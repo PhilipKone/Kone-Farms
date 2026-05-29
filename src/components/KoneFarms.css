@@ -528,6 +528,10 @@
   transform: translateY(-1px);
 }
 
+.spice-btn:active {
+  transform: scale(0.95);
+}
+
 /* Fire CSS Particle Emitter for Extra Hot */
 .fire-particles-emitter {
   position: absolute;
@@ -1280,13 +1284,17 @@
     gap: 0.65rem !important;
   }
   .spice-btn {
-    min-height: 42px !important;
+    min-height: 46px !important;
     padding: 0.55rem 0.95rem !important;
     font-size: 0.85rem !important;
     flex: 1 !important;
     display: inline-flex !important;
     justify-content: center !important;
     align-items: center !important;
+    transition: all 0.15s ease-in-out !important;
+  }
+  .spice-btn:active {
+    transform: scale(0.94) !important;
   }
 }
 
