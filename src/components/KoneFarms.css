@@ -1320,5 +1320,19 @@
   .spice-btn:active {
     transform: scale(0.94) !important;
   }
+  
+  /* PWA bottom navigation tab overrides to prevent sticky hover and improve tap tactile feel */
+  .pwa-nav-btn:hover::before {
+    opacity: 0 !important;
+    transform: translate(-50%, -50%) scale(0.5) !important;
+  }
+  .pwa-nav-btn.active:hover::before {
+    opacity: 1 !important;
+    transform: translate(-50%, -50%) scale(1) !important;
+    background: rgba(52, 211, 153, 0.12) !important;
+  }
+  .pwa-nav-btn:active {
+    transform: scale(0.95) !important;
+  }
 }
 
