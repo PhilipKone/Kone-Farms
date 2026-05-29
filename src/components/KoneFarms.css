@@ -773,6 +773,11 @@
   transform: translateX(-3px);
 }
 
+.back-btn-farms:active {
+  background: rgba(255,255,255,0.12);
+  transform: scale(0.96) translateX(-3px);
+}
+
 /* --- High-Fidelity Smartphone Trace Diagnostics Overlay --- */
 .trace-modal-overlay {
   position: fixed;
@@ -1252,17 +1257,24 @@
     font-size: 0.95rem !important;
   }
   .back-btn-farms {
-    width: 44px !important;
-    height: 44px !important;
-    min-height: 44px !important;
+    width: 48px !important;
+    height: 48px !important;
+    min-height: 48px !important;
     border-radius: 50% !important;
     padding: 0 !important;
     display: inline-flex !important;
     justify-content: center !important;
     align-items: center !important;
+    transition: background 0.15s, transform 0.15s !important;
+  }
+  .back-btn-farms:active {
+    background: rgba(255, 255, 255, 0.16) !important;
+    transform: scale(0.9) !important;
   }
   .back-arrow-svg {
     margin-right: 0 !important;
+    width: 20px !important;
+    height: 20px !important;
   }
   .spice-slider {
     gap: 0.65rem !important;
