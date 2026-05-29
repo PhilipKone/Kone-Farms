@@ -1076,6 +1076,11 @@
   border-color: #dc2626;
 }
 
+.phone-exit-btn:active {
+  transform: scale(0.96);
+  background: rgba(220, 38, 38, 0.2);
+}
+
 /* Keyframe Animations */
 .animate-fade-in {
   animation: fadeIn 0.3s ease-out forwards;
@@ -1333,6 +1338,24 @@
   }
   .pwa-nav-btn:active {
     transform: scale(0.95) !important;
+  }
+  
+  /* Smartphone modal exit button overrides */
+  .phone-exit-btn {
+    min-height: 46px !important;
+    font-size: 0.9rem !important;
+    transition: background 0.15s, transform 0.15s !important;
+  }
+  .phone-exit-btn:hover {
+    background: rgba(220, 38, 38, 0.1) !important;
+    color: #f87171 !important;
+    border-color: rgba(220, 38, 38, 0.3) !important;
+  }
+  .phone-exit-btn:active {
+    transform: scale(0.94) !important;
+    background: rgba(220, 38, 38, 0.25) !important;
+    color: white !important;
+    border-color: #dc2626 !important;
   }
 }
 
