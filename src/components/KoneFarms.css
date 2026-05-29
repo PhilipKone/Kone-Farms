@@ -1247,10 +1247,34 @@
 /* Form input touch size adjustments */
 @media (max-width: 768px) {
   .dist-input,
-  .farms-submit-btn,
-  .back-btn-farms {
+  .farms-submit-btn {
     min-height: 48px !important; /* Satisfies Android/iOS tap accessibility standards */
     font-size: 0.95rem !important;
+  }
+  .back-btn-farms {
+    width: 44px !important;
+    height: 44px !important;
+    min-height: 44px !important;
+    border-radius: 50% !important;
+    padding: 0 !important;
+    display: inline-flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  .back-arrow-svg {
+    margin-right: 0 !important;
+  }
+  .spice-slider {
+    gap: 0.65rem !important;
+  }
+  .spice-btn {
+    min-height: 42px !important;
+    padding: 0.55rem 0.95rem !important;
+    font-size: 0.85rem !important;
+    flex: 1 !important;
+    display: inline-flex !important;
+    justify-content: center !important;
+    align-items: center !important;
   }
 }
 
