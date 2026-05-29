@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './KoneFarms.css';
-
+import { db } from '../firebase/config';
+import { doc, collection, addDoc, onSnapshot, setDoc } from 'firebase/firestore';
 
 export default function KoneFarms({ onBack }) {
   const [spiceLevel, setSpiceLevel] = useState('Hot 🌶️🌶️');
@@ -9,6 +10,14 @@ export default function KoneFarms({ onBack }) {
   const [distributorEmail, setDistributorEmail] = useState('');
   const [orderSubmitted, setOrderSubmitted] = useState(false);
   const [showTraceModal, setShowTraceModal] = useState(false);
+
+  // Real-time agritech telemetry sensor overrides
+  const [telemetry, setTelemetry] = useState({
+    moisture: 48,
+    temperature: 29.5,
+    sunlight: 82,
+    valveActive: false
+  });
 
   // PWA Mobile View State
   const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
@@ -22,6 +31,46 @@ export default function KoneFarms({ onBack }) {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  // Subscribe to live telemetry configurations in Firestore
+  useEffect(() => {
+    if (!db || !db.app) {
+      console.warn("Firebase/Firestore is not initialized. Starting mock telemetry standby.");
+      return;
+    }
+    const telemDocRef = doc(db, 'farm_telemetry', 'live');
+    const unsubscribe = onSnapshot(telemDocRef, (docSnap) => {
+      if (docSnap.exists()) {
+        setTelemetry(docSnap.data());
+      } else {
+        const defaults = {
+          moisture: 48,
+          temperature: 29.5,
+          sunlight: 82,
+          valveActive: false,
+          updatedAt: new Date().toISOString()
+        };
+        setDoc(telemDocRef, defaults).catch(err => console.error("Firestore telem init error:", err));
+        setTelemetry(defaults);
+      }
+    }, (err) => {
+      console.warn("Firestore listener failed: switching to offline telemetry mock", err);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  // Live Telemetry variables mapped from state (admin overrides)
+  const moistureVal = telemetry.moisture ?? 48;
+  const tempVal = telemetry.temperature ?? 29.5;
+  const sunlightVal = telemetry.sunlight ?? 82;
+  const valveActive = telemetry.valveActive ?? false;
+
+  const moistureShift = (moistureVal - 48) * 0.4;
+  const tempShift = (tempVal - 29.5) * 1.2;
+
+  const moisturePathD = `M 0 ${80 - moistureShift} Q 50 ${95 - moistureShift}, 100 ${65 - moistureShift} T 200 ${45 - moistureShift} T 300 ${90 - moistureShift} T 400 ${55 - moistureShift}`;
+  const tempPathD = `M 0 ${50 - tempShift} Q 60 ${30 - tempShift}, 120 ${60 - tempShift} T 240 ${40 - tempShift} T 360 ${70 - tempShift} T 400 ${55 - tempShift}`;
 
   // Multi-tier wholesale pricing calculator
   const getPricingTier = (qty) => {
@@ -44,10 +93,25 @@ export default function KoneFarms({ onBack }) {
     setSpiceLevel(level);
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     if (!distributorName || !distributorEmail) return;
     setOrderSubmitted(true);
+
+    if (db && db.app) {
+      try {
+        await addDoc(collection(db, 'farm_distributors'), {
+          name: distributorName.trim(),
+          email: distributorEmail.trim(),
+          quantity: Number(orderQuantity),
+          status: 'Pending',
+          createdAt: new Date().toISOString()
+        });
+      } catch (err) {
+        console.error("Firestore B2B submission error:", err);
+      }
+    }
+
     setTimeout(() => {
       setOrderSubmitted(false);
       setDistributorName('');
@@ -102,15 +166,15 @@ export default function KoneFarms({ onBack }) {
         {/* Live Metrics Grid */}
         <div className="telemetry-grid">
           <div className="telemetry-item">
-            <div className="telemetry-val">48%</div>
+            <div className="telemetry-val">{moistureVal}%</div>
             <div className="telemetry-label">Soil Moisture 💧</div>
           </div>
           <div className="telemetry-item">
-            <div className="telemetry-val">29.5°C</div>
+            <div className="telemetry-val">{tempVal}°C</div>
             <div className="telemetry-label">Temp 🌡️</div>
           </div>
           <div className="telemetry-item">
-            <div className="telemetry-val">82%</div>
+            <div className="telemetry-val">{sunlightVal}%</div>
             <div className="telemetry-label">Sunlight ☀️</div>
           </div>
         </div>
@@ -134,10 +198,10 @@ export default function KoneFarms({ onBack }) {
             <line x1="0" y1="20" x2="400" y2="20" stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
             <line x1="0" y1="60" x2="400" y2="60" stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
             <line x1="0" y1="100" x2="400" y2="100" stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
-            <path d="M 0 80 Q 50 95, 100 65 T 200 45 T 300 90 T 400 55 L 400 120 L 0 120 Z" fill="url(#moistureGlow)" />
-            <path d="M 0 80 Q 50 95, 100 65 T 200 45 T 300 90 T 400 55" fill="none" stroke="#10b981" strokeWidth="3" className="telemetry-polyline" />
-            <path d="M 0 50 Q 60 30, 120 60 T 240 40 T 360 70 T 400 55 L 400 120 L 0 120 Z" fill="url(#tempGlow)" />
-            <path d="M 0 50 Q 60 30, 120 60 T 240 40 T 360 70 T 400 55" fill="none" stroke="#f59e0b" strokeWidth="2" strokeDasharray="4 3" className="telemetry-polyline-temp" />
+            <path d={`${moisturePathD} L 400 120 L 0 120 Z`} fill="url(#moistureGlow)" />
+            <path d={moisturePathD} fill="none" stroke="#10b981" strokeWidth="3" className="telemetry-polyline" />
+            <path d={`${tempPathD} L 400 120 L 0 120 Z`} fill="url(#tempGlow)" />
+            <path d={tempPathD} fill="none" stroke="#f59e0b" strokeWidth="2" strokeDasharray="4 3" className="telemetry-polyline-temp" />
           </svg>
         </div>
 
@@ -158,11 +222,15 @@ export default function KoneFarms({ onBack }) {
               <span style={{ fontSize: '0.7rem', color: '#94a3b8' }}>Geolocation seed mapping</span>
             </div>
           </div>
-          <div className="pipeline-step pending">
+          <div className={`pipeline-step ${valveActive ? 'active' : 'pending'}`}>
             <span className="pipeline-step-num">3</span>
             <div>
-              <strong style={{ display: 'block', color: 'white', fontSize: '0.85rem' }}>Automated Irrigation</strong>
-              <span style={{ fontSize: '0.7rem', color: '#94a3b8' }}>Sensor-driven watering active</span>
+              <strong style={{ display: 'block', color: 'white', fontSize: '0.85rem' }}>
+                Automated Irrigation {valveActive ? '🟢' : '⚪'}
+              </strong>
+              <span style={{ fontSize: '0.7rem', color: '#94a3b8' }}>
+                {valveActive ? 'Drip irrigation valve open' : 'Valve closed - Standby mode'}
+              </span>
             </div>
           </div>
         </div>
@@ -535,15 +603,15 @@ export default function KoneFarms({ onBack }) {
               {/* Live Metrics */}
               <div className="telemetry-grid">
                 <div className="telemetry-item">
-                  <div className="telemetry-val">48%</div>
+                  <div className="telemetry-val">{moistureVal}%</div>
                   <div className="telemetry-label">Soil Moisture 💧</div>
                 </div>
                 <div className="telemetry-item">
-                  <div className="telemetry-val">29.5°C</div>
+                  <div className="telemetry-val">{tempVal}°C</div>
                   <div className="telemetry-label">Temperature 🌡️</div>
                 </div>
                 <div className="telemetry-item">
-                  <div className="telemetry-val">82%</div>
+                  <div className="telemetry-val">{sunlightVal}%</div>
                   <div className="telemetry-label">Sunlight ☀️</div>
                 </div>
               </div>
@@ -573,11 +641,11 @@ export default function KoneFarms({ onBack }) {
                   <line x1="0" y1="60" x2="400" y2="60" stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
                   <line x1="0" y1="100" x2="400" y2="100" stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
 
-                  <path d="M 0 80 Q 50 95, 100 65 T 200 45 T 300 90 T 400 55 L 400 120 L 0 120 Z" fill="url(#moistureGlow)" />
-                  <path d="M 0 80 Q 50 95, 100 65 T 200 45 T 300 90 T 400 55" fill="none" stroke="#10b981" strokeWidth="3" className="telemetry-polyline" />
+                  <path d={`${moisturePathD} L 400 120 L 0 120 Z`} fill="url(#moistureGlow)" />
+                  <path d={moisturePathD} fill="none" stroke="#10b981" strokeWidth="3" className="telemetry-polyline" />
 
-                  <path d="M 0 50 Q 60 30, 120 60 T 240 40 T 360 70 T 400 55 L 400 120 L 0 120 Z" fill="url(#tempGlow)" />
-                  <path d="M 0 50 Q 60 30, 120 60 T 240 40 T 360 70 T 400 55" fill="none" stroke="#f59e0b" strokeWidth="2" strokeDasharray="4 3" className="telemetry-polyline-temp" />
+                  <path d={`${tempPathD} L 400 120 L 0 120 Z`} fill="url(#tempGlow)" />
+                  <path d={tempPathD} fill="none" stroke="#f59e0b" strokeWidth="2" strokeDasharray="4 3" className="telemetry-polyline-temp" />
                 </svg>
               </div>
 
@@ -598,11 +666,11 @@ export default function KoneFarms({ onBack }) {
                     <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>Direct seed insertion with geolocation mapping</span>
                   </div>
                 </div>
-                <div className="pipeline-step pending">
+                <div className={`pipeline-step ${valveActive ? 'active' : 'pending'}`}>
                   <span className="pipeline-step-num">3</span>
                   <div>
-                    <strong style={{ display: 'block', color: 'white' }}>Sensor-Driven Watering (smartTools)</strong>
-                    <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>Real-time automated drip irrigation active</span>
+                    <strong style={{ display: 'block', color: 'white' }}>Sensor-Driven Watering (smartTools) {valveActive ? '🟢' : '⚪'}</strong>
+                    <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>{valveActive ? 'Real-time automated drip irrigation active' : 'Sensor-driven standby'}</span>
                   </div>
                 </div>
               </div>
