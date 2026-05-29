@@ -689,6 +689,16 @@
   box-shadow: 0 2px 0 #047857;
 }
 
+.farms-submit-btn:disabled {
+  background: #1e293b !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  color: #64748b !important;
+  box-shadow: none !important;
+  transform: none !important;
+  cursor: not-allowed !important;
+  opacity: 0.6 !important;
+}
+
 .submit-success-banner {
   padding: 3rem 1.5rem;
   background: rgba(16, 185, 129, 0.08);
@@ -1255,10 +1265,24 @@
 
 /* Form input touch size adjustments */
 @media (max-width: 768px) {
-  .dist-input,
-  .farms-submit-btn {
-    min-height: 48px !important; /* Satisfies Android/iOS tap accessibility standards */
+  .dist-input {
+    min-height: 48px !important;
     font-size: 0.95rem !important;
+  }
+  .farms-submit-btn {
+    min-height: 48px !important;
+    font-size: 0.95rem !important;
+    transition: background 0.15s, transform 0.15s !important;
+  }
+  .farms-submit-btn:hover {
+    transform: none !important;
+    box-shadow: 0 6px 0 #047857, 0 10px 20px rgba(0,0,0,0.3) !important;
+    background: #10b981 !important;
+  }
+  .farms-submit-btn:active {
+    transform: translateY(4px) !important;
+    box-shadow: 0 2px 0 #047857 !important;
+    background: #059669 !important;
   }
   .back-btn-farms {
     width: 48px !important;
