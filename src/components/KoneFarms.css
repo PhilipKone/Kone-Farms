@@ -1,7 +1,7 @@
 /* Kone Farms & Agritech Stylesheet */
 .farms-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #061c15 0%, #0c2d20 100%);
+  background: linear-gradient(135deg, #04140f 0%, #082218 100%);
   color: #e2e8f0;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   padding: 8rem 5% 5rem;
@@ -62,21 +62,64 @@
   -webkit-text-fill-color: transparent;
 }
 
+/* Floating Brand Header */
+.farms-nav-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 85px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5%;
+  background: rgba(4, 20, 15, 0.55);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+  z-index: 100;
+}
+
+.farms-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.farms-logo {
+  width: 44px;
+  height: 44px;
+  filter: drop-shadow(0 0 10px rgba(52, 211, 153, 0.35));
+}
+
+.farms-brand-name {
+  font-family: 'Baloo 2', cursive, sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: white;
+  letter-spacing: 0.05em;
+  background: linear-gradient(135deg, #ffffff 0%, #a7f3d0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 /* Glass Panels */
 .farms-card {
-  background: rgba(15, 47, 36, 0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 2px solid rgba(16, 185, 129, 0.15);
+  background: rgba(10, 36, 27, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 2px solid rgba(16, 185, 129, 0.12);
   border-radius: 28px;
   padding: 2.5rem;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.45);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
 }
 
 .farms-card:hover {
-  border-color: rgba(16, 185, 129, 0.3);
-  box-shadow: 0 25px 50px rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.28);
+  box-shadow: 0 25px 50px rgba(16, 185, 129, 0.15);
   transform: translateY(-4px);
 }
 
@@ -99,7 +142,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid rgba(16, 185, 129, 0.15);
+  border-bottom: 2px solid rgba(16, 185, 129, 0.12);
   padding-bottom: 1.25rem;
   margin-bottom: 1.5rem;
 }
@@ -123,17 +166,18 @@
 }
 
 .telemetry-item {
-  background: rgba(0,0,0,0.25);
+  background: rgba(0,0,0,0.3);
   padding: 1rem;
   border-radius: 16px;
-  border: 1px solid rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.08);
   text-align: center;
 }
 
 .telemetry-val {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 800;
   color: #34d399;
+  text-shadow: 0 0 10px rgba(52, 211, 153, 0.2);
 }
 
 .telemetry-label {
@@ -142,6 +186,79 @@
   text-transform: uppercase;
   font-weight: 800;
   margin-top: 0.25rem;
+}
+
+/* Custom Telemetry Chart Styles */
+.telemetry-chart-container {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(16, 185, 129, 0.08);
+  border-radius: 20px;
+  padding: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.chart-title {
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #94a3b8;
+  letter-spacing: 0.05em;
+}
+
+.chart-legend {
+  font-size: 0.75rem;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.legend-dot.moisture {
+  background: #10b981;
+  box-shadow: 0 0 6px #10b981;
+}
+
+.legend-dot.temp {
+  background: #f59e0b;
+  box-shadow: 0 0 6px #f59e0b;
+}
+
+.telemetry-svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.telemetry-polyline {
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  animation: drawLine 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.telemetry-polyline-temp {
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  animation: drawLine 3s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
+}
+
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
 /* Cultivation Pipeline */
@@ -199,8 +316,8 @@
 
 /* Crops List */
 .crop-badge {
-  background: rgba(245, 158, 11, 0.1);
-  border: 1px solid rgba(245, 158, 11, 0.2);
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.18);
   color: #f59e0b;
   padding: 0.35rem 0.75rem;
   border-radius: 8px;
@@ -208,18 +325,25 @@
   font-weight: 800;
   display: inline-block;
   margin: 0.25rem;
+  transition: all 0.2s ease;
+}
+
+.crop-badge:hover {
+  transform: translateY(-2px);
+  background: rgba(245, 158, 11, 0.15);
+  border-color: rgba(245, 158, 11, 0.3);
 }
 
 .gmo-policy-banner {
-  background: rgba(16, 185, 129, 0.08);
-  border: 1px solid rgba(16, 185, 129, 0.2);
-  padding: 1rem;
-  border-radius: 16px;
+  background: rgba(16, 185, 129, 0.06);
+  border: 1px solid rgba(16, 185, 129, 0.18);
+  padding: 1.25rem;
+  border-radius: 20px;
   color: #34d399;
   font-size: 0.9rem;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.85rem;
   text-align: left;
   margin-top: 1.5rem;
 }
@@ -235,17 +359,24 @@
   background: rgba(0,0,0,0.25);
   padding: 1.5rem;
   border-radius: 20px;
-  border: 1px solid rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.08);
   text-align: left;
+  transition: all 0.3s;
+}
+
+.tool-card:hover {
+  border-color: rgba(16, 185, 129, 0.25);
+  background: rgba(16, 185, 129, 0.04);
 }
 
 .tool-icon {
-  font-size: 2rem;
+  font-size: 2.2rem;
   margin-bottom: 0.75rem;
+  display: inline-block;
 }
 
 .tool-title {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 800;
   color: #fff;
   margin-bottom: 0.25rem;
@@ -254,21 +385,21 @@
 .tool-desc {
   font-size: 0.8rem;
   color: #64748b;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 /* Kone Shito Product Section */
 .shito-container {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
-  gap: 3rem;
+  gap: 3.5rem;
   align-items: center;
 }
 
 @media (max-width: 900px) {
   .shito-container {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 2.5rem;
   }
 }
 
@@ -283,29 +414,57 @@
   position: absolute;
   width: 250px;
   height: 250px;
-  background: radial-gradient(circle, rgba(239, 68, 68, 0.15) 0%, rgba(239, 68, 68, 0) 70%);
   z-index: 1;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.75;
+  transition: background 0.8s ease-in-out;
+}
+
+/* Heat-Level Background Glow Presets */
+.jar-glow.mild {
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.3) 0%, rgba(245, 158, 11, 0) 70%);
+  animation: glowPulse 4s infinite alternate;
+}
+
+.jar-glow.hot {
+  background: radial-gradient(circle, rgba(239, 68, 68, 0.3) 0%, rgba(239, 68, 68, 0) 70%);
+  animation: glowPulse 2s infinite alternate;
+}
+
+.jar-glow.extra-hot {
+  background: radial-gradient(circle, rgba(220, 38, 38, 0.45) 0%, rgba(220, 38, 38, 0) 70%);
+  animation: glowPulse 1s infinite alternate;
+}
+
+@keyframes glowPulse {
+  0% { transform: scale(0.95); opacity: 0.6; }
+  100% { transform: scale(1.05); opacity: 0.9; }
 }
 
 .shito-jar-graphic {
-  background: linear-gradient(180deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%);
-  border: 3px solid #ea580c;
+  background: linear-gradient(180deg, rgba(24, 34, 48, 0.9) 0%, rgba(10, 15, 26, 0.98) 100%);
+  border: 3.5px solid #d97706;
   border-radius: 40px 40px 20px 20px;
   padding: 3rem 2rem;
   width: 240px;
-  box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.6);
   z-index: 2;
   text-align: center;
   position: relative;
 }
 
+.shito-visual:hover .shito-jar-graphic {
+  border-color: #ef4444;
+}
+
 .shito-jar-lid {
   width: 140px;
   height: 25px;
-  background: #d97706;
+  background: #b45309;
   border-radius: 8px 8px 2px 2px;
   margin: 0 auto -3px;
-  border: 2px solid #b45309;
+  border: 2px solid #78350f;
   z-index: 3;
 }
 
@@ -336,6 +495,7 @@
 .spice-meter {
   margin-top: 2rem;
   text-align: center;
+  z-index: 3;
 }
 
 .spice-slider {
@@ -346,22 +506,66 @@
 }
 
 .spice-btn {
-  padding: 0.35rem 0.75rem;
+  padding: 0.45rem 0.85rem;
   border-radius: 8px;
-  border: 1px solid rgba(239, 68, 68, 0.3);
+  border: 1px solid rgba(239, 68, 68, 0.35);
   background: rgba(239, 68, 68, 0.05);
   color: #f87171;
   font-size: 0.8rem;
   font-weight: 800;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.25s;
+}
+
+.spice-btn:hover {
+  background: rgba(239, 68, 68, 0.15);
+  color: white;
 }
 
 .spice-btn.active {
   background: #ef4444;
   color: white;
   border-color: #ef4444;
-  box-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.5);
+  transform: translateY(-1px);
+}
+
+/* Fire CSS Particle Emitter for Extra Hot */
+.fire-particles-emitter {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  height: 80px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0.8;
+}
+
+.fire-particle {
+  position: absolute;
+  bottom: -10px;
+  background: radial-gradient(circle, #f59e0b 0%, rgba(239, 68, 68, 0.8) 50%, rgba(220, 38, 38, 0) 100%);
+  border-radius: 50%;
+  animation: floatUp 2s infinite linear;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-80px) scale(0.2);
+    opacity: 0;
+  }
 }
 
 /* QR Code Trace Flow */
@@ -374,6 +578,30 @@
   align-items: center;
   gap: 1.5rem;
   margin-top: 2rem;
+  transition: all 0.3s ease;
+}
+
+.trace-card:hover {
+  border-color: rgba(251, 191, 36, 0.45);
+  box-shadow: 0 8px 30px rgba(251, 191, 36, 0.1);
+  transform: translateY(-2px);
+}
+
+.tap-badge {
+  font-size: 0.65rem;
+  background: rgba(245, 158, 11, 0.2);
+  border: 1px solid #f59e0b;
+  color: #fbbf24;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  animation: pulseRate 1.5s infinite alternate;
+}
+
+@keyframes pulseRate {
+  from { opacity: 0.6; }
+  to { opacity: 1; }
 }
 
 .qr-code-mock {
@@ -426,9 +654,74 @@
   border-color: #10b981;
   outline: none;
   background: rgba(0,0,0,0.6);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
 }
 
-/* Calculator box */
+.select-farms-option option {
+  background: #071712 !important;
+  color: white;
+}
+
+.farms-submit-btn {
+  width: 100%;
+  padding: 0.85rem;
+  background: #10b981;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-weight: 800;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 6px 0 #047857, 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.farms-submit-btn:hover {
+  background: #34d399;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 #047857, 0 12px 25px rgba(0,0,0,0.4);
+}
+
+.farms-submit-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 #047857;
+}
+
+.submit-success-banner {
+  padding: 3rem 1.5rem;
+  background: rgba(16, 185, 129, 0.08);
+  border: 2px dashed #10b981;
+  border-radius: 24px;
+  color: #34d399;
+  text-align: center;
+  animation: zoomBanner 0.4s ease;
+}
+
+@keyframes zoomBanner {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Wholesale Calculator and Pricing Tiers */
+.savings-badge-glow {
+  background: linear-gradient(90deg, rgba(245,158,11,0.15) 0%, rgba(16,185,129,0.15) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #34d399;
+  padding: 0.65rem 1rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  margin-bottom: 1.25rem;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.1);
+  animation: glowAlert 1.5s infinite alternate;
+}
+
+@keyframes glowAlert {
+  from { border-color: rgba(16, 185, 129, 0.25); box-shadow: 0 0 10px rgba(16, 185, 129, 0.05); }
+  to { border-color: rgba(16, 185, 129, 0.5); box-shadow: 0 0 20px rgba(16, 185, 129, 0.25); }
+}
+
 .calc-card {
   background: rgba(0,0,0,0.35);
   padding: 1.5rem;
@@ -445,24 +738,27 @@
   font-size: 0.9rem;
 }
 
+.free-shipping-tag {
+  color: #10b981;
+  font-weight: 900;
+  text-shadow: 0 0 8px rgba(52,211,153,0.3);
+}
+
 .calc-total {
   border-top: 1px solid rgba(16, 185, 129, 0.2);
   padding-top: 0.75rem;
   margin-top: 0.75rem;
   font-weight: 800;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   color: #34d399;
 }
 
 /* CTA Back Button */
 .back-btn-farms {
-  position: absolute;
-  top: 2rem;
-  left: 5%;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
   color: white;
-  padding: 0.5rem 1.25rem;
+  padding: 0.55rem 1.35rem;
   border-radius: 30px;
   cursor: pointer;
   font-weight: 800;
@@ -471,10 +767,313 @@
   align-items: center;
   gap: 0.4rem;
   transition: all 0.2s;
-  z-index: 100;
 }
 
 .back-btn-farms:hover {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.15);
   transform: translateX(-3px);
+}
+
+/* --- High-Fidelity Smartphone Trace Diagnostics Overlay --- */
+.trace-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
+
+.smartphone-chassis {
+  width: 360px;
+  height: 670px;
+  background: #0f1c18;
+  border: 11px solid #23342d;
+  border-radius: 46px;
+  box-shadow: 0 25px 65px -10px rgba(0, 0, 0, 0.8),
+              0 0 40px rgba(16, 185, 129, 0.15);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.phone-screen-frame {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding-top: 24px;
+}
+
+/* Phone Ear Notch */
+.phone-camera-notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 130px;
+  height: 25px;
+  background: #23342d;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 100;
+}
+
+.camera-dot {
+  width: 8px;
+  height: 8px;
+  background: #111827;
+  border-radius: 50%;
+}
+
+.speaker-grill {
+  width: 45px;
+  height: 4px;
+  background: #374151;
+  border-radius: 4px;
+}
+
+/* Screen Content */
+.phone-screen-content {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.phone-brand-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Baloo 2', cursive, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #34d399;
+  margin-bottom: 1rem;
+}
+
+.phone-logo-img {
+  width: 26px;
+  height: 26px;
+}
+
+/* Verified Seal Card */
+.trace-verified-seal {
+  background: linear-gradient(135deg, rgba(16,185,129,0.18) 0%, rgba(4,20,15,0.4) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  border-radius: 20px;
+  padding: 1rem;
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+
+.verified-seal-badge {
+  font-size: 0.65rem;
+  font-weight: 900;
+  background: #10b981;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.verified-batch-id {
+  font-family: 'Baloo 2', cursive, sans-serif;
+  font-size: 1.2rem;
+  color: white;
+  margin: 0 0 0.25rem;
+}
+
+.verified-purity {
+  font-size: 0.75rem;
+  color: #a7f3d0;
+  margin: 0;
+}
+
+/* Mobile Subsections */
+.phone-info-section {
+  margin-bottom: 1.25rem;
+}
+
+.phone-sect-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #f59e0b;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+}
+
+.farmer-card-bubble {
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.05);
+  padding: 0.85rem;
+  border-radius: 16px;
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.farmer-avatar-emoji {
+  font-size: 1.7rem;
+  background: rgba(255,255,255,0.05);
+  padding: 0.3rem;
+  border-radius: 10px;
+}
+
+.farmer-bubble-name {
+  color: white;
+  font-size: 0.85rem;
+  display: block;
+  font-weight: 800;
+}
+
+.farmer-bubble-meta {
+  color: #64748b;
+  font-size: 0.7rem;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.farmer-bubble-quote {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin: 0;
+  font-style: italic;
+  line-height: 1.35;
+}
+
+/* Bubble grids */
+.diagnostics-bubble-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.diag-bubble {
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 12px;
+  padding: 0.65rem 0.25rem;
+  text-align: center;
+}
+
+.diag-b-val {
+  font-size: 0.95rem;
+  font-weight: 900;
+  color: #34d399;
+  display: block;
+}
+
+.diag-b-lbl {
+  font-size: 0.6rem;
+  color: #64748b;
+  display: block;
+  text-transform: uppercase;
+  font-weight: 800;
+  margin-top: 0.15rem;
+}
+
+/* Stepper Journey */
+.timeline-trail-bubble {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  position: relative;
+  padding-left: 1.25rem;
+  border-left: 2px solid rgba(16, 185, 129, 0.15);
+  margin-left: 0.5rem;
+}
+
+.trail-node {
+  position: relative;
+  font-size: 0.75rem;
+}
+
+.trail-node-dot {
+  position: absolute;
+  left: -24px;
+  top: 4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #4b5563;
+  border: 2px solid #0f1c18;
+}
+
+.trail-node.active .trail-node-dot {
+  background: #10b981;
+  box-shadow: 0 0 6px #10b981;
+}
+
+.trail-node.current .trail-node-dot {
+  background: #fbbf24;
+  box-shadow: 0 0 8px #fbbf24;
+  animation: pulseRate 1s infinite alternate;
+}
+
+.trail-node strong {
+  display: block;
+  color: white;
+}
+
+.trail-node span {
+  color: #64748b;
+}
+
+/* Exit/Close Button */
+.phone-exit-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background: rgba(220, 38, 38, 0.1);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  color: #f87171;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 0.85rem;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.phone-exit-btn:hover {
+  background: #dc2626;
+  color: white;
+  border-color: #dc2626;
+}
+
+/* Keyframe Animations */
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
