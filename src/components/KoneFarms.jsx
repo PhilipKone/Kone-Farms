@@ -88,7 +88,11 @@ export default function KoneFarms({ onBack }) {
           <span className="farms-brand-name">Kone Farms</span>
         </div>
         <button className="back-btn-farms" onClick={onBack}>
-          ⬅️ Back to Kone Academy
+          <svg className="back-arrow-svg" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '6px' }}>
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          Back to Kone Academy
         </button>
       </header>
 
