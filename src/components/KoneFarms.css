@@ -589,6 +589,10 @@
   transform: translateY(-2px);
 }
 
+.trace-card:active {
+  transform: scale(0.97);
+}
+
 .tap-badge {
   font-size: 0.65rem;
   background: rgba(245, 158, 11, 0.2);
@@ -1356,6 +1360,21 @@
     background: rgba(220, 38, 38, 0.25) !important;
     color: white !important;
     border-color: #dc2626 !important;
+  }
+  
+  /* Mobile trace-card interactive overrides */
+  .trace-card {
+    transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s !important;
+  }
+  .trace-card:hover {
+    transform: none !important;
+    border-color: rgba(251, 191, 36, 0.15) !important;
+    box-shadow: none !important;
+  }
+  .trace-card:active {
+    transform: scale(0.95) !important;
+    border-color: rgba(251, 191, 36, 0.5) !important;
+    box-shadow: 0 4px 20px rgba(251, 191, 36, 0.12) !important;
   }
 }
 
