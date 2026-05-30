@@ -1393,5 +1393,15 @@
     font-size: 0.68rem !important;
     letter-spacing: 0.02em !important;
   }
+  
+  /* Responsive card padding and card hover adjustments */
+  .farms-card {
+    padding: 1.5rem 1.15rem !important;
+    border-radius: 20px !important;
+  }
+  .farms-card:hover {
+    transform: none !important;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.45) !important;
+  }
 }
 
