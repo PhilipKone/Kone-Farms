@@ -16,6 +16,7 @@ let db;
 try {
     app = initializeApp(firebaseConfig);
     db = getFirestore(app);
+    db.app = app; // Attach app reference for frontend validation checks (db.app)
 } catch (error) {
     console.error('Firebase initialization error:', error);
     db = {};
