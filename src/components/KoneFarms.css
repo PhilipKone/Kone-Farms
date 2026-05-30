@@ -1403,5 +1403,23 @@
     transform: none !important;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.45) !important;
   }
+  
+  /* Mobile smartphone simulated chassis overrides for immersive full-screen reporting */
+  .smartphone-chassis {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+  
+  .phone-screen-frame {
+    padding-top: env(safe-area-inset-top, 16px) !important;
+  }
+  
+  .phone-camera-notch {
+    display: none !important;
+  }
 }
 
