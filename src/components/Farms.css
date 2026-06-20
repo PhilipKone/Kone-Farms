@@ -1,0 +1,265 @@
+/* Farms Division Styles */
+.farms-div-page {
+  padding-top: 100px;
+  min-height: calc(100vh - 80px);
+  position: relative;
+  z-index: 2;
+}
+
+.farms-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 5% 4rem;
+}
+
+.farms-header-section {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+/* Crops Grid */
+.crops-section {
+  margin-bottom: 4rem;
+}
+
+.crops-category {
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.crops-category-title {
+  color: #fff;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.crops-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.crop-card-detailed {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(245, 158, 11, 0.15);
+  padding: 1rem 1.5rem;
+  border-radius: 16px;
+  color: #e2e8f0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.crop-card-detailed:hover {
+  transform: translateY(-3px);
+  background: rgba(245, 158, 11, 0.05);
+  border-color: rgba(245, 158, 11, 0.35);
+  box-shadow: 0 5px 15px rgba(245, 158, 11, 0.1);
+}
+
+.crop-card-detailed.exotic {
+  border-color: rgba(96, 165, 250, 0.15);
+}
+
+.crop-card-detailed.exotic:hover {
+  background: rgba(96, 165, 250, 0.05);
+  border-color: rgba(96, 165, 250, 0.35);
+  box-shadow: 0 5px 15px rgba(96, 165, 250, 0.1);
+}
+
+/* Farmers Spotlight */
+.farmers-section {
+  margin-bottom: 4rem;
+  text-align: left;
+}
+
+.farmers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.farmer-spotlight-card {
+  background: rgba(10, 36, 27, 0.55);
+  border: 1px solid rgba(16, 185, 129, 0.12);
+  border-radius: 24px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: all 0.3s ease;
+}
+
+.farmer-spotlight-card:hover {
+  border-color: rgba(16, 185, 129, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.08);
+}
+
+.farmer-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.farmer-avatar {
+  font-size: 2.2rem;
+  background: rgba(16, 185, 129, 0.1);
+  padding: 0.5rem;
+  border-radius: 16px;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.farmer-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.farmer-name {
+  color: white;
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.farmer-title {
+  color: #34d399;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.farmer-quote {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  font-style: italic;
+  line-height: 1.5;
+  margin: 0;
+  border-left: 3px solid rgba(16, 185, 129, 0.3);
+  padding-left: 0.85rem;
+}
+
+.farmer-specialty {
+  font-size: 0.8rem;
+  color: #64748b;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+.specialty-tag {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  color: #cbd5e1;
+}
+
+/* Sourcing Map styles */
+.map-section {
+  margin-bottom: 4rem;
+}
+
+.map-layout-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .map-layout-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+.map-svg-container {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(16, 185, 129, 0.12);
+  border-radius: 28px;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.map-svg {
+  width: 100%;
+  max-width: 380px;
+  height: auto;
+}
+
+.map-pin {
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.map-pin:hover {
+  filter: drop-shadow(0 0 8px currentColor);
+}
+
+.map-details-card {
+  text-align: left;
+}
+
+.region-detail-box {
+  background: rgba(10, 36, 27, 0.65);
+  border: 2px solid rgba(16, 185, 129, 0.2);
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  animation: pwaPanelFade 0.3s ease;
+}
+
+.region-tag {
+  display: inline-block;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  color: #34d399;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.region-h4 {
+  font-family: 'Baloo 2', cursive, sans-serif;
+  color: white;
+  font-size: 1.5rem;
+  margin: 0 0 0.5rem;
+}
+
+.region-desc {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.region-crops-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.region-crop-tag {
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  color: #f59e0b;
+  font-size: 0.8rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+}

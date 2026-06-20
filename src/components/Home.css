@@ -1,0 +1,215 @@
+/* Home Portal Styles */
+.home-page {
+  padding-top: 100px;
+  min-height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.home-container {
+  max-width: 1200px;
+  width: 90%;
+  margin: 2rem auto 4rem;
+  text-align: center;
+}
+
+.home-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  color: #34d399;
+  padding: 0.5rem 1.25rem;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.5rem;
+}
+
+.home-headline {
+  font-family: 'Baloo 2', cursive, sans-serif;
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.2;
+  margin-bottom: 1.2rem;
+}
+
+.home-subheadline {
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  color: #94a3b8;
+  max-width: 750px;
+  margin: 0 auto 3.5rem;
+  line-height: 1.5;
+}
+
+/* Division Cards Grid */
+.divisions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.div-card {
+  background: rgba(10, 36, 27, 0.45);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 2px solid rgba(255, 255, 255, 0.05);
+  border-radius: 28px;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.div-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 26px;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+/* Custom glows for each card */
+.div-card.card-farms {
+  border-color: rgba(52, 211, 153, 0.12);
+}
+.div-card.card-farms::before {
+  background: radial-gradient(circle at top, rgba(52, 211, 153, 0.1) 0%, rgba(52, 211, 153, 0) 70%);
+}
+
+.div-card.card-food {
+  border-color: rgba(245, 158, 11, 0.12);
+}
+.div-card.card-food::before {
+  background: radial-gradient(circle at top, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0) 70%);
+}
+
+.div-card.card-agritech {
+  border-color: rgba(59, 130, 246, 0.12);
+}
+.div-card.card-agritech::before {
+  background: radial-gradient(circle at top, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0) 70%);
+}
+
+.div-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--hover-border-color);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 25px var(--hover-glow-color);
+}
+
+.div-card:hover::before {
+  opacity: 1;
+}
+
+/* Set local variables for hover effects */
+.card-farms:hover {
+  --hover-border-color: rgba(52, 211, 153, 0.35);
+  --hover-glow-color: rgba(52, 211, 153, 0.1);
+}
+.card-food:hover {
+  --hover-border-color: rgba(245, 158, 11, 0.35);
+  --hover-glow-color: rgba(245, 158, 11, 0.1);
+}
+.card-agritech:hover {
+  --hover-border-color: rgba(59, 130, 246, 0.35);
+  --hover-glow-color: rgba(59, 130, 246, 0.1);
+}
+
+.div-icon-wrapper {
+  width: 72px;
+  height: 72px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s;
+}
+
+.div-card:hover .div-icon-wrapper {
+  transform: scale(1.1) rotate(5deg);
+  background: var(--btn-accent-bg);
+  border-color: var(--btn-accent-border);
+}
+
+.card-farms {
+  --btn-accent-bg: rgba(52, 211, 153, 0.15);
+  --btn-accent-border: rgba(52, 211, 153, 0.3);
+}
+.card-food {
+  --btn-accent-bg: rgba(245, 158, 11, 0.15);
+  --btn-accent-border: rgba(245, 158, 11, 0.3);
+}
+.card-agritech {
+  --btn-accent-bg: rgba(59, 130, 246, 0.15);
+  --btn-accent-border: rgba(59, 130, 246, 0.3);
+}
+
+.div-h3 {
+  font-family: 'Baloo 2', cursive, sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 0.75rem;
+  z-index: 1;
+}
+
+.div-desc {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+  z-index: 1;
+  flex-grow: 1;
+}
+
+.div-btn {
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 1;
+  transition: gap 0.2s;
+}
+
+.div-card:hover .div-btn {
+  color: var(--btn-text-color);
+  gap: 0.85rem;
+}
+
+.card-farms { --btn-text-color: #34d399; }
+.card-food { --btn-text-color: #fbbf24; }
+.card-agritech { --btn-text-color: #60a5fa; }
+
+@media (max-width: 900px) {
+  .divisions-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .div-card {
+    padding: 2.5rem 1.5rem;
+  }
+}
