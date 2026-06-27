@@ -28,6 +28,22 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Ecosystem Column */}
+        <div className="footer-links-col">
+          <h4 className="footer-h4">Ecosystem</h4>
+          <div className="footer-links">
+            <a href="https://www.koneacademy.io" className="footer-link">Academy Home</a>
+            <a href="https://code.koneacademy.io" className="footer-link">Kone Code</a>
+            <a href="https://lab.koneacademy.io" className="footer-link">Kone Lab</a>
+            <a href="https://ai.koneacademy.io" className="footer-link">Kone AI</a>
+            <a href="https://consult.koneacademy.io" className="footer-link">Kone Consult</a>
+            <a href="https://kids.koneacademy.io" className="footer-link">Kone Kids</a>
+            <a href="https://shop.koneacademy.io" className="footer-link">Kone Shop</a>
+            <a href="https://warp.koneacademy.io" className="footer-link">Kone Warp</a>
+            <a href="https://digital.koneacademy.io" className="footer-link">Kone Digital</a>
+          </div>
+        </div>
+
         {/* Contact/Location Column */}
         <div className="footer-links-col">
           <h4 className="footer-h4">Headquarters</h4>

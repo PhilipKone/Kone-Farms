@@ -278,6 +278,19 @@ export default function Agritech() {
           </div>
         )}
 
+        {/* Engineering Background Section (SEO Hub & Spoke Link) */}
+        <div className="farms-card" style={{ textAlign: 'left', background: 'rgba(59, 130, 246, 0.03)', border: '1px solid rgba(59, 130, 246, 0.1)', padding: '2rem' }}>
+          <h3 className="smartfarm-title" style={{ color: '#60a5fa', margin: '0 0 1rem 0' }}>🧠 The Engineering Behind smartFarm</h3>
+          <p style={{ color: '#94a3b8', fontSize: '0.95rem', lineHeight: 1.7, margin: 0 }}>
+            Our smartFarm agricultural monitoring system is a product of multidisciplinary collaboration at Kone Academy. 
+            The solar telemetry hardware nodes and micro-controllers are designed and prototyped by researchers at the 
+            <a href="https://lab.koneacademy.io" target="_blank" rel="noopener noreferrer" style={{ color: '#a855f7', textDecoration: 'none', fontWeight: 600, margin: '0 4px' }}>Kone Lab</a> 
+            engineering division, while the automated database sync channels and telemetry dashboard logic are programmed in collaboration with the 
+            <a href="https://code.koneacademy.io" target="_blank" rel="noopener noreferrer" style={{ color: '#22c55e', textDecoration: 'none', fontWeight: 600, margin: '0 4px' }}>Kone Code</a> 
+            software engineering branch.
+          </p>
+        </div>
+
         {/* smartTools Showcase */}
         <div className="farms-card" style={{ textAlign: 'center' }}>
           <h3 className="smartfarm-title" style={{ justifyContent: 'center', marginBottom: '2rem' }}>
