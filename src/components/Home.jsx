@@ -4,6 +4,13 @@ import './Home.css';
 export default function Home() {
   return (
     <div className="home-page animate-fade-in">
+      {/* Organic floating decorative particles */}
+      <div className="floating-particle p1">🌿</div>
+      <div className="floating-particle p2">🍃</div>
+      <div className="floating-particle p3">🌱</div>
+      <div className="floating-particle p4">✨</div>
+      <div className="floating-particle p5">🌿</div>
+
       <div className="home-container">
         
         {/* Banner Title */}

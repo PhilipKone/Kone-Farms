@@ -251,11 +251,11 @@ export default function Farms() {
         </div>
 
         {/* GMO banner */}
-        <div className="gmo-policy-banner" style={{ padding: '2rem', justifyContent: 'center' }}>
+        <div className="gmo-policy-banner">
           <span style={{ fontSize: '2.5rem' }}>🛡️</span>
           <div>
-            <strong style={{ display: 'block', color: '#fff', fontSize: '1.1rem', marginBottom: '0.25rem' }}>100% Non-GMO & Organic Standard</strong>
-            <span style={{ fontSize: '0.85rem', color: '#a7f3d0', lineHeight: 1.4 }}>
+            <strong className="gmo-policy-title">100% Non-GMO & Organic Standard</strong>
+            <span className="gmo-policy-desc">
               Kone Farms enforces strict pesticide-free standards. We protect native biodiversity, prevent chemical run-offs, and ensure the pure, bold flavor profiles of Kone Food products.
             </span>
           </div>
