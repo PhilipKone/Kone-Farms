@@ -1,8 +1,65 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Farms.css';
+import L from 'leaflet';
 
 export default function Farms() {
   const [activeRegion, setActiveRegion] = useState('volta'); // 'volta' | 'accra'
+
+  // Initialize Leaflet Map
+  useEffect(() => {
+    // Center at Ghana [6.8, -0.9] with zoom 7 to show both Volta & Accra
+    const map = L.map('farms-leaflet-map', {
+      center: [6.8, -0.9],
+      zoom: 7,
+      zoomControl: true,
+      scrollWheelZoom: false, // Prevent page scrolling hijacking
+    });
+
+    // Dark Matter tile layer
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; OpenStreetMap &copy; CartoDB',
+      minZoom: 6,
+      maxZoom: 11,
+    }).addTo(map);
+
+    // Custom glowing HTML markers html generator
+    const createGlowingPin = (color) => `
+      <div class="custom-marker-glowing" style="--pin-color: ${color};">
+        <div class="pin-core"></div>
+        <div class="pin-ring"></div>
+      </div>
+    `;
+
+    // Volta Region Marker [6.6, 0.6]
+    const voltaIcon = L.divIcon({
+      html: createGlowingPin('#fbbf24'),
+      className: 'leaflet-custom-marker-wrapper',
+      iconSize: [30, 30],
+      iconAnchor: [15, 15],
+    });
+
+    const voltaMarker = L.marker([6.6, 0.6], { icon: voltaIcon }).addTo(map);
+    voltaMarker.on('click', () => {
+      setActiveRegion('volta');
+    });
+
+    // Accra Region Marker [5.6, -0.18]
+    const accraIcon = L.divIcon({
+      html: createGlowingPin('#60a5fa'),
+      className: 'leaflet-custom-marker-wrapper',
+      iconSize: [30, 30],
+      iconAnchor: [15, 15],
+    });
+
+    const accraMarker = L.marker([5.6, -0.18], { icon: accraIcon }).addTo(map);
+    accraMarker.on('click', () => {
+      setActiveRegion('accra');
+    });
+
+    return () => {
+      map.remove();
+    };
+  }, []);
 
   const regions = {
     volta: {
@@ -85,75 +142,9 @@ export default function Farms() {
           </div>
 
           <div className="map-layout-grid">
-            {/* SVG Map of Ghana */}
-            <div className="map-svg-container">
-              <svg className="map-svg" viewBox="0 0 350 450" fill="none" xmlns="http://www.w3.org/2000/svg">
-                {/* Ghana Map Outline (Stylized Path) */}
-                <path 
-                  d="M 120 40 L 190 20 L 260 50 L 280 120 L 310 180 L 290 260 L 295 320 L 280 370 L 210 380 L 180 375 L 140 370 L 120 340 L 90 320 L 70 240 L 95 180 L 80 120 L 100 80 Z" 
-                  fill="rgba(16, 185, 129, 0.05)" 
-                  stroke="rgba(16, 185, 129, 0.3)" 
-                  strokeWidth="3.5"
-                  strokeLinejoin="round"
-                />
-                
-                {/* Grid lines for coordinate grid feel */}
-                <line x1="50" y1="0" x2="50" y2="450" stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
-                <line x1="150" y1="0" x2="150" y2="450" stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
-                <line x1="250" y1="0" x2="250" y2="450" stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
-                <line x1="0" y1="100" x2="350" y2="100" stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
-                <line x1="0" y1="200" x2="350" y2="200" stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
-                <line x1="0" y1="300" x2="350" y2="300" stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
-
-                {/* Region boundary: Volta Region (East/Right side) */}
-                <path 
-                  d="M 230 180 L 270 200 L 290 260 L 295 320 L 270 340 L 245 280 L 235 240 Z" 
-                  fill={activeRegion === 'volta' ? 'rgba(245, 158, 11, 0.15)' : 'rgba(255,255,255,0.02)'} 
-                  stroke="rgba(245, 158, 11, 0.25)" 
-                  strokeWidth="1.5" 
-                  style={{ transition: 'all 0.3s' }}
-                />
-
-                {/* Region: Greater Accra (South Coast) */}
-                <path 
-                  d="M 180 375 L 210 380 L 240 372 L 250 350 L 205 350 Z" 
-                  fill={activeRegion === 'accra' ? 'rgba(59, 130, 246, 0.15)' : 'rgba(255,255,255,0.02)'} 
-                  stroke="rgba(59, 130, 246, 0.25)" 
-                  strokeWidth="1.5" 
-                  style={{ transition: 'all 0.3s' }}
-                />
-
-                {/* Connective Route Line */}
-                <path 
-                  d="M 265 260 Q 240 310, 215 362" 
-                  fill="none" 
-                  stroke="rgba(16, 185, 129, 0.4)" 
-                  strokeWidth="2.5" 
-                  strokeDasharray="5 4" 
-                />
-
-                {/* Pin 1: Volta Region Cultivation Hub */}
-                <g 
-                  className="map-pin" 
-                  style={{ color: '#f59e0b' }} 
-                  onClick={() => setActiveRegion('volta')}
-                >
-                  <circle cx="265" cy="260" r="16" fill="rgba(245, 158, 11, 0.2)" />
-                  <circle cx="265" cy="260" r="7" fill="#f59e0b" className={activeRegion === 'volta' ? 'live-badge-glow' : ''} />
-                  <text x="285" y="265" fill="#f59e0b" fontSize="12" fontWeight="800">Volta Sourcing</text>
-                </g>
-
-                {/* Pin 2: Accra Processing Kitchen */}
-                <g 
-                  className="map-pin" 
-                  style={{ color: '#3b82f6' }} 
-                  onClick={() => setActiveRegion('accra')}
-                >
-                  <circle cx="215" cy="362" r="16" fill="rgba(59, 130, 246, 0.2)" />
-                  <circle cx="215" cy="362" r="7" fill="#3b82f6" className={activeRegion === 'accra' ? 'live-badge-glow' : ''} />
-                  <text x="100" y="367" fill="#60a5fa" fontSize="12" fontWeight="800">Accra Kitchen</text>
-                </g>
-              </svg>
+            {/* Leaflet Real Geographical Map */}
+            <div className="map-svg-container" style={{ padding: 0, overflow: 'hidden' }}>
+              <div id="farms-leaflet-map" style={{ width: '100%', height: '450px', zIndex: 1 }}></div>
             </div>
 
             {/* Region details panel */}
