@@ -7,7 +7,7 @@ export default function Farms() {
 
   // Initialize Leaflet Map
   useEffect(() => {
-    // Center at Ghana [6.8, -0.9] with zoom 7 to show both Volta & Accra
+    // Center at Ghana [6.8, -0.9] with zoom 7 initially
     const map = L.map('farms-leaflet-map', {
       center: [6.8, -0.9],
       zoom: 7,
@@ -30,31 +30,53 @@ export default function Farms() {
       </div>
     `;
 
-    // Volta Region Marker [6.6, 0.6]
-    const voltaIcon = L.divIcon({
-      html: createGlowingPin('#fbbf24'),
-      className: 'leaflet-custom-marker-wrapper',
-      iconSize: [30, 30],
-      iconAnchor: [15, 15],
+    // Coordinates definition
+    const locations = [
+      { id: 'accra', name: 'Accra Packaging Kitchen', coords: [5.6, -0.18], color: '#60a5fa' },
+      { id: 'volta', name: 'Volta Sourcing District', coords: [6.6, 0.6], color: '#fbbf24' },
+      { id: 'kumasi', name: 'Kumasi Agro-forestry Hub', coords: [6.69, -1.62], color: '#10b981' },
+      { id: 'tamale', name: 'Tamale Shea & Grain Cooperative', coords: [9.40, -0.84], color: '#f97316' },
+    ];
+
+    const markerInstances = [];
+
+    locations.forEach((loc) => {
+      const icon = L.divIcon({
+        html: createGlowingPin(loc.color),
+        className: 'leaflet-custom-marker-wrapper',
+        iconSize: [30, 30],
+        iconAnchor: [15, 15],
+      });
+
+      const marker = L.marker(loc.coords, { icon }).addTo(map);
+      marker.on('click', () => {
+        setActiveRegion(loc.id);
+      });
+      markerInstances.push(marker);
     });
 
-    const voltaMarker = L.marker([6.6, 0.6], { icon: voltaIcon }).addTo(map);
-    voltaMarker.on('click', () => {
-      setActiveRegion('volta');
+    // Fit map bounds automatically to frame all 4 pins beautifully with padding
+    const group = L.featureGroup(markerInstances);
+    map.fitBounds(group.getBounds().pad(0.18));
+
+    // Logistics Polylines flowing towards Accra Packaging Kitchen [5.6, -0.18]
+    const routeOptions = (color) => ({
+      color: color,
+      weight: 2.5,
+      opacity: 0.65,
+      dashArray: '8, 8',
+      className: 'logistics-route'
     });
 
-    // Accra Region Marker [5.6, -0.18]
-    const accraIcon = L.divIcon({
-      html: createGlowingPin('#60a5fa'),
-      className: 'leaflet-custom-marker-wrapper',
-      iconSize: [30, 30],
-      iconAnchor: [15, 15],
-    });
+    // Outlying hubs -> Accra Packaging Kitchen
+    const accraCoords = [5.6, -0.18];
+    const voltaCoords = [6.6, 0.6];
+    const kumasiCoords = [6.69, -1.62];
+    const tamaleCoords = [9.40, -0.84];
 
-    const accraMarker = L.marker([5.6, -0.18], { icon: accraIcon }).addTo(map);
-    accraMarker.on('click', () => {
-      setActiveRegion('accra');
-    });
+    L.polyline([voltaCoords, accraCoords], routeOptions('#fbbf24')).addTo(map);
+    L.polyline([kumasiCoords, accraCoords], routeOptions('#10b981')).addTo(map);
+    L.polyline([tamaleCoords, accraCoords], routeOptions('#f97316')).addTo(map);
 
     return () => {
       map.remove();
@@ -75,10 +97,24 @@ export default function Farms() {
       title: 'Accra Packaging Kitchen',
       desc: 'Our state-of-the-art kitchen and audit center located in Greater Accra. Fresh crops harvested from the Volta Region are transported here within 24 hours. The ingredients undergo strict quality checks (moisture auditing, purity tests) before being slow-cooked in small batches, bottled, vacuum-sealed, and shipped to stockists.',
       crops: ['🥫 Shito Processing', '🧪 Purity Auditing', '📦 Wholesale Shipping', '🐟 Smoked Herring', '🦐 Dried Shrimp']
+    },
+    kumasi: {
+      id: 'kumasi',
+      tag: 'Agro-forestry Hub',
+      title: 'Kumasi Agro-forestry Hub',
+      desc: 'Located in the heart of the Ashanti Region, this hub focuses on sustainable multi-tier organic cocoa shade-cropping, black pepper vine inter-cropping, and natural composting research. We host soil regeneration workshops for regional farming cooperatives here.',
+      crops: ['🍫 Organic Cocoa', '🪵 Composting Research', '🌿 Black Pepper Vines', '🍌 Plantain Shade-crops']
+    },
+    tamale: {
+      id: 'tamale',
+      tag: 'Arid Farming & Cooperative',
+      title: 'Tamale Shea & Grain Cooperative',
+      desc: 'Our northernmost cooperative specializing in wild-harvested organic shea butter extraction, drought-resistant pearl millet cultivation, and solar dehydration processing. It operates as a women-led cooperative supporting 80 households.',
+      crops: ['🧴 Organic Shea Butter', '🌾 Pearl Millet', '☀️ Solar Dehydration', '🥜 Roasted Groundnuts']
     }
   };
 
-  const currentRegion = regions[activeRegion];
+  const currentRegion = regions[activeRegion] || regions.volta;
 
   return (
     <div className="farms-div-page animate-fade-in">

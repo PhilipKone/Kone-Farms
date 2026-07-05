@@ -413,3 +413,19 @@
   text-decoration: underline;
 }
 
+/* Animated flow logistics routes (flowing dashes) */
+.logistics-route {
+  stroke-dasharray: 8, 8;
+  animation: logisticsFlow 20s linear infinite;
+}
+
+@keyframes logisticsFlow {
+  from {
+    stroke-dashoffset: 320;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+
