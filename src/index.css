@@ -48,6 +48,8 @@ body {
   background: rgba(10, 36, 27, 0.65);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
   border: 2px solid rgba(16, 185, 129, 0.12);
   border-radius: 28px;
   padding: 2.5rem;
