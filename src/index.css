@@ -45,12 +45,8 @@ body {
 
 /* Shared Glass Cards */
 .farms-card {
-  background: rgba(10, 36, 27, 0.65);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  border: 2px solid rgba(16, 185, 129, 0.12);
+  background: rgba(6, 28, 21, 0.9);
+  border: 2px solid rgba(16, 185, 129, 0.15);
   border-radius: 28px;
   padding: 2.5rem;
   box-shadow: 0 20px 40px rgba(0,0,0,0.45);
