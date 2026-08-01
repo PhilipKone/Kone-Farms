@@ -1,0 +1,169 @@
+.farms-sitemap-page {
+  background-color: #060913;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: #e2e8f0;
+  font-family: 'Nunito', 'Outfit', 'Inter', sans-serif;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(57, 255, 20, 0.05), transparent 50%),
+    radial-gradient(circle at 90% 80%, rgba(57, 255, 20, 0.02), transparent 50%);
+}
+
+.farms-sitemap-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: #090B10;
+  border-bottom: 1px solid rgba(57, 255, 20, 0.1);
+  z-index: 20;
+}
+
+.farms-sitemap-back-btn {
+  background: transparent;
+  border: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  font-size: 0.95rem;
+}
+
+.farms-sitemap-back-btn:hover {
+  opacity: 0.8;
+  color: #39ff14;
+}
+
+.farms-sitemap-brand {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.farms-sitemap-container {
+  flex: 1;
+  padding: 60px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.farms-sitemap-card {
+  width: 100%;
+  max-width: 900px;
+  background: rgba(10, 15, 30, 0.7);
+  border: 1px solid rgba(57, 255, 20, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  backdrop-filter: blur(25px);
+  border-radius: 24px;
+  padding: 48px;
+}
+
+.farms-sitemap-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, #ffffff 0%, #39ff14 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.farms-sitemap-subtitle {
+  color: #94a3b8;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  max-width: 650px;
+  margin-bottom: 40px;
+}
+
+.farms-sitemap-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+@media (max-width: 768px) {
+  .farms-sitemap-grid {
+    grid-template-columns: 1fr;
+  }
+  .farms-sitemap-card {
+    padding: 30px 20px;
+  }
+}
+
+.farms-sitemap-column {
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.farms-sitemap-col-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 12px;
+}
+
+.farms-sitemap-icon {
+  font-size: 1.25rem;
+  color: #39ff14;
+}
+
+.farms-sitemap-col-header h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+.farms-sitemap-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.farms-sitemap-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.farms-sitemap-link {
+  color: #e2e8f0;
+  text-decoration: none;
+  font-size: 1.05rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  transition: color 0.2s;
+}
+
+.farms-sitemap-link:hover {
+  color: #39ff14;
+}
+
+.farms-sitemap-desc {
+  color: #64748b;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.farms-external-icon {
+  font-size: 0.75rem;
+  opacity: 0.6;
+}

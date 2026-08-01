@@ -25,6 +25,7 @@ export default function Footer() {
             <a href="#farms" className="footer-link">Farms & Sourcing</a>
             <a href="#food" className="footer-link">Kone Shito Sauce</a>
             <a href="#agritech" className="footer-link">Smart telemetry</a>
+            <a href="#sitemap" className="footer-link" style={{ fontWeight: 'bold', color: '#39ff14' }}>Subdomain Sitemap</a>
           </div>
         </div>
 
@@ -33,6 +34,7 @@ export default function Footer() {
           <h4 className="footer-h4">Ecosystem</h4>
           <div className="footer-links">
             <a href="https://www.koneacademy.io" className="footer-link">Academy Home</a>
+            <a href="https://www.koneacademy.io/sitemap" className="footer-link">Sitemap</a>
             <a href="https://code.koneacademy.io" className="footer-link">Kone Code</a>
             <a href="https://lab.koneacademy.io" className="footer-link">Kone Lab</a>
             <a href="https://ai.koneacademy.io" className="footer-link">Kone AI</a>

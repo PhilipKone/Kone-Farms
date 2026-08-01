@@ -428,4 +428,13 @@
   }
 }
 
+@media (max-width: 768px) {
+  .leaflet-bar a {
+    width: 44px !important;
+    height: 44px !important;
+    line-height: 44px !important;
+    font-size: 1.2rem !important;
+  }
+}
+
 

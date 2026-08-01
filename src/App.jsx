@@ -5,6 +5,7 @@ import Home from './components/Home';
 import Farms from './components/Farms';
 import Food from './components/Food';
 import Agritech from './components/Agritech';
+import Sitemap from './components/Sitemap';
 
 export default function App() {
   const [route, setRoute] = useState(window.location.hash || '#home');
@@ -15,7 +16,7 @@ export default function App() {
       // Map empty hash to #home
       if (!currentHash || currentHash === '#') {
         setRoute('#home');
-      } else if (['#home', '#farms', '#food', '#agritech'].includes(currentHash)) {
+      } else if (['#home', '#farms', '#food', '#agritech', '#sitemap'].includes(currentHash)) {
         setRoute(currentHash);
       } else {
         // Fallback for unrecognized hashes
@@ -44,6 +45,8 @@ export default function App() {
         return <Food />;
       case '#agritech':
         return <Agritech />;
+      case '#sitemap':
+        return <Sitemap onBack={() => { window.location.hash = '#home'; }} />;
       case '#home':
       default:
         return <Home />;

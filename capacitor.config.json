@@ -1,0 +1,6 @@
+{
+  "appId": "io.koneacademy.farms",
+  "appName": "Kone Farms",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}

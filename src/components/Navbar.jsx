@@ -50,6 +50,12 @@ export default function Navbar({ currentRoute }) {
         )}
       </button>
 
+      {/* Mobile Menu Backdrop Overlay */}
+      <div 
+        className={`nav-mobile-overlay ${mobileMenuOpen ? 'visible' : ''}`} 
+        onClick={closeMobileMenu}
+      />
+
       {/* Mobile Menu Overlay */}
       <nav className={`nav-menu-mobile ${mobileMenuOpen ? 'open' : ''}`}>
         <a href="#home" className={`nav-link ${currentRoute === '#home' ? 'active' : ''}`} onClick={closeMobileMenu}>Overview</a>
