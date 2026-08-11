@@ -4,7 +4,7 @@ import './BlogPost.css';
 
 export default function BlogPost({ slug, onBack }) {
   const [copied, setCopied] = useState(false);
-  const [showCode, setShowCode] = useState(false); // Collapsible code toggle
+  const [showCode, setShowCode] = useState(false);
 
   const article = blogArticles.find(a => a.slug === slug) || blogArticles[0];
 
@@ -25,9 +25,7 @@ export default function BlogPost({ slug, onBack }) {
     }
   };
 
-  // Helper to parse bold text (**text**) AND in-text citations ([1], [2], etc.)
   const renderFormattedText = (text) => {
-    // Regex splits by bold (**...**) and citation brackets (\[\d+\])
     const regex = /(\*\*.*?\*\*|\[\d+\])/g;
     const parts = text.split(regex);
 
@@ -67,7 +65,7 @@ export default function BlogPost({ slug, onBack }) {
         >
           <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="2.5" fill="none">
             <line x1="19" y1="12" x2="5" y2="12"></line>
-            <polyline points="12 19 5 12 12 19"></polyline>
+            <polyline points="12 19 5 12 12 5"></polyline>
           </svg>
           Back to Agritech Research Hub
         </a>
@@ -108,6 +106,14 @@ export default function BlogPost({ slug, onBack }) {
             const trimmed = block.trim();
             if (trimmed === '---') {
               return <hr key={idx} className="post-divider-line" />;
+            } else if (trimmed.startsWith('MATH_BLOCK:')) {
+              const formula = trimmed.replace('MATH_BLOCK:', '').trim();
+              return (
+                <div key={idx} className="post-math-card">
+                  <span className="math-label">Mathematical Formula:</span>
+                  <code className="math-formula-code">{formula}</code>
+                </div>
+              );
             } else if (trimmed.startsWith('### ')) {
               return <h3 key={idx} className="post-subhead-h3">{trimmed.replace(/^###\s+/, '')}</h3>;
             } else if (trimmed.startsWith('#### ')) {

@@ -172,6 +172,32 @@
   margin: 2.5rem 0;
 }
 
+.post-math-card {
+  background: rgba(16, 185, 129, 0.08);
+  border-left: 4px solid #10b981;
+  border-radius: 10px;
+  padding: 1rem 1.4rem;
+  margin: 1.8rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.math-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #34d399;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.math-formula-code {
+  font-family: 'Consolas', 'Fira Code', monospace;
+  font-size: 1.05rem;
+  color: #ffffff;
+  font-weight: 700;
+}
+
 .code-toggle-btn {
   width: 100%;
   background: rgba(16, 185, 129, 0.08);

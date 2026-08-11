@@ -84,18 +84,18 @@ Each remote node uses an **ESP32 WROOM-32U** microcontroller [3] paired with a *
 
 #### Sensor Calibration Formula:
 The ESP32 12-bit Analog-to-Digital Converter (ADC) yields raw values between 0 and 4095. Calibration requires recording two baseline voltage states:
-1. $V_{air}$: Raw ADC reading in dry open air ($\approx 3200$).
-2. $V_{water}$: Raw ADC reading submerged in distilled water ($\approx 1350$).
+1. **V_air**: Raw ADC reading in dry open air (~3200).
+2. **V_water**: Raw ADC reading submerged in distilled water (~1350).
 
-$$\text{VWC} (\%) = \operatorname{clamp}\left( \frac{V_{raw} - V_{air}}{V_{water} - V_{air}} \times 100, 0, 100 \right)$$
+MATH_BLOCK: VWC (%) = Clamp( (V_raw - V_air) / (V_water - V_air) × 100, 0, 100 )
 
 ---
 
 ### Solar Power Budget & Deep Sleep Optimization
 
 Field nodes are powered by a single **18650 LiFePO4 battery (3400mAh)** coupled with a **6W Monocrystalline Solar Panel**. To achieve multi-year maintenance-free operation:
-- **Active Transmission State**: Draws $\approx 120\text{mA}$ for 1.2 seconds during ADC sampling and LoRa packet broadcast.
-- **Deep Sleep State**: Disables Wi-Fi, Bluetooth, ADC, and LoRa power rails, reducing current draw to just **15.4 $\mu\text{A}$** [3].
+- **Active Transmission State**: Draws ~120mA for 1.2 seconds during ADC sampling and LoRa packet broadcast.
+- **Deep Sleep State**: Disables Wi-Fi, Bluetooth, ADC, and LoRa power rails, reducing current draw to just **15.4 µA** [3].
 - **Calculated Battery Lifespan**: Even with zero solar exposure (continuous cloud cover), a single node operates autonomously for over 68 days on one full charge.
 `,
     references: [
@@ -185,13 +185,13 @@ void loop() {
     content: `
 ### Microclimate Control in High-Temperature Tropical Environments
 
-Greenhouse farming in West Africa offers protection against heavy rains and pests [1]. However, managing **Vapor Pressure Deficit (VPD)** during peak afternoon temperatures ($\ge 34^\circ\text{C}$) is critical to prevent crop stomatal closure and blossom end rot.
+Greenhouse farming in West Africa offers protection against heavy rains and pests [1]. However, managing **Vapor Pressure Deficit (VPD)** during peak afternoon temperatures (≥ 34°C) is critical to prevent crop stomatal closure and blossom end rot.
 
 VPD measures the difference between the pressure exerted by water vapor inside leaves versus the surrounding air pressure. In tropical greenhouses, optimal VPD for fruiting crops (tomatoes, sweet peppers) ranges between **0.8 kPa and 1.2 kPa** [1].
 
-$$\text{SVP} (T) = 0.61078 \times \exp\left( \frac{17.27 \times T}{T + 237.3} \right) \quad (\text{kPa})$$
+MATH_BLOCK: SVP(T) = 0.61078 × exp( (17.27 × T) / (T + 237.3) )  [kPa]
 
-$$\text{VPD} = \text{SVP} \times \left( 1 - \frac{\text{RH}}{100} \right) \quad (\text{kPa})$$
+MATH_BLOCK: VPD = SVP × ( 1 - RH / 100 )  [kPa]
 
 When VPD exceeds 1.5 kPa, the automated control system triggers high-pressure fogging nozzles and shade nets to cool the ambient air without over-saturating the growing substrate.
 
@@ -287,20 +287,20 @@ void loop() {
     content: `
 ### The Impact of High Ammonia Levels in Poultry Production
 
-Ammonia gas ($\text{NH}_3$) is a byproduct of microbial decomposition of uric acid in poultry manure [1]. In enclosed coops across Ghana [2], elevated ammonia levels severely damage the respiratory tract of broilers and layers, leading to Newcastle disease vulnerability and reduced egg production [1].
+Ammonia gas (**NH₃**) is a byproduct of microbial decomposition of uric acid in poultry manure [1]. In enclosed coops across Ghana [2], elevated ammonia levels severely damage the respiratory tract of broilers and layers, leading to Newcastle disease vulnerability and reduced egg production [1].
 
 #### Safety Thresholds for Poultry Health:
-- **$< 10\text{ PPM}$**: Optimal air quality. Normal growth and feed conversion ratio (FCR).
-- **$20 - 25\text{ PPM}$**: Irritation of bird respiratory linings; vaccination efficacy drops [1].
-- **$> 50\text{ PPM}$**: Severe lethargy, conjunctivitis, and up to $15\%$ loss in body weight gain.
+- **< 10 PPM**: Optimal air quality. Normal growth and feed conversion ratio (FCR).
+- **20 - 25 PPM**: Irritation of bird respiratory linings; vaccination efficacy drops [1].
+- **> 50 PPM**: Severe lethargy, conjunctivitis, and up to 15% loss in body weight gain.
 
 ---
 
 ### Automated Multi-Stage Ventilation & Solar Backup
 
-To maintain coop ammonia below $20\text{ PPM}$ without draining grid power during load-shedding, **Kone Farms** engineered an automated solar-assisted exhaust system.
+To maintain coop ammonia below **20 PPM** without draining grid power during load-shedding, **Kone Farms** engineered an automated solar-assisted exhaust system.
 
-Dual **MQ-137 semiconductor gas sensors** [3] and **DHT22 climate sensors** continuously sample coop air. When ammonia exceeds $20\text{ PPM}$ or relative humidity surpasses $75\%$, the ESP32 controller fires Solid State Relays (SSR) to engage industrial 24V solar-powered exhaust fans, rapidly flushing out accumulated manure gases.
+Dual **MQ-137 semiconductor gas sensors** [3] and **DHT22 climate sensors** continuously sample coop air. When ammonia exceeds **20 PPM** or relative humidity surpasses **75%**, the ESP32 controller fires Solid State Relays (SSR) to engage industrial 24V solar-powered exhaust fans, rapidly flushing out accumulated manure gases.
 `,
     references: [
       {
