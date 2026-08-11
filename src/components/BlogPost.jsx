@@ -55,7 +55,7 @@ export default function BlogPost({ slug, onBack }) {
   };
 
   return (
-    <div className="farms-post-container">
+    <div className="farms-post-container" itemScope itemType="https://schema.org/TechArticle">
       {/* Top Navigation */}
       <div className="post-nav-bar">
         <a 
@@ -74,8 +74,8 @@ export default function BlogPost({ slug, onBack }) {
       {/* Header Banner */}
       <header className="post-header-banner" style={{ background: article.coverGradient }}>
         <div className="post-category-tag">{article.category}</div>
-        <h1 className="post-main-title">{article.title}</h1>
-        <p className="post-main-summary">{article.summary}</p>
+        <h1 className="post-main-title" itemProp="headline">{article.title}</h1>
+        <p className="post-main-summary" itemProp="description">{article.summary}</p>
 
         <div className="post-author-bar">
           <a 
@@ -83,24 +83,27 @@ export default function BlogPost({ slug, onBack }) {
             target="_blank" 
             rel="noopener noreferrer" 
             className="post-author-link"
+            itemProp="author"
+            itemScope
+            itemType="https://schema.org/Person"
             title={`View ${article.author.name}'s bio`}
           >
-            <img src={article.author.avatar} alt={article.author.name} className="post-author-img" />
+            <img src={article.author.avatar} alt={article.author.name} className="post-author-img" itemProp="image" />
             <div className="post-author-meta">
-              <span className="post-author-name">{article.author.name}</span>
-              <span className="post-author-role">{article.author.role}</span>
+              <span className="post-author-name" itemProp="name">{article.author.name}</span>
+              <span className="post-author-role" itemProp="jobTitle">{article.author.role}</span>
             </div>
           </a>
 
           <div className="post-time-meta">
-            <span className="meta-item">📅 {article.publishDate}</span>
+            <span className="meta-item">📅 <time itemProp="datePublished" dateTime={article.isoDate}>{article.publishDate}</time></span>
             <span className="meta-item">⏱️ {article.readTime}</span>
           </div>
         </div>
       </header>
 
       {/* Article Content Body */}
-      <article className="post-body-content">
+      <article className="post-body-content" itemProp="articleBody">
         <div className="post-text-blocks">
           {article.content.split(/\r?\n\r?\n/).map((block, idx) => {
             const trimmed = block.trim();
