@@ -9,12 +9,17 @@ export default function Blog({ onSelectArticle }) {
   const categories = ['All', 'Telemetry & IoT', 'Greenhouse Automation', 'Livestock & Poultry'];
 
   const filteredArticles = useMemo(() => {
+    const cleanQuery = searchQuery.toLowerCase().replace(/[^a-z0-9\s]/g, '').trim();
+    if (!cleanQuery && selectedCategory === 'All') return blogArticles;
+
     return blogArticles.filter(art => {
       const matchesCat = selectedCategory === 'All' || art.category === selectedCategory;
+      if (!cleanQuery) return matchesCat;
+
       const matchesSearch = 
-        art.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        art.summary.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        art.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+        art.title.toLowerCase().includes(cleanQuery) ||
+        art.summary.toLowerCase().includes(cleanQuery) ||
+        art.tags.some(tag => tag.toLowerCase().includes(cleanQuery));
       return matchesCat && matchesSearch;
     });
   }, [selectedCategory, searchQuery]);
@@ -68,7 +73,7 @@ export default function Blog({ onSelectArticle }) {
       <div className="farms-blog-grid">
         {filteredArticles.length === 0 ? (
           <div className="no-articles-found">
-            <p>No agricultural engineering articles found matching "{searchQuery}".</p>
+            <p>No agricultural engineering articles found matching "{searchQuery.replace(/[^a-zA-Z0-9\s-_]/g, '')}".</p>
             <button className="reset-search-btn" onClick={() => { setSearchQuery(''); setSelectedCategory('All'); }}>
               Reset Filters
             </button>
