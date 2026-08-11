@@ -3,6 +3,8 @@ import './Agritech.css';
 import { db } from '../firebase/config';
 import { doc, onSnapshot, setDoc } from 'firebase/firestore';
 
+import VwcCalculator from './VwcCalculator';
+
 export default function Agritech() {
   // Telemetry state
   const [telemetry, setTelemetry] = useState({
@@ -277,6 +279,9 @@ export default function Agritech() {
             </div>
           </div>
         )}
+
+        {/* --- Interactive Precision Telemetry & VWC Calculator --- */}
+        <VwcCalculator />
 
         {/* Engineering Background Section (SEO Hub & Spoke Link) */}
         <div className="farms-card" style={{ textAlign: 'left', background: 'rgba(59, 130, 246, 0.03)', border: '1px solid rgba(59, 130, 246, 0.1)', padding: '2rem' }}>
