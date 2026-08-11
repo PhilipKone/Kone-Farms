@@ -402,3 +402,45 @@
   background: #10b981;
   color: #060d08;
 }
+
+@media (max-width: 768px) {
+  .farms-post-container {
+    padding: 1.5rem 1rem 6.5rem;
+  }
+
+  .post-header-banner {
+    padding: 1.5rem 1.2rem;
+    margin-bottom: 2rem;
+  }
+
+  .post-main-title {
+    font-size: 1.5rem;
+  }
+
+  .post-main-summary {
+    font-size: 0.92rem;
+  }
+
+  .post-author-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+
+  .post-subhead-h3 {
+    font-size: 1.25rem;
+  }
+
+  .post-math-card {
+    padding: 0.8rem 1rem;
+  }
+
+  .math-formula-code {
+    font-size: 0.9rem;
+    word-break: break-word;
+  }
+
+  .hardware-bom-section, .code-snippet-section, .scientific-references-section {
+    padding: 1.2rem 1rem;
+  }
+}

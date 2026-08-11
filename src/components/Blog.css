@@ -293,3 +293,29 @@
   cursor: pointer;
   font-weight: 700;
 }
+
+@media (max-width: 768px) {
+  .farms-blog-container {
+    padding: 1.5rem 1rem 6rem;
+  }
+
+  .farms-blog-title {
+    font-size: 1.85rem;
+  }
+
+  .farms-blog-subtitle {
+    font-size: 0.92rem;
+  }
+
+  .farms-blog-badge {
+    font-size: 0.68rem;
+    padding: 0.35rem 0.75rem;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .farms-blog-grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+}
