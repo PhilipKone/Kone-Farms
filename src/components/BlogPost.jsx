@@ -75,19 +75,19 @@ export default function BlogPost({ slug, onBack }) {
       {/* Article Content Body */}
       <article className="post-body-content">
         <div className="post-text-blocks">
-          {article.content.split('\n\n').map((block, idx) => {
+          {article.content.split(/\r?\n\r?\n/).map((block, idx) => {
             const trimmed = block.trim();
             if (trimmed === '---') {
               return <hr key={idx} className="post-divider-line" />;
             } else if (trimmed.startsWith('### ')) {
-              return <h3 key={idx} className="post-subhead-h3">{trimmed.replace('### ', '')}</h3>;
+              return <h3 key={idx} className="post-subhead-h3">{trimmed.replace(/^###\s+/, '')}</h3>;
             } else if (trimmed.startsWith('#### ')) {
-              return <h4 key={idx} className="post-subhead-h4">{trimmed.replace('#### ', '')}</h4>;
+              return <h4 key={idx} className="post-subhead-h4">{trimmed.replace(/^####\s+/, '')}</h4>;
             } else if (trimmed.startsWith('- ')) {
               return (
                 <ul key={idx} className="post-bullet-list">
-                  {trimmed.split('\n').map((item, itemIdx) => (
-                    <li key={itemIdx}>{renderFormattedText(item.replace('- ', ''))}</li>
+                  {trimmed.split(/\r?\n/).map((item, itemIdx) => (
+                    <li key={itemIdx}>{renderFormattedText(item.replace(/^- \s*/, ''))}</li>
                   ))}
                 </ul>
               );
