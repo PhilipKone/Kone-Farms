@@ -25,6 +25,7 @@ export default function Navbar({ currentRoute }) {
         <a href="#farms" className={`nav-link ${currentRoute === '#farms' ? 'active' : ''}`}>Farms</a>
         <a href="#food" className={`nav-link ${currentRoute === '#food' ? 'active' : ''}`}>Food</a>
         <a href="#agritech" className={`nav-link ${currentRoute === '#agritech' ? 'active' : ''}`}>Agritech</a>
+        <a href="#blog" className={`nav-link ${currentRoute.startsWith('#blog') ? 'active' : ''}`}>Blog</a>
         <a href="https://koneacademy.io" className="back-btn-nav">
           <svg className="back-arrow-svg" viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '4px' }}>
             <line x1="19" y1="12" x2="5" y2="12"></line>
@@ -62,6 +63,7 @@ export default function Navbar({ currentRoute }) {
         <a href="#farms" className={`nav-link ${currentRoute === '#farms' ? 'active' : ''}`} onClick={closeMobileMenu}>Farms</a>
         <a href="#food" className={`nav-link ${currentRoute === '#food' ? 'active' : ''}`} onClick={closeMobileMenu}>Food</a>
         <a href="#agritech" className={`nav-link ${currentRoute === '#agritech' ? 'active' : ''}`} onClick={closeMobileMenu}>Agritech</a>
+        <a href="#blog" className={`nav-link ${currentRoute.startsWith('#blog') ? 'active' : ''}`} onClick={closeMobileMenu}>Blog</a>
         <a href="https://koneacademy.io" className="back-btn-nav" style={{ marginTop: '1rem', justifyContent: 'center' }}>
           ⬅️ Back to Academy
         </a>

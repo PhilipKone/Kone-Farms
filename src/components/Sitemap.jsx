@@ -88,6 +88,12 @@ const Sitemap = ({ onBack }) => {
                   </a>
                   <p className="farms-sitemap-desc">Hardware specs for microcontroller soil nodes, sensor arrays, and solar telemetry modules.</p>
                 </div>
+                <div className="farms-sitemap-item">
+                  <a href="#blog" className="farms-sitemap-link">
+                    Agritech Research Blog
+                  </a>
+                  <p className="farms-sitemap-desc">Deep-dive engineering research, solar telemetry node circuit schematics, and sensor calibration guides.</p>
+                </div>
               </div>
             </div>
 

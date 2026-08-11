@@ -25,6 +25,7 @@ export default function Footer() {
             <a href="#farms" className="footer-link">Farms & Sourcing</a>
             <a href="#food" className="footer-link">Kone Shito Sauce</a>
             <a href="#agritech" className="footer-link">Smart telemetry</a>
+            <a href="#blog" className="footer-link">Agritech Research Blog</a>
             <a href="#sitemap" className="footer-link" style={{ fontWeight: 'bold', color: '#39ff14' }}>Subdomain Sitemap</a>
           </div>
         </div>

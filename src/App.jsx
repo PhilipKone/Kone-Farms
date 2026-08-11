@@ -6,6 +6,8 @@ import Farms from './components/Farms';
 import Food from './components/Food';
 import Agritech from './components/Agritech';
 import Sitemap from './components/Sitemap';
+import Blog from './components/Blog';
+import BlogPost from './components/BlogPost';
 
 export default function App() {
   const [route, setRoute] = useState(window.location.hash || '#home');
@@ -16,7 +18,9 @@ export default function App() {
       // Map empty hash to #home
       if (!currentHash || currentHash === '#') {
         setRoute('#home');
-      } else if (['#home', '#farms', '#food', '#agritech', '#sitemap'].includes(currentHash)) {
+      } else if (currentHash.startsWith('#blog/')) {
+        setRoute(currentHash);
+      } else if (['#home', '#farms', '#food', '#agritech', '#blog', '#sitemap'].includes(currentHash)) {
         setRoute(currentHash);
       } else {
         // Fallback for unrecognized hashes
@@ -38,6 +42,11 @@ export default function App() {
   }, [route]);
 
   const renderContent = () => {
+    if (route.startsWith('#blog/')) {
+      const slug = route.replace('#blog/', '');
+      return <BlogPost slug={slug} onBack={() => { window.location.hash = '#blog'; }} />;
+    }
+
     switch (route) {
       case '#farms':
         return <Farms />;
@@ -45,6 +54,8 @@ export default function App() {
         return <Food />;
       case '#agritech':
         return <Agritech />;
+      case '#blog':
+        return <Blog onSelectArticle={(slug) => { window.location.hash = `#blog/${slug}`; }} />;
       case '#sitemap':
         return <Sitemap onBack={() => { window.location.hash = '#home'; }} />;
       case '#home':
