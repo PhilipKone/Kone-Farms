@@ -16,12 +16,41 @@ export default function BlogPost({ slug, onBack }) {
     }
   };
 
-  // Helper to parse basic markdown bold/text formatting cleanly
+  const scrollToRef = (refId) => {
+    const el = document.getElementById(`ref-${refId}`);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      el.classList.add('highlight-ref');
+      setTimeout(() => el.classList.remove('highlight-ref'), 2000);
+    }
+  };
+
+  // Helper to parse bold text (**text**) AND in-text citations ([1], [2], etc.)
   const renderFormattedText = (text) => {
-    const parts = text.split(/(\*\*.*?\*\*)/g);
+    // Regex splits by bold (**...**) and citation brackets (\[\d+\])
+    const regex = /(\*\*.*?\*\*|\[\d+\])/g;
+    const parts = text.split(regex);
+
     return parts.map((part, i) => {
       if (part.startsWith('**') && part.endsWith('**')) {
         return <strong key={i} className="text-emerald-bold">{part.slice(2, -2)}</strong>;
+      } else if (/^\[\d+\]$/.test(part)) {
+        const num = part.replace(/[\[\]]/g, '');
+        return (
+          <sup key={i}>
+            <a 
+              href={`#ref-${num}`}
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToRef(num);
+              }}
+              className="intext-citation-link"
+              title={`Jump to Reference [${num}]`}
+            >
+              [{num}]
+            </a>
+          </sup>
+        );
       }
       return part;
     });
@@ -160,8 +189,8 @@ export default function BlogPost({ slug, onBack }) {
             <h3 className="section-title">📚 Scientific References & Hardware Datasheets</h3>
             <ul className="references-list">
               {article.references.map((ref, idx) => (
-                <li key={idx} className="reference-item">
-                  <span className="ref-index">[{idx + 1}]</span>
+                <li key={idx} id={`ref-${ref.id}`} className="reference-item">
+                  <span className="ref-index">[{ref.id}]</span>
                   <div className="ref-details">
                     <a 
                       href={ref.url} 

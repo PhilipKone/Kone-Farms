@@ -72,15 +72,15 @@ void loop() {
     content: `
 ### The Challenge of Rural Farmland Irrigation in Ghana
 
-In agricultural hubs across the Volta, Eastern, and Ashanti regions of Ghana, seasonal rainfall volatility directly impacts crop yields. Conventional scheduled irrigation often leads to over-saturation or root rot during unexpected rain showers, or severe water stress during extended dry spells.
+In agricultural hubs across the Volta, Eastern, and Ashanti regions of Ghana, seasonal rainfall volatility directly impacts crop yields [1]. Conventional scheduled irrigation often leads to over-saturation or root rot during unexpected rain showers, or severe water stress during extended dry spells.
 
-To solve this, **Kone Farms** engineered a low-power, long-range **LoRa-based Soil Telemetry Network**. By placing low-cost solar sensor nodes across crop zones, farmers gain real-time visibility into volumetric water content (VWC) without needing cellular SIM cards or mains electricity at every field location.
+To solve this, **Kone Farms** engineered a low-power, long-range **LoRa-based Soil Telemetry Network** [2]. By placing low-cost solar sensor nodes across crop zones, farmers gain real-time visibility into volumetric water content (VWC) without needing cellular SIM cards or mains electricity at every field location.
 
 ---
 
 ### Hardware Architecture & Circuit Calibration
 
-Each remote node uses an **ESP32 WROOM-32U** microcontroller paired with a **Semtech SX1276 LoRa transceiver**. Because standard resistive soil sensors corrode rapidly due to electrolysis in humid tropical soils, we utilize **Capacitive Soil Moisture Sensors (v1.2)**.
+Each remote node uses an **ESP32 WROOM-32U** microcontroller [3] paired with a **Semtech SX1276 LoRa transceiver** [4]. Because standard resistive soil sensors corrode rapidly due to electrolysis in humid tropical soils, we utilize **Capacitive Soil Moisture Sensors (v1.2)**.
 
 #### Sensor Calibration Formula:
 The ESP32 12-bit Analog-to-Digital Converter (ADC) yields raw values between 0 and 4095. Calibration requires recording two baseline voltage states:
@@ -95,26 +95,30 @@ $$\text{VWC} (\%) = \operatorname{clamp}\left( \frac{V_{raw} - V_{air}}{V_{water
 
 Field nodes are powered by a single **18650 LiFePO4 battery (3400mAh)** coupled with a **6W Monocrystalline Solar Panel**. To achieve multi-year maintenance-free operation:
 - **Active Transmission State**: Draws $\approx 120\text{mA}$ for 1.2 seconds during ADC sampling and LoRa packet broadcast.
-- **Deep Sleep State**: Disables Wi-Fi, Bluetooth, ADC, and LoRa power rails, reducing current draw to just **15.4 $\mu\text{A}$**.
+- **Deep Sleep State**: Disables Wi-Fi, Bluetooth, ADC, and LoRa power rails, reducing current draw to just **15.4 $\mu\text{A}$** [3].
 - **Calculated Battery Lifespan**: Even with zero solar exposure (continuous cloud cover), a single node operates autonomously for over 68 days on one full charge.
 `,
     references: [
       {
+        id: 1,
         title: 'FAO Irrigation & Drainage Paper 56: Crop Evapotranspiration Guidelines',
         url: 'https://www.fao.org/3/x0490e/x0490e00.htm',
         publisher: 'Food and Agriculture Organization (FAO)'
       },
       {
+        id: 2,
         title: 'IEEE Sensors Journal: Low-Power LoRaWAN Nodes for Agricultural Monitoring',
         url: 'https://doi.org/10.1109/JSEN.2023.3245102',
         publisher: 'IEEE Xplore Digital Library'
       },
       {
+        id: 3,
         title: 'ESP32 WROOM-32U Microcontroller Technical Datasheet & Deep Sleep Power Metrics',
         url: 'https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf',
         publisher: 'Espressif Systems'
       },
       {
+        id: 4,
         title: 'Semtech SX1276/77/78/79 Long Range Low Power Transceiver Datasheet',
         url: 'https://www.semtech.com/products/wireless-rf/lora-connect/sx1276',
         publisher: 'Semtech Corporation'
@@ -181,9 +185,9 @@ void loop() {
     content: `
 ### Microclimate Control in High-Temperature Tropical Environments
 
-Greenhouse farming in West Africa offers protection against heavy rains and pests. However, managing **Vapor Pressure Deficit (VPD)** during peak afternoon temperatures ($\ge 34^\circ\text{C}$) is critical to prevent crop stomatal closure and blossom end rot.
+Greenhouse farming in West Africa offers protection against heavy rains and pests [1]. However, managing **Vapor Pressure Deficit (VPD)** during peak afternoon temperatures ($\ge 34^\circ\text{C}$) is critical to prevent crop stomatal closure and blossom end rot.
 
-VPD measures the difference between the pressure exerted by water vapor inside leaves versus the surrounding air pressure. In tropical greenhouses, optimal VPD for fruiting crops (tomatoes, sweet peppers) ranges between **0.8 kPa and 1.2 kPa**.
+VPD measures the difference between the pressure exerted by water vapor inside leaves versus the surrounding air pressure. In tropical greenhouses, optimal VPD for fruiting crops (tomatoes, sweet peppers) ranges between **0.8 kPa and 1.2 kPa** [1].
 
 $$\text{SVP} (T) = 0.61078 \times \exp\left( \frac{17.27 \times T}{T + 237.3} \right) \quad (\text{kPa})$$
 
@@ -195,25 +199,28 @@ When VPD exceeds 1.5 kPa, the automated control system triggers high-pressure fo
 
 ### Soil NPK & Electrical Conductivity (EC) Monitoring via RS485
 
-To automate fertigation (fertilizer injection), **Kone Farms** deploys industrial 7-in-1 Modbus RS485 probes directly into the root zone. Modbus RTU over RS485 ensures noise-free transmission over 100-meter cables inside large commercial greenhouses.
+To automate fertigation (fertilizer injection), **Kone Farms** deploys industrial 7-in-1 Modbus RS485 probes [2] directly into the root zone. Modbus RTU over RS485 ensures noise-free transmission over 100-meter cables inside large commercial greenhouses [2]. High-precision air temperature and humidity readings are sampled continuously using dual SHT31 sensor probes [3].
 
-#### key Soil Indicators:
+#### Key Soil Indicators:
 - **Electrical Conductivity (EC)**: Kept between 1.8 and 2.4 dS/m for optimal nutrient uptake.
 - **Nitrogen (N)**: Dynamically tracked to optimize vegetative vs. flowering growth stages.
 `,
     references: [
       {
-        title: 'FAO Plant Production and Protection Paper 217: Good Agricultural Practices for Greenhouse Vegetable Crops',
+        id: 1,
+        title: 'FAO Plant Production Paper 217: Good Agricultural Practices for Greenhouse Vegetables',
         url: 'https://www.fao.org/3/i3284e/i3284e.pdf',
         publisher: 'Food and Agriculture Organization (FAO)'
       },
       {
+        id: 2,
         title: 'Modbus Application Protocol Specification v1.1b3',
         url: 'https://modbus.org/docs/Modbus_Application_Protocol_V1_1b3.pdf',
         publisher: 'Modbus Organization'
       },
       {
-        title: 'Sensirion SHT3x Humidity and Temperature Sensor Datasheet',
+        id: 3,
+        title: 'Sensirion SHT3x Humidity and Temperature Sensor Technical Datasheet',
         url: 'https://sensirion.com/media/documents/213732B6/6164147B/Sensirion_Humidity_Sensors_SHT3x_Datasheet_digital.pdf',
         publisher: 'Sensirion AG'
       }
@@ -280,11 +287,11 @@ void loop() {
     content: `
 ### The Impact of High Ammonia Levels in Poultry Production
 
-Ammonia gas ($\text{NH}_3$) is a byproduct of microbial decomposition of uric acid in poultry manure. In enclosed coops across Ghana, elevated ammonia levels severely damage the respiratory tract of broilers and layers, leading to Newcastle disease vulnerability and reduced egg production.
+Ammonia gas ($\text{NH}_3$) is a byproduct of microbial decomposition of uric acid in poultry manure [1]. In enclosed coops across Ghana [2], elevated ammonia levels severely damage the respiratory tract of broilers and layers, leading to Newcastle disease vulnerability and reduced egg production [1].
 
 #### Safety Thresholds for Poultry Health:
 - **$< 10\text{ PPM}$**: Optimal air quality. Normal growth and feed conversion ratio (FCR).
-- **$20 - 25\text{ PPM}$**: Irritation of bird respiratory linings; vaccination efficacy drops.
+- **$20 - 25\text{ PPM}$**: Irritation of bird respiratory linings; vaccination efficacy drops [1].
 - **$> 50\text{ PPM}$**: Severe lethargy, conjunctivitis, and up to $15\%$ loss in body weight gain.
 
 ---
@@ -293,20 +300,23 @@ Ammonia gas ($\text{NH}_3$) is a byproduct of microbial decomposition of uric ac
 
 To maintain coop ammonia below $20\text{ PPM}$ without draining grid power during load-shedding, **Kone Farms** engineered an automated solar-assisted exhaust system.
 
-Dual **MQ-137 gas sensors** and **DHT22 climate sensors** continuously sample coop air. When ammonia exceeds $20\text{ PPM}$ or relative humidity surpasses $75\%$, the ESP32 controller fires Solid State Relays (SSR) to engage industrial 24V solar-powered exhaust fans, rapidly flushing out accumulated manure gases.
+Dual **MQ-137 semiconductor gas sensors** [3] and **DHT22 climate sensors** continuously sample coop air. When ammonia exceeds $20\text{ PPM}$ or relative humidity surpasses $75\%$, the ESP32 controller fires Solid State Relays (SSR) to engage industrial 24V solar-powered exhaust fans, rapidly flushing out accumulated manure gases.
 `,
     references: [
       {
+        id: 1,
         title: 'Poultry Science Journal: Impact of Atmospheric Ammonia on Layer Health and Egg Production',
         url: 'https://doi.org/10.3382/ps.2012-02456',
         publisher: 'Poultry Science Association'
       },
       {
+        id: 2,
         title: 'Ghana Ministry of Food & Agriculture (MoFA): Livestock & Poultry Production Guidelines',
         url: 'https://mofa.gov.gh/',
         publisher: 'Ministry of Food and Agriculture (MoFA Ghana)'
       },
       {
+        id: 3,
         title: 'MQ-137 Technical Gas Sensor Calibration Datasheet',
         url: 'https://www.winsen-sensor.com/d/files/semiconductor/mq-137.pdf',
         publisher: 'Zhengzhou Winsen Electronics Technology Co., Ltd.'
