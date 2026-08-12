@@ -139,7 +139,7 @@ In Ghana, major production zones span the Volta, Eastern, Ashanti, Central, and 
 
 The primary physiological bottlenecks include:
 1. **Shallow Root Systems**: Over 85% of functional plantain roots reside in the top $30\text{ cm}$ of soil, making plants acutely vulnerable to moisture stress [5].
-2. **High Transpiration Rates**: Large laminar leaf areas ($LAI \ge 4.5$) drive substantial daily water loss [6].
+2. **High Transpiration Rates**: Large laminar leaf areas ($\text{LAI} \ge 4.5$) drive substantial daily water loss [6].
 3. **Nutrient Mining**: Plantain is a heavy feeder of Potassium ($\text{K}^+$) and Nitrogen ($\text{N}$), consuming up to $400\text{ kg K}_2\text{O/ha/year}$ [7].
 
 ---
@@ -151,14 +151,14 @@ Black Sigatoka, caused by the ascomycete fungus *Pseudocercospora fijiensis* (Mo
 #### Spore Germination Microclimate Requirements:
 Fungal ascospore release and conidial germination depend strictly on environmental microclimate variables:
 - **Relative Humidity (RH)**: $\ge 90\%$ sustained for more than 6 consecutive hours [8].
-- **Ambient Canopy Temperature**: Optimal range between **$25^\circ\text{C}$ and $28^\circ\text{C}$** [8].
+- **Ambient Canopy Temperature**: Optimal range between $25^\circ\text{C}$ and $28^\circ\text{C}$ [8].
 - **Leaf Wetness Duration (LWD)**: Continuous presence of free water droplets on the abaxial leaf surface for $\ge 4\text{ hours}$.
 
-To automate early warning alerts, **Kone Farms** integrated a predictive disease risk index ($R_{sigatoka}$) into the ESP32 edge microcontroller firmware:
+To automate early warning alerts, **Kone Farms** integrated a predictive disease risk index ($R_{\text{sigatoka}}$) into the ESP32 edge microcontroller firmware:
 
-MATH_BLOCK: R_sigatoka = Clamp( ( (RH_canopy - 85) / 15 ) × ( LWD_hours / 6 ) × Temp_factor, 0.0, 1.0 )
+MATH_BLOCK: R_{\text{sigatoka}} = \text{Clamp}\left( \frac{\text{RH}_{\text{canopy}} - 85}{15} \times \frac{\text{LWD}_{\text{hours}}}{6} \times \text{Temp}_{\text{factor}}, 0.0, 1.0 \right)
 
-Where $\text{Temp\_factor} = 1.0$ when $24^\circ\text{C} \le T \le 30^\circ\text{C}$, and $0.3$ otherwise. When $R_{sigatoka} \ge 0.75$, automated alerts prompt targeted bio-fungicide sprays before visual leaf necrosis occurs.
+Where $\text{Temp}_{\text{factor}} = 1.0$ when $24^\circ\text{C} \le T \le 30^\circ\text{C}$, and $0.3$ otherwise. When $R_{\text{sigatoka}} \ge 0.75$, automated alerts prompt targeted bio-fungicide sprays before visual leaf necrosis occurs.
 
 ---
 
@@ -175,9 +175,9 @@ Plantain plants extract vast quantities of macronutrients during the vegetative 
 #### Multi-Depth TDR Moisture Profiling:
 To monitor water movement across the soil profile, **Kone Farms** deploys Time-Domain Reflectometry (TDR) probes with sensors at $10\text{ cm}$, $30\text{ cm}$, and $60\text{ cm}$ depths.
 
-MATH_BLOCK: VWC_weighted = ( 0.50 × VWC_10cm ) + ( 0.35 × VWC_30cm ) + ( 0.15 × VWC_60cm )
+MATH_BLOCK: \text{VWC}_{\text{weighted}} = ( 0.50 \times \text{VWC}_{10\text{cm}} ) + ( 0.35 \times \text{VWC}_{30\text{cm}} ) + ( 0.15 \times \text{VWC}_{60\text{cm}} )
 
-By weighting the shallow root zone (0–30 cm at 85% total weight), precision micro-irrigation valves trigger only when $VWC_{weighted}$ drops below **22%**, conserving over $3,400\text{ m}^3$ of water per hectare annually [6].
+By weighting the shallow root zone (0–30 cm at 85% total weight), precision micro-irrigation valves trigger only when $\text{VWC}_{\text{weighted}}$ drops below **22%**, conserving over $3,400\text{ m}^3$ of water per hectare annually [6].
 
 ---
 
@@ -185,7 +185,7 @@ By weighting the shallow root zone (0–30 cm at 85% total weight), precision mi
 
 Accurate determination of daily crop evapotranspiration ($ET_c$) prevents both crop water stress and nutrient leaching [6]. We implement the standard **FAO-56 Penman-Monteith equation** on our cloud relay gateway:
 
-MATH_BLOCK: ET_o = ( 0.408 × Δ × (R_n - G) + γ × ( 900 / (T + 273) ) × u_2 × (e_s - e_a) ) / ( Δ + γ × ( 1 + 0.34 × u_2 ) )
+MATH_BLOCK: ET_o = \frac{0.408 \Delta (R_n - G) + \gamma \left(\frac{900}{T + 273}\right) u_2 (e_s - e_a)}{\Delta + \gamma (1 + 0.34 u_2)}
 
 Where:
 - $ET_o$: Reference evapotranspiration ($\text{mm/day}$)
@@ -206,9 +206,9 @@ Plantain crop coefficient ($K_c$) ranges from **0.50** (early establishment) to 
 Plantain is a climacteric fruit characterized by a sharp burst in respiratory activity and endogenous ethylene ($C_2H_4$) synthesis during ripening [9]. In tropical ambient transport conditions ($30-34^\circ\text{C}$), untreated harvested bunches transition from green hard stage to overripe brown stage within **4 to 6 days**, leading to severe post-harvest losses exceeding 35% across West Africa [10].
 
 #### Respiratory Rate & Ethylene Synthesis Model:
-The rate of ethylene production ($R_{C2H4}$) follows Arrhenius temperature kinetics:
+The rate of ethylene production ($R_{C_2H_4}$) follows Arrhenius temperature kinetics:
 
-MATH_BLOCK: R_C2H4(T) = A × exp( -E_a / ( R × (T + 273.15) ) )
+MATH_BLOCK: R_{C_2H_4}(T) = A \cdot \exp\left( -\frac{E_a}{R (T + 273.15)} \right)
 
 Where:
 - $E_a$: Activation energy for ACC oxidase enzyme conversion ($\approx 58.4\text{ kJ/mol}$) [9]
@@ -414,7 +414,7 @@ The ESP32 12-bit Analog-to-Digital Converter (ADC) yields raw values between 0 a
 1. **V_air**: Raw ADC reading in dry open air (~3200).
 2. **V_water**: Raw ADC reading submerged in distilled water (~1350).
 
-MATH_BLOCK: VWC (%) = Clamp( (V_raw - V_air) / (V_water - V_air) × 100, 0, 100 )
+MATH_BLOCK: \text{VWC (\%)} = \text{Clamp}\left( \frac{V_{\text{raw}} - V_{\text{air}}}{V_{\text{water}} - V_{\text{air}}} \times 100, 0, 100 \right)
 
 ---
 
@@ -512,13 +512,13 @@ void loop() {
     content: `
 ### Microclimate Control in High-Temperature Tropical Environments
 
-Greenhouse farming in West Africa offers protection against heavy rains and pests [1]. However, managing **Vapor Pressure Deficit (VPD)** during peak afternoon temperatures (≥ 34°C) is critical to prevent crop stomatal closure and blossom end rot.
+Greenhouse farming in West Africa offers protection against heavy rains and pests [1]. However, managing **Vapor Pressure Deficit (VPD)** during peak afternoon temperatures ($\ge 34^\circ\text{C}$) for crops like *Solanum lycopersicum* (tomato) and *Capsicum annuum* (pepper) is critical to prevent crop stomatal closure and blossom end rot.
 
-VPD measures the difference between the pressure exerted by water vapor inside leaves versus the surrounding air pressure. In tropical greenhouses, optimal VPD for fruiting crops (tomatoes, sweet peppers) ranges between **0.8 kPa and 1.2 kPa** [1].
+VPD measures the difference between the pressure exerted by water vapor inside leaves versus the surrounding air pressure. In tropical greenhouses, optimal VPD for fruiting crops ranges between **0.8 kPa and 1.2 kPa** [1].
 
-MATH_BLOCK: SVP(T) = 0.61078 × exp( (17.27 × T) / (T + 237.3) )  [kPa]
+MATH_BLOCK: \text{SVP}(T) = 0.61078 \times \exp\left( \frac{17.27 \times T}{T + 237.3} \right) \quad [\text{kPa}]
 
-MATH_BLOCK: VPD = SVP × ( 1 - RH / 100 )  [kPa]
+MATH_BLOCK: \text{VPD} = \text{SVP} \times \left( 1 - \frac{\text{RH}}{100} \right) \quad [\text{kPa}]
 
 When VPD exceeds 1.5 kPa, the automated control system triggers high-pressure fogging nozzles and shade nets to cool the ambient air without over-saturating the growing substrate.
 
@@ -614,12 +614,15 @@ void loop() {
     content: `
 ### The Impact of High Ammonia Levels in Poultry Production
 
-Ammonia gas (**NH₃**) is a byproduct of microbial decomposition of uric acid in poultry manure [1]. In enclosed coops across Ghana [2], elevated ammonia levels severely damage the respiratory tract of broilers and layers, leading to Newcastle disease vulnerability and reduced egg production [1].
+Ammonia gas ($\text{NH}_3$) is a byproduct of microbial decomposition of uric acid in poultry manure [1]. In enclosed coops for *Gallus gallus domesticus* across Ghana [2], elevated ammonia levels severely damage the respiratory tract of broilers and layers, leading to Newcastle disease vulnerability and reduced egg production [1].
 
 #### Safety Thresholds for Poultry Health:
 - **< 10 PPM**: Optimal air quality. Normal growth and feed conversion ratio (FCR).
 - **20 - 25 PPM**: Irritation of bird respiratory linings; vaccination efficacy drops [1].
 - **> 50 PPM**: Severe lethargy, conjunctivitis, and up to 15% loss in body weight gain.
+
+#### Ammonia Sensor Characteristic Transfer Function:
+MATH_BLOCK: \text{PPM}_{\text{NH}_3} = 102.2 \times \left( \frac{R_s}{R_0} \right)^{-2.473}
 
 ---
 
