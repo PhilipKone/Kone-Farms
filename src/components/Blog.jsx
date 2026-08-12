@@ -6,10 +6,16 @@ export default function Blog({ onSelectArticle }) {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
 
+  const handleSearchChange = (e) => {
+    const rawVal = e.target.value || '';
+    const safeVal = rawVal.replace(/[^a-zA-Z0-9\s\-_]/g, '').slice(0, 50);
+    setSearchQuery(safeVal);
+  };
+
   const categories = ['All', 'Telemetry & IoT', 'Greenhouse Automation', 'Livestock & Poultry'];
 
   const filteredArticles = useMemo(() => {
-    const cleanQuery = searchQuery.toLowerCase().replace(/[^a-z0-9\s]/g, '').trim();
+    const cleanQuery = searchQuery.toLowerCase().trim();
     if (!cleanQuery && selectedCategory === 'All') return blogArticles;
 
     return blogArticles.filter(art => {
@@ -48,10 +54,10 @@ export default function Blog({ onSelectArticle }) {
             </svg>
             <input 
               type="text" 
-              placeholder="Search sensors, LoRa, ESP32, microclimates..." 
+              placeholder="Search articles by topic, sensor, or frequency..." 
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="blog-search-input"
+              onChange={handleSearchChange}
+              className="search-text-input"
             />
           </div>
 
