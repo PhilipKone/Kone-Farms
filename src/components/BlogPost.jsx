@@ -1,12 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { blogArticles } from '../data/blogArticles';
 import './BlogPost.css';
 
 export default function BlogPost({ slug, onBack }) {
   const [copied, setCopied] = useState(false);
   const [showCode, setShowCode] = useState(false);
+  const [katexLoaded, setKatexLoaded] = useState(false);
 
   const article = blogArticles.find(a => a.slug === slug) || blogArticles[0];
+
+  useEffect(() => {
+    if (window.katex) {
+      setKatexLoaded(true);
+    } else {
+      const interval = setInterval(() => {
+        if (window.katex) {
+          setKatexLoaded(true);
+          clearInterval(interval);
+        }
+      }, 300);
+      return () => clearInterval(interval);
+    }
+  }, []);
 
   const copyCode = () => {
     if (article.codeSnippet) {
@@ -25,14 +40,49 @@ export default function BlogPost({ slug, onBack }) {
     }
   };
 
+  // Helper to render KaTeX Math equations
+  const renderMath = (texString, displayMode = false) => {
+    if (window.katex) {
+      try {
+        const htmlStr = window.katex.renderToString(texString, {
+          displayMode: displayMode,
+          throwOnError: false
+        });
+        return <span dangerouslySetInnerHTML={{ __html: htmlStr }} />;
+      } catch (err) {
+        console.warn("KaTeX render error:", err);
+      }
+    }
+    return <code className="fallback-tex">{texString}</code>;
+  };
+
+  // Enhanced Formatted Text Parser supporting LaTeX math ($...$), Bold (**...**), Italics (*...*), and Citations ([1])
   const renderFormattedText = (text) => {
-    const regex = /(\*\*.*?\*\*|\[\d+\])/g;
+    // Tokenize text into math ($...$), bold (**...**), italics (*...*), and citations ([1])
+    const regex = /(\$.*?\$|\*\*.*?\*\*|\*[^\*]+?\*|\[\d+\])/g;
     const parts = text.split(regex);
 
     return parts.map((part, i) => {
-      if (part.startsWith('**') && part.endsWith('**')) {
+      if (!part) return null;
+
+      // Inline LaTeX Math ($...$)
+      if (part.startsWith('$') && part.endsWith('$') && part.length > 2) {
+        const mathExpr = part.slice(1, -1);
+        return <span key={i} className="inline-math-wrapper">{renderMath(mathExpr, false)}</span>;
+      }
+      
+      // Bold text (**...**)
+      if (part.startsWith('**') && part.endsWith('**') && part.length > 4) {
         return <strong key={i} className="text-emerald-bold">{part.slice(2, -2)}</strong>;
-      } else if (/^\[\d+\]$/.test(part)) {
+      }
+      
+      // Italics scientific species names (*...*)
+      if (part.startsWith('*') && part.endsWith('*') && part.length > 2) {
+        return <em key={i} className="text-scientific-italic">{part.slice(1, -1)}</em>;
+      }
+      
+      // Superscript citation link ([1])
+      if (/^\[\d+\]$/.test(part)) {
         const num = part.replace(/[\[\]]/g, '');
         return (
           <sup key={i}>
@@ -50,6 +100,7 @@ export default function BlogPost({ slug, onBack }) {
           </sup>
         );
       }
+
       return part;
     });
   };
@@ -74,8 +125,8 @@ export default function BlogPost({ slug, onBack }) {
       {/* Header Banner */}
       <header className="post-header-banner" style={{ background: article.coverGradient }}>
         <div className="post-category-tag">{article.category}</div>
-        <h1 className="post-main-title" itemProp="headline">{article.title}</h1>
-        <p className="post-main-summary" itemProp="description">{article.summary}</p>
+        <h1 className="post-main-title" itemProp="headline">{renderFormattedText(article.title)}</h1>
+        <p className="post-main-summary" itemProp="description">{renderFormattedText(article.summary)}</p>
 
         <div className="post-author-bar">
           <a 
@@ -113,14 +164,16 @@ export default function BlogPost({ slug, onBack }) {
               const formula = trimmed.replace('MATH_BLOCK:', '').trim();
               return (
                 <div key={idx} className="post-math-card">
-                  <span className="math-label">Mathematical Formula:</span>
-                  <code className="math-formula-code">{formula}</code>
+                  <span className="math-label">LaTeX Mathematical Model:</span>
+                  <div className="math-formula-container">
+                    {renderMath(formula, true)}
+                  </div>
                 </div>
               );
             } else if (trimmed.startsWith('### ')) {
-              return <h3 key={idx} className="post-subhead-h3">{trimmed.replace(/^###\s+/, '')}</h3>;
+              return <h3 key={idx} className="post-subhead-h3">{renderFormattedText(trimmed.replace(/^###\s+/, ''))}</h3>;
             } else if (trimmed.startsWith('#### ')) {
-              return <h4 key={idx} className="post-subhead-h4">{trimmed.replace(/^####\s+/, '')}</h4>;
+              return <h4 key={idx} className="post-subhead-h4">{renderFormattedText(trimmed.replace(/^####\s+/, ''))}</h4>;
             } else if (trimmed.startsWith('- ')) {
               return (
                 <ul key={idx} className="post-bullet-list">
@@ -197,24 +250,19 @@ export default function BlogPost({ slug, onBack }) {
           <section className="scientific-references-section">
             <h3 className="section-title">📚 Scientific References & Hardware Datasheets</h3>
             <ul className="references-list">
-              {article.references.map((ref, idx) => (
-                <li key={idx} id={`ref-${ref.id}`} className="reference-item">
-                  <span className="ref-index">[{ref.id}]</span>
+              {article.references.map((ref) => (
+                <li key={ref.id} id={`ref-${ref.id}`} className="reference-item">
+                  <span className="ref-number">[{ref.id}]</span>
                   <div className="ref-details">
                     <a 
                       href={ref.url} 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="ref-external-link"
+                      className="ref-title-link"
                     >
                       {ref.title}
-                      <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2.5" fill="none" style={{ marginLeft: '4px' }}>
-                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                        <polyline points="15 3 21 3 21 9"></polyline>
-                        <line x1="10" y1="14" x2="21" y2="3"></line>
-                      </svg>
                     </a>
-                    <span className="ref-publisher">{ref.publisher}</span>
+                    <span className="ref-publisher-badge">{ref.publisher}</span>
                   </div>
                 </li>
               ))}
@@ -222,17 +270,6 @@ export default function BlogPost({ slug, onBack }) {
           </section>
         )}
       </article>
-
-      {/* Footer Navigation */}
-      <div className="post-footer-bar">
-        <a 
-          href="#blog" 
-          onClick={(e) => { e.preventDefault(); window.location.hash = '#blog'; if (onBack) onBack(); }}
-          className="post-back-btn-large"
-        >
-          ← Return to Agritech Research Hub
-        </a>
-      </div>
     </div>
   );
 }
