@@ -43,18 +43,77 @@
     <meta name="theme-color" content="#061c15" />
     <link rel="apple-touch-icon" href="/logo192.png" />
     
-    <!-- Structured Data (Invisible SEO) -->
+    <!-- Structured Data (Invisible SEO & Sitelinks Schema) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "WebSite",
         "name": "Kone Farms",
+        "alternateName": ["Kone Farms Agritech", "Kone Farms Ghana"],
         "url": "https://farms.koneacademy.io/",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://farms.koneacademy.io/#blog?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        },
+        "hasPart": [
+          {
+            "@type": "WebPage",
+            "name": "Agritech & Field Telemetry",
+            "url": "https://farms.koneacademy.io/#agritech"
+          },
+          {
+            "@type": "WebPage",
+            "name": "Agritech Research Blog",
+            "url": "https://farms.koneacademy.io/#blog"
+          },
+          {
+            "@type": "WebPage",
+            "name": "Organic Volta Farms",
+            "url": "https://farms.koneacademy.io/#farms"
+          },
+          {
+            "@type": "WebPage",
+            "name": "Kone Shito Food Products",
+            "url": "https://farms.koneacademy.io/#food"
+          }
+        ],
         "parentOrganization": {
           "@type": "Organization",
           "name": "Kone Academy",
           "url": "https://www.koneacademy.io/"
         }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "SiteNavigationElement",
+            "name": "Agritech Telemetry",
+            "description": "Smart IoT telemetry, soil moisture calculators, and micro-irrigation valves.",
+            "url": "https://farms.koneacademy.io/#agritech"
+          },
+          {
+            "@type": "SiteNavigationElement",
+            "name": "Agritech Research Blog",
+            "description": "Peer-reviewed research articles on Musa paradisiaca L., NPK sensors, and poultry environmental control.",
+            "url": "https://farms.koneacademy.io/#blog"
+          },
+          {
+            "@type": "SiteNavigationElement",
+            "name": "Organic Farmlands",
+            "description": "Volta Region family pepper, shallot, and organic crop farmlands.",
+            "url": "https://farms.koneacademy.io/#farms"
+          },
+          {
+            "@type": "SiteNavigationElement",
+            "name": "Kone Shito & Food Security",
+            "description": "Organic Volta ingredients and artisanal Kone Shito production.",
+            "url": "https://farms.koneacademy.io/#food"
+          }
+        ]
       }
     </script>
     <script type="application/ld+json">
@@ -101,7 +160,7 @@
         background: #061c15;
       }
     </style>
-    <script type="module" crossorigin src="/assets/index-DMFd7nKd.js"></script>
+    <script type="module" crossorigin src="/assets/index-OLq1Qsdx.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-CHhJyGoW.css">
   </head>
   <body>
