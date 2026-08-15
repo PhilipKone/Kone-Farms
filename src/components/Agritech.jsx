@@ -105,7 +105,7 @@ export default function Agritech() {
           {/* Dashboard and Chart */}
           <div className="farms-card">
             <div className="smartfarm-header">
-              <h3 className="smartfarm-title">🖥️ live telemetry</h3>
+              <h2 className="smartfarm-title">🖥️ live telemetry</h2>
               <span className={`live-badge-glow ${valveActive ? '' : 'mild'}`} style={{ background: isDbOnline ? '#059669' : '#475569' }}>
                 {isDbOnline ? 'LIVE SYNC' : 'STANDBY MODE'}
               </span>
@@ -164,7 +164,7 @@ export default function Agritech() {
           <div className="farms-card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <div>
               <div className="smartfarm-header">
-                <h3 className="smartfarm-title">⚙️ Irrigation Pipeline</h3>
+                <h2 className="smartfarm-title">⚙️ Irrigation Pipeline</h2>
               </div>
               <div className="pipeline-title" style={{ marginTop: '0.5rem' }}>Land Cultivation Pipeline</div>
               <div className="pipeline-steps">
@@ -285,7 +285,7 @@ export default function Agritech() {
 
         {/* Engineering Background Section (SEO Hub & Spoke Link) */}
         <div className="farms-card" style={{ textAlign: 'left', background: 'rgba(59, 130, 246, 0.03)', border: '1px solid rgba(59, 130, 246, 0.1)', padding: '2rem' }}>
-          <h3 className="smartfarm-title" style={{ color: '#60a5fa', margin: '0 0 1rem 0' }}>🧠 The Engineering Behind smartFarm</h3>
+          <h2 className="smartfarm-title" style={{ color: '#60a5fa', margin: '0 0 1rem 0' }}>🧠 The Engineering Behind smartFarm</h2>
           <p style={{ color: '#94a3b8', fontSize: '0.95rem', lineHeight: 1.7, margin: 0 }}>
             Our smartFarm agricultural monitoring system is a product of multidisciplinary collaboration at Kone Academy. 
             The solar telemetry hardware nodes and micro-controllers are designed and prototyped by researchers at the 
@@ -298,9 +298,9 @@ export default function Agritech() {
 
         {/* smartTools Showcase */}
         <div className="farms-card" style={{ textAlign: 'center' }}>
-          <h3 className="smartfarm-title" style={{ justifyContent: 'center', marginBottom: '2rem' }}>
+          <h2 className="smartfarm-title" style={{ justifyContent: 'center', marginBottom: '2rem' }}>
             🛠️ smartTools Technology Suite
-          </h3>
+          </h2>
           <div className="tools-grid">
             <div className="tool-card">
               <div className="tool-icon">💧</div>

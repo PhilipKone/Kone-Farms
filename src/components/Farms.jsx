@@ -131,10 +131,10 @@ export default function Farms() {
 
         {/* Crops & Sourcing Section */}
         <div className="farms-card crops-section">
-          <h3 className="smartfarm-title" style={{ marginBottom: '2rem' }}>🌱 Our Organic Crops</h3>
+          <h2 className="smartfarm-title" style={{ marginBottom: '2rem' }}>🌱 Our Organic Crops</h2>
           
           <div className="crops-category">
-            <h4 className="crops-category-title">🥫 Volta Region Staples (Shito Ingredients)</h4>
+            <h3 className="crops-category-title">🥫 Volta Region Staples (Shito Ingredients)</h3>
             <div className="crops-flex">
               <div className="crop-card-detailed">
                 <span>🌶️</span> Scotch Bonnet Pepper
@@ -155,7 +155,7 @@ export default function Farms() {
           </div>
 
           <div className="crops-category" style={{ marginBottom: 0 }}>
-            <h4 className="crops-category-title" style={{ color: '#60a5fa' }}>🌿 Exotic Herb Plots</h4>
+            <h3 className="crops-category-title" style={{ color: '#60a5fa' }}>🌿 Exotic Herb Plots</h3>
             <div className="crops-flex">
               <div className="crop-card-detailed exotic">
                 <span>🌿</span> Aromatic Basil
@@ -193,10 +193,10 @@ export default function Farms() {
                 }}>
                   {currentRegion.tag}
                 </span>
-                <h4 className="region-h4">{currentRegion.title}</h4>
+                <h3 className="region-h4">{currentRegion.title}</h3>
                 <p className="region-desc">{currentRegion.desc}</p>
                 
-                <h5 style={{ color: 'white', fontSize: '0.9rem', marginBottom: '0.5rem', fontWeight: 800 }}>Associated Activities/Crops:</h5>
+                <h4 style={{ color: 'white', fontSize: '0.9rem', marginBottom: '0.5rem', fontWeight: 800 }}>Associated Activities/Crops:</h4>
                 <div className="region-crops-list">
                   {currentRegion.crops.map((c, i) => (
                     <span key={i} className="region-crop-tag" style={{

@@ -14,16 +14,20 @@ let app;
 let db;
 
 try {
-    app = initializeApp(firebaseConfig);
-    db = initializeFirestore(app, {
-        localCache: persistentLocalCache({
-            tabManager: persistentMultipleTabManager()
-        })
-    });
-    db.app = app; // Attach app reference for frontend validation checks (db.app)
+    if (firebaseConfig.apiKey) {
+        app = initializeApp(firebaseConfig);
+        db = initializeFirestore(app, {
+            localCache: persistentLocalCache({
+                tabManager: persistentMultipleTabManager()
+            })
+        });
+    } else {
+        console.warn('Firebase Hub: Missing VITE_FIREBASE_API_KEY. Initializing in offline simulation mode.');
+        db = { app: null };
+    }
 } catch (error) {
     console.error('Firebase initialization error:', error);
-    db = {};
+    db = { app: null };
 }
 
 export { db };

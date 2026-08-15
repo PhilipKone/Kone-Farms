@@ -180,7 +180,7 @@ export default function Food() {
               <div className="shito-jar-lid"></div>
               <div className="shito-jar-graphic">
                 <div className="shito-label-inner">
-                  <h4 className="shito-label-title">KONE</h4>
+                  <div className="shito-label-title">KONE</div>
                   <div className="shito-label-sub">Premium Shito</div>
                   <div style={{ borderTop: '2px solid #b45309', margin: '0.5rem 0' }}></div>
                   <div style={{ fontSize: '0.75rem', fontWeight: 800 }}>AUTHENTIC RECIPE</div>
@@ -196,6 +196,7 @@ export default function Food() {
                     <button
                       key={level}
                       onClick={() => handleSpiceSelect(level)}
+                      aria-label={`Select heat level ${level}`}
                       className={`spice-btn ${spiceLevel === level ? 'active' : ''}`}
                     >
                       {level}
@@ -216,16 +217,18 @@ export default function Food() {
 
               {/* Real Batch Lookup Form Card */}
               <div className="trace-card" style={{ display: 'block', padding: '1.75rem' }}>
-                <h4 style={{ margin: '0 0 0.5rem', color: '#f59e0b', fontSize: '1.1rem', fontWeight: 800 }}>
+                <h3 style={{ margin: '0 0 0.5rem', color: '#f59e0b', fontSize: '1.1rem', fontWeight: 800 }}>
                   Trace Your Shito Jar 🔍
-                </h4>
+                </h3>
                 <p style={{ margin: '0 0 1.25rem', fontSize: '0.85rem', color: '#94a3b8', lineHeight: 1.4 }}>
                   Each physical jar of Kone Shito features a batch code printed on its label. Enter it below to load verified harvest logs, Scoville heat levels, and laboratory diagnostics.
                 </p>
 
                 <form onSubmit={handleBatchSearch} style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
                   <input
+                    id="batch-search-input"
                     type="text"
+                    aria-label="Enter batch ID"
                     value={searchBatchId}
                     onChange={(e) => setSearchBatchId(e.target.value)}
                     placeholder="e.g. KS-VOLTA-2026"
@@ -235,6 +238,7 @@ export default function Food() {
                   <button 
                     type="submit" 
                     className="farms-submit-btn" 
+                    aria-label="Trace batch"
                     style={{ width: 'auto', padding: '0 1.5rem', height: '44px', boxShadow: 'none' }}
                     disabled={isLoadingBatch}
                   >
@@ -274,10 +278,12 @@ export default function Food() {
             ) : (
               <form onSubmit={handleFormSubmit}>
                 <div className="dist-form-group">
-                  <label className="dist-label">Store / Partner Name</label>
+                  <label htmlFor="dist-partner-name" className="dist-label">Store / Partner Name</label>
                   <input
+                    id="dist-partner-name"
                     type="text"
                     required
+                    aria-label="Store or partner name"
                     value={distributorName}
                     onChange={(e) => setDistributorName(e.target.value)}
                     placeholder="e.g. Westside Supermarket"
@@ -285,10 +291,12 @@ export default function Food() {
                   />
                 </div>
                 <div className="dist-form-group">
-                  <label className="dist-label">Email Address</label>
+                  <label htmlFor="dist-email" className="dist-label">Email Address</label>
                   <input
+                    id="dist-email"
                     type="email"
                     required
+                    aria-label="Email address"
                     value={distributorEmail}
                     onChange={(e) => setDistributorEmail(e.target.value)}
                     placeholder="partner@yourstore.com"
@@ -296,8 +304,10 @@ export default function Food() {
                   />
                 </div>
                 <div className="dist-form-group">
-                  <label className="dist-label">Select Volume (Boxes of 12 jars)</label>
+                  <label htmlFor="dist-quantity-select" className="dist-label">Select Volume (Boxes of 12 jars)</label>
                   <select
+                    id="dist-quantity-select"
+                    aria-label="Select Volume (Boxes of 12 jars)"
                     value={orderQuantity}
                     onChange={(e) => setOrderQuantity(Number(e.target.value))}
                     className="dist-input select-farms-option"
@@ -313,6 +323,7 @@ export default function Food() {
                 <button
                   type="submit"
                   className="farms-submit-btn"
+                  aria-label="Apply to distribute"
                 >
                   Apply to Distribute 🚀
                 </button>

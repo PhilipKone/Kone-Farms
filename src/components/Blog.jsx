@@ -106,34 +106,35 @@ export default function Blog({ onSelectArticle }) {
 
                 <div className="card-footer">
                   <a 
-                    href={art.author.profileUrl} 
+                    href="https://koneacademy.io" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="author-info-link"
                     title={`View ${art.author.name}'s bio`}
                   >
-                    <img src={art.author.avatar} alt={art.author.name} className="author-avatar-img" />
+                    <div className="author-avatar-img" style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(52, 211, 153, 0.2)', border: '1px solid rgba(52, 211, 153, 0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, color: '#34d399', fontSize: '0.9rem' }}>
+                      {art.author.name.charAt(0)}
+                    </div>
                     <div className="author-text-meta">
                       <span className="author-name">{art.author.name}</span>
                       <span className="article-pub-date">{art.publishDate}</span>
                     </div>
                   </a>
 
-                  <a 
-                    href={`#blog/${art.slug}`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      window.location.hash = `#blog/${art.slug}`;
+                  <button 
+                    onClick={() => {
+                      window.location.hash = `#blog/${encodeURIComponent(art.slug)}`;
                       if (onSelectArticle) onSelectArticle(art.slug);
                     }}
                     className="read-article-btn"
+                    aria-label={`Read deep-dive on ${art.title}`}
                   >
                     Read Deep-Dive
                     <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2.5" fill="none" style={{ marginLeft: '4px' }}>
                       <line x1="5" y1="12" x2="19" y2="12"></line>
                       <polyline points="12 5 19 12 12 19"></polyline>
                     </svg>
-                  </a>
+                  </button>
                 </div>
               </div>
             </article>

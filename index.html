@@ -5,9 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kone Farms & Agritech | Sustainable Agriculture</title>
     <link rel="icon" type="image/svg+xml" href="/logos/logo.svg" />
-  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
-  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+    <link rel="help" type="text/markdown" href="/llms.txt" title="LLMs Text File" />
+    <link rel="llms-txt" href="/llms.txt" />
     <link rel="canonical" href="https://farms.koneacademy.io/" />
+
+    <!-- WebMCP Declarations for Autonomous Agentic Browsing -->
+    <script type="application/webmcp+json">
+    {
+      "version": "1.0",
+      "name": "Kone Farms & Agritech Telemetry Hub",
+      "description": "Agent tools for reading Volta Region farm telemetry, calculating soil moisture irrigation requirements, and reading agritech research papers",
+      "tools": [
+        {
+          "name": "get_farm_telemetry",
+          "description": "Retrieve live IoT soil moisture, ambient temperature, and NPK metrics from Volta Region organic farms",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "farm_id": { "type": "string", "enum": ["volta-north", "volta-south", "anloga-shallots"] }
+            }
+          }
+        },
+        {
+          "name": "calculate_irrigation_demand",
+          "description": "Calculate soil moisture evapotranspiration deficits and irrigation water volume required",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "soil_type": { "type": "string", "enum": ["sandy-loam", "clay", "loam"] },
+              "target_moisture_percent": { "type": "number" },
+              "current_moisture_percent": { "type": "number" }
+            },
+            "required": ["soil_type", "target_moisture_percent", "current_moisture_percent"]
+          }
+        }
+      ]
+    }
+    </script>
     
     <!-- KaTeX CSS for Publication-Grade LaTeX Math Equations -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossOrigin="anonymous" />

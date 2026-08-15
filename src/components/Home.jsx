@@ -30,7 +30,7 @@ export default function Home() {
           {/* Card 1: Farms & Sourcing */}
           <a href="#farms" className="div-card card-farms">
             <div className="div-icon-wrapper">🌾</div>
-            <h3 className="div-h3">Farms & Sourcing</h3>
+            <h2 className="div-h3">Farms & Sourcing</h2>
             <p className="div-desc">
               Discover our local farming partnerships in the Volta Region. Browse our organic crops (Scotch Bonnet, Shallots) and read our strict 100% Non-GMO standard policy.
             </p>
@@ -42,7 +42,7 @@ export default function Home() {
           {/* Card 2: Kone Food Division */}
           <a href="#food" className="div-card card-food">
             <div className="div-icon-wrapper">🥫</div>
-            <h3 className="div-h3">Kone Food</h3>
+            <h2 className="div-h3">Kone Food</h2>
             <p className="div-desc">
               Premium organic foods catalog. Explore our featured authentic black pepper sauce (Kone Shito), check audited batch logs, or apply as a distributor for our upcoming food line.
             </p>
@@ -54,7 +54,7 @@ export default function Home() {
           {/* Card 3: Agritech / smartFarm Telemetry */}
           <a href="#agritech" className="div-card card-agritech">
             <div className="div-icon-wrapper">📡</div>
-            <h3 className="div-h3">smartFarm Telemetry</h3>
+            <h2 className="div-h3">smartFarm Telemetry</h2>
             <p className="div-desc">
               Monitor live IoT field sensors tracking soil moisture, temperature, and sunlight. Test the real-time two-way sync console by overriding telemetry values directly to Firestore.
             </p>

@@ -19,7 +19,7 @@ export default function Footer() {
 
         {/* Quick Links Column */}
         <div className="footer-links-col">
-          <h4 className="footer-h4">Explore</h4>
+          <h3 className="footer-h4">Explore</h3>
           <div className="footer-links">
             <a href="#home" className="footer-link">Overview</a>
             <a href="#farms" className="footer-link">Farms & Sourcing</a>
@@ -32,7 +32,7 @@ export default function Footer() {
 
         {/* Ecosystem Column */}
         <div className="footer-links-col">
-          <h4 className="footer-h4">Ecosystem</h4>
+          <h3 className="footer-h4">Ecosystem</h3>
           <div className="footer-links">
             <a href="https://www.koneacademy.io" className="footer-link">Academy Home</a>
             <a href="https://www.koneacademy.io/sitemap" className="footer-link">Sitemap</a>
@@ -49,7 +49,7 @@ export default function Footer() {
 
         {/* Contact/Social Column */}
         <div className="footer-links-col">
-          <h4 className="footer-h4">Community & Contact</h4>
+          <h3 className="footer-h4">Community & Contact</h3>
           <div className="footer-social-info" style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
             <a 
               href="https://whatsapp.com/channel/0029Vb89rkTE50Ugks0LIG0L" 
