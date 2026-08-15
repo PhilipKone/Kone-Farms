@@ -1,0 +1,18 @@
+# Kone Farms & Agritech
+
+> Sustainable Agriculture, Smart IoT Soil Telemetry, and Volta Region Organic Sourcing.
+
+Kone Farms pioneers sustainable agriculture, food security, and IoT field automation. We partner with Volta Region family farmers to cultivate organic Scotch Bonnet peppers, Anloga shallots, and ginger while developing open-access telemetry and micro-irrigation systems.
+
+## Primary Sections & Capabilities
+
+- [Agritech & IoT Telemetry](https://farms.koneacademy.io/#agritech) - Real-time soil moisture calculations, micro-irrigation valve automation, and ESP32 solar telemetry.
+- [Agritech Research Blog](https://farms.koneacademy.io/#blog) - Peer-reviewed publications and field whitepapers on Musa paradisiaca L., NPK sensing, and precision irrigation.
+- [Volta Farmlands & Map](https://farms.koneacademy.io/#farms) - Interactive map of Volta Region organic farm clusters and harvest schedules.
+- [Kone Shito & Food Security](https://farms.koneacademy.io/#food) - Artisanal food production empowering local agricultural supply chains.
+
+## Parent Collective
+
+- [Kone Academy Main Hub](https://www.koneacademy.io/) - The core innovation collective and educational platform.
+- [Kone Lab](https://lab.koneacademy.io/) - Hardware engineering, CAD, and IoT prototyping studio.
+- [Kone Shop](https://shop.koneacademy.io/) - Official hardware kits and ESP32 telemetry hardware.
