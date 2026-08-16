@@ -9,7 +9,7 @@ Kone Farms pioneers sustainable agriculture, food security, and IoT field automa
 - [Agritech & IoT Telemetry](https://farms.koneacademy.io/#agritech) - Real-time soil moisture calculations, micro-irrigation valve automation, and ESP32 solar telemetry.
 - [Agritech Research Blog](https://farms.koneacademy.io/#blog) - Peer-reviewed publications and field whitepapers on Musa paradisiaca L., NPK sensing, and precision irrigation.
 - [Volta Farmlands & Map](https://farms.koneacademy.io/#farms) - Interactive map of Volta Region organic farm clusters and harvest schedules.
-- [Kone Shito & Food Security](https://farms.koneacademy.io/#food) - Artisanal food production empowering local agricultural supply chains.
+- [Kone Food & Artisanal Snacks](https://farms.koneacademy.io/#food) - Artisanal food production empowering local agricultural supply chains with Kone Chips (Plantain, Yam & Potato) and Kone Shito.
 
 ## Parent Collective
 
