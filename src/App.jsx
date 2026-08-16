@@ -5,6 +5,7 @@ import Home from './components/Home';
 import Farms from './components/Farms';
 import Food from './components/Food';
 import Agritech from './components/Agritech';
+import AgritechWebApp from './components/AgritechWebApp';
 import Sitemap from './components/Sitemap';
 import Blog from './components/Blog';
 import BlogPost from './components/BlogPost';
@@ -15,31 +16,29 @@ export default function App() {
   useEffect(() => {
     const handleHashChange = () => {
       const currentHash = window.location.hash;
-      // Map empty hash to #home
       if (!currentHash || currentHash === '#') {
         setRoute('#home');
       } else if (currentHash.startsWith('#blog/')) {
         setRoute(currentHash);
+      } else if (currentHash === '#agritech/webapp') {
+        setRoute('#agritech/webapp');
       } else if (['#home', '#farms', '#food', '#agritech', '#blog', '#sitemap'].includes(currentHash)) {
         setRoute(currentHash);
       } else {
-        // Fallback for unrecognized hashes
         setRoute('#home');
       }
     };
 
     window.addEventListener('hashchange', handleHashChange);
-    
-    // Perform initial evaluation
     handleHashChange();
-
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
-  // Smoothly scroll back to top of screen on page/route transition
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [route]);
+
+  const isWebAppRoute = route === '#agritech/webapp';
 
   const renderContent = () => {
     if (route.startsWith('#blog/')) {
@@ -52,6 +51,8 @@ export default function App() {
         return <Farms />;
       case '#food':
         return <Food />;
+      case '#agritech/webapp':
+        return <AgritechWebApp onBack={() => { window.location.hash = '#agritech'; }} />;
       case '#agritech':
         return <Agritech />;
       case '#blog':
@@ -66,11 +67,11 @@ export default function App() {
 
   return (
     <div className="farms-page-wrapper">
-      <Navbar currentRoute={route} />
+      {!isWebAppRoute && <Navbar currentRoute={route} />}
       <main className="farms-main-viewport">
         {renderContent()}
       </main>
-      <Footer />
+      {!isWebAppRoute && <Footer />}
     </div>
   );
 }

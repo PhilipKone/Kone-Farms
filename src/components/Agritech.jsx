@@ -94,9 +94,19 @@ export default function Agritech() {
         <div className="agritech-header-section">
           <div className="farms-title-badge" style={{ background: 'rgba(59, 130, 246, 0.12)', borderColor: 'rgba(59, 130, 246, 0.25)', color: '#60a5fa' }}>📡 smartFarm Agritech</div>
           <h1 className="farms-headline">Precision Agriculture & Field Telemetry</h1>
-          <p className="farms-subheadline" style={{ margin: '0 auto' }}>
+          <p className="farms-subheadline" style={{ margin: '0 auto 1.5rem' }}>
             We deploy software engineering, solar-driven field units, and wireless telemetry sensors directly into Volta plots. Real-time atmospheric statistics drive automated micro-irrigation valves to conserve water.
           </p>
+          
+          <div className="agritech-pwa-launch-banner">
+            <div className="pwa-banner-text">
+              <h3>📱 Standalone Native Agritech Web App (PWA)</h3>
+              <p>Live soil temp, VWC %, humidity, phone sensor reads, automated recommendations & Kone AI integration.</p>
+            </div>
+            <a href="#agritech/webapp" className="pwa-launch-btn">
+              🚀 Launch Native PWA App →
+            </a>
+          </div>
         </div>
 
         {/* Telemetry Dashboard Grid */}

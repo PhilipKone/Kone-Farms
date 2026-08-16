@@ -1,0 +1,681 @@
+/* ── Standalone Native PWA Shell Styles ─────────────────── */
+.agritech-pwa-shell {
+  min-height: 100vh;
+  background: #060d0a;
+  color: #f1f5f9;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 5rem;
+}
+
+/* ── PWA Header Bar ──────────────────────────────────────── */
+.pwa-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(6, 20, 14, 0.94);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+  padding: 0.9rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pwa-header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.pwa-back-btn {
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #34d399;
+  padding: 0.45rem 0.9rem;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 750;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pwa-back-btn:hover {
+  background: #10b981;
+  color: #060d08;
+}
+
+.pwa-title-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.pwa-app-name {
+  font-size: 1.15rem;
+  font-weight: 850;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.pwa-node-status {
+  font-size: 0.7rem;
+  color: #34d399;
+  font-weight: 750;
+  letter-spacing: 0.05em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.status-dot-pulse {
+  width: 7px;
+  height: 7px;
+  background: #10b981;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #10b981;
+  animation: pulseGlow 1.8s infinite ease-in-out;
+}
+
+.pwa-header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.pwa-install-btn {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #060d08;
+  border: none;
+  padding: 0.45rem 0.9rem;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-weight: 850;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+  transition: all 0.2s ease;
+}
+
+.pwa-install-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);
+}
+
+.offline-badge {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.35rem 0.7rem;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+/* ── Main PWA Grid ───────────────────────────────────────── */
+.pwa-main-grid {
+  max-width: 1350px;
+  margin: 1.8rem auto 0;
+  padding: 0 1.2rem;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 1.8rem;
+  align-items: start;
+}
+
+.pwa-telemetry-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+/* ── Sensor Mode Switcher Card ───────────────────────────── */
+.sensor-mode-card {
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  padding: 1.2rem 1.4rem;
+  backdrop-filter: blur(12px);
+}
+
+.mode-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.card-label {
+  font-size: 0.72rem;
+  font-weight: 850;
+  color: #34d399;
+  letter-spacing: 0.06em;
+}
+
+.live-clock {
+  font-size: 0.75rem;
+  color: #64748b;
+  font-family: monospace;
+}
+
+.mode-toggle-row {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.mode-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+  padding: 0.5rem 0.95rem;
+  border-radius: 12px;
+  font-size: 0.82rem;
+  font-weight: 750;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mode-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.mode-btn.active {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: #10b981;
+  color: #34d399;
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+}
+
+.phone-sensor-banner {
+  margin-top: 0.9rem;
+  background: rgba(59, 130, 246, 0.12);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: #93c5fd;
+  padding: 0.6rem 0.9rem;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tilt-info {
+  font-family: monospace;
+  font-size: 0.75rem;
+}
+
+/* ── Telemetry Gauges Grid ───────────────────────────────── */
+.telemetry-gauges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.2rem;
+}
+
+.gauge-card {
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  backdrop-filter: blur(12px);
+  transition: transform 0.2s ease;
+}
+
+.gauge-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.gauge-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.gauge-icon {
+  font-size: 1.2rem;
+}
+
+.gauge-name {
+  font-size: 0.8rem;
+  font-weight: 750;
+  color: #cbd5e1;
+}
+
+.gauge-value-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.gauge-number {
+  font-size: 2.1rem;
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.gauge-unit {
+  font-size: 0.78rem;
+  color: #64748b;
+}
+
+.gauge-bar-track {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.gauge-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+
+.moisture-fill { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+.temp-fill { background: linear-gradient(90deg, #f59e0b, #ef4444); }
+.humidity-fill { background: linear-gradient(90deg, #10b981, #34d399); }
+
+.vpd-status-tag {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #34d399;
+}
+
+.slider-override {
+  width: 100%;
+  accent-color: #10b981;
+}
+
+/* ── Solenoid Valve Control Card ─────────────────────────── */
+.valve-control-card {
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  padding: 1.3rem 1.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.valve-info {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.valve-icon {
+  font-size: 1.8rem;
+}
+
+.valve-info h4 {
+  font-size: 0.95rem;
+  font-weight: 850;
+  color: #ffffff;
+  margin-bottom: 0.2rem;
+}
+
+.valve-info p {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.valve-toggle-btn {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1.5px solid #10b981;
+  color: #34d399;
+  padding: 0.7rem 1.4rem;
+  border-radius: 12px;
+  font-size: 0.88rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.valve-toggle-btn:hover,
+.valve-toggle-btn.active {
+  background: #10b981;
+  color: #060d08;
+  box-shadow: 0 4px 18px rgba(16, 185, 129, 0.35);
+}
+
+/* ── Agronomic Recommendations List ──────────────────────── */
+.recommendations-card {
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 1.5rem;
+}
+
+.section-heading {
+  font-size: 1rem;
+  font-weight: 850;
+  color: #ffffff;
+  margin-bottom: 1.1rem;
+}
+
+.recommendations-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.recommendation-item {
+  border-radius: 14px;
+  padding: 1.1rem;
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  border: 1px solid transparent;
+}
+
+.rec-danger {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.rec-warning {
+  background: rgba(245, 158, 11, 0.08);
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.rec-success {
+  background: rgba(16, 185, 129, 0.08);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.rec-info {
+  background: rgba(59, 130, 246, 0.08);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.rec-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.rec-details h4 {
+  font-size: 0.9rem;
+  font-weight: 850;
+  color: #ffffff;
+  margin-bottom: 0.3rem;
+}
+
+.rec-details p {
+  font-size: 0.82rem;
+  color: #cbd5e1;
+  line-height: 1.5;
+  margin-bottom: 0.6rem;
+}
+
+.rec-action-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  padding: 0.35rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.rec-action-btn:hover {
+  background: #ffffff;
+  color: #060d08;
+}
+
+/* ── Kone AI Agronomist Chat Column ──────────────────────── */
+.pwa-ai-col {
+  position: sticky;
+  top: 80px;
+}
+
+.kone-ai-container {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 120px);
+  max-height: 700px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(16, 185, 129, 0.12);
+}
+
+.ai-chat-header {
+  padding: 1.1rem 1.3rem;
+  background: rgba(6, 20, 14, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ai-brand-info {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.ai-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.2);
+  border: 1.5px solid #10b981;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.ai-brand-info h3 {
+  font-size: 0.95rem;
+  font-weight: 850;
+  color: #ffffff;
+  margin: 0;
+}
+
+.ai-sub {
+  font-size: 0.7rem;
+  color: #34d399;
+  font-weight: 600;
+}
+
+.analyze-now-btn {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #34d399;
+  padding: 0.4rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.analyze-now-btn:hover {
+  background: #10b981;
+  color: #060d08;
+}
+
+.ai-messages-list {
+  flex-grow: 1;
+  padding: 1.2rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.chat-message {
+  display: flex;
+  flex-direction: column;
+  max-width: 88%;
+}
+
+.message-user {
+  align-self: flex-end;
+}
+
+.message-user .message-content {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #060d08;
+  border-radius: 16px 16px 4px 16px;
+  padding: 0.8rem 1rem;
+  font-weight: 600;
+}
+
+.message-ai {
+  align-self: flex-start;
+}
+
+.message-ai .message-content {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #f1f5f9;
+  border-radius: 16px 16px 16px 4px;
+  padding: 0.9rem 1.1rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.message-text p {
+  margin: 0 0 0.5rem;
+}
+
+.message-text p:last-child {
+  margin-bottom: 0;
+}
+
+.message-time {
+  font-size: 0.65rem;
+  opacity: 0.7;
+  display: block;
+  text-align: right;
+  margin-top: 0.3rem;
+}
+
+.thinking-content {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.typing-dot {
+  width: 6px;
+  height: 6px;
+  background: #34d399;
+  border-radius: 50%;
+  animation: typingBounce 1.4s infinite ease-in-out;
+}
+
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typingBounce {
+  0%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-6px); }
+}
+
+.thinking-text {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  margin-left: 0.4rem;
+}
+
+.ai-query-chips {
+  padding: 0.6rem 1rem;
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.ai-query-chips button {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+  padding: 0.35rem 0.7rem;
+  border-radius: 14px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.ai-query-chips button:hover {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: #10b981;
+  color: #34d399;
+}
+
+.ai-input-form {
+  padding: 0.9rem 1.1rem;
+  background: rgba(6, 20, 14, 0.9);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  gap: 0.6rem;
+}
+
+.ai-chat-input {
+  flex-grow: 1;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 0.7rem 0.9rem;
+  color: #ffffff;
+  font-size: 0.85rem;
+  outline: none;
+}
+
+.ai-chat-input:focus {
+  border-color: #10b981;
+}
+
+.ai-send-btn {
+  background: #10b981;
+  color: #060d08;
+  border: none;
+  padding: 0.7rem 1.1rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 850;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ai-send-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.ai-send-btn:not(:disabled):hover {
+  background: #34d399;
+}
+
+/* ── Mobile Responsiveness (max-width: 900px) ────────────── */
+@media (max-width: 900px) {
+  .pwa-main-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pwa-ai-col {
+    position: static;
+  }
+
+  .kone-ai-container {
+    height: 520px;
+  }
+}
