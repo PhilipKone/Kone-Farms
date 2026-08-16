@@ -13,7 +13,7 @@
 .farms-post-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2.5rem 1.5rem 6rem;
+  padding: 7rem 1.5rem 6rem;
   color: #e2e8f0;
 }
 
@@ -810,7 +810,7 @@
   }
 
   .farms-post-container {
-    padding: 1.5rem 1rem 7.5rem;
+    padding: 5.5rem 1rem 7.5rem;
   }
 
   .post-header-banner {

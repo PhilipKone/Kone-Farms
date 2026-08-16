@@ -141,6 +141,21 @@ export default function Blog({ onSelectArticle }) {
                 <span className="star-icon">★</span>
                 FEATURED RESEARCH PAPER
               </div>
+
+              <div className="featured-cover-visual">
+                <div className="telemetry-node-graphic">
+                  <div className="node-center-core">
+                    <span className="node-icon">🌱</span>
+                    <span className="node-pulse-ring"></span>
+                  </div>
+                  <div className="node-spec-tags">
+                    <span className="spec-tag-item">📡 LoRa SX1262 Mesh</span>
+                    <span className="spec-tag-item">🧪 RS485 NPK Telemetry</span>
+                    <span className="spec-tag-item">🔬 Sigatoka AI Bio-Model</span>
+                  </div>
+                </div>
+              </div>
+
               <div className="featured-cover-graphic">
                 <svg viewBox="0 0 100 100" width="140" height="140" opacity="0.15" fill="none" stroke="currentColor" strokeWidth="2">
                   <circle cx="50" cy="50" r="45" />

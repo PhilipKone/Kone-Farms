@@ -1,7 +1,7 @@
 /* Footer Styles */
 .farms-footer {
-  background: rgba(4, 20, 15, 0.8);
-  border-top: 1px solid rgba(16, 185, 129, 0.12);
+  background: rgba(4, 20, 15, 0.88);
+  border-top: 1px solid rgba(16, 185, 129, 0.15);
   padding: 4rem 5% 2rem;
   color: #64748b;
   position: relative;
@@ -12,7 +12,7 @@
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
   gap: 3rem;
   text-align: left;
 }
@@ -81,31 +81,100 @@
   color: #34d399;
 }
 
-.footer-social-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+/* ── Social Media Button List ───────────────────────────── */
+.footer-social-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.social-pill {
+  padding: 0.45rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 750;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+}
+
+.whatsapp-pill {
+  background: rgba(37, 211, 102, 0.1);
+  border: 1px solid rgba(37, 211, 102, 0.3);
+  color: #25D366;
+}
+
+.whatsapp-pill:hover {
+  background: #25D366;
+  color: #060d08;
+  border-color: #25D366;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
+
+.linkedin-pill {
+  background: rgba(10, 102, 194, 0.1);
+  border: 1px solid rgba(10, 102, 194, 0.3);
+  color: #38bdf8;
+}
+
+.linkedin-pill:hover {
+  background: #0A66C2;
+  color: #ffffff;
+  border-color: #0A66C2;
+  box-shadow: 0 4px 15px rgba(10, 102, 194, 0.3);
+}
+
+.facebook-pill {
+  background: rgba(24, 119, 242, 0.1);
+  border: 1px solid rgba(24, 119, 242, 0.3);
+  color: #60a5fa;
+}
+
+.facebook-pill:hover {
+  background: #1877F2;
+  color: #ffffff;
+  border-color: #1877F2;
+  box-shadow: 0 4px 15px rgba(24, 119, 242, 0.3);
+}
+
+.instagram-pill {
+  background: rgba(225, 48, 108, 0.1);
+  border: 1px solid rgba(225, 48, 108, 0.3);
+  color: #f472b6;
+}
+
+.instagram-pill:hover {
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 4px 15px rgba(225, 48, 108, 0.3);
 }
 
 .footer-info-item {
-  font-size: 0.85rem;
-  line-height: 1.4;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: #94a3b8;
 }
 
 .footer-bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
   max-width: 1200px;
   margin: 3rem auto 0;
   padding-top: 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.75rem;
+  font-size: 0.78rem;
 }
 
 .footer-bottom-links {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.2rem;
+  flex-wrap: wrap;
 }
 
 @media (max-width: 768px) {
@@ -117,5 +186,8 @@
     flex-direction: column;
     gap: 1rem;
     text-align: center;
+  }
+  .footer-bottom-links {
+    justify-content: center;
   }
 }
