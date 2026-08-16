@@ -1,18 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import './Farms.css';
 import L from 'leaflet';
+import { db } from '../firebase/config';
+import { collection, addDoc } from 'firebase/firestore';
 
 export default function Farms() {
-  const [activeRegion, setActiveRegion] = useState('volta'); // 'volta' | 'accra'
+  const [activeRegion, setActiveRegion] = useState('volta'); // 'volta' | 'accra' | 'kumasi' | 'tamale'
+  const [selectedCropFilter, setSelectedCropFilter] = useState('all');
+  
+  // Outgrower registration state
+  const [farmerName, setFarmerName] = useState('');
+  const [farmerContact, setFarmerContact] = useState('');
+  const [farmLocation, setFarmLocation] = useState('');
+  const [farmAcreage, setFarmAcreage] = useState('5-10');
+  const [cropType, setCropType] = useState('plantain');
+  const [outgrowerSubmitted, setOutgrowerSubmitted] = useState(false);
 
   // Initialize Leaflet Map
   useEffect(() => {
+    const mapContainer = document.getElementById('farms-leaflet-map');
+    if (!mapContainer) return;
+
     // Center at Ghana [6.8, -0.9] with zoom 7 initially
     const map = L.map('farms-leaflet-map', {
       center: [6.8, -0.9],
       zoom: 7,
       zoomControl: true,
-      scrollWheelZoom: false, // Prevent page scrolling hijacking
+      scrollWheelZoom: false,
     });
 
     // Dark Matter tile layer
@@ -22,7 +36,7 @@ export default function Farms() {
       maxZoom: 11,
     }).addTo(map);
 
-    // Custom glowing HTML markers html generator
+    // Custom glowing HTML markers generator
     const createGlowingPin = (color) => `
       <div class="custom-marker-glowing" style="--pin-color: ${color};">
         <div class="pin-core"></div>
@@ -55,7 +69,7 @@ export default function Farms() {
       markerInstances.push(marker);
     });
 
-    // Fit map bounds automatically to frame all 4 pins beautifully with padding
+    // Fit map bounds automatically to frame all pins with padding
     const group = L.featureGroup(markerInstances);
     map.fitBounds(group.getBounds().pad(0.18));
 
@@ -68,7 +82,6 @@ export default function Farms() {
       className: 'logistics-route'
     });
 
-    // Outlying hubs -> Accra Packaging Kitchen
     const accraCoords = [5.6, -0.18];
     const voltaCoords = [6.6, 0.6];
     const kumasiCoords = [6.69, -1.62];
@@ -86,84 +99,285 @@ export default function Farms() {
   const regions = {
     volta: {
       id: 'volta',
-      tag: 'Main Cultivation Hub',
-      title: 'Volta Sourcing District',
-      desc: 'Situated along the fertile plains of the Volta Region, this area provides the ideal tropical climate and rich, sandy-loam soil required for growing fiery Scotch Bonnet peppers, shallots, and organic ginger. We partner directly with 45 local family farms, ensuring ethical fair-wage labor and sustainable water practices.',
-      crops: ['🌶️ Scotch Bonnet Pepper', '🧅 Shallots', '🧄 Organic Garlic', '🌿 Exotic Basil', '🌿 Sweet Oregano']
+      tag: 'Main Agricultural & Chips Sourcing Hub',
+      title: 'Volta Basin Sourcing District',
+      desc: 'Spanning the nutrient-rich fertile soils of the Volta Region (Kpando, Hohoe, Anloga). This district delivers sun-ripened organic plantains, Ghanaian white yams, and fiery Scotch Bonnet peppers. Powered by smart IoT telemetry, solar drip irrigation, and ethical fair-trade farmer contracts.',
+      crops: ['🍌 Golden Plantains', '🍠 Ghanaian White Yam', '🌶️ Scotch Bonnet Pepper', '🧅 Anloga Shallots', '🧄 Organic Garlic'],
+      stats: { farmers: '45+ Smallholders', soilHealth: '98% Organic Purity', acreage: '280 Hectares' }
     },
     accra: {
       id: 'accra',
-      tag: 'Logistics & Cooking Hub',
-      title: 'Accra Packaging Kitchen',
-      desc: 'Our state-of-the-art kitchen and audit center located in Greater Accra. Fresh crops harvested from the Volta Region are transported here within 24 hours. The ingredients undergo strict quality checks (moisture auditing, purity tests) before being slow-cooked in small batches, bottled, vacuum-sealed, and shipped to stockists.',
-      crops: ['🥫 Shito Processing', '🧪 Purity Auditing', '📦 Wholesale Shipping', '🐟 Smoked Herring', '🦐 Dried Shrimp']
+      tag: 'Agro-Processing & Cold Packaging Kitchen',
+      title: 'Accra Packaging & Quality Hub',
+      desc: 'Our centralized agro-processing facility and laboratory quality audit center. Fresh harvests from the Volta basin arrive within 24 hours to undergo precision kettle-frying in cold-pressed oil, nitrogen-sealed packaging for Kone Chips, and slow-cooking for Kone Shito.',
+      crops: ['🍌 Nitrogen Foil Packaging', '🥫 Shito Slow-Cooking', '🧪 Moisture Auditing', '📦 Wholesale Pallet Freight'],
+      stats: { farmers: 'Central Distribution', soilHealth: 'ISO 22000 Certified', acreage: 'Food Processing Hub' }
     },
     kumasi: {
       id: 'kumasi',
-      tag: 'Agro-forestry Hub',
-      title: 'Kumasi Agro-forestry Hub',
-      desc: 'Located in the heart of the Ashanti Region, this hub focuses on sustainable multi-tier organic cocoa shade-cropping, black pepper vine inter-cropping, and natural composting research. We host soil regeneration workshops for regional farming cooperatives here.',
-      crops: ['🍫 Organic Cocoa', '🪵 Composting Research', '🌿 Black Pepper Vines', '🍌 Plantain Shade-crops']
+      tag: 'Agro-forestry & Soil Research',
+      title: 'Kumasi Agro-Forestry Hub',
+      desc: 'Located in the Ashanti rainforest belt. Specializes in shade-grown cocoa, root composting research, multi-canopy agroforestry, and indigenous seed conservation.',
+      crops: ['🍫 Organic Cocoa', '🪵 Forest Composting', '🌿 Wild Herbal Plots', '🍌 Plantain Agro-Canopy'],
+      stats: { farmers: '30 Cooperatives', soilHealth: 'Regenerative Loam', acreage: '140 Hectares' }
     },
     tamale: {
       id: 'tamale',
-      tag: 'Arid Farming & Cooperative',
-      title: 'Tamale Shea & Grain Cooperative',
-      desc: 'Our northernmost cooperative specializing in wild-harvested organic shea butter extraction, drought-resistant pearl millet cultivation, and solar dehydration processing. It operates as a women-led cooperative supporting 80 households.',
-      crops: ['🧴 Organic Shea Butter', '🌾 Pearl Millet', '☀️ Solar Dehydration', '🥜 Roasted Groundnuts']
+      tag: 'Savannah Climate & Grains Co-op',
+      title: 'Tamale Shea & Grains Collective',
+      desc: 'Operating across Northern Ghana savannah soils. Focused on drought-resilient pearl millet, solar dehydration processing, and wild organic shea butter.',
+      crops: ['🧴 Organic Shea Butter', '🌾 Pearl Millet', '☀️ Solar Dehydration', '🥜 Roasted Groundnuts'],
+      stats: { farmers: '80 Women Households', soilHealth: 'Solar Regenerative', acreage: '350 Hectares' }
     }
   };
 
   const currentRegion = regions[activeRegion] || regions.volta;
 
+  const handleOutgrowerSubmit = async (e) => {
+    e.preventDefault();
+    if (!farmerName || !farmerContact) return;
+    setOutgrowerSubmitted(true);
+
+    if (db && db.app) {
+      try {
+        await addDoc(collection(db, 'farm_outgrowers'), {
+          name: farmerName.trim(),
+          contact: farmerContact.trim(),
+          location: farmLocation.trim(),
+          acreage: farmAcreage,
+          cropType: cropType,
+          status: 'Under Review',
+          submittedAt: new Date().toISOString()
+        });
+      } catch (err) {
+        console.error("Firestore outgrower submission error:", err);
+      }
+    }
+
+    setTimeout(() => {
+      setOutgrowerSubmitted(false);
+      setFarmerName('');
+      setFarmerContact('');
+      setFarmLocation('');
+    }, 4000);
+  };
+
   return (
     <div className="farms-div-page animate-fade-in">
       <div className="farms-container">
         
-        {/* Header */}
-        <div className="farms-header-section">
-          <div className="farms-title-badge">🌾 Sourcing & Cultivation</div>
-          <h1 className="farms-headline">Cultivating the Future, Respecting the Soil</h1>
-          <p className="farms-subheadline" style={{ margin: '0 auto' }}>
-            We believe that premium food starts with healthy soil and respected communities. Our sourcing model pairs ecological farming standards with direct, fair-trade support for Ghanaian family farmers.
-          </p>
+        {/* Farmland Hero Section with Realistic Farm Photography */}
+        <div className="farm-hero-banner">
+          <div className="farm-hero-img-wrapper">
+            <img 
+              src="/assets/farms/volta-groves.jpg" 
+              alt="Volta Organic Farmlands & Smart Agtech Groves" 
+              className="farm-hero-img"
+            />
+            <div className="farm-hero-gradient-overlay"></div>
+            
+            <div className="farm-hero-content">
+              <div className="farms-title-badge">🌾 Sustainable Agriculture & Smart Agtech</div>
+              <h1 className="farms-headline">Cultivating the Future, Respecting the Soil</h1>
+              <p className="farms-subheadline" style={{ color: '#e2e8f0', maxWidth: '680px' }}>
+                We combine organic smallholder cultivation with precision IoT telemetry. Sun-drenched Volta plantain groves, rich white yam mounds, and highland potato fields powering our artisanal food division.
+              </p>
+            </div>
+          </div>
         </div>
 
-        {/* Crops & Sourcing Section */}
-        <div className="farms-card crops-section">
-          <h2 className="smartfarm-title" style={{ marginBottom: '2rem' }}>🌱 Our Organic Crops</h2>
-          
-          <div className="crops-category">
-            <h3 className="crops-category-title">🥫 Volta Region Staples (Shito Ingredients)</h3>
-            <div className="crops-flex">
-              <div className="crop-card-detailed">
-                <span>🌶️</span> Scotch Bonnet Pepper
+        {/* Live IoT Agro-Telemetry Stream Bar */}
+        <div className="telemetry-bar-card">
+          <div className="telemetry-bar-header">
+            <div className="live-indicator">
+              <span className="live-dot pulse"></span>
+              <strong>LIVE VOLTA FIELD TELEMETRY</strong>
+            </div>
+            <span className="telemetry-timestamp">Station #VOLTA-AG-04 • Last Synced: 2 mins ago</span>
+          </div>
+
+          <div className="telemetry-grid">
+            <div className="telemetry-metric-item">
+              <span className="t-icon">💧</span>
+              <div>
+                <span className="t-val">28.4%</span>
+                <span className="t-lbl">Soil Moisture (Optimal)</span>
               </div>
-              <div className="crop-card-detailed">
-                <span>🧅</span> Shallots
+            </div>
+            <div className="telemetry-metric-item">
+              <span className="t-icon">🧪</span>
+              <div>
+                <span className="t-val">6.4 pH</span>
+                <span className="t-lbl">Volta Loam Soil pH</span>
               </div>
-              <div className="crop-card-detailed">
-                <span>🧄</span> Organic Garlic
+            </div>
+            <div className="telemetry-metric-item">
+              <span className="t-icon">☀️</span>
+              <div>
+                <span className="t-val">865 W/m²</span>
+                <span className="t-lbl">Solar Irradiance</span>
               </div>
-              <div className="crop-card-detailed">
-                <span>🐟</span> Smoked Herring
+            </div>
+            <div className="telemetry-metric-item">
+              <span className="t-icon">🌡️</span>
+              <div>
+                <span className="t-val">29.5°C</span>
+                <span className="t-lbl">Ambient Field Temp</span>
               </div>
-              <div className="crop-card-detailed">
-                <span>🦐</span> Dried Shrimp
+            </div>
+            <div className="telemetry-metric-item">
+              <span className="t-icon">🌿</span>
+              <div>
+                <span className="t-val">0.92 NDVI</span>
+                <span className="t-lbl">Canopy Health Index</span>
               </div>
             </div>
           </div>
+        </div>
 
-          <div className="crops-category" style={{ marginBottom: 0 }}>
-            <h3 className="crops-category-title" style={{ color: '#60a5fa' }}>🌿 Exotic Herb Plots</h3>
-            <div className="crops-flex">
-              <div className="crop-card-detailed exotic">
-                <span>🌿</span> Aromatic Basil
-              </div>
-              <div className="crop-card-detailed exotic">
-                <span>🌿</span> Sweet Oregano
-              </div>
+        {/* Organic Farmlands & Crops Section */}
+        <div className="farms-card crops-section">
+          <div className="section-head-flex">
+            <div>
+              <h2 className="smartfarm-title">🌱 Farmland Crops & Sourcing Groves</h2>
+              <p style={{ color: '#94a3b8', fontSize: '0.9rem', margin: '0.25rem 0 1.5rem', textAlign: 'left' }}>
+                Explore the biological varieties cultivated across our Ghanaian partner farm clusters.
+              </p>
             </div>
+            <div className="crop-filter-chips">
+              {['all', 'chips', 'shito', 'agroforestry'].map((filter) => (
+                <button
+                  key={filter}
+                  className={`filter-chip-btn ${selectedCropFilter === filter ? 'active' : ''}`}
+                  onClick={() => setSelectedCropFilter(filter)}
+                >
+                  {filter === 'all' && 'All Farmlands'}
+                  {filter === 'chips' && '🍌 Chips Crops'}
+                  {filter === 'shito' && '🌶️ Shito Spices'}
+                  {filter === 'agroforestry' && '🌿 Agro-Forestry'}
+                </button>
+              ))}
+            </div>
+          </div>
+          
+          <div className="farms-crops-grid">
+            {(selectedCropFilter === 'all' || selectedCropFilter === 'chips') && (
+              <>
+                <div className="farm-crop-box">
+                  <div className="crop-box-top">
+                    <span className="crop-avatar">🍌</span>
+                    <div>
+                      <h4 className="crop-name">Golden Plantain</h4>
+                      <span className="crop-scientific">Musa paradisiaca L.</span>
+                    </div>
+                  </div>
+                  <p className="crop-desc">
+                    Grown in Kpando & Hohoe under multi-tier canopy cover. Naturally high in potassium and slow-release carbohydrates, harvested at peak starch-to-sugar balance for Kone Chips.
+                  </p>
+                  <div className="crop-meta-tags">
+                    <span>📍 Volta Groves</span>
+                    <span>💧 Drip Irrigated</span>
+                    <span>🌿 100% Non-GMO</span>
+                  </div>
+                </div>
+
+                <div className="farm-crop-box">
+                  <div className="crop-box-top">
+                    <span className="crop-avatar">🍠</span>
+                    <div>
+                      <h4 className="crop-name">Ghanaian White Yam</h4>
+                      <span className="crop-scientific">Dioscorea alata</span>
+                    </div>
+                  </div>
+                  <p className="crop-desc">
+                    Cultivated in aerated alluvial mounds in the Volta Basin. Produces crisp, fiber-rich root tubers with dense texture and clean roasted flavor.
+                  </p>
+                  <div className="crop-meta-tags">
+                    <span>📍 Central & Volta Basin</span>
+                    <span>🌱 Mound Grown</span>
+                    <span>✨ High Fiber</span>
+                  </div>
+                </div>
+
+                <div className="farm-crop-box">
+                  <div className="crop-box-top">
+                    <span className="crop-avatar">🥔</span>
+                    <div>
+                      <h4 className="crop-name">Highland Russet Potato</h4>
+                      <span className="crop-scientific">Solanum tuberosum</span>
+                    </div>
+                  </div>
+                  <p className="crop-desc">
+                    Farm-fresh potatoes slow-grown in cooler highland soils for maximum starch density and golden frying performance.
+                  </p>
+                  <div className="crop-meta-tags">
+                    <span>📍 Highland Co-ops</span>
+                    <span>🌿 Skin-On Processing</span>
+                    <span>🥔 Rich Potassium</span>
+                  </div>
+                </div>
+              </>
+            )}
+
+            {(selectedCropFilter === 'all' || selectedCropFilter === 'shito') && (
+              <>
+                <div className="farm-crop-box">
+                  <div className="crop-box-top">
+                    <span className="crop-avatar">🌶️</span>
+                    <div>
+                      <h4 className="crop-name">Scotch Bonnet Pepper</h4>
+                      <span className="crop-scientific">Capsicum chinense</span>
+                    </div>
+                  </div>
+                  <p className="crop-desc">
+                    Fiery Volta Scotch Bonnet peppers harvested at 85,000 Scoville Heat units. Sun-ripened on organic soil beds and cold-audited for pesticide purity.
+                  </p>
+                  <div className="crop-meta-tags">
+                    <span>📍 Anloga Fields</span>
+                    <span>🔥 85,000 SHU</span>
+                    <span>🚫 Zero Pesticides</span>
+                  </div>
+                </div>
+
+                <div className="farm-crop-box">
+                  <div className="crop-box-top">
+                    <span className="crop-avatar">🧅</span>
+                    <div>
+                      <h4 className="crop-name">Anloga Pink Shallots</h4>
+                      <span className="crop-scientific">Allium cepa var. aggregatum</span>
+                    </div>
+                  </div>
+                  <p className="crop-desc">
+                    Grown in coastal sandy loam near the Keta lagoon. Imparts deep aromatic sweetness and umami foundation to our slow-cooked Kone Shito sauce.
+                  </p>
+                  <div className="crop-meta-tags">
+                    <span>📍 Keta/Anloga Coast</span>
+                    <span>🍯 Natural Sweetness</span>
+                    <span>🧅 Hand Harvested</span>
+                  </div>
+                </div>
+              </>
+            )}
+
+            {(selectedCropFilter === 'all' || selectedCropFilter === 'agroforestry') && (
+              <div className="farm-crop-box">
+                <div className="crop-box-top">
+                  <span className="crop-avatar">🌿</span>
+                  <div>
+                    <h4 className="crop-name">Organic Garlic & Herbs</h4>
+                    <span className="crop-scientific">Allium sativum & Ocimum</span>
+                  </div>
+                </div>
+                <p className="crop-desc">
+                  Inter-cropped alongside plantains to deter pests naturally while providing wild herbal seasonings for our artisanal chips and sauces.
+                </p>
+                <div className="crop-meta-tags">
+                  <span>📍 Kumasi & Volta Hubs</span>
+                  <span>🌿 Companion Cropped</span>
+                  <span>🧄 Wild Seasoning</span>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
@@ -171,7 +385,7 @@ export default function Farms() {
         <div className="map-section">
           <div className="farms-header-section" style={{ marginBottom: '2.5rem' }}>
             <div className="farms-title-badge" style={{ background: 'rgba(59, 130, 246, 0.12)', borderColor: 'rgba(59, 130, 246, 0.25)', color: '#60a5fa' }}>📍 Geographic Trail</div>
-            <h2 className="farms-headline" style={{ fontSize: '2rem' }}>Trace the Harvest Path</h2>
+            <h2 className="farms-headline" style={{ fontSize: '2rem' }}>Trace the Ghanaian Harvest Path</h2>
             <p className="farms-subheadline" style={{ fontSize: '0.95rem', margin: '0 auto', maxWidth: '600px' }}>
               Hover or tap the glowing region pins on our interactive map of Ghana to explore where our ingredients are cultivated and prepared.
             </p>
@@ -196,7 +410,7 @@ export default function Farms() {
                 <h3 className="region-h4">{currentRegion.title}</h3>
                 <p className="region-desc">{currentRegion.desc}</p>
                 
-                <h4 style={{ color: 'white', fontSize: '0.9rem', marginBottom: '0.5rem', fontWeight: 800 }}>Associated Activities/Crops:</h4>
+                <h4 style={{ color: 'white', fontSize: '0.9rem', marginBottom: '0.5rem', fontWeight: 800 }}>Primary Crops & Activities:</h4>
                 <div className="region-crops-list">
                   {currentRegion.crops.map((c, i) => (
                     <span key={i} className="region-crop-tag" style={{
@@ -208,83 +422,163 @@ export default function Farms() {
                     </span>
                   ))}
                 </div>
+
+                {currentRegion.stats && (
+                  <div className="region-stats-strip">
+                    <div className="r-stat">
+                      <strong>{currentRegion.stats.farmers}</strong>
+                      <small>Network</small>
+                    </div>
+                    <div className="r-stat">
+                      <strong>{currentRegion.stats.soilHealth}</strong>
+                      <small>Purity</small>
+                    </div>
+                    <div className="r-stat">
+                      <strong>{currentRegion.stats.acreage}</strong>
+                      <small>Coverage</small>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
         </div>
 
-        {/* Sourcing Principles & Guidelines Section */}
-        <div className="farmers-section">
+        {/* Sustainable Ecological Farming Principles */}
+        <div className="farms-card ecological-principles-card">
           <div className="farms-header-section" style={{ marginBottom: '2rem', textAlign: 'left' }}>
-            <div className="farms-title-badge">🤝 Partnership Guidelines</div>
-            <h2 className="farms-headline" style={{ fontSize: '2rem' }}>Our Sourcing Commitments</h2>
-            <p className="farms-subheadline" style={{ margin: 0, fontSize: '0.95rem', color: '#94a3b8' }}>
-              We build long-term relationships with smallholder family farms in Ghana, combining generations of agricultural craftsmanship with modern technical auditing.
-            </p>
+            <div className="farms-title-badge" style={{ background: 'rgba(16, 185, 129, 0.12)', borderColor: 'rgba(16, 185, 129, 0.25)', color: '#34d399' }}>
+              🌍 Agro-Ecology Standards
+            </div>
+            <h2 className="farms-headline" style={{ fontSize: '2rem' }}>How We Protect the Soil & Farmers</h2>
           </div>
 
-          <div className="farmers-grid">
-            <div className="farmer-spotlight-card">
-              <div className="farmer-header">
-                <span className="farmer-avatar">⚖️</span>
-                <div className="farmer-meta">
-                  <span className="farmer-name">Fair-Trade Standards</span>
-                  <span className="farmer-title">Community Commitments</span>
-                </div>
-              </div>
-              <p className="farmer-quote">
-                We guarantee fair, above-market pricing directly to local growers. By eliminating brokers, we keep economic value within the Volta Region's farming communities.
-              </p>
-              <div className="farmer-specialty">
-                <span className="specialty-tag">Ethical Wages</span>
-                <span className="specialty-tag">Volta Region</span>
-              </div>
+          <div className="principles-grid">
+            <div className="principle-item">
+              <span className="p-icon">🌱</span>
+              <h4>100% Regenerative Soil</h4>
+              <p>We use rich natural organic compost derived from plantain biomass and fallen leaves, keeping heavy chemicals and artificial nitrates out of the soil.</p>
             </div>
-
-            <div className="farmer-spotlight-card">
-              <div className="farmer-header">
-                <span className="farmer-avatar">🌾</span>
-                <div className="farmer-meta">
-                  <span className="farmer-name">Ecological Stewardship</span>
-                  <span className="farmer-title">Soil Protection Rules</span>
-                </div>
-              </div>
-              <p className="farmer-quote">
-                Every farm partner enforces strict pesticide-free protocols. Enriching soil with organic compost prevents chemical runoff into local rivers and safeguards the water tables.
-              </p>
-              <div className="farmer-specialty">
-                <span className="specialty-tag">Pesticide-Free</span>
-                <span className="specialty-tag">Organic Compost</span>
-              </div>
+            <div className="principle-item">
+              <span className="p-icon">💧</span>
+              <h4>Solar Drip Micro-Irrigation</h4>
+              <p>Precision water sensors monitor root depth hydration, utilizing gravity and solar pumps from the Volta River basin with zero wastewater runoff.</p>
             </div>
-
-            <div className="farmer-spotlight-card">
-              <div className="farmer-header">
-                <span className="farmer-avatar">📡</span>
-                <div className="farmer-meta">
-                  <span className="farmer-name">Agritech Integration</span>
-                  <span className="farmer-title">Data Sharing Program</span>
-                </div>
-              </div>
-              <p className="farmer-quote">
-                We share wireless telemetry insights with our partners, providing moisture alerts and weather forecasts to optimize sowing, land irrigation, and harvest timings.
-              </p>
-              <div className="farmer-specialty">
-                <span className="specialty-tag">IoT Insights</span>
-                <span className="specialty-tag">Smart Harvests</span>
-              </div>
+            <div className="principle-item">
+              <span className="p-icon">⚖️</span>
+              <h4>Fair-Trade Guaranteed Floor</h4>
+              <p>We contract directly with smallholder farmers, guaranteeing pre-harvest floor purchase prices 25% above volatile open commodity market rates.</p>
+            </div>
+            <div className="principle-item">
+              <span className="p-icon">📡</span>
+              <h4>Digital Harvest Traceability</h4>
+              <p>Every harvested crate is assigned an RFID telemetry tag linking field coordinates, soil logs, and farmer signatures directly to consumer QR codes.</p>
             </div>
           </div>
         </div>
 
-        {/* GMO banner */}
-        <div className="gmo-policy-banner">
-          <span style={{ fontSize: '2.5rem' }}>🛡️</span>
-          <div>
-            <strong className="gmo-policy-title">100% Non-GMO & Organic Standard</strong>
-            <span className="gmo-policy-desc">
-              Kone Farms enforces strict pesticide-free standards. We protect native biodiversity, prevent chemical run-offs, and ensure the pure, bold flavor profiles of Kone Food products.
-            </span>
+        {/* Outgrower Network & Contract Farming Registration */}
+        <div className="farms-card outgrower-section animate-fade-in">
+          <div className="outgrower-grid">
+            <div style={{ textAlign: 'left' }}>
+              <div className="farms-title-badge" style={{ background: 'rgba(234, 179, 8, 0.12)', borderColor: 'rgba(234, 179, 8, 0.25)', color: '#facc15' }}>
+                🤝 Ghanaian Farmer Partnership
+              </div>
+              <h2 style={{ color: 'white', fontSize: '1.8rem', margin: '0.5rem 0' }}>
+                Join the Kone Outgrower Network
+              </h2>
+              <p style={{ color: '#94a3b8', fontSize: '0.95rem', lineHeight: 1.6, marginBottom: '1.25rem' }}>
+                Are you a Ghanaian farmer cultivating plantains, white yams, potatoes, or Scotch Bonnet peppers? Partner with Kone Food Division for guaranteed off-take contracts, agronomy training, and precision smart soil sensors.
+              </p>
+
+              <div className="outgrower-perks-list">
+                <div className="perk-row">✓ Guaranteed purchasing contract before harvest</div>
+                <div className="perk-row">✓ Free soil fertility and moisture audit telemetry</div>
+                <div className="perk-row">✓ Access to certified non-GMO planting suckers & organic inputs</div>
+              </div>
+            </div>
+
+            <div className="outgrower-form-wrapper">
+              {outgrowerSubmitted ? (
+                <div className="submit-success-banner">
+                  <span style={{ fontSize: '3rem', display: 'block', marginBottom: '1rem' }}>🌱</span>
+                  <strong style={{ display: 'block', fontSize: '1.2rem', marginBottom: '0.5rem' }}>Farm Application Received!</strong>
+                  <p style={{ fontSize: '0.85rem', margin: 0 }}>An agronomist from our Volta Field Cluster will reach out to inspect soil logs and schedule an onboarding visit.</p>
+                </div>
+              ) : (
+                <form onSubmit={handleOutgrowerSubmit}>
+                  <div className="dist-form-group">
+                    <label className="dist-label">Farmer / Co-op Lead Name</label>
+                    <input
+                      type="text"
+                      required
+                      value={farmerName}
+                      onChange={(e) => setFarmerName(e.target.value)}
+                      placeholder="e.g. Kwame Mensah"
+                      className="dist-input"
+                    />
+                  </div>
+
+                  <div className="dist-form-group">
+                    <label className="dist-label">Phone / WhatsApp Number</label>
+                    <input
+                      type="tel"
+                      required
+                      value={farmerContact}
+                      onChange={(e) => setFarmerContact(e.target.value)}
+                      placeholder="+233 24 123 4567"
+                      className="dist-input"
+                    />
+                  </div>
+
+                  <div className="dist-form-group">
+                    <label className="dist-label">Farmland Location / District</label>
+                    <input
+                      type="text"
+                      required
+                      value={farmLocation}
+                      onChange={(e) => setFarmLocation(e.target.value)}
+                      placeholder="e.g. Kpando District, Volta Region"
+                      className="dist-input"
+                    />
+                  </div>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+                    <div className="dist-form-group">
+                      <label className="dist-label">Estimated Acreage</label>
+                      <select 
+                        value={farmAcreage} 
+                        onChange={(e) => setFarmAcreage(e.target.value)}
+                        className="dist-input select-farms-option"
+                      >
+                        <option value="1-4">1 - 4 Acres</option>
+                        <option value="5-10">5 - 10 Acres</option>
+                        <option value="10-25">10 - 25 Acres</option>
+                        <option value="25+">25+ Acres</option>
+                      </select>
+                    </div>
+
+                    <div className="dist-form-group">
+                      <label className="dist-label">Primary Crop</label>
+                      <select 
+                        value={cropType} 
+                        onChange={(e) => setCropType(e.target.value)}
+                        className="dist-input select-farms-option"
+                      >
+                        <option value="plantain">🍌 Golden Plantain</option>
+                        <option value="yam">🍠 White Yam</option>
+                        <option value="potato">🥔 Highland Potato</option>
+                        <option value="pepper">🌶️ Scotch Bonnet</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <button type="submit" className="farms-submit-btn" style={{ width: '100%', marginTop: '0.75rem' }}>
+                    Apply as Outgrower Partner ➔
+                  </button>
+                </form>
+              )}
+            </div>
           </div>
         </div>
 

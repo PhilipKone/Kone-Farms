@@ -41,13 +41,13 @@ export default function Home() {
 
           {/* Card 2: Kone Food Division */}
           <a href="#food" className="div-card card-food">
-            <div className="div-icon-wrapper">🥫</div>
-            <h2 className="div-h3">Kone Food</h2>
+            <div className="div-icon-wrapper">🍌</div>
+            <h2 className="div-h3">Kone Food & Snacks</h2>
             <p className="div-desc">
-              Premium organic foods catalog. Explore our featured authentic black pepper sauce (Kone Shito), check audited batch logs, or apply as a distributor for our upcoming food line.
+              Artisanal organic snacks & cuisine catalog. Explore our new <strong>Kone Chips</strong> (Plantain, Yam & Potato) and signature <strong>Kone Shito</strong>, check audited batch logs, or calculate distributor wholesale pricing.
             </p>
             <div className="div-btn">
-              View Food Division ➔
+              Explore Food & Snacks ➔
             </div>
           </a>
 

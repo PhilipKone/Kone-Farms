@@ -1,6 +1,6 @@
 /* Farms Division Styles */
 .farms-div-page {
-  padding-top: 100px;
+  padding-top: 85px;
   min-height: calc(100vh - 80px);
   position: relative;
   z-index: 2;
@@ -9,325 +9,458 @@
 .farms-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem 5% 4rem;
+  padding: 1rem 5% 4rem;
 }
 
 .farms-header-section {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 2.5rem;
+}
+
+/* Farmland Hero Banner */
+.farm-hero-banner {
+  margin-bottom: 2.5rem;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  position: relative;
+}
+
+.farm-hero-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  background: #064e3b;
+}
+
+@media (max-width: 768px) {
+  .farm-hero-img-wrapper {
+    height: 480px;
+  }
+}
+
+.farm-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.farm-hero-gradient-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(6, 78, 59, 0.3) 0%, rgba(2, 44, 34, 0.75) 60%, rgba(2, 20, 16, 0.95) 100%);
+}
+
+.farm-hero-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2.5rem 2.5rem 2rem;
+  text-align: left;
+  z-index: 2;
+}
+
+@media (max-width: 600px) {
+  .farm-hero-content {
+    padding: 1.5rem 1.25rem 1.5rem;
+  }
+}
+
+/* Telemetry Bar */
+.telemetry-bar-card {
+  background: linear-gradient(145deg, rgba(10, 36, 27, 0.9) 0%, rgba(4, 18, 14, 0.96) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 20px;
+  padding: 1.25rem 1.75rem;
+  margin-bottom: 3rem;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.telemetry-bar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 1rem;
+}
+
+.live-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #34d399;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+
+.live-dot {
+  width: 10px;
+  height: 10px;
+  background: #10b981;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.live-dot.pulse {
+  box-shadow: 0 0 0 rgba(16, 185, 129, 0.6);
+  animation: pulse-glow 2s infinite;
+}
+
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+.telemetry-timestamp {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.telemetry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 1rem;
+}
+
+.telemetry-metric-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0.65rem 0.85rem;
+  border-radius: 12px;
+  text-align: left;
+}
+
+.t-icon {
+  font-size: 1.4rem;
+}
+
+.t-val {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #ffffff;
+}
+
+.t-lbl {
+  font-size: 0.68rem;
+  color: #94a3b8;
+  text-transform: uppercase;
 }
 
 /* Crops Grid */
 .crops-section {
-  margin-bottom: 4rem;
+  margin-bottom: 3.5rem;
 }
 
-.crops-category {
-  margin-bottom: 2rem;
-  text-align: left;
-}
-
-.crops-category-title {
-  color: #fff;
-  font-size: 1.25rem;
-  margin-bottom: 1rem;
-  font-weight: 800;
+.section-head-flex {
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.crops-flex {
-  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   flex-wrap: wrap;
-  gap: 0.85rem;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
-.crop-card-detailed {
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(245, 158, 11, 0.15);
-  padding: 1rem 1.5rem;
-  border-radius: 16px;
-  color: #e2e8f0;
-  font-size: 0.95rem;
+.crop-filter-chips {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.filter-chip-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+  padding: 0.4rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
   font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-chip-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+}
+
+.filter-chip-btn.active {
+  background: rgba(16, 185, 129, 0.2);
+  color: #34d399;
+  border-color: #10b981;
+}
+
+.farms-crops-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.farm-crop-box {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(16, 185, 129, 0.15);
+  border-radius: 18px;
+  padding: 1.5rem;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.farm-crop-box:hover {
+  transform: translateY(-4px);
+  border-color: rgba(16, 185, 129, 0.35);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+.crop-box-top {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  transition: all 0.3s ease;
-  cursor: default;
+  margin-bottom: 0.85rem;
 }
 
-.crop-card-detailed:hover {
-  transform: translateY(-3px);
-  background: rgba(245, 158, 11, 0.05);
-  border-color: rgba(245, 158, 11, 0.35);
-  box-shadow: 0 5px 15px rgba(245, 158, 11, 0.1);
-}
-
-.crop-card-detailed.exotic {
-  border-color: rgba(96, 165, 250, 0.15);
-}
-
-.crop-card-detailed.exotic:hover {
-  background: rgba(96, 165, 250, 0.05);
-  border-color: rgba(96, 165, 250, 0.35);
-  box-shadow: 0 5px 15px rgba(96, 165, 250, 0.1);
-}
-
-/* Farmers Spotlight */
-.farmers-section {
-  margin-bottom: 4rem;
-  text-align: left;
-}
-
-.farmers-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2rem;
-  margin-top: 1.5rem;
-}
-
-.farmer-spotlight-card {
-  background: rgba(10, 36, 27, 0.55);
-  border: 1px solid rgba(16, 185, 129, 0.12);
-  border-radius: 24px;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  transition: all 0.3s ease;
-}
-
-.farmer-spotlight-card:hover {
-  border-color: rgba(16, 185, 129, 0.3);
-  transform: translateY(-4px);
-  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.08);
-}
-
-.farmer-header {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.farmer-avatar {
-  font-size: 2.2rem;
+.crop-avatar {
+  font-size: 1.8rem;
   background: rgba(16, 185, 129, 0.1);
-  padding: 0.5rem;
-  border-radius: 16px;
+  padding: 0.45rem;
+  border-radius: 12px;
   border: 1px solid rgba(16, 185, 129, 0.2);
 }
 
-.farmer-meta {
-  display: flex;
-  flex-direction: column;
-}
-
-.farmer-name {
+.crop-name {
   color: white;
   font-size: 1.15rem;
   font-weight: 800;
-}
-
-.farmer-title {
-  color: #34d399;
-  font-size: 0.8rem;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.farmer-quote {
-  font-size: 0.9rem;
-  color: #94a3b8;
-  font-style: italic;
-  line-height: 1.5;
   margin: 0;
-  border-left: 3px solid rgba(16, 185, 129, 0.3);
-  padding-left: 0.85rem;
 }
 
-.farmer-specialty {
-  font-size: 0.8rem;
-  color: #64748b;
+.crop-scientific {
+  font-size: 0.75rem;
+  color: #38bdf8;
+  font-style: italic;
+}
+
+.crop-desc {
+  font-size: 0.85rem;
+  color: #cbd5e1;
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+  flex: 1;
+}
+
+.crop-meta-tags {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.4rem;
   flex-wrap: wrap;
-  margin-top: auto;
 }
 
-.specialty-tag {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  padding: 0.25rem 0.65rem;
+.crop-meta-tags span {
+  font-size: 0.72rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.2rem 0.5rem;
   border-radius: 6px;
   color: #cbd5e1;
 }
 
 /* Sourcing Map styles */
 .map-section {
-  margin-bottom: 4rem;
+  margin-bottom: 3.5rem;
 }
 
 .map-layout-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 2.5rem;
   align-items: center;
 }
 
 @media (max-width: 900px) {
   .map-layout-grid {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 2rem;
   }
 }
 
 .map-svg-container {
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(16, 185, 129, 0.12);
-  border-radius: 28px;
-  padding: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-
-.map-svg {
-  width: 100%;
-  max-width: 380px;
-  height: auto;
-}
-
-.map-pin {
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.map-pin:hover {
-  filter: drop-shadow(0 0 8px currentColor);
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
 }
 
 .map-details-card {
-  text-align: left;
-}
-
-.region-detail-box {
-  background: rgba(10, 36, 27, 0.65);
-  border: 2px solid rgba(16, 185, 129, 0.2);
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.85) 0%, rgba(10, 15, 26, 0.95) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 24px;
   padding: 2rem;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-  animation: pwaPanelFade 0.3s ease;
+  text-align: left;
 }
 
 .region-tag {
   display: inline-block;
-  background: rgba(16, 185, 129, 0.12);
-  border: 1px solid rgba(16, 185, 129, 0.25);
-  color: #34d399;
   font-size: 0.75rem;
   font-weight: 800;
   padding: 0.25rem 0.75rem;
-  border-radius: 6px;
-  text-transform: uppercase;
+  border-radius: 20px;
+  border: 1px solid;
   margin-bottom: 0.75rem;
 }
 
 .region-h4 {
-  font-family: 'Baloo 2', cursive, sans-serif;
+  font-size: 1.4rem;
   color: white;
-  font-size: 1.5rem;
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.75rem;
 }
 
 .region-desc {
   font-size: 0.9rem;
-  color: #94a3b8;
-  line-height: 1.5;
-  margin-bottom: 1rem;
+  color: #cbd5e1;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
 }
 
 .region-crops-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.4rem;
+  margin-bottom: 1.5rem;
 }
 
 .region-crop-tag {
-  background: rgba(245, 158, 11, 0.08);
-  border: 1px solid rgba(245, 158, 11, 0.2);
-  color: #f59e0b;
-  font-size: 0.8rem;
-  padding: 0.2rem 0.5rem;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.6rem;
   border-radius: 6px;
+  border: 1px solid;
+  font-weight: 700;
 }
 
-/* GMO Policy Banner Styling */
-.gmo-policy-banner {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(4, 20, 15, 0.4) 100%);
-  border: 2px solid rgba(16, 185, 129, 0.18);
-  border-radius: 24px;
-  padding: 2.25rem 2rem !important;
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
-  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  margin-top: 3rem;
+.region-stats-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 1rem;
+}
+
+.r-stat {
+  text-align: center;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  padding: 0.5rem;
+}
+
+.r-stat strong {
+  display: block;
+  font-size: 0.9rem;
+  color: #38bdf8;
+}
+
+.r-stat small {
+  font-size: 0.68rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+
+/* Ecological Principles */
+.ecological-principles-card {
+  margin-bottom: 3.5rem;
+  background: linear-gradient(145deg, rgba(8, 28, 21, 0.85) 0%, rgba(3, 14, 10, 0.95) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: 28px;
+  padding: 2.5rem;
+}
+
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.75rem;
   text-align: left;
 }
 
-.gmo-policy-banner:hover {
-  border-color: rgba(16, 185, 129, 0.35);
-  transform: translateY(-2px);
-  box-shadow: 0 20px 45px rgba(16, 185, 129, 0.1);
+.principle-item {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(16, 185, 129, 0.12);
+  border-radius: 16px;
+  padding: 1.5rem;
 }
 
-.gmo-policy-title {
+.p-icon {
+  font-size: 2rem;
   display: block;
-  color: #fff;
-  font-size: 1.15rem;
-  margin-bottom: 0.35rem;
-  font-weight: 800;
+  margin-bottom: 0.75rem;
 }
 
-.gmo-policy-desc {
-  font-size: 0.88rem;
-  color: #a7f3d0;
+.principle-item h4 {
+  color: #ffffff;
+  font-size: 1.1rem;
+  margin: 0 0 0.5rem;
+}
+
+.principle-item p {
+  font-size: 0.85rem;
+  color: #cbd5e1;
   line-height: 1.5;
+  margin: 0;
 }
 
-@media (max-width: 768px) {
-  .gmo-policy-banner {
-    flex-direction: column;
-    text-align: center;
-    gap: 1rem;
-    padding: 2rem 1.5rem !important;
+/* Outgrower Registration */
+.outgrower-section {
+  background: linear-gradient(145deg, rgba(28, 22, 12, 0.85) 0%, rgba(14, 11, 6, 0.95) 100%);
+  border: 1px solid rgba(234, 179, 8, 0.25);
+  border-radius: 28px;
+  padding: 2.5rem;
+}
+
+.outgrower-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+@media (max-width: 850px) {
+  .outgrower-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
   }
 }
 
-/* Leaflet Map Integration Styles */
-#farms-leaflet-map {
-  width: 100%;
-  height: 450px;
-  background: #020907;
-  border-radius: 28px;
-  border: 1px solid rgba(16, 185, 129, 0.15);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55), inset 0 0 15px rgba(16, 185, 129, 0.05);
-}
-
-/* Hide default leaflet marker icon container border/background */
-.leaflet-custom-marker-wrapper {
-  background: none !important;
-  border: none !important;
+.outgrower-perks-list {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-top: 1rem;
 }
 
-/* Custom Marker CSS Glow & Ripple */
+.perk-row {
+  font-size: 0.88rem;
+  color: #fef08a;
+  background: rgba(234, 179, 8, 0.08);
+  border: 1px solid rgba(234, 179, 8, 0.2);
+  padding: 0.55rem 0.85rem;
+  border-radius: 10px;
+}
+
+/* Leaflet Glowing Pin */
 .custom-marker-glowing {
   position: relative;
   width: 30px;
@@ -335,106 +468,34 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
 }
 
-.custom-marker-glowing .pin-core {
-  width: 11px;
-  height: 11px;
-  background-color: var(--pin-color);
+.pin-core {
+  width: 12px;
+  height: 12px;
+  background: var(--pin-color, #fbbf24);
   border-radius: 50%;
-  border: 2px solid #ffffff;
-  box-shadow: 0 0 12px var(--pin-color), 0 0 4px var(--pin-color);
-  z-index: 10;
+  box-shadow: 0 0 10px var(--pin-color, #fbbf24);
+  z-index: 2;
 }
 
-.custom-marker-glowing .pin-ring {
+.pin-ring {
   position: absolute;
   width: 26px;
   height: 26px;
-  border: 2px solid var(--pin-color);
+  border: 2px solid var(--pin-color, #fbbf24);
   border-radius: 50%;
+  animation: marker-pulse 2s infinite ease-out;
   opacity: 0.6;
-  animation: pinPulseRing 1.4s infinite cubic-bezier(0.215, 0.610, 0.355, 1);
-  pointer-events: none;
 }
 
-@keyframes pinPulseRing {
+@keyframes marker-pulse {
   0% {
-    transform: scale(0.75);
+    transform: scale(0.6);
     opacity: 0.8;
   }
   100% {
-    transform: scale(1.45);
+    transform: scale(1.6);
     opacity: 0;
   }
 }
-
-/* Dark Mode Leaflet Override Controls */
-.leaflet-bar {
-  border: 1px solid rgba(16, 185, 129, 0.25) !important;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.45) !important;
-}
-
-.leaflet-bar a {
-  background-color: rgba(10, 36, 27, 0.85) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
-  color: #10b981 !important;
-  border-bottom: 1px solid rgba(16, 185, 129, 0.2) !important;
-  transition: all 0.2s;
-}
-
-.leaflet-bar a:hover {
-  background-color: #10b981 !important;
-  color: white !important;
-}
-
-.leaflet-control-attribution {
-  background: rgba(4, 20, 15, 0.85) !important;
-  backdrop-filter: blur(8px) !important;
-  color: #64748b !important;
-  font-size: 0.65rem !important;
-  font-family: inherit;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  border-top-left-radius: 8px;
-  border-left: 1px solid rgba(16, 185, 129, 0.15) !important;
-  border-top: 1px solid rgba(16, 185, 129, 0.15) !important;
-}
-
-.leaflet-control-attribution a {
-  color: #10b981 !important;
-  text-decoration: none;
-}
-
-.leaflet-control-attribution a:hover {
-  text-decoration: underline;
-}
-
-/* Animated flow logistics routes (flowing dashes) */
-.logistics-route {
-  stroke-dasharray: 8, 8;
-  animation: logisticsFlow 20s linear infinite;
-}
-
-@keyframes logisticsFlow {
-  from {
-    stroke-dashoffset: 320;
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-@media (max-width: 768px) {
-  .leaflet-bar a {
-    width: 44px !important;
-    height: 44px !important;
-    line-height: 44px !important;
-    font-size: 1.2rem !important;
-  }
-}
-
-
