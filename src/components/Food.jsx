@@ -5,32 +5,32 @@ import { collection, addDoc, doc, getDoc } from 'firebase/firestore';
 
 // Fallback verified demo batches for instant interactive tracing
 const demoBatches = {
-  'KC-CHIPS-VOLTA-2026': {
-    batchId: 'KC-CHIPS-VOLTA-2026',
+  'KC-CHIPS-BATCH-2026': {
+    batchId: 'KC-CHIPS-BATCH-2026',
     productName: 'Kone Chips (Plantain, Yam & Potato)',
     pesticideLevel: '0.0% (Non-GMO)',
     moistureLevel: '1.8% (Optimal Crisp)',
     scovilleHeat: 'Mild-Zesty Seasoning',
-    certification: 'Volta Farm Direct & ISO-Food Safe',
+    certification: 'Organic Farm Direct & ISO-Food Safe',
     farmerName: 'Kwame & Efua Asare',
-    farmerMeta: 'Kpando Plantain Groves & Central Yam Co-op',
-    farmerQuote: '"Our plantains and yams are sun-ripened on Volta soil and harvested within 24 hours of kettle frying for unmatched crunch."',
+    farmerMeta: 'Smallholder Plantain Groves & Central Yam Co-op',
+    farmerQuote: '"Our plantains and yams are sun-ripened on organic soil and harvested within 24 hours of kettle frying for unmatched crunch."',
     trail: [
-      { date: 'June 02, 2026', text: 'Volta grove harvest & sugar-brix indexing', status: 'active' },
+      { date: 'June 02, 2026', text: 'Organic grove harvest & sugar-brix indexing', status: 'active' },
       { date: 'June 03, 2026', text: 'Precision kettle-frying in cold-pressed oil', status: 'active' },
       { date: 'June 04, 2026', text: 'Nitrogen-flushed vacuum sealed foil pouches', status: 'active' },
       { date: 'June 05, 2026', text: 'Quality checked (99.8% crispness index) & dispatched', status: 'current' }
     ]
   },
-  'KS-VOLTA-2026': {
-    batchId: 'KS-VOLTA-2026',
+  'KS-SHITO-BATCH-2026': {
+    batchId: 'KS-SHITO-BATCH-2026',
     productName: 'Kone Shito (Black Pepper Sauce)',
     pesticideLevel: '0.0%',
     moistureLevel: '12%',
     scovilleHeat: '85,000 SHU',
     certification: 'Organic Standard',
     farmerName: 'Kofi Mensah',
-    farmerMeta: 'Volta Region field manager (Anloga/Kpando)',
+    farmerMeta: 'Field operations manager (Organic Crop Cluster)',
     farmerQuote: '"We feed our Scotch Bonnet pepper crop pure organic compost. No chemical fertilizer is ever allowed."',
     trail: [
       { date: 'May 24, 2026', text: 'Harvested & telemetry checks passed', status: 'active' },
@@ -50,7 +50,7 @@ export default function Food() {
 
   // Chips states (Plantain, Yam, Potato, Trio)
   const [chipVariety, setChipVariety] = useState('plantain');
-  const [chipFlavor, setChipFlavor] = useState('Volta Chili & Garlic 🌶️');
+  const [chipFlavor, setChipFlavor] = useState('Savory Chili & Garlic 🌶️');
   const [chipCut, setChipCut] = useState('Kettle Thin');
 
   // Store modal / quick view
@@ -77,15 +77,15 @@ export default function Food() {
       id: 'plantain',
       name: 'Golden Plantain Chips',
       scientific: 'Musa paradisiaca L.',
-      origin: 'Kpando & Hohoe Groves, Volta Region',
+      origin: 'Partner Smallholder Groves, Ghana',
       tag: '🏆 Flagship Snack',
       image: '/assets/products/plantain-chips.jpg',
-      desc: 'Thinly sliced sun-drenched Volta plantains kettle-cooked in cold-pressed oil. Incredibly light, crisp, and naturally rich in potassium and micronutrients.',
+      desc: 'Thinly sliced sun-drenched organic plantains kettle-cooked in cold-pressed oil. Incredibly light, crisp, and naturally rich in potassium and micronutrients.',
       tastingNotes: 'Crisp caramelized natural sweetness with a savory roasted salt finish.',
       nutrition: { crunchScore: '99.8%', oilAbsorption: 'Zero Trans Fat', shelfLife: '9 Months', calories: '140 kcal / serving' },
       colorAccent: '#eab308',
       bgGradient: 'linear-gradient(155deg, #2b1e06 0%, #150e02 100%)',
-      badge: '🍌 Volta Plantain',
+      badge: '🍌 Golden Plantain',
       retailPrice: 'GHS 8.00',
       cartonPrice: 'GHS 140 (24 packs)'
     },
@@ -93,7 +93,7 @@ export default function Food() {
       id: 'yam',
       name: 'Crispy Yam Chips',
       scientific: 'Dioscorea alata',
-      origin: 'Central Belt & Volta Basin Farms',
+      origin: 'Central Belt Farmlands, Ghana',
       tag: '🔥 Savory Favorite',
       image: '/assets/products/yam-chips.jpg',
       desc: 'Authentic Ghanaian white yam sliced into ultra-crisp chips, kettle-fried and seasoned with roasted sea salt, cracked black pepper, and wild rosemary.',
@@ -123,7 +123,7 @@ export default function Food() {
     },
     trio: {
       id: 'trio',
-      name: 'Volta Trio Variety Box',
+      name: 'Kone Trio Variety Box',
       scientific: 'Musa + Dioscorea + Solanum Blend',
       origin: 'Multi-Hub Collective, Ghana',
       tag: '🌟 Master Sampler',
@@ -154,7 +154,7 @@ export default function Food() {
       badgeColor: '#eab308',
       rating: 4.9,
       reviewsCount: 128,
-      ingredients: 'Sun-ripened Volta Plantains, Cold-Pressed Vegetable Oil, Sea Salt, Natural Spices',
+      ingredients: 'Sun-ripened Organic Plantains, Cold-Pressed Vegetable Oil, Sea Salt, Natural Spices',
       tags: ['🌱 100% Vegan', '🌾 Gluten-Free', '🍌 Non-GMO']
     },
     {
@@ -187,7 +187,7 @@ export default function Food() {
     },
     {
       id: 'trio',
-      name: 'Kone Volta Trio Variety Box',
+      name: 'Kone Trio Variety Box',
       category: 'bundles',
       image: '/assets/products/trio-box.jpg',
       size: '3 x 150g Gift Box',
@@ -210,7 +210,7 @@ export default function Food() {
       badgeColor: '#ef4444',
       rating: 4.95,
       reviewsCount: 215,
-      ingredients: 'Organic Scotch Bonnet, Anloga Shallots, Wild Smoked Herring, Dried Shrimp, Ginger, Vegetable Oil',
+      ingredients: 'Organic Scotch Bonnet, Artisanal Pink Shallots, Wild Smoked Herring, Dried Shrimp, Ginger, Vegetable Oil',
       tags: ['🌶️ 85K SHU Heat', '🐟 Smoked Seafood', '🥫 Vacuum Sealed']
     }
   ];
@@ -321,14 +321,14 @@ export default function Food() {
           setBatchData({ batchId: queryId, ...docSnap.data() });
           setShowTraceModal(true);
         } else {
-          setSearchError(`Batch ID "${queryId}" not found. Try "KC-CHIPS-VOLTA-2026" or "KS-VOLTA-2026".`);
+          setSearchError(`Batch ID "${queryId}" not found. Try "KC-CHIPS-BATCH-2026" or "KS-SHITO-BATCH-2026".`);
         }
       } catch (err) {
         console.error("Firestore batch query error:", err);
         setSearchError("Connection error while tracing batch. Please try again.");
       }
     } else {
-      setSearchError(`Batch ID "${queryId}" not found. Try "KC-CHIPS-VOLTA-2026" or "KS-VOLTA-2026".`);
+      setSearchError(`Batch ID "${queryId}" not found. Try "KC-CHIPS-BATCH-2026" or "KS-SHITO-BATCH-2026".`);
     }
     setIsLoadingBatch(false);
   };
@@ -363,7 +363,7 @@ export default function Food() {
           </div>
           <h1 className="farms-headline">Kone Gourmet Snacks & Fine Foods</h1>
           <p className="farms-subheadline">
-            Farm-to-pantry excellence from the Volta Basin. Handcrafted <strong>Kone Chips</strong> kettle-cooked to golden crispness and our authentic <strong>Kone Shito</strong> black pepper sauce. Audited by digital batch telemetry.
+            Farm-to-pantry excellence from Ghanaian smallholder partner farms. Handcrafted <strong>Kone Chips</strong> kettle-cooked to golden crispness and our authentic <strong>Kone Shito</strong> black pepper sauce. Audited by digital batch telemetry.
           </p>
 
           {/* Product Category Segmented Control */}
@@ -409,7 +409,7 @@ export default function Food() {
               <div className="showcase-top-bar">
                 <div className="showcase-badges-group">
                   <span className="featured-badge chips-badge">★ New Product Line</span>
-                  <span className="source-origin-tag">🌿 100% Non-GMO Volta Crop Sourced</span>
+                  <span className="source-origin-tag">🌿 100% Non-GMO Organic Crop Sourced</span>
                 </div>
                 <span className="process-highlight-pill">
                   Kettle Cooked • Zero Trans Fat • 150g Nitrogen Pouch
@@ -516,7 +516,7 @@ export default function Food() {
                     <span className="dist-label">Choose Artisanal Seasoning:</span>
                     <div className="flavor-options-grid">
                       {[
-                        { label: 'Volta Chili & Garlic 🌶️', desc: 'Infused with organic Scotch Bonnet' },
+                        { label: 'Savory Chili & Garlic 🌶️', desc: 'Infused with organic Scotch Bonnet' },
                         { label: 'Roasted Sea Salt 🧂', desc: 'Pure Ada coastal mineral salt crunch' },
                         { label: 'Sweet Cinnamon & Cane 🍯', desc: 'Caramelized natural raw cane sugar' },
                         { label: 'Smoked Onion & Herb 🌿', desc: 'Aromatic Ghanaian wild forest herbs' }
@@ -568,10 +568,10 @@ export default function Food() {
                   {/* Chip Batch Trace Hint Bar */}
                   <div 
                     className="chips-trace-hint"
-                    onClick={() => executeTraceLookup('KC-CHIPS-VOLTA-2026')}
+                    onClick={() => executeTraceLookup('KC-CHIPS-BATCH-2026')}
                     style={{ cursor: 'pointer' }}
                   >
-                    <span>🔍 Trace your chip bag telemetry: Tap to verify batch <strong>KC-CHIPS-VOLTA-2026</strong> ➔</span>
+                    <span>🔍 Trace your chip bag telemetry: Tap to verify batch <strong>KC-CHIPS-BATCH-2026</strong> ➔</span>
                   </div>
 
                 </div>
@@ -593,7 +593,7 @@ export default function Food() {
               <div className="showcase-top-bar">
                 <div className="showcase-badges-group">
                   <span className="featured-badge shito-badge">★ Culinary Heritage</span>
-                  <span className="source-origin-tag">🌶️ Anloga & Kpando Organic Sourced</span>
+                  <span className="source-origin-tag">🌶️ Ghanaian Organic Sourced</span>
                 </div>
                 <span className="process-highlight-pill" style={{ color: '#fca5a5', borderColor: 'rgba(239, 68, 68, 0.3)', background: 'rgba(239, 68, 68, 0.1)' }}>
                   Slow Cooked • 100% Non-GMO • 350g Glass Jar
@@ -659,7 +659,7 @@ export default function Food() {
                 <div className="chips-details-column">
                   <div className="product-title-row">
                     <span className="product-scientific-tag">Capsicum chinense + Allium cepa</span>
-                    <span className="origin-pill">📍 Volta Region, Ghana</span>
+                    <span className="origin-pill">📍 Ghana Sourced</span>
                   </div>
 
                   <h2 className="product-main-heading">
@@ -667,7 +667,7 @@ export default function Food() {
                   </h2>
                   
                   <p className="product-lead-desc">
-                    Our signature black pepper sauce is slow-cooked over low flame using organic Scotch Bonnet peppers, Anloga shallots, wild dried herring, and smoked shrimp sourced directly from Volta Region family farms.
+                    Our signature black pepper sauce is slow-cooked over low flame using organic Scotch Bonnet peppers, pink shallots, wild dried herring, and smoked shrimp sourced directly from Ghanaian smallholder family farms.
                   </p>
 
                   <div className="tasting-notes-strip" style={{ borderColor: 'rgba(239, 68, 68, 0.3)', background: 'rgba(239, 68, 68, 0.06)' }}>
@@ -692,10 +692,10 @@ export default function Food() {
                   {/* Shito Batch Trace Hint */}
                   <div 
                     className="chips-trace-hint"
-                    onClick={() => executeTraceLookup('KS-VOLTA-2026')}
+                    onClick={() => executeTraceLookup('KS-SHITO-BATCH-2026')}
                     style={{ cursor: 'pointer', borderColor: '#f87171', background: 'rgba(239, 68, 68, 0.08)', marginTop: '1.5rem' }}
                   >
-                    <span>🔍 Trace your shito jar telemetry: Tap to verify batch <strong>KS-VOLTA-2026</strong> ➔</span>
+                    <span>🔍 Trace your shito jar telemetry: Tap to verify batch <strong>KS-SHITO-BATCH-2026</strong> ➔</span>
                   </div>
                 </div>
 
@@ -795,16 +795,16 @@ export default function Food() {
                 <button 
                   type="button" 
                   className="quick-code-btn"
-                  onClick={() => executeTraceLookup('KC-CHIPS-VOLTA-2026')}
+                  onClick={() => executeTraceLookup('KC-CHIPS-BATCH-2026')}
                 >
-                  🍌 KC-CHIPS-VOLTA-2026 (Chips)
+                  🍌 KC-CHIPS-BATCH-2026 (Chips)
                 </button>
                 <button 
                   type="button" 
                   className="quick-code-btn"
-                  onClick={() => executeTraceLookup('KS-VOLTA-2026')}
+                  onClick={() => executeTraceLookup('KS-SHITO-BATCH-2026')}
                 >
-                  🥫 KS-VOLTA-2026 (Shito)
+                  🥫 KS-SHITO-BATCH-2026 (Shito)
                 </button>
               </div>
             </div>
@@ -819,7 +819,7 @@ export default function Food() {
                     aria-label="Enter batch ID"
                     value={searchBatchId}
                     onChange={(e) => setSearchBatchId(e.target.value)}
-                    placeholder="e.g. KC-CHIPS-VOLTA-2026"
+                    placeholder="e.g. KC-CHIPS-BATCH-2026"
                     className="dist-input"
                   />
                   <button 
@@ -873,7 +873,7 @@ export default function Food() {
                     aria-label="Store or partner name"
                     value={distributorName}
                     onChange={(e) => setDistributorName(e.target.value)}
-                    placeholder="e.g. Volta Fresh Mart & Supermarket"
+                    placeholder="e.g. Prime Fresh Mart & Supermarket"
                     className="dist-input"
                   />
                 </div>
@@ -1052,8 +1052,8 @@ export default function Food() {
                   <div className="farmer-card-bubble">
                     <div className="farmer-avatar-emoji">🌱</div>
                     <div>
-                      <strong className="farmer-bubble-name">{batchData.farmerName || 'Volta Grower'}</strong>
-                      <span className="farmer-bubble-meta">{batchData.farmerMeta || 'Volta Region Field Cluster'}</span>
+                      <strong className="farmer-bubble-name">{batchData.farmerName || 'Partner Grower'}</strong>
+                      <span className="farmer-bubble-meta">{batchData.farmerMeta || 'Organic Field Cluster'}</span>
                       <p className="farmer-bubble-quote">
                         {batchData.farmerQuote || '"We prioritize soil health and organic principles."'}
                       </p>

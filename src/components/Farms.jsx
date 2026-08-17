@@ -5,7 +5,7 @@ import { db } from '../firebase/config';
 import { collection, addDoc } from 'firebase/firestore';
 
 export default function Farms() {
-  const [activeRegion, setActiveRegion] = useState('volta'); // 'volta' | 'accra' | 'kumasi' | 'tamale'
+  const [activeRegion, setActiveRegion] = useState('eastern'); // 'eastern' | 'accra' | 'kumasi' | 'tamale'
   const [selectedCropFilter, setSelectedCropFilter] = useState('all');
   
   // Outgrower registration state
@@ -47,7 +47,7 @@ export default function Farms() {
     // Coordinates definition
     const locations = [
       { id: 'accra', name: 'Accra Packaging Kitchen', coords: [5.6, -0.18], color: '#60a5fa' },
-      { id: 'volta', name: 'Volta Sourcing District', coords: [6.6, 0.6], color: '#fbbf24' },
+      { id: 'eastern', name: 'Organic Plantain & Root Crops District', coords: [6.6, 0.6], color: '#fbbf24' },
       { id: 'kumasi', name: 'Kumasi Agro-forestry Hub', coords: [6.69, -1.62], color: '#10b981' },
       { id: 'tamale', name: 'Tamale Shea & Grain Cooperative', coords: [9.40, -0.84], color: '#f97316' },
     ];
@@ -83,11 +83,11 @@ export default function Farms() {
     });
 
     const accraCoords = [5.6, -0.18];
-    const voltaCoords = [6.6, 0.6];
+    const easternCoords = [6.6, 0.6];
     const kumasiCoords = [6.69, -1.62];
     const tamaleCoords = [9.40, -0.84];
 
-    L.polyline([voltaCoords, accraCoords], routeOptions('#fbbf24')).addTo(map);
+    L.polyline([easternCoords, accraCoords], routeOptions('#fbbf24')).addTo(map);
     L.polyline([kumasiCoords, accraCoords], routeOptions('#10b981')).addTo(map);
     L.polyline([tamaleCoords, accraCoords], routeOptions('#f97316')).addTo(map);
 
@@ -97,19 +97,19 @@ export default function Farms() {
   }, []);
 
   const regions = {
-    volta: {
-      id: 'volta',
+    eastern: {
+      id: 'eastern',
       tag: 'Main Agricultural & Chips Sourcing Hub',
-      title: 'Volta Basin Sourcing District',
-      desc: 'Spanning the nutrient-rich fertile soils of the Volta Region (Kpando, Hohoe, Anloga). This district delivers sun-ripened organic plantains, Ghanaian white yams, and fiery Scotch Bonnet peppers. Powered by smart IoT telemetry, solar drip irrigation, and ethical fair-trade farmer contracts.',
-      crops: ['🍌 Golden Plantains', '🍠 Ghanaian White Yam', '🌶️ Scotch Bonnet Pepper', '🧅 Anloga Shallots', '🧄 Organic Garlic'],
+      title: 'Organic Plantain & Root Crops District',
+      desc: 'Spanning nutrient-rich fertile loam soils. This district delivers sun-ripened organic plantains, Ghanaian white yams, and fiery Scotch Bonnet peppers. Powered by smart IoT telemetry, solar drip irrigation, and ethical fair-trade farmer contracts.',
+      crops: ['🍌 Golden Plantains', '🍠 Ghanaian White Yam', '🌶️ Scotch Bonnet Pepper', '🧅 Sweet Pink Shallots', '🧄 Organic Garlic'],
       stats: { farmers: '45+ Smallholders', soilHealth: '98% Organic Purity', acreage: '280 Hectares' }
     },
     accra: {
       id: 'accra',
       tag: 'Agro-Processing & Cold Packaging Kitchen',
       title: 'Accra Packaging & Quality Hub',
-      desc: 'Our centralized agro-processing facility and laboratory quality audit center. Fresh harvests from the Volta basin arrive within 24 hours to undergo precision kettle-frying in cold-pressed oil, nitrogen-sealed packaging for Kone Chips, and slow-cooking for Kone Shito.',
+      desc: 'Our centralized agro-processing facility and laboratory quality audit center. Fresh harvests from partner farms arrive within 24 hours to undergo precision kettle-frying in cold-pressed oil, nitrogen-sealed packaging for Kone Chips, and slow-cooking for Kone Shito.',
       crops: ['🍌 Nitrogen Foil Packaging', '🥫 Shito Slow-Cooking', '🧪 Moisture Auditing', '📦 Wholesale Pallet Freight'],
       stats: { farmers: 'Central Distribution', soilHealth: 'ISO 22000 Certified', acreage: 'Food Processing Hub' }
     },
@@ -131,7 +131,7 @@ export default function Farms() {
     }
   };
 
-  const currentRegion = regions[activeRegion] || regions.volta;
+  const currentRegion = regions[activeRegion] || regions.eastern;
 
   const handleOutgrowerSubmit = async (e) => {
     e.preventDefault();
@@ -171,7 +171,7 @@ export default function Farms() {
           <div className="farm-hero-img-wrapper">
             <img 
               src="/assets/farms/volta-groves.jpg" 
-              alt="Volta Organic Farmlands & Smart Agtech Groves" 
+              alt="Organic Farmlands & Smart Agtech Groves" 
               className="farm-hero-img"
             />
             <div className="farm-hero-gradient-overlay"></div>
@@ -180,7 +180,7 @@ export default function Farms() {
               <div className="farms-title-badge">🌾 Sustainable Agriculture & Smart Agtech</div>
               <h1 className="farms-headline">Cultivating the Future, Respecting the Soil</h1>
               <p className="farms-subheadline" style={{ color: '#e2e8f0', maxWidth: '680px' }}>
-                We combine organic smallholder cultivation with precision IoT telemetry. Sun-drenched Volta plantain groves, rich white yam mounds, and highland potato fields powering our artisanal food division.
+                We combine organic smallholder cultivation with precision IoT telemetry. Sun-drenched organic plantain groves, rich white yam mounds, and highland potato fields powering our artisanal food division.
               </p>
             </div>
           </div>
@@ -191,9 +191,9 @@ export default function Farms() {
           <div className="telemetry-bar-header">
             <div className="live-indicator">
               <span className="live-dot pulse"></span>
-              <strong>LIVE VOLTA FIELD TELEMETRY</strong>
+              <strong>LIVE FIELD AGRO-TELEMETRY</strong>
             </div>
-            <span className="telemetry-timestamp">Station #VOLTA-AG-04 • Last Synced: 2 mins ago</span>
+            <span className="telemetry-timestamp">Station #AG-FIELD-04 • Last Synced: 2 mins ago</span>
           </div>
 
           <div className="telemetry-grid">
@@ -208,7 +208,7 @@ export default function Farms() {
               <span className="t-icon">🧪</span>
               <div>
                 <span className="t-val">6.4 pH</span>
-                <span className="t-lbl">Volta Loam Soil pH</span>
+                <span className="t-lbl">Soil Loam pH</span>
               </div>
             </div>
             <div className="telemetry-metric-item">
@@ -272,10 +272,10 @@ export default function Farms() {
                     </div>
                   </div>
                   <p className="crop-desc">
-                    Grown in Kpando & Hohoe under multi-tier canopy cover. Naturally high in potassium and slow-release carbohydrates, harvested at peak starch-to-sugar balance for Kone Chips.
+                    Grown under multi-tier canopy cover. Naturally high in potassium and slow-release carbohydrates, harvested at peak starch-to-sugar balance for Kone Chips.
                   </p>
                   <div className="crop-meta-tags">
-                    <span>📍 Volta Groves</span>
+                    <span>📍 Partner Groves</span>
                     <span>💧 Drip Irrigated</span>
                     <span>🌿 100% Non-GMO</span>
                   </div>
@@ -290,10 +290,10 @@ export default function Farms() {
                     </div>
                   </div>
                   <p className="crop-desc">
-                    Cultivated in aerated alluvial mounds in the Volta Basin. Produces crisp, fiber-rich root tubers with dense texture and clean roasted flavor.
+                    Cultivated in aerated alluvial mounds. Produces crisp, fiber-rich root tubers with dense texture and clean roasted flavor.
                   </p>
                   <div className="crop-meta-tags">
-                    <span>📍 Central & Volta Basin</span>
+                    <span>📍 Partner Farmlands</span>
                     <span>🌱 Mound Grown</span>
                     <span>✨ High Fiber</span>
                   </div>
@@ -330,10 +330,10 @@ export default function Farms() {
                     </div>
                   </div>
                   <p className="crop-desc">
-                    Fiery Volta Scotch Bonnet peppers harvested at 85,000 Scoville Heat units. Sun-ripened on organic soil beds and cold-audited for pesticide purity.
+                    Fiery organic Scotch Bonnet peppers harvested at 85,000 Scoville Heat units. Sun-ripened on organic soil beds and cold-audited for pesticide purity.
                   </p>
                   <div className="crop-meta-tags">
-                    <span>📍 Anloga Fields</span>
+                    <span>📍 Partner Fields</span>
                     <span>🔥 85,000 SHU</span>
                     <span>🚫 Zero Pesticides</span>
                   </div>
@@ -343,15 +343,15 @@ export default function Farms() {
                   <div className="crop-box-top">
                     <span className="crop-avatar">🧅</span>
                     <div>
-                      <h4 className="crop-name">Anloga Pink Shallots</h4>
+                      <h4 className="crop-name">Sweet Pink Shallots</h4>
                       <span className="crop-scientific">Allium cepa var. aggregatum</span>
                     </div>
                   </div>
                   <p className="crop-desc">
-                    Grown in coastal sandy loam near the Keta lagoon. Imparts deep aromatic sweetness and umami foundation to our slow-cooked Kone Shito sauce.
+                    Grown in coastal sandy loam. Imparts deep aromatic sweetness and umami foundation to our slow-cooked Kone Shito sauce.
                   </p>
                   <div className="crop-meta-tags">
-                    <span>📍 Keta/Anloga Coast</span>
+                    <span>📍 Coastal Farmlands</span>
                     <span>🍯 Natural Sweetness</span>
                     <span>🧅 Hand Harvested</span>
                   </div>
@@ -372,7 +372,7 @@ export default function Farms() {
                   Inter-cropped alongside plantains to deter pests naturally while providing wild herbal seasonings for our artisanal chips and sauces.
                 </p>
                 <div className="crop-meta-tags">
-                  <span>📍 Kumasi & Volta Hubs</span>
+                  <span>📍 Kumasi & Partner Hubs</span>
                   <span>🌿 Companion Cropped</span>
                   <span>🧄 Wild Seasoning</span>
                 </div>
@@ -401,9 +401,9 @@ export default function Farms() {
             <div className="map-details-card">
               <div className="region-detail-box">
                 <span className="region-tag" style={{
-                  color: currentRegion.id === 'volta' ? '#fbbf24' : '#60a5fa',
-                  background: currentRegion.id === 'volta' ? 'rgba(245,158,11,0.12)' : 'rgba(59,130,246,0.12)',
-                  borderColor: currentRegion.id === 'volta' ? 'rgba(245,158,11,0.25)' : 'rgba(59,130,246,0.25)',
+                  color: currentRegion.id === 'eastern' ? '#fbbf24' : '#60a5fa',
+                  background: currentRegion.id === 'eastern' ? 'rgba(245,158,11,0.12)' : 'rgba(59,130,246,0.12)',
+                  borderColor: currentRegion.id === 'eastern' ? 'rgba(245,158,11,0.25)' : 'rgba(59,130,246,0.25)',
                 }}>
                   {currentRegion.tag}
                 </span>
@@ -414,9 +414,9 @@ export default function Farms() {
                 <div className="region-crops-list">
                   {currentRegion.crops.map((c, i) => (
                     <span key={i} className="region-crop-tag" style={{
-                      color: currentRegion.id === 'volta' ? '#f59e0b' : '#3b82f6',
-                      background: currentRegion.id === 'volta' ? 'rgba(245,158,11,0.08)' : 'rgba(59,130,246,0.08)',
-                      borderColor: currentRegion.id === 'volta' ? 'rgba(245,158,11,0.2)' : 'rgba(59,130,246,0.2)',
+                      color: currentRegion.id === 'eastern' ? '#f59e0b' : '#3b82f6',
+                      background: currentRegion.id === 'eastern' ? 'rgba(245,158,11,0.08)' : 'rgba(59,130,246,0.08)',
+                      borderColor: currentRegion.id === 'eastern' ? 'rgba(245,158,11,0.2)' : 'rgba(59,130,246,0.2)',
                     }}>
                       {c}
                     </span>
@@ -462,7 +462,7 @@ export default function Farms() {
             <div className="principle-item">
               <span className="p-icon">💧</span>
               <h4>Solar Drip Micro-Irrigation</h4>
-              <p>Precision water sensors monitor root depth hydration, utilizing gravity and solar pumps from the Volta River basin with zero wastewater runoff.</p>
+              <p>Precision water sensors monitor root depth hydration, utilizing gravity and solar pumps with zero wastewater runoff.</p>
             </div>
             <div className="principle-item">
               <span className="p-icon">⚖️</span>
@@ -503,7 +503,7 @@ export default function Farms() {
                 <div className="submit-success-banner">
                   <span style={{ fontSize: '3rem', display: 'block', marginBottom: '1rem' }}>🌱</span>
                   <strong style={{ display: 'block', fontSize: '1.2rem', marginBottom: '0.5rem' }}>Farm Application Received!</strong>
-                  <p style={{ fontSize: '0.85rem', margin: 0 }}>An agronomist from our Volta Field Cluster will reach out to inspect soil logs and schedule an onboarding visit.</p>
+                  <p style={{ fontSize: '0.85rem', margin: 0 }}>An agronomist from our Field Operations team will reach out to inspect soil logs and schedule an onboarding visit.</p>
                 </div>
               ) : (
                 <form onSubmit={handleOutgrowerSubmit}>
@@ -538,7 +538,7 @@ export default function Farms() {
                       required
                       value={farmLocation}
                       onChange={(e) => setFarmLocation(e.target.value)}
-                      placeholder="e.g. Kpando District, Volta Region"
+                      placeholder="e.g. Asuogyaman District, Eastern Region"
                       className="dist-input"
                     />
                   </div>

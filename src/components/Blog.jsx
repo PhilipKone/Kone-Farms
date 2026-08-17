@@ -48,7 +48,7 @@ export default function Blog({ onSelectArticle }) {
       case 'Telemetry & IoT':
         return (
           <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2.2" fill="none" style={{ marginRight: '4px' }}>
-            <path d="M12 2a10 10 0 0 0-10 10c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
+            <path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/>
           </svg>
         );
       case 'Greenhouse Automation':
@@ -138,20 +138,24 @@ export default function Blog({ onSelectArticle }) {
           <article className="featured-blog-card">
             <div className="featured-card-cover" style={{ background: featuredArticle.coverGradient }}>
               <div className="featured-badge-pill">
-                <span className="star-icon">★</span>
+                <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" style={{ marginRight: '4px' }}>
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
                 FEATURED RESEARCH PAPER
               </div>
 
               <div className="featured-cover-visual">
                 <div className="telemetry-node-graphic">
                   <div className="node-center-core">
-                    <span className="node-icon">🌱</span>
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="#34d399" strokeWidth="2" fill="none">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
                     <span className="node-pulse-ring"></span>
                   </div>
                   <div className="node-spec-tags">
-                    <span className="spec-tag-item">📡 LoRa SX1262 Mesh</span>
-                    <span className="spec-tag-item">🧪 RS485 NPK Telemetry</span>
-                    <span className="spec-tag-item">🔬 Sigatoka AI Bio-Model</span>
+                    <span className="spec-tag-item">LoRa SX1262 Mesh</span>
+                    <span className="spec-tag-item">RS485 NPK Telemetry</span>
+                    <span className="spec-tag-item">Sigatoka AI Bio-Model</span>
                   </div>
                 </div>
               </div>
@@ -167,7 +171,13 @@ export default function Blog({ onSelectArticle }) {
             <div className="featured-card-content">
               <div className="featured-meta-row">
                 <span className="card-category-badge">{featuredArticle.category}</span>
-                <span className="card-read-time">⏱️ {featuredArticle.readTime}</span>
+                <span className="card-read-time" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                  <svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" strokeWidth="2" fill="none">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                  {featuredArticle.readTime}
+                </span>
               </div>
 
               <h2 className="featured-card-title">
@@ -217,7 +227,12 @@ export default function Blog({ onSelectArticle }) {
       <div className="farms-blog-grid">
         {filteredArticles.length === 0 ? (
           <div className="no-articles-found">
-            <div className="no-results-icon">🔍</div>
+            <div className="no-results-icon">
+              <svg viewBox="0 0 24 24" width="48" height="48" stroke="#64748b" strokeWidth="1.5" fill="none">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </div>
             <h3>No Agritech Publications Found</h3>
             <p>No research studies match your current query "{searchQuery}". Try adjusting your keywords or category filter.</p>
             <button className="reset-search-btn" onClick={() => { setSearchQuery(''); setSelectedCategory('All'); }}>

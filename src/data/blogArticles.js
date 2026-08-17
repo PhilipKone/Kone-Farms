@@ -135,7 +135,7 @@ This paper presents an integrated agritech framework developed by **Kone Farms**
 
 Plantain (*Musa paradisiaca* L., AAB genome group) is a perennial monocotyledonous crop characterized by rapid vegetative biomass expansion and high physiological water requirements [1]. Unlike sweet bananas (*Musa acuminata*), plantains possess higher starch densities (28–35% wet weight basis) and lower sucrose content at harvest, rendering them a primary culinary staple across humid tropical lowland zones [3].
 
-In Ghana, major production zones span the Volta, Eastern, Ashanti, Central, and Western regions, where annual rainfall fluctuates between $1,200\\text{ mm}$ and $2,200\\text{ mm}$ [4]. Despite high regional demand, national average yield remains constrained at **9.2 tonnes per hectare (t/ha)**, significantly below the genetic yield potential of **35–45 t/ha** achievable under precision management [2].
+In Ghana, major production zones span the Eastern, Ashanti, Central, and Western regions, where annual rainfall fluctuates between $1,200\\text{ mm}$ and $2,200\\text{ mm}$ [4]. Despite high regional demand, national average yield remains constrained at **9.2 tonnes per hectare (t/ha)**, significantly below the genetic yield potential of **35–45 t/ha** achievable under precision management [2].
 
 The primary physiological bottlenecks include:
 1. **Shallow Root Systems**: Over 85% of functional plantain roots reside in the top $30\\text{ cm}$ of soil, making plants acutely vulnerable to moisture stress [5].
@@ -166,7 +166,7 @@ Where $\\text{Temp}_{\\text{factor}} = 1.0$ when $24^\\circ\\text{C} \\le T \\le
 
 Plantain plants extract vast quantities of macronutrients during the vegetative phase (months 1–7) prior to floral transition [7]. Soil degradation and potassium deficiency directly impair stomatal regulation, osmotic potential, and fruit filling.
 
-#### Critical Soil Nutrient Thresholds (Volta & Ashanti Loams):
+#### Critical Soil Nutrient Thresholds (Tropical & Forest Loams):
 - **Potassium ($\\text{K}^+$)**: $\\ge 0.8\\text{ cmol}_c/\\text{kg}$ (Critical for carbohydrate translocation into the developing bunch) [7].
 - **Nitrogen ($\\text{N}$)**: $\\ge 180\\text{ mg/kg}$ (Essential for pseudostem girth and leaf emergence rates).
 - **Phosphorus ($\\text{P}$)**: $\\ge 25\\text{ mg/kg}$ (Bray-1 method, vital for early root architecture).
@@ -234,7 +234,7 @@ The deployment architecture consists of three core hardware tiers:
 
 ### Section 7: Economic Yield Impact & Cost-Benefit Analysis
 
-Field trials conducted across **12.5 hectares** of plantain plantations in the Volta Region of Ghana yielded dramatic operational improvements over conventional farming methods:
+Field trials conducted across **12.5 hectares** of plantain plantations in partner agricultural districts of Ghana yielded dramatic operational improvements over conventional farming methods:
 
 | Metric / Parameter | Conventional Farming | Kone Farms Precision Agritech | Impact / Difference |
 | :--- | :--- | :--- | :--- |
@@ -399,7 +399,7 @@ void loop() {
     content: `
 ### The Challenge of Rural Farmland Irrigation in Ghana
 
-In agricultural hubs across the Volta, Eastern, and Ashanti regions of Ghana, seasonal rainfall volatility directly impacts crop yields [1]. Conventional scheduled irrigation often leads to over-saturation or root rot during unexpected rain showers, or severe water stress during extended dry spells.
+In agricultural hubs across the Eastern, Ashanti, and Central regions of Ghana, seasonal rainfall volatility directly impacts crop yields [1]. Conventional scheduled irrigation often leads to over-saturation or root rot during unexpected rain showers, or severe water stress during extended dry spells.
 
 To solve this, **Kone Farms** engineered a low-power, long-range **LoRa-based Soil Telemetry Network** [2]. By placing low-cost solar sensor nodes across crop zones, farmers gain real-time visibility into volumetric water content (VWC) without needing cellular SIM cards or mains electricity at every field location.
 

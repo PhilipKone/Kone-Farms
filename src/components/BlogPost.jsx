@@ -200,7 +200,6 @@ export default function BlogPost({ slug, onBack, onSelectArticle }) {
     };
 
     const headerCells = parseRow(lines[0]);
-    // Skip separator line if present (e.g., | :--- | :--- |)
     const bodyLines = lines.slice(1).filter(l => !l.includes('---'));
 
     return (
@@ -230,7 +229,6 @@ export default function BlogPost({ slug, onBack, onSelectArticle }) {
     );
   };
 
-  // Find related articles (excluding current)
   const relatedArticles = useMemo(() => {
     return blogArticles.filter(a => a.slug !== article.slug).slice(0, 2);
   }, [article]);
@@ -251,7 +249,7 @@ export default function BlogPost({ slug, onBack, onSelectArticle }) {
           onClick={(e) => { e.preventDefault(); window.location.hash = '#blog'; if (onBack) onBack(); }}
           className="post-back-btn"
         >
-          <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="2.5" fill="none">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2.5" fill="none">
             <line x1="19" y1="12" x2="5" y2="12"></line>
             <polyline points="12 19 5 12 12 5"></polyline>
           </svg>
@@ -261,7 +259,11 @@ export default function BlogPost({ slug, onBack, onSelectArticle }) {
         {/* Share Quick Action Buttons */}
         <div className="share-actions-row">
           <button className="share-btn" onClick={copyArticleLink} title="Copy Article Link">
-            {copiedLink ? '✅ Link Copied!' : '🔗 Share Link'}
+            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2.2" fill="none" style={{ marginRight: '5px' }}>
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+            {copiedLink ? 'Link Copied!' : 'Share Link'}
           </button>
           <a 
             href={`https://api.whatsapp.com/send?text=${encodeURIComponent(`${article.title} - Read at ${window.location.href}`)}`}
@@ -270,7 +272,10 @@ export default function BlogPost({ slug, onBack, onSelectArticle }) {
             className="share-btn whatsapp-share"
             title="Share via WhatsApp"
           >
-            💬 WhatsApp
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style={{ marginRight: '5px' }}>
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            WhatsApp
           </a>
         </div>
       </div>
@@ -302,8 +307,22 @@ export default function BlogPost({ slug, onBack, onSelectArticle }) {
           </a>
 
           <div className="post-time-meta">
-            <span className="meta-item">📅 <time itemProp="datePublished" dateTime={article.isoDate}>{article.publishDate}</time></span>
-            <span className="meta-item">⏱️ {article.readTime}</span>
+            <span className="meta-item">
+              <svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" strokeWidth="2" fill="none" style={{ marginRight: '4px' }}>
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+              <time itemProp="datePublished" dateTime={article.isoDate}>{article.publishDate}</time>
+            </span>
+            <span className="meta-item">
+              <svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" strokeWidth="2" fill="none" style={{ marginRight: '4px' }}>
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              {article.readTime}
+            </span>
           </div>
         </div>
       </header>
@@ -315,7 +334,17 @@ export default function BlogPost({ slug, onBack, onSelectArticle }) {
             className="mobile-toc-trigger"
             onClick={() => setShowMobileToc(!showMobileToc)}
           >
-            <span>📑 Table of Contents ({tocItems.length} Sections)</span>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+              <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" strokeWidth="2" fill="none">
+                <line x1="8" y1="6" x2="21" y2="6"></line>
+                <line x1="8" y1="12" x2="21" y2="12"></line>
+                <line x1="8" y1="18" x2="21" y2="18"></line>
+                <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                <line x1="3" y1="18" x2="3.01" y2="18"></line>
+              </svg>
+              Table of Contents ({tocItems.length} Sections)
+            </span>
             <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2.5" fill="none" style={{ transform: showMobileToc ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s ease' }}>
               <polyline points="6 9 12 15 18 9"></polyline>
             </svg>
@@ -361,7 +390,11 @@ export default function BlogPost({ slug, onBack, onSelectArticle }) {
                         onClick={() => copyMathFormula(formula, idx)}
                         title="Copy LaTeX Formula"
                       >
-                        {copiedMathIdx === idx ? '✅ Copied!' : '📋 Copy LaTeX'}
+                        <svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" strokeWidth="2" fill="none" style={{ marginRight: '4px' }}>
+                          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        {copiedMathIdx === idx ? 'Copied!' : 'Copy LaTeX'}
                       </button>
                     </div>
                     <div className="math-formula-container">
@@ -374,7 +407,13 @@ export default function BlogPost({ slug, onBack, onSelectArticle }) {
               } else if (trimmed.startsWith('> ')) {
                 return (
                   <blockquote key={idx} className="agritech-callout-card">
-                    <span className="callout-icon">💡</span>
+                    <div className="callout-icon-wrapper">
+                      <svg viewBox="0 0 24 24" width="20" height="20" stroke="#f59e0b" strokeWidth="2" fill="none">
+                        <line x1="9" y1="18" x2="15" y2="18"></line>
+                        <line x1="10" y1="22" x2="14" y2="22"></line>
+                        <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"></path>
+                      </svg>
+                    </div>
                     <div className="callout-content">
                       {renderFormattedText(trimmed.replace(/^>\s*/, ''))}
                     </div>
@@ -416,7 +455,12 @@ export default function BlogPost({ slug, onBack, onSelectArticle }) {
           {/* Hardware Bill of Materials (BOM) Table */}
           {article.hardwareBOM && article.hardwareBOM.length > 0 && (
             <section className="hardware-bom-section">
-              <h3 className="section-title">🔧 Hardware Bill of Materials (BOM) & Microcontroller Schematics</h3>
+              <h3 className="section-title" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="#34d399" strokeWidth="2" fill="none">
+                  <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                </svg>
+                Hardware Bill of Materials (BOM) & Microcontroller Schematics
+              </h3>
               <div className="table-responsive-wrapper">
                 <table className="bom-table">
                   <thead>
@@ -447,7 +491,13 @@ export default function BlogPost({ slug, onBack, onSelectArticle }) {
                 className="code-toggle-btn"
                 onClick={() => setShowCode(!showCode)}
               >
-                <span>{showCode ? '📖 Hide Microcontroller Firmware Code' : '💻 Expand Microcontroller Firmware Code (C++)'}</span>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                  <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none">
+                    <polyline points="16 18 22 12 16 6"></polyline>
+                    <polyline points="8 6 2 12 8 18"></polyline>
+                  </svg>
+                  {showCode ? 'Hide Microcontroller Firmware Code' : 'Expand Microcontroller Firmware Code (C++)'}
+                </span>
                 <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2.5" fill="none" style={{ transform: showCode ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s ease' }}>
                   <polyline points="6 9 12 15 18 9"></polyline>
                 </svg>
@@ -458,7 +508,11 @@ export default function BlogPost({ slug, onBack, onSelectArticle }) {
                   <div className="code-header-bar">
                     <span className="code-lang-label">ESP32 / Arduino C++ Telemetry Code</span>
                     <button className="copy-code-btn" onClick={copyFirmwareCode}>
-                      {copiedCode ? '✅ Copied to Clipboard!' : '📋 Copy Firmware Code'}
+                      <svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" strokeWidth="2" fill="none" style={{ marginRight: '4px' }}>
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                      </svg>
+                      {copiedCode ? 'Copied to Clipboard!' : 'Copy Firmware Code'}
                     </button>
                   </div>
                   <pre className="code-block-display">
@@ -472,7 +526,13 @@ export default function BlogPost({ slug, onBack, onSelectArticle }) {
           {/* Formal References & Peer-Reviewed Scientific Sources Section */}
           {article.references && article.references.length > 0 && (
             <section className="scientific-references-section">
-              <h3 className="section-title">📚 Scientific References & Peer-Reviewed Datasheets</h3>
+              <h3 className="section-title" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="#34d399" strokeWidth="2" fill="none">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                </svg>
+                Scientific References & Peer-Reviewed Datasheets
+              </h3>
               <ul className="references-list">
                 {article.references.map((ref) => (
                   <li key={ref.id} id={`ref-${ref.id}`} className="reference-item">
@@ -514,13 +574,24 @@ export default function BlogPost({ slug, onBack, onSelectArticle }) {
           {/* Related Articles Navigation */}
           {relatedArticles.length > 0 && (
             <section className="related-articles-section">
-              <h3 className="section-title">🌱 Related Agritech Research Studies</h3>
+              <h3 className="section-title" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="#34d399" strokeWidth="2" fill="none">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                Related Agritech Research Studies
+              </h3>
               <div className="related-grid">
                 {relatedArticles.map(rel => (
                   <article key={rel.id} className="related-card" onClick={() => { window.location.hash = `#blog/${encodeURIComponent(rel.slug)}`; if (onSelectArticle) onSelectArticle(rel.slug); }}>
                     <span className="rel-cat-badge">{rel.category}</span>
                     <h4 className="rel-title">{rel.title}</h4>
-                    <span className="rel-read-time">⏱️ {rel.readTime}</span>
+                    <span className="rel-read-time" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                      <svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" strokeWidth="2" fill="none">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                      </svg>
+                      {rel.readTime}
+                    </span>
                   </article>
                 ))}
               </div>
@@ -534,7 +605,11 @@ export default function BlogPost({ slug, onBack, onSelectArticle }) {
               onClick={(e) => { e.preventDefault(); window.location.hash = '#blog'; if (onBack) onBack(); }}
               className="post-back-btn-large"
             >
-              ← Back to Agritech Research Hub
+              <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2.5" fill="none" style={{ marginRight: '6px' }}>
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+              </svg>
+              Back to Agritech Research Hub
             </a>
           </div>
         </article>
@@ -543,7 +618,17 @@ export default function BlogPost({ slug, onBack, onSelectArticle }) {
         {tocItems.length > 0 && (
           <aside className="desktop-toc-sidebar">
             <div className="sticky-toc-box">
-              <h4 className="toc-title">📑 Table of Contents</h4>
+              <h4 className="toc-title" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" strokeWidth="2" fill="none">
+                  <line x1="8" y1="6" x2="21" y2="6"></line>
+                  <line x1="8" y1="12" x2="21" y2="12"></line>
+                  <line x1="8" y1="18" x2="21" y2="18"></line>
+                  <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                  <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                  <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                </svg>
+                Table of Contents
+              </h4>
               <nav className="toc-nav">
                 <ul>
                   {tocItems.map(item => (
@@ -567,7 +652,10 @@ export default function BlogPost({ slug, onBack, onSelectArticle }) {
       {/* Floating Back to Top Button */}
       {showBackToTop && (
         <button className="back-to-top-btn" onClick={scrollToTop} aria-label="Back to Top">
-          ↑
+          <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="2.5" fill="none">
+            <line x1="12" y1="19" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline>
+          </svg>
         </button>
       )}
     </div>

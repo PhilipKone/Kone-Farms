@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import './VwcCalculator.css';
 
 export default function VwcCalculator() {
-  const [substrate, setSubstrate] = useState('volta-loam');
+  const [substrate, setSubstrate] = useState('tropical-loam');
   const [rawAdc, setRawAdc] = useState(2200);
   const [airBaseline, setAirBaseline] = useState(3200);
   const [waterBaseline, setWaterBaseline] = useState(1350);
@@ -10,7 +10,7 @@ export default function VwcCalculator() {
 
   // Substrate compensation coefficients
   const substrates = {
-    'volta-loam': { name: 'Volta Sandy Loam', optimalMin: 18, optimalMax: 32, icon: '🌾' },
+    'tropical-loam': { name: 'Tropical Sandy Loam', optimalMin: 18, optimalMax: 32, icon: '🌾' },
     'ashanti-clay': { name: 'Ashanti Clay Loam', optimalMin: 22, optimalMax: 38, icon: '🧱' },
     'eastern-peat': { name: 'Eastern Peat Substrate', optimalMin: 25, optimalMax: 45, icon: '🍃' },
     'coco-coir': { name: 'Greenhouse Coco Coir', optimalMin: 30, optimalMax: 50, icon: '🥥' }

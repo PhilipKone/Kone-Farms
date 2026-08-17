@@ -80,7 +80,7 @@ const Sitemap = ({ onBack }) => {
                   <a href="#food" className="farms-sitemap-link">
                     Kone Food (Supply Network)
                   </a>
-                  <p className="farms-sitemap-desc">Sourcing premium organic ingredients (Volta Region) directly to consumers and shops.</p>
+                  <p className="farms-sitemap-desc">Sourcing premium organic ingredients directly to consumers and shops.</p>
                 </div>
                 <div className="farms-sitemap-item">
                   <a href="#agritech" className="farms-sitemap-link">

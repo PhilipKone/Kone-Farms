@@ -21,7 +21,7 @@ export default function Home() {
           Software & Science in Service of the Soil
         </h1>
         <p className="home-subheadline">
-          Empowering Ghana's agricultural future by combining IoT automation, software monitoring, Volta Region family farm sourcing, and organic premium processing.
+          Empowering Ghana's agricultural future by combining IoT automation, software monitoring, smallholder family farm sourcing, and organic premium processing.
         </p>
 
         {/* Division Selector Grid */}
@@ -32,7 +32,7 @@ export default function Home() {
             <div className="div-icon-wrapper">🌾</div>
             <h2 className="div-h3">Farms & Sourcing</h2>
             <p className="div-desc">
-              Discover our local farming partnerships in the Volta Region. Browse our organic crops (Scotch Bonnet, Shallots) and read our strict 100% Non-GMO standard policy.
+              Discover our local farming partnerships and regional clusters. Browse our organic crops (Scotch Bonnet, Shallots) and read our strict 100% Non-GMO standard policy.
             </p>
             <div className="div-btn">
               Explore Sourcing ➔

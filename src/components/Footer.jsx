@@ -103,13 +103,22 @@ export default function Footer() {
             </a>
           </div>
 
-          <div className="footer-info-item" style={{ marginTop: '0.5rem' }}>
-            📍 <strong>Accra Office:</strong><br />
+          <div className="footer-info-item" style={{ marginTop: '0.75rem' }}>
+            <svg viewBox="0 0 24 24" width="14" height="14" stroke="#34d399" strokeWidth="2.5" fill="none" style={{ marginRight: '6px', verticalAlign: 'middle' }}>
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <strong>Accra Office:</strong><br />
             Kone Code Academy, Accra, Ghana
           </div>
           <div className="footer-info-item">
-            🌾 <strong>Farming Partner Districts:</strong><br />
-            Volta Region, Ghana
+            <svg viewBox="0 0 24 24" width="14" height="14" stroke="#34d399" strokeWidth="2.5" fill="none" style={{ marginRight: '6px', verticalAlign: 'middle' }}>
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+            <strong>Farming Partner Districts:</strong><br />
+            Partner Organic Agricultural Districts, Ghana
           </div>
         </div>
 
