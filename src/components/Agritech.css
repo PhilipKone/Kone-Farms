@@ -14,7 +14,7 @@
 
 .agritech-header-section {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 3.5rem;
 }
 
 /* Control Panel styles */
@@ -165,9 +165,10 @@
 }
 
 .telemetry-val {
-  font-family: 'Baloo 2', cursive, sans-serif;
+  font-family: 'Outfit', 'Plus Jakarta Sans', -apple-system, sans-serif;
   font-size: 2.3rem;
   font-weight: 800;
+  letter-spacing: -0.02em;
   color: #10b981;
   text-shadow: 0 0 12px rgba(16, 185, 129, 0.35);
   margin-bottom: 0.35rem;
@@ -246,9 +247,10 @@
 
 /* Vertical Irrigation Pipeline Stepper */
 .pipeline-title {
-  font-family: 'Baloo 2', cursive, sans-serif;
+  font-family: 'Outfit', 'Plus Jakarta Sans', -apple-system, sans-serif;
   font-size: 1.25rem;
-  font-weight: 800;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   color: #fff;
   margin-bottom: 1.75rem;
   text-align: left;
@@ -374,16 +376,17 @@
 }
 
 .tool-card:hover .tool-icon {
-  transform: scale(1.12) rotate(6deg);
+  transform: scale(1.12);
   background: rgba(16, 185, 129, 0.18);
   border-color: rgba(16, 185, 129, 0.4);
   box-shadow: 0 0 15px rgba(16, 185, 129, 0.15);
 }
 
 .tool-title {
-  font-family: 'Baloo 2', cursive, sans-serif;
+  font-family: 'Outfit', 'Plus Jakarta Sans', -apple-system, sans-serif;
   font-size: 1.35rem;
-  font-weight: 800;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   color: #fff;
   margin: 0;
 }
@@ -391,7 +394,7 @@
 .tool-desc {
   font-size: 0.88rem;
   color: #94a3b8;
-  line-height: 1.55;
+  line-height: 1.6;
   margin: 0;
 }
 
@@ -414,7 +417,8 @@
 
 .pwa-banner-text h3 {
   font-size: 1.15rem;
-  font-weight: 850;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   color: #ffffff;
   margin-bottom: 0.3rem;
 }
@@ -423,7 +427,7 @@
   font-size: 0.88rem;
   color: #cbd5e1;
   margin: 0;
-  line-height: 1.45;
+  line-height: 1.5;
 }
 
 .pwa-launch-btn {
@@ -432,7 +436,7 @@
   padding: 0.75rem 1.5rem;
   border-radius: 14px;
   font-size: 0.92rem;
-  font-weight: 850;
+  font-weight: 800;
   text-decoration: none;
   white-space: nowrap;
   transition: all 0.25s ease;
@@ -444,4 +448,3 @@
   box-shadow: 0 8px 25px rgba(16, 185, 129, 0.5);
   background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
 }
-

@@ -12,6 +12,7 @@
     "deploy": "gh-pages -d dist --dotfiles"
   },
   "dependencies": {
+    "@sentry/react": "^10.70.0",
     "firebase": "^12.14.0",
     "leaflet": "^1.9.4",
     "react": "^18.2.0",
