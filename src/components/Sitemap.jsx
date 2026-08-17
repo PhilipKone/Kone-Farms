@@ -60,7 +60,9 @@ const Sitemap = ({ onBack }) => {
             {/* Column 1: Core Farms Views */}
             <div className="farms-sitemap-column">
               <div className="farms-sitemap-col-header">
-                <span style={{ fontSize: '1.4rem', marginRight: '8px' }}>🌱</span>
+                <svg viewBox="0 0 24 24" width="22" height="22" stroke="#34d399" strokeWidth="2" fill="none" style={{ marginRight: '8px' }}>
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
                 <h2>Platform Modules</h2>
               </div>
               <div className="farms-sitemap-list">
@@ -106,7 +108,11 @@ const Sitemap = ({ onBack }) => {
             {/* Column 2: Ecosystem & Academy Links */}
             <div className="farms-sitemap-column">
               <div className="farms-sitemap-col-header">
-                <span style={{ fontSize: '1.4rem', marginRight: '8px' }}>🌐</span>
+                <svg viewBox="0 0 24 24" width="22" height="22" stroke="#60a5fa" strokeWidth="2" fill="none" style={{ marginRight: '8px' }}>
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
                 <h2>Ecosystem & Resources</h2>
               </div>
               <div className="farms-sitemap-list">

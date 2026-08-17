@@ -5,7 +5,7 @@ import { db } from '../firebase/config';
 import { collection, addDoc } from 'firebase/firestore';
 
 export default function Farms() {
-  const [activeRegion, setActiveRegion] = useState('eastern'); // 'eastern' | 'accra' | 'kumasi' | 'tamale'
+  const [activeRegion, setActiveRegion] = useState('eastern');
   const [selectedCropFilter, setSelectedCropFilter] = useState('all');
   
   // Outgrower registration state
@@ -21,7 +21,6 @@ export default function Farms() {
     const mapContainer = document.getElementById('farms-leaflet-map');
     if (!mapContainer) return;
 
-    // Center at Ghana [6.8, -0.9] with zoom 7 initially
     const map = L.map('farms-leaflet-map', {
       center: [6.8, -0.9],
       zoom: 7,
@@ -29,14 +28,12 @@ export default function Farms() {
       scrollWheelZoom: false,
     });
 
-    // Dark Matter tile layer
     L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; OpenStreetMap &copy; CartoDB',
       minZoom: 6,
       maxZoom: 11,
     }).addTo(map);
 
-    // Custom glowing HTML markers generator
     const createGlowingPin = (color) => `
       <div class="custom-marker-glowing" style="--pin-color: ${color};">
         <div class="pin-core"></div>
@@ -44,7 +41,6 @@ export default function Farms() {
       </div>
     `;
 
-    // Coordinates definition
     const locations = [
       { id: 'accra', name: 'Accra Packaging Kitchen', coords: [5.6, -0.18], color: '#60a5fa' },
       { id: 'eastern', name: 'Organic Plantain & Root Crops District', coords: [6.6, 0.6], color: '#fbbf24' },
@@ -69,11 +65,9 @@ export default function Farms() {
       markerInstances.push(marker);
     });
 
-    // Fit map bounds automatically to frame all pins with padding
     const group = L.featureGroup(markerInstances);
     map.fitBounds(group.getBounds().pad(0.18));
 
-    // Logistics Polylines flowing towards Accra Packaging Kitchen [5.6, -0.18]
     const routeOptions = (color) => ({
       color: color,
       weight: 2.5,
@@ -102,7 +96,7 @@ export default function Farms() {
       tag: 'Main Agricultural & Chips Sourcing Hub',
       title: 'Organic Plantain & Root Crops District',
       desc: 'Spanning nutrient-rich fertile loam soils. This district delivers sun-ripened organic plantains, Ghanaian white yams, and fiery Scotch Bonnet peppers. Powered by smart IoT telemetry, solar drip irrigation, and ethical fair-trade farmer contracts.',
-      crops: ['🍌 Golden Plantains', '🍠 Ghanaian White Yam', '🌶️ Scotch Bonnet Pepper', '🧅 Sweet Pink Shallots', '🧄 Organic Garlic'],
+      crops: ['Golden Plantains', 'Ghanaian White Yam', 'Scotch Bonnet Pepper', 'Sweet Pink Shallots', 'Organic Garlic'],
       stats: { farmers: '45+ Smallholders', soilHealth: '98% Organic Purity', acreage: '280 Hectares' }
     },
     accra: {
@@ -110,7 +104,7 @@ export default function Farms() {
       tag: 'Agro-Processing & Cold Packaging Kitchen',
       title: 'Accra Packaging & Quality Hub',
       desc: 'Our centralized agro-processing facility and laboratory quality audit center. Fresh harvests from partner farms arrive within 24 hours to undergo precision kettle-frying in cold-pressed oil, nitrogen-sealed packaging for Kone Chips, and slow-cooking for Kone Shito.',
-      crops: ['🍌 Nitrogen Foil Packaging', '🥫 Shito Slow-Cooking', '🧪 Moisture Auditing', '📦 Wholesale Pallet Freight'],
+      crops: ['Nitrogen Foil Packaging', 'Shito Slow-Cooking', 'Moisture Auditing', 'Wholesale Pallet Freight'],
       stats: { farmers: 'Central Distribution', soilHealth: 'ISO 22000 Certified', acreage: 'Food Processing Hub' }
     },
     kumasi: {
@@ -118,7 +112,7 @@ export default function Farms() {
       tag: 'Agro-forestry & Soil Research',
       title: 'Kumasi Agro-Forestry Hub',
       desc: 'Located in the Ashanti rainforest belt. Specializes in shade-grown cocoa, root composting research, multi-canopy agroforestry, and indigenous seed conservation.',
-      crops: ['🍫 Organic Cocoa', '🪵 Forest Composting', '🌿 Wild Herbal Plots', '🍌 Plantain Agro-Canopy'],
+      crops: ['Organic Cocoa', 'Forest Composting', 'Wild Herbal Plots', 'Plantain Agro-Canopy'],
       stats: { farmers: '30 Cooperatives', soilHealth: 'Regenerative Loam', acreage: '140 Hectares' }
     },
     tamale: {
@@ -126,7 +120,7 @@ export default function Farms() {
       tag: 'Savannah Climate & Grains Co-op',
       title: 'Tamale Shea & Grains Collective',
       desc: 'Operating across Northern Ghana savannah soils. Focused on drought-resilient pearl millet, solar dehydration processing, and wild organic shea butter.',
-      crops: ['🧴 Organic Shea Butter', '🌾 Pearl Millet', '☀️ Solar Dehydration', '🥜 Roasted Groundnuts'],
+      crops: ['Organic Shea Butter', 'Pearl Millet', 'Solar Dehydration', 'Roasted Groundnuts'],
       stats: { farmers: '80 Women Households', soilHealth: 'Solar Regenerative', acreage: '350 Hectares' }
     }
   };
@@ -177,7 +171,12 @@ export default function Farms() {
             <div className="farm-hero-gradient-overlay"></div>
             
             <div className="farm-hero-content">
-              <div className="farms-title-badge">🌾 Sustainable Agriculture & Smart Agtech</div>
+              <div className="farms-title-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                <svg viewBox="0 0 24 24" width="14" height="14" stroke="#34d399" strokeWidth="2.5" fill="none">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                Sustainable Agriculture & Smart Agtech
+              </div>
               <h1 className="farms-headline">Cultivating the Future, Respecting the Soil</h1>
               <p className="farms-subheadline" style={{ color: '#e2e8f0', maxWidth: '680px' }}>
                 We combine organic smallholder cultivation with precision IoT telemetry. Sun-drenched organic plantain groves, rich white yam mounds, and highland potato fields powering our artisanal food division.
@@ -198,35 +197,62 @@ export default function Farms() {
 
           <div className="telemetry-grid">
             <div className="telemetry-metric-item">
-              <span className="t-icon">💧</span>
+              <span className="t-icon">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="#60a5fa" strokeWidth="2" fill="none">
+                  <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                </svg>
+              </span>
               <div>
                 <span className="t-val">28.4%</span>
                 <span className="t-lbl">Soil Moisture (Optimal)</span>
               </div>
             </div>
             <div className="telemetry-metric-item">
-              <span className="t-icon">🧪</span>
+              <span className="t-icon">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="#34d399" strokeWidth="2" fill="none">
+                  <path d="M10 2v7.31L4.41 18.9A2 2 0 0 0 6.13 22h11.74a2 2 0 0 0 1.72-3.1L14 9.31V2"/>
+                  <line x1="8.5" y1="2" x2="15.5" y2="2"/>
+                </svg>
+              </span>
               <div>
                 <span className="t-val">6.4 pH</span>
                 <span className="t-lbl">Soil Loam pH</span>
               </div>
             </div>
             <div className="telemetry-metric-item">
-              <span className="t-icon">☀️</span>
+              <span className="t-icon">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="#fbbf24" strokeWidth="2" fill="none">
+                  <circle cx="12" cy="12" r="5"></circle>
+                  <line x1="12" y1="1" x2="12" y2="3"></line>
+                  <line x1="12" y1="21" x2="12" y2="23"></line>
+                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                  <line x1="1" y1="12" x2="3" y2="12"></line>
+                  <line x1="21" y1="12" x2="23" y2="12"></line>
+                </svg>
+              </span>
               <div>
                 <span className="t-val">865 W/m²</span>
                 <span className="t-lbl">Solar Irradiance</span>
               </div>
             </div>
             <div className="telemetry-metric-item">
-              <span className="t-icon">🌡️</span>
+              <span className="t-icon">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="#f59e0b" strokeWidth="2" fill="none">
+                  <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/>
+                </svg>
+              </span>
               <div>
                 <span className="t-val">29.5°C</span>
                 <span className="t-lbl">Ambient Field Temp</span>
               </div>
             </div>
             <div className="telemetry-metric-item">
-              <span className="t-icon">🌿</span>
+              <span className="t-icon">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="#10b981" strokeWidth="2" fill="none">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+              </span>
               <div>
                 <span className="t-val">0.92 NDVI</span>
                 <span className="t-lbl">Canopy Health Index</span>
@@ -239,7 +265,12 @@ export default function Farms() {
         <div className="farms-card crops-section">
           <div className="section-head-flex">
             <div>
-              <h2 className="smartfarm-title">🌱 Farmland Crops & Sourcing Groves</h2>
+              <h2 className="smartfarm-title" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="#34d399" strokeWidth="2" fill="none">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                Farmland Crops & Sourcing Groves
+              </h2>
               <p style={{ color: '#94a3b8', fontSize: '0.9rem', margin: '0.25rem 0 1.5rem', textAlign: 'left' }}>
                 Explore the biological varieties cultivated across our Ghanaian partner farm clusters.
               </p>
@@ -252,9 +283,9 @@ export default function Farms() {
                   onClick={() => setSelectedCropFilter(filter)}
                 >
                   {filter === 'all' && 'All Farmlands'}
-                  {filter === 'chips' && '🍌 Chips Crops'}
-                  {filter === 'shito' && '🌶️ Shito Spices'}
-                  {filter === 'agroforestry' && '🌿 Agro-Forestry'}
+                  {filter === 'chips' && 'Chips Crops'}
+                  {filter === 'shito' && 'Shito Spices'}
+                  {filter === 'agroforestry' && 'Agro-Forestry'}
                 </button>
               ))}
             </div>
@@ -265,7 +296,11 @@ export default function Farms() {
               <>
                 <div className="farm-crop-box">
                   <div className="crop-box-top">
-                    <span className="crop-avatar">🍌</span>
+                    <div className="crop-avatar-svg" style={{ color: '#eab308' }}>
+                      <svg viewBox="0 0 24 24" width="26" height="26" stroke="currentColor" strokeWidth="2" fill="none">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                      </svg>
+                    </div>
                     <div>
                       <h4 className="crop-name">Golden Plantain</h4>
                       <span className="crop-scientific">Musa paradisiaca L.</span>
@@ -275,15 +310,20 @@ export default function Farms() {
                     Grown under multi-tier canopy cover. Naturally high in potassium and slow-release carbohydrates, harvested at peak starch-to-sugar balance for Kone Chips.
                   </p>
                   <div className="crop-meta-tags">
-                    <span>📍 Partner Groves</span>
-                    <span>💧 Drip Irrigated</span>
-                    <span>🌿 100% Non-GMO</span>
+                    <span>Partner Groves</span>
+                    <span>Drip Irrigated</span>
+                    <span>100% Non-GMO</span>
                   </div>
                 </div>
 
                 <div className="farm-crop-box">
                   <div className="crop-box-top">
-                    <span className="crop-avatar">🍠</span>
+                    <div className="crop-avatar-svg" style={{ color: '#f97316' }}>
+                      <svg viewBox="0 0 24 24" width="26" height="26" stroke="currentColor" strokeWidth="2" fill="none">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M12 8v8M8 12h8"></path>
+                      </svg>
+                    </div>
                     <div>
                       <h4 className="crop-name">Ghanaian White Yam</h4>
                       <span className="crop-scientific">Dioscorea alata</span>
@@ -293,15 +333,20 @@ export default function Farms() {
                     Cultivated in aerated alluvial mounds. Produces crisp, fiber-rich root tubers with dense texture and clean roasted flavor.
                   </p>
                   <div className="crop-meta-tags">
-                    <span>📍 Partner Farmlands</span>
-                    <span>🌱 Mound Grown</span>
-                    <span>✨ High Fiber</span>
+                    <span>Partner Farmlands</span>
+                    <span>Mound Grown</span>
+                    <span>High Fiber</span>
                   </div>
                 </div>
 
                 <div className="farm-crop-box">
                   <div className="crop-box-top">
-                    <span className="crop-avatar">🥔</span>
+                    <div className="crop-avatar-svg" style={{ color: '#38bdf8' }}>
+                      <svg viewBox="0 0 24 24" width="26" height="26" stroke="currentColor" strokeWidth="2" fill="none">
+                        <circle cx="12" cy="12" r="9"></circle>
+                        <path d="M12 3v18"></path>
+                      </svg>
+                    </div>
                     <div>
                       <h4 className="crop-name">Highland Russet Potato</h4>
                       <span className="crop-scientific">Solanum tuberosum</span>
@@ -311,9 +356,9 @@ export default function Farms() {
                     Farm-fresh potatoes slow-grown in cooler highland soils for maximum starch density and golden frying performance.
                   </p>
                   <div className="crop-meta-tags">
-                    <span>📍 Highland Co-ops</span>
-                    <span>🌿 Skin-On Processing</span>
-                    <span>🥔 Rich Potassium</span>
+                    <span>Highland Co-ops</span>
+                    <span>Skin-On Processing</span>
+                    <span>Rich Potassium</span>
                   </div>
                 </div>
               </>
@@ -323,7 +368,11 @@ export default function Farms() {
               <>
                 <div className="farm-crop-box">
                   <div className="crop-box-top">
-                    <span className="crop-avatar">🌶️</span>
+                    <div className="crop-avatar-svg" style={{ color: '#ef4444' }}>
+                      <svg viewBox="0 0 24 24" width="26" height="26" stroke="currentColor" strokeWidth="2" fill="none">
+                        <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+                      </svg>
+                    </div>
                     <div>
                       <h4 className="crop-name">Scotch Bonnet Pepper</h4>
                       <span className="crop-scientific">Capsicum chinense</span>
@@ -333,15 +382,19 @@ export default function Farms() {
                     Fiery organic Scotch Bonnet peppers harvested at 85,000 Scoville Heat units. Sun-ripened on organic soil beds and cold-audited for pesticide purity.
                   </p>
                   <div className="crop-meta-tags">
-                    <span>📍 Partner Fields</span>
-                    <span>🔥 85,000 SHU</span>
-                    <span>🚫 Zero Pesticides</span>
+                    <span>Partner Fields</span>
+                    <span>85,000 SHU</span>
+                    <span>Zero Pesticides</span>
                   </div>
                 </div>
 
                 <div className="farm-crop-box">
                   <div className="crop-box-top">
-                    <span className="crop-avatar">🧅</span>
+                    <div className="crop-avatar-svg" style={{ color: '#a855f7' }}>
+                      <svg viewBox="0 0 24 24" width="26" height="26" stroke="currentColor" strokeWidth="2" fill="none">
+                        <path d="M12 2a5 5 0 0 1 5 5c0 3.5-5 9-5 9s-5-5.5-5-9a5 5 0 0 1 5-5z"></path>
+                      </svg>
+                    </div>
                     <div>
                       <h4 className="crop-name">Sweet Pink Shallots</h4>
                       <span className="crop-scientific">Allium cepa var. aggregatum</span>
@@ -351,9 +404,9 @@ export default function Farms() {
                     Grown in coastal sandy loam. Imparts deep aromatic sweetness and umami foundation to our slow-cooked Kone Shito sauce.
                   </p>
                   <div className="crop-meta-tags">
-                    <span>📍 Coastal Farmlands</span>
-                    <span>🍯 Natural Sweetness</span>
-                    <span>🧅 Hand Harvested</span>
+                    <span>Coastal Farmlands</span>
+                    <span>Natural Sweetness</span>
+                    <span>Hand Harvested</span>
                   </div>
                 </div>
               </>
@@ -362,7 +415,11 @@ export default function Farms() {
             {(selectedCropFilter === 'all' || selectedCropFilter === 'agroforestry') && (
               <div className="farm-crop-box">
                 <div className="crop-box-top">
-                  <span className="crop-avatar">🌿</span>
+                  <div className="crop-avatar-svg" style={{ color: '#10b981' }}>
+                    <svg viewBox="0 0 24 24" width="26" height="26" stroke="currentColor" strokeWidth="2" fill="none">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                  </div>
                   <div>
                     <h4 className="crop-name">Organic Garlic & Herbs</h4>
                     <span className="crop-scientific">Allium sativum & Ocimum</span>
@@ -372,9 +429,9 @@ export default function Farms() {
                   Inter-cropped alongside plantains to deter pests naturally while providing wild herbal seasonings for our artisanal chips and sauces.
                 </p>
                 <div className="crop-meta-tags">
-                  <span>📍 Kumasi & Partner Hubs</span>
-                  <span>🌿 Companion Cropped</span>
-                  <span>🧄 Wild Seasoning</span>
+                  <span>Kumasi & Partner Hubs</span>
+                  <span>Companion Cropped</span>
+                  <span>Wild Seasoning</span>
                 </div>
               </div>
             )}
@@ -384,7 +441,13 @@ export default function Farms() {
         {/* Interactive Map Section */}
         <div className="map-section">
           <div className="farms-header-section" style={{ marginBottom: '2.5rem' }}>
-            <div className="farms-title-badge" style={{ background: 'rgba(59, 130, 246, 0.12)', borderColor: 'rgba(59, 130, 246, 0.25)', color: '#60a5fa' }}>📍 Geographic Trail</div>
+            <div className="farms-title-badge" style={{ background: 'rgba(59, 130, 246, 0.12)', borderColor: 'rgba(59, 130, 246, 0.25)', color: '#60a5fa', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+              <svg viewBox="0 0 24 24" width="14" height="14" stroke="#60a5fa" strokeWidth="2.5" fill="none">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              Geographic Trail
+            </div>
             <h2 className="farms-headline" style={{ fontSize: '2rem' }}>Trace the Ghanaian Harvest Path</h2>
             <p className="farms-subheadline" style={{ fontSize: '0.95rem', margin: '0 auto', maxWidth: '600px' }}>
               Hover or tap the glowing region pins on our interactive map of Ghana to explore where our ingredients are cultivated and prepared.
@@ -447,30 +510,53 @@ export default function Farms() {
         {/* Sustainable Ecological Farming Principles */}
         <div className="farms-card ecological-principles-card">
           <div className="farms-header-section" style={{ marginBottom: '2rem', textAlign: 'left' }}>
-            <div className="farms-title-badge" style={{ background: 'rgba(16, 185, 129, 0.12)', borderColor: 'rgba(16, 185, 129, 0.25)', color: '#34d399' }}>
-              🌍 Agro-Ecology Standards
+            <div className="farms-title-badge" style={{ background: 'rgba(16, 185, 129, 0.12)', borderColor: 'rgba(16, 185, 129, 0.25)', color: '#34d399', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+              <svg viewBox="0 0 24 24" width="14" height="14" stroke="#34d399" strokeWidth="2.5" fill="none">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+              Agro-Ecology Standards
             </div>
             <h2 className="farms-headline" style={{ fontSize: '2rem' }}>How We Protect the Soil & Farmers</h2>
           </div>
 
           <div className="principles-grid">
             <div className="principle-item">
-              <span className="p-icon">🌱</span>
+              <span className="p-icon">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="#34d399" strokeWidth="2" fill="none">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+              </span>
               <h4>100% Regenerative Soil</h4>
               <p>We use rich natural organic compost derived from plantain biomass and fallen leaves, keeping heavy chemicals and artificial nitrates out of the soil.</p>
             </div>
             <div className="principle-item">
-              <span className="p-icon">💧</span>
+              <span className="p-icon">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="#60a5fa" strokeWidth="2" fill="none">
+                  <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                </svg>
+              </span>
               <h4>Solar Drip Micro-Irrigation</h4>
               <p>Precision water sensors monitor root depth hydration, utilizing gravity and solar pumps with zero wastewater runoff.</p>
             </div>
             <div className="principle-item">
-              <span className="p-icon">⚖️</span>
+              <span className="p-icon">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="#fbbf24" strokeWidth="2" fill="none">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M16 8l-8 8"></path>
+                  <path d="M8 8l8 8"></path>
+                </svg>
+              </span>
               <h4>Fair-Trade Guaranteed Floor</h4>
               <p>We contract directly with smallholder farmers, guaranteeing pre-harvest floor purchase prices 25% above volatile open commodity market rates.</p>
             </div>
             <div className="principle-item">
-              <span className="p-icon">📡</span>
+              <span className="p-icon">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="#c084fc" strokeWidth="2" fill="none">
+                  <path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/>
+                </svg>
+              </span>
               <h4>Digital Harvest Traceability</h4>
               <p>Every harvested crate is assigned an RFID telemetry tag linking field coordinates, soil logs, and farmer signatures directly to consumer QR codes.</p>
             </div>
@@ -481,8 +567,14 @@ export default function Farms() {
         <div className="farms-card outgrower-section animate-fade-in">
           <div className="outgrower-grid">
             <div style={{ textAlign: 'left' }}>
-              <div className="farms-title-badge" style={{ background: 'rgba(234, 179, 8, 0.12)', borderColor: 'rgba(234, 179, 8, 0.25)', color: '#facc15' }}>
-                🤝 Ghanaian Farmer Partnership
+              <div className="farms-title-badge" style={{ background: 'rgba(234, 179, 8, 0.12)', borderColor: 'rgba(234, 179, 8, 0.25)', color: '#facc15', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                <svg viewBox="0 0 24 24" width="14" height="14" stroke="#facc15" strokeWidth="2.5" fill="none">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+                Ghanaian Farmer Partnership
               </div>
               <h2 style={{ color: 'white', fontSize: '1.8rem', margin: '0.5rem 0' }}>
                 Join the Kone Outgrower Network
@@ -492,16 +584,35 @@ export default function Farms() {
               </p>
 
               <div className="outgrower-perks-list">
-                <div className="perk-row">✓ Guaranteed purchasing contract before harvest</div>
-                <div className="perk-row">✓ Free soil fertility and moisture audit telemetry</div>
-                <div className="perk-row">✓ Access to certified non-GMO planting suckers & organic inputs</div>
+                <div className="perk-row">
+                  <svg viewBox="0 0 24 24" width="14" height="14" stroke="#34d399" strokeWidth="2.5" fill="none" style={{ marginRight: '8px' }}>
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Guaranteed purchasing contract before harvest
+                </div>
+                <div className="perk-row">
+                  <svg viewBox="0 0 24 24" width="14" height="14" stroke="#34d399" strokeWidth="2.5" fill="none" style={{ marginRight: '8px' }}>
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Free soil fertility and moisture audit telemetry
+                </div>
+                <div className="perk-row">
+                  <svg viewBox="0 0 24 24" width="14" height="14" stroke="#34d399" strokeWidth="2.5" fill="none" style={{ marginRight: '8px' }}>
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Access to certified non-GMO planting suckers & organic inputs
+                </div>
               </div>
             </div>
 
             <div className="outgrower-form-wrapper">
               {outgrowerSubmitted ? (
                 <div className="submit-success-banner">
-                  <span style={{ fontSize: '3rem', display: 'block', marginBottom: '1rem' }}>🌱</span>
+                  <div style={{ margin: '0 auto 1rem', width: '48px', height: '48px', borderRadius: '50%', background: 'rgba(16, 185, 129, 0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <svg viewBox="0 0 24 24" width="28" height="28" stroke="#34d399" strokeWidth="2" fill="none">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
                   <strong style={{ display: 'block', fontSize: '1.2rem', marginBottom: '0.5rem' }}>Farm Application Received!</strong>
                   <p style={{ fontSize: '0.85rem', margin: 0 }}>An agronomist from our Field Operations team will reach out to inspect soil logs and schedule an onboarding visit.</p>
                 </div>
@@ -565,10 +676,10 @@ export default function Farms() {
                         onChange={(e) => setCropType(e.target.value)}
                         className="dist-input select-farms-option"
                       >
-                        <option value="plantain">🍌 Golden Plantain</option>
-                        <option value="yam">🍠 White Yam</option>
-                        <option value="potato">🥔 Highland Potato</option>
-                        <option value="pepper">🌶️ Scotch Bonnet</option>
+                        <option value="plantain">Golden Plantain</option>
+                        <option value="yam">White Yam</option>
+                        <option value="potato">Highland Potato</option>
+                        <option value="pepper">Scotch Bonnet</option>
                       </select>
                     </div>
                   </div>

@@ -10,10 +10,10 @@ export default function VwcCalculator() {
 
   // Substrate compensation coefficients
   const substrates = {
-    'tropical-loam': { name: 'Tropical Sandy Loam', optimalMin: 18, optimalMax: 32, icon: '🌾' },
-    'ashanti-clay': { name: 'Ashanti Clay Loam', optimalMin: 22, optimalMax: 38, icon: '🧱' },
-    'eastern-peat': { name: 'Eastern Peat Substrate', optimalMin: 25, optimalMax: 45, icon: '🍃' },
-    'coco-coir': { name: 'Greenhouse Coco Coir', optimalMin: 30, optimalMax: 50, icon: '🥥' }
+    'tropical-loam': { name: 'Tropical Sandy Loam', optimalMin: 18, optimalMax: 32 },
+    'ashanti-clay': { name: 'Ashanti Clay Loam', optimalMin: 22, optimalMax: 38 },
+    'eastern-peat': { name: 'Eastern Peat Substrate', optimalMin: 25, optimalMax: 45 },
+    'coco-coir': { name: 'Greenhouse Coco Coir', optimalMin: 30, optimalMax: 50 }
   };
 
   // VWC Formula Calculation
@@ -35,7 +35,13 @@ export default function VwcCalculator() {
         color: '#ef4444',
         bgColor: 'rgba(239, 68, 68, 0.15)',
         borderColor: '#f87171',
-        icon: '⚠️',
+        icon: (
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="#f87171" strokeWidth="2" fill="none">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+        ),
         action: 'Critical Water Stress! Recommend triggering LoRa automated solenoid valve for 20-25 mins.'
       };
     } else if (vwcPercentage <= currentSubstrate.optimalMax) {
@@ -44,7 +50,11 @@ export default function VwcCalculator() {
         color: '#34d399',
         bgColor: 'rgba(16, 185, 129, 0.15)',
         borderColor: '#10b981',
-        icon: '🌱',
+        icon: (
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="#34d399" strokeWidth="2" fill="none">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+        ),
         action: 'Perfect root zone moisture! Maintain current 15-minute solar telemetry cycle.'
       };
     } else {
@@ -53,7 +63,11 @@ export default function VwcCalculator() {
         color: '#38bdf8',
         bgColor: 'rgba(56, 189, 248, 0.15)',
         borderColor: '#38bdf8',
-        icon: '🌊',
+        icon: (
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="#38bdf8" strokeWidth="2" fill="none">
+            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+          </svg>
+        ),
         action: 'Soil is waterlogged. Halt automated irrigation to prevent root hypoxia and fungal rot.'
       };
     }
@@ -81,7 +95,12 @@ export default function VwcCalculator() {
     <div className="vwc-calculator-card">
       <div className="calc-header">
         <div className="calc-title-row">
-          <span className="calc-badge">⚡ INTERACTIVE AGRITECH TOOL</span>
+          <span className="calc-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+            INTERACTIVE AGRITECH TOOL
+          </span>
           <h2 className="calc-headline">Precision Soil Telemetry & VWC Calculator</h2>
         </div>
         <p className="calc-subtitle">
@@ -103,7 +122,7 @@ export default function VwcCalculator() {
             >
               {Object.keys(substrates).map(key => (
                 <option key={key} value={key}>
-                  {substrates[key].icon} {substrates[key].name} (Optimal: {substrates[key].optimalMin}% - {substrates[key].optimalMax}%)
+                  {substrates[key].name} (Optimal: {substrates[key].optimalMin}% - {substrates[key].optimalMax}%)
                 </option>
               ))}
             </select>
@@ -215,7 +234,12 @@ export default function VwcCalculator() {
           {/* Power Budget Battery Lifespan Card */}
           <div className="power-budget-box">
             <div className="power-icon-row">
-              <span className="power-icon">🔋</span>
+              <div className="power-icon">
+                <svg viewBox="0 0 24 24" width="22" height="22" stroke="#34d399" strokeWidth="2" fill="none">
+                  <rect x="1" y="6" width="18" height="12" rx="2" ry="2"></rect>
+                  <line x1="23" y1="13" x2="23" y2="11"></line>
+                </svg>
+              </div>
               <div className="power-text-meta">
                 <span className="power-title">Solar Telemetry Battery Lifespan</span>
                 <span className="power-desc">18650 LiFePO4 (3400mAh) with zero solar recharge:</span>

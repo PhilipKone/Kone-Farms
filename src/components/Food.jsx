@@ -42,19 +42,15 @@ const demoBatches = {
 };
 
 export default function Food() {
-  // Active catalog view: 'chips' | 'shito' | 'store' | 'all'
   const [productTab, setProductTab] = useState('chips');
 
   // Shito states
-  const [spiceLevel, setSpiceLevel] = useState('Hot 🌶️🌶️');
+  const [spiceLevel, setSpiceLevel] = useState('Hot');
 
-  // Chips states (Plantain, Yam, Potato, Trio)
+  // Chips states
   const [chipVariety, setChipVariety] = useState('plantain');
-  const [chipFlavor, setChipFlavor] = useState('Savory Chili & Garlic 🌶️');
+  const [chipFlavor, setChipFlavor] = useState('Savory Chili & Garlic');
   const [chipCut, setChipCut] = useState('Kettle Thin');
-
-  // Store modal / quick view
-  const [activeModalProduct, setActiveModalProduct] = useState(null);
 
   // Wholesaler / Distributor states
   const [selectedProductLine, setSelectedProductLine] = useState('chips');
@@ -78,14 +74,13 @@ export default function Food() {
       name: 'Golden Plantain Chips',
       scientific: 'Musa paradisiaca L.',
       origin: 'Partner Smallholder Groves, Ghana',
-      tag: '🏆 Flagship Snack',
+      tag: 'Flagship Snack',
       image: '/assets/products/plantain-chips.jpg',
       desc: 'Thinly sliced sun-drenched organic plantains kettle-cooked in cold-pressed oil. Incredibly light, crisp, and naturally rich in potassium and micronutrients.',
       tastingNotes: 'Crisp caramelized natural sweetness with a savory roasted salt finish.',
       nutrition: { crunchScore: '99.8%', oilAbsorption: 'Zero Trans Fat', shelfLife: '9 Months', calories: '140 kcal / serving' },
       colorAccent: '#eab308',
-      bgGradient: 'linear-gradient(155deg, #2b1e06 0%, #150e02 100%)',
-      badge: '🍌 Golden Plantain',
+      badge: 'Golden Plantain',
       retailPrice: 'GHS 8.00',
       cartonPrice: 'GHS 140 (24 packs)'
     },
@@ -94,14 +89,13 @@ export default function Food() {
       name: 'Crispy Yam Chips',
       scientific: 'Dioscorea alata',
       origin: 'Central Belt Farmlands, Ghana',
-      tag: '🔥 Savory Favorite',
+      tag: 'Savory Favorite',
       image: '/assets/products/yam-chips.jpg',
       desc: 'Authentic Ghanaian white yam sliced into ultra-crisp chips, kettle-fried and seasoned with roasted sea salt, cracked black pepper, and wild rosemary.',
       tastingNotes: 'Earthy, robust crunch with delicate herbal notes and clean roasted yam aroma.',
       nutrition: { crunchScore: '98.5%', oilAbsorption: 'Zero Cholesterol', shelfLife: '9 Months', calories: '135 kcal / serving' },
       colorAccent: '#f97316',
-      bgGradient: 'linear-gradient(155deg, #2d1806 0%, #170b02 100%)',
-      badge: '🍠 Ghanaian Yam',
+      badge: 'Ghanaian Yam',
       retailPrice: 'GHS 8.00',
       cartonPrice: 'GHS 140 (24 packs)'
     },
@@ -110,14 +104,13 @@ export default function Food() {
       name: 'Rustic Potato Crisps',
       scientific: 'Solanum tuberosum',
       origin: 'Highland Farms Cooperative',
-      tag: '✨ Classic Crunch',
+      tag: 'Classic Crunch',
       image: '/assets/products/potato-chips.jpg',
       desc: 'Farm-fresh highland potatoes, slow kettle-cooked with skins on for authentic rustic crunch and seasoned with aromatic Ghanaian chili paprika.',
       tastingNotes: 'Deep golden potato flavor with a zesty, smoky paprika kick.',
       nutrition: { crunchScore: '99.2%', oilAbsorption: 'Cold-Pressed Oil Only', shelfLife: '9 Months', calories: '145 kcal / serving' },
       colorAccent: '#38bdf8',
-      bgGradient: 'linear-gradient(155deg, #0e2238 0%, #06101c 100%)',
-      badge: '🥔 Highland Potato',
+      badge: 'Highland Potato',
       retailPrice: 'GHS 8.00',
       cartonPrice: 'GHS 140 (24 packs)'
     },
@@ -126,14 +119,13 @@ export default function Food() {
       name: 'Kone Trio Variety Box',
       scientific: 'Musa + Dioscorea + Solanum Blend',
       origin: 'Multi-Hub Collective, Ghana',
-      tag: '🌟 Master Sampler',
+      tag: 'Master Sampler',
       image: '/assets/products/trio-box.jpg',
       desc: 'The ultimate Ghanaian snacking experience. Includes Golden Plantain, Crispy Yam, and Rustic Potato packs in one presentation-grade gift and party box.',
       tastingNotes: 'The complete trifecta of sweet, savory, and rustic crunches in one premium package.',
       nutrition: { crunchScore: '100%', oilAbsorption: '100% Non-GMO', shelfLife: '9 Months', calories: '3 x 150g Packs' },
       colorAccent: '#ec4899',
-      bgGradient: 'linear-gradient(155deg, #2e0e27 0%, #160513 100%)',
-      badge: '🌟 3-in-1 Combo',
+      badge: '3-in-1 Combo',
       retailPrice: 'GHS 24.00',
       cartonPrice: 'GHS 210 (10 boxes)'
     }
@@ -141,7 +133,6 @@ export default function Food() {
 
   const currentChip = chipVarieties[chipVariety];
 
-  // Storefront Market Catalog Items
   const storeCatalog = [
     {
       id: 'plantain',
@@ -155,7 +146,7 @@ export default function Food() {
       rating: 4.9,
       reviewsCount: 128,
       ingredients: 'Sun-ripened Organic Plantains, Cold-Pressed Vegetable Oil, Sea Salt, Natural Spices',
-      tags: ['🌱 100% Vegan', '🌾 Gluten-Free', '🍌 Non-GMO']
+      tags: ['100% Vegan', 'Gluten-Free', 'Non-GMO']
     },
     {
       id: 'yam',
@@ -169,7 +160,7 @@ export default function Food() {
       rating: 4.8,
       reviewsCount: 94,
       ingredients: 'Ghanaian White Yam, Cold-Pressed Vegetable Oil, Cracked Black Pepper, Rosemary, Sea Salt',
-      tags: ['🌱 100% Vegan', '🌾 Gluten-Free', '🍠 High Fiber']
+      tags: ['100% Vegan', 'Gluten-Free', 'High Fiber']
     },
     {
       id: 'potato',
@@ -183,7 +174,7 @@ export default function Food() {
       rating: 4.9,
       reviewsCount: 86,
       ingredients: 'Highland Potatoes (Skin-on), Cold-Pressed Oil, Ghanaian Chili Paprika, Sea Salt',
-      tags: ['🌾 Gluten-Free', '🥔 Slow Kettle Fried', '✨ Zero Trans Fat']
+      tags: ['Gluten-Free', 'Slow Kettle Fried', 'Zero Trans Fat']
     },
     {
       id: 'trio',
@@ -197,7 +188,7 @@ export default function Food() {
       rating: 5.0,
       reviewsCount: 62,
       ingredients: 'Complete selection: Golden Plantain, Crispy Yam, and Rustic Potato packs',
-      tags: ['🎁 Gift Box', '🌟 3 Flavour Blend', '🎉 Party Ready']
+      tags: ['Gift Box', '3 Flavour Blend', 'Party Ready']
     },
     {
       id: 'shito',
@@ -211,11 +202,10 @@ export default function Food() {
       rating: 4.95,
       reviewsCount: 215,
       ingredients: 'Organic Scotch Bonnet, Artisanal Pink Shallots, Wild Smoked Herring, Dried Shrimp, Ginger, Vegetable Oil',
-      tags: ['🌶️ 85K SHU Heat', '🐟 Smoked Seafood', '🥫 Vacuum Sealed']
+      tags: ['85K SHU Heat', 'Smoked Seafood', 'Vacuum Sealed']
     }
   ];
 
-  // Multi-tier wholesale pricing calculator based on product line
   const productPricingConfig = {
     chips: {
       unitName: 'Carton of 24 Pouches (150g)',
@@ -305,7 +295,6 @@ export default function Food() {
     setIsLoadingBatch(true);
     setSearchError('');
 
-    // Check demo code fallbacks
     if (demoBatches[queryId]) {
       setBatchData(demoBatches[queryId]);
       setShowTraceModal(true);
@@ -338,12 +327,6 @@ export default function Food() {
     executeTraceLookup(searchBatchId);
   };
 
-  const getGlowClass = () => {
-    if (spiceLevel.includes('Mild')) return 'mild';
-    if (spiceLevel.includes('Extra Hot')) return 'extra-hot';
-    return 'hot';
-  };
-
   const scrollToDistributor = (lineKey) => {
     if (lineKey) setSelectedProductLine(lineKey);
     const element = document.getElementById('distributor-hub-section');
@@ -358,8 +341,13 @@ export default function Food() {
         
         {/* Market & Gourmet Storefront Header */}
         <div className="food-header-section">
-          <div className="farms-title-badge" style={{ background: 'rgba(239, 68, 68, 0.12)', borderColor: 'rgba(239, 68, 68, 0.25)', color: '#f87171' }}>
-            🛒 Artisanal Food Market & Pantry Store
+          <div className="farms-title-badge" style={{ background: 'rgba(239, 68, 68, 0.12)', borderColor: 'rgba(239, 68, 68, 0.25)', color: '#f87171', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+            <svg viewBox="0 0 24 24" width="14" height="14" stroke="#f87171" strokeWidth="2.5" fill="none">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            Artisanal Food Market & Pantry Store
           </div>
           <h1 className="farms-headline">Kone Gourmet Snacks & Fine Foods</h1>
           <p className="farms-subheadline">
@@ -373,25 +361,25 @@ export default function Food() {
                 className={`segment-btn ${productTab === 'chips' ? 'active' : ''}`}
                 onClick={() => setProductTab('chips')}
               >
-                🍌 Kone Chips <span className="new-pill">NEW</span>
+                Kone Chips <span className="new-pill">NEW</span>
               </button>
               <button 
                 className={`segment-btn ${productTab === 'shito' ? 'active' : ''}`}
                 onClick={() => setProductTab('shito')}
               >
-                🥫 Kone Shito
+                Kone Shito
               </button>
               <button 
                 className={`segment-btn ${productTab === 'store' ? 'active' : ''}`}
                 onClick={() => setProductTab('store')}
               >
-                🛍️ Pantry Store Catalog
+                Pantry Store Catalog
               </button>
               <button 
                 className={`segment-btn ${productTab === 'all' ? 'active' : ''}`}
                 onClick={() => setProductTab('all')}
               >
-                🍽️ View Everything
+                View Everything
               </button>
             </div>
           </div>
@@ -409,7 +397,7 @@ export default function Food() {
               <div className="showcase-top-bar">
                 <div className="showcase-badges-group">
                   <span className="featured-badge chips-badge">★ New Product Line</span>
-                  <span className="source-origin-tag">🌿 100% Non-GMO Organic Crop Sourced</span>
+                  <span className="source-origin-tag">100% Non-GMO Organic Crop Sourced</span>
                 </div>
                 <span className="process-highlight-pill">
                   Kettle Cooked • Zero Trans Fat • 150g Nitrogen Pouch
@@ -451,7 +439,7 @@ export default function Food() {
                         className="photo-order-btn"
                         onClick={() => scrollToDistributor('chips')}
                       >
-                        ⚡ Order Wholesale Carton (24 Packs)
+                        Order Wholesale Carton (24 Packs)
                       </button>
                     </div>
                   </div>
@@ -465,28 +453,28 @@ export default function Food() {
                         onClick={() => setChipVariety('plantain')}
                         style={{ '--active-border': '#eab308' }}
                       >
-                        🍌 Plantain
+                        Plantain
                       </button>
                       <button 
                         className={`variety-btn ${chipVariety === 'yam' ? 'active' : ''}`}
                         onClick={() => setChipVariety('yam')}
                         style={{ '--active-border': '#f97316' }}
                       >
-                        🍠 Yam
+                        Yam
                       </button>
                       <button 
                         className={`variety-btn ${chipVariety === 'potato' ? 'active' : ''}`}
                         onClick={() => setChipVariety('potato')}
                         style={{ '--active-border': '#38bdf8' }}
                       >
-                        🥔 Potato
+                        Potato
                       </button>
                       <button 
                         className={`variety-btn ${chipVariety === 'trio' ? 'active' : ''}`}
                         onClick={() => setChipVariety('trio')}
                         style={{ '--active-border': '#ec4899' }}
                       >
-                        🌟 Trio Box
+                        Trio Box
                       </button>
                     </div>
                   </div>
@@ -516,10 +504,10 @@ export default function Food() {
                     <span className="dist-label">Choose Artisanal Seasoning:</span>
                     <div className="flavor-options-grid">
                       {[
-                        { label: 'Savory Chili & Garlic 🌶️', desc: 'Infused with organic Scotch Bonnet' },
-                        { label: 'Roasted Sea Salt 🧂', desc: 'Pure Ada coastal mineral salt crunch' },
-                        { label: 'Sweet Cinnamon & Cane 🍯', desc: 'Caramelized natural raw cane sugar' },
-                        { label: 'Smoked Onion & Herb 🌿', desc: 'Aromatic Ghanaian wild forest herbs' }
+                        { label: 'Savory Chili & Garlic', desc: 'Infused with organic Scotch Bonnet' },
+                        { label: 'Roasted Sea Salt', desc: 'Pure Ada coastal mineral salt crunch' },
+                        { label: 'Sweet Cinnamon & Cane', desc: 'Caramelized natural raw cane sugar' },
+                        { label: 'Smoked Onion & Herb', desc: 'Aromatic Ghanaian wild forest herbs' }
                       ].map((item) => (
                         <button
                           key={item.label}
@@ -571,7 +559,11 @@ export default function Food() {
                     onClick={() => executeTraceLookup('KC-CHIPS-BATCH-2026')}
                     style={{ cursor: 'pointer' }}
                   >
-                    <span>🔍 Trace your chip bag telemetry: Tap to verify batch <strong>KC-CHIPS-BATCH-2026</strong> ➔</span>
+                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none" style={{ marginRight: '6px' }}>
+                      <circle cx="11" cy="11" r="8"></circle>
+                      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <span>Trace your chip bag telemetry: Tap to verify batch <strong>KC-CHIPS-BATCH-2026</strong> ➔</span>
                   </div>
 
                 </div>
@@ -593,7 +585,7 @@ export default function Food() {
               <div className="showcase-top-bar">
                 <div className="showcase-badges-group">
                   <span className="featured-badge shito-badge">★ Culinary Heritage</span>
-                  <span className="source-origin-tag">🌶️ Ghanaian Organic Sourced</span>
+                  <span className="source-origin-tag">Ghanaian Organic Sourced</span>
                 </div>
                 <span className="process-highlight-pill" style={{ color: '#fca5a5', borderColor: 'rgba(239, 68, 68, 0.3)', background: 'rgba(239, 68, 68, 0.1)' }}>
                   Slow Cooked • 100% Non-GMO • 350g Glass Jar
@@ -604,8 +596,6 @@ export default function Food() {
                 
                 {/* Photo Display Card for Shito */}
                 <div className="shito-visual-column">
-                  <div className={`jar-glow ${getGlowClass()}`}></div>
-                  
                   <div className="photo-product-chassis">
                     <div className="photo-frame-wrapper">
                       <img 
@@ -617,7 +607,7 @@ export default function Food() {
                       <div className="photo-overlay-gradient"></div>
                       
                       <div className="photo-floating-badge" style={{ borderColor: '#ef4444', color: '#f87171' }}>
-                        🥫 Authentic Shito
+                        Authentic Shito
                       </div>
 
                       <div className="photo-price-tag">
@@ -632,7 +622,7 @@ export default function Food() {
                         style={{ background: 'linear-gradient(135deg, #dc2626 0%, #991b1b 100%)', borderColor: '#ef4444' }}
                         onClick={() => scrollToDistributor('shito')}
                       >
-                        ⚡ Order Wholesale Box (12 Jars)
+                        Order Wholesale Box (12 Jars)
                       </button>
                     </div>
                   </div>
@@ -641,7 +631,7 @@ export default function Food() {
                   <div className="spice-meter">
                     <span className="dist-label">Select Heat Intensity:</span>
                     <div className="spice-slider">
-                      {['Mild 🌶️', 'Hot 🌶️🌶️', 'Extra Hot 🌶️🌶️🌶️'].map((level) => (
+                      {['Mild', 'Hot', 'Extra Hot'].map((level) => (
                         <button
                           key={level}
                           onClick={() => setSpiceLevel(level)}
@@ -675,17 +665,17 @@ export default function Food() {
                   </div>
 
                   <div className="shito-features-grid">
-                    <div className="shito-feature-pill">🌶️ 85,000 Scoville Heat</div>
-                    <div className="shito-feature-pill">🐟 Wild Caught Smoked Herring</div>
-                    <div className="shito-feature-pill">🌿 100% Chemical-Free</div>
-                    <div className="shito-feature-pill">🥫 Vacuum-Sealed Glass Jars</div>
+                    <div className="shito-feature-pill">85,000 Scoville Heat</div>
+                    <div className="shito-feature-pill">Wild Caught Smoked Herring</div>
+                    <div className="shito-feature-pill">100% Chemical-Free</div>
+                    <div className="shito-feature-pill">Vacuum-Sealed Glass Jars</div>
                   </div>
 
                   {/* Culinary Companion Callout */}
                   <div className="culinary-pairing-card">
-                    <strong style={{ color: '#fca5a5', display: 'block', marginBottom: '0.35rem' }}>🍽️ Chef's Pairing Tip:</strong>
+                    <strong style={{ color: '#fca5a5', display: 'block', marginBottom: '0.35rem' }}>Chef's Pairing Tip:</strong>
                     <span style={{ fontSize: '0.85rem', color: '#cbd5e1', lineHeight: 1.5 }}>
-                      Dip our <strong>Kone Crispy Yam Chips</strong> or <strong>Golden Plantain Chips</strong> directly into Kone Shito for an irresistible Ghanaian street food experience at home!
+                      Dip our <strong>Kone Crispy Yam Chips</strong> or <strong>Golden Plantain Chips</strong> directly into Kone Shito for an irresistible Ghanaian street food experience at home.
                     </span>
                   </div>
 
@@ -695,7 +685,11 @@ export default function Food() {
                     onClick={() => executeTraceLookup('KS-SHITO-BATCH-2026')}
                     style={{ cursor: 'pointer', borderColor: '#f87171', background: 'rgba(239, 68, 68, 0.08)', marginTop: '1.5rem' }}
                   >
-                    <span>🔍 Trace your shito jar telemetry: Tap to verify batch <strong>KS-SHITO-BATCH-2026</strong> ➔</span>
+                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none" style={{ marginRight: '6px' }}>
+                      <circle cx="11" cy="11" r="8"></circle>
+                      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <span>Trace your shito jar telemetry: Tap to verify batch <strong>KS-SHITO-BATCH-2026</strong> ➔</span>
                   </div>
                 </div>
 
@@ -710,8 +704,13 @@ export default function Food() {
         {(productTab === 'store' || productTab === 'all') && (
           <div className="storefront-section animate-fade-in">
             <div className="farms-header-section" style={{ marginBottom: '2rem', textAlign: 'left' }}>
-              <div className="farms-title-badge" style={{ background: 'rgba(16, 185, 129, 0.12)', borderColor: 'rgba(16, 185, 129, 0.25)', color: '#34d399' }}>
-                🏪 Gourmet Store & Retail Catalog
+              <div className="farms-title-badge" style={{ background: 'rgba(16, 185, 129, 0.12)', borderColor: 'rgba(16, 185, 129, 0.25)', color: '#34d399', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                <svg viewBox="0 0 24 24" width="14" height="14" stroke="#34d399" strokeWidth="2.5" fill="none">
+                  <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                  <line x1="3" y1="6" x2="21" y2="6"></line>
+                  <path d="M16 10a4 4 0 0 1-8 0"></path>
+                </svg>
+                Gourmet Store & Retail Catalog
               </div>
               <h2 className="farms-headline" style={{ fontSize: '2rem' }}>Browse the Complete Shelf</h2>
               <p className="farms-subheadline" style={{ margin: 0, fontSize: '0.95rem' }}>
@@ -780,8 +779,12 @@ export default function Food() {
         <div className="farms-card trace-console-card animate-fade-in">
           <div className="trace-console-grid">
             <div style={{ textAlign: 'left' }}>
-              <div className="farms-title-badge" style={{ background: 'rgba(245, 158, 11, 0.12)', borderColor: 'rgba(245, 158, 11, 0.25)', color: '#fbbf24' }}>
-                🔍 Quality & Agritech Assurance
+              <div className="farms-title-badge" style={{ background: 'rgba(245, 158, 11, 0.12)', borderColor: 'rgba(245, 158, 11, 0.25)', color: '#fbbf24', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                <svg viewBox="0 0 24 24" width="14" height="14" stroke="#fbbf24" strokeWidth="2.5" fill="none">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                Quality & Agritech Assurance
               </div>
               <h2 style={{ color: 'white', fontSize: '1.8rem', margin: '0.5rem 0' }}>
                 Trace Your Food Batch
@@ -797,14 +800,14 @@ export default function Food() {
                   className="quick-code-btn"
                   onClick={() => executeTraceLookup('KC-CHIPS-BATCH-2026')}
                 >
-                  🍌 KC-CHIPS-BATCH-2026 (Chips)
+                  KC-CHIPS-BATCH-2026 (Chips)
                 </button>
                 <button 
                   type="button" 
                   className="quick-code-btn"
                   onClick={() => executeTraceLookup('KS-SHITO-BATCH-2026')}
                 >
-                  🥫 KS-SHITO-BATCH-2026 (Shito)
+                  KS-SHITO-BATCH-2026 (Shito)
                 </button>
               </div>
             </div>
@@ -835,7 +838,7 @@ export default function Food() {
               
               {searchError && (
                 <div style={{ color: '#f87171', fontSize: '0.85rem', marginTop: '0.75rem', fontWeight: 700 }}>
-                  ⚠️ {searchError}
+                  {searchError}
                 </div>
               )}
             </div>
@@ -849,8 +852,14 @@ export default function Food() {
           
           {/* Left panel: Registration form */}
           <div className="farms-card">
-            <h3 className="smartfarm-title" style={{ marginBottom: '0.75rem' }}>
-              📦 Retailer & Distributor Registration
+            <h3 className="smartfarm-title" style={{ marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <svg viewBox="0 0 24 24" width="20" height="20" stroke="#34d399" strokeWidth="2" fill="none">
+                <line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line>
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+              </svg>
+              Retailer & Distributor Registration
             </h3>
             <p style={{ color: '#94a3b8', fontSize: '0.9rem', marginBottom: '1.5rem', textAlign: 'left', lineHeight: 1.5 }}>
               Stock <strong>Kone Chips</strong> and <strong>Kone Shito</strong> in your supermarket, grocery store, school snack lounge, hotel, or retail chain. Direct wholesale margins, shelf display materials, and scheduled delivery.
@@ -858,9 +867,13 @@ export default function Food() {
 
             {orderSubmitted ? (
               <div className="submit-success-banner">
-                <span style={{ fontSize: '3rem', display: 'block', marginBottom: '1rem' }}>🎉</span>
+                <div style={{ margin: '0 auto 1rem', width: '48px', height: '48px', borderRadius: '50%', background: 'rgba(16, 185, 129, 0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <svg viewBox="0 0 24 24" width="28" height="28" stroke="#34d399" strokeWidth="2" fill="none">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </div>
                 <strong style={{ display: 'block', fontSize: '1.2rem', marginBottom: '0.5rem' }}>Application Submitted!</strong>
-                <p style={{ fontSize: '0.85rem', margin: 0 }}>Thank you for joining our distribution network. Our logistics team will email your account credentials and merchant delivery schedule!</p>
+                <p style={{ fontSize: '0.85rem', margin: 0 }}>Thank you for joining our distribution network. Our logistics team will email your account credentials and merchant delivery schedule.</p>
               </div>
             ) : (
               <form onSubmit={handleFormSubmit}>
@@ -913,9 +926,9 @@ export default function Food() {
                     onChange={(e) => setSelectedProductLine(e.target.value)}
                     className="dist-input select-farms-option"
                   >
-                    <option value="chips">🍌 Kone Chips (Cartons of 24 Pouches - 150g)</option>
-                    <option value="shito">🥫 Kone Shito (Boxes of 12 Jars - 350g)</option>
-                    <option value="combo">🌟 Merchant Starter Pallet (12 Jars Shito + 12 Chip Pouches)</option>
+                    <option value="chips">Kone Chips (Cartons of 24 Pouches - 150g)</option>
+                    <option value="shito">Kone Shito (Boxes of 12 Jars - 350g)</option>
+                    <option value="combo">Merchant Starter Pallet (12 Jars Shito + 12 Chip Pouches)</option>
                   </select>
                 </div>
 
@@ -932,7 +945,7 @@ export default function Food() {
                   >
                     {[1, 2, 5, 10, 20, 50, 100].map((num) => (
                       <option key={num} value={num}>
-                        {num} {activePricing.itemLabel} {num >= 10 ? '🔥 (10% Off + Free Shipping)' : num >= 5 ? '⚡ (5% Bulk Discount)' : ''}
+                        {num} {activePricing.itemLabel} {num >= 10 ? '(10% Off + Free Shipping)' : num >= 5 ? '(5% Bulk Discount)' : ''}
                       </option>
                     ))}
                   </select>
@@ -947,8 +960,13 @@ export default function Food() {
 
           {/* Right panel: Live B2B margin calculator */}
           <div className="farms-card">
-            <h3 className="smartfarm-title" style={{ marginBottom: '0.75rem' }}>
-              📊 Merchant Margin & Invoice Calculator
+            <h3 className="smartfarm-title" style={{ marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <svg viewBox="0 0 24 24" width="20" height="20" stroke="#34d399" strokeWidth="2" fill="none">
+                <line x1="18" y1="20" x2="18" y2="10"></line>
+                <line x1="12" y1="20" x2="12" y2="4"></line>
+                <line x1="6" y1="20" x2="6" y2="14"></line>
+              </svg>
+              Merchant Margin & Invoice Calculator
             </h3>
             <p style={{ color: '#94a3b8', fontSize: '0.9rem', marginBottom: '1.5rem', textAlign: 'left', lineHeight: 1.5 }}>
               Real-time wholesale breakdown for your retail store shelf or food service establishment.
@@ -999,7 +1017,7 @@ export default function Food() {
               </div>
 
               <div style={{ textAlign: 'left', fontSize: '0.85rem', color: '#94a3b8', lineHeight: 1.5, marginTop: '1rem' }}>
-                <strong style={{ display: 'block', color: 'white', marginBottom: '0.25rem' }}>💡 Volume Incentive Tiers:</strong>
+                <strong style={{ display: 'block', color: 'white', marginBottom: '0.25rem' }}>Volume Incentive Tiers:</strong>
                 <ul>
                   <li>Order <strong>5 - 9 cartons/boxes</strong>: Save <strong>5%</strong> on whole invoice.</li>
                   <li>Order <strong>10+ cartons/boxes</strong>: Save <strong>10%</strong> + <strong>100% Free Nationwide Freight</strong>!</li>
@@ -1008,7 +1026,12 @@ export default function Food() {
             </div>
 
             <div style={{ borderTop: '1px solid rgba(16, 185, 129, 0.15)', paddingTop: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.75rem', textAlign: 'left', marginTop: '1rem' }}>
-              <span>🚚</span>
+              <svg viewBox="0 0 24 24" width="20" height="20" stroke="#34d399" strokeWidth="2" fill="none" style={{ flexShrink: 0 }}>
+                <rect x="1" y="3" width="15" height="13"></rect>
+                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                <circle cx="18.5" cy="18.5" r="2.5"></circle>
+              </svg>
               <span style={{ fontSize: '0.8rem', color: '#94a3b8', lineHeight: 1.4 }}>
                 Products are packaged in moisture-barrier nitrogen foil and dispatched directly from our packaging facility to stockists within 24-48 hours.
               </span>
@@ -1048,9 +1071,13 @@ export default function Food() {
                 </div>
 
                 <div className="phone-info-section">
-                  <h5 className="phone-sect-label">👨‍🌾 Agricultural Crop Source</h5>
+                  <h5 className="phone-sect-label">Agricultural Crop Source</h5>
                   <div className="farmer-card-bubble">
-                    <div className="farmer-avatar-emoji">🌱</div>
+                    <div className="farmer-avatar-emoji">
+                      <svg viewBox="0 0 24 24" width="22" height="22" stroke="#34d399" strokeWidth="2" fill="none">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                      </svg>
+                    </div>
                     <div>
                       <strong className="farmer-bubble-name">{batchData.farmerName || 'Partner Grower'}</strong>
                       <span className="farmer-bubble-meta">{batchData.farmerMeta || 'Organic Field Cluster'}</span>
@@ -1062,7 +1089,7 @@ export default function Food() {
                 </div>
 
                 <div className="phone-info-section">
-                  <h5 className="phone-sect-label">🧪 Laboratory & Crispness Audit</h5>
+                  <h5 className="phone-sect-label">Laboratory & Crispness Audit</h5>
                   <div className="diagnostics-bubble-grid">
                     <div className="diag-bubble">
                       <span className="diag-b-val">{batchData.moistureLevel || '1.8%'}</span>
@@ -1080,7 +1107,7 @@ export default function Food() {
                 </div>
 
                 <div className="phone-info-section">
-                  <h5 className="phone-sect-label">📍 Supply Chain & Logistics Trail</h5>
+                  <h5 className="phone-sect-label">Supply Chain & Logistics Trail</h5>
                   <div className="timeline-trail-bubble">
                     {batchData.trail && batchData.trail.map((node, i) => (
                       <div key={i} className={`trail-node ${node.status || 'active'}`}>
