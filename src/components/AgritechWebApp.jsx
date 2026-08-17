@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import './AgritechWebApp.css';
 import { db } from '../firebase/config';
 import { doc, onSnapshot, setDoc } from 'firebase/firestore';
