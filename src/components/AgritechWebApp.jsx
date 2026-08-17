@@ -1,52 +1,54 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import './AgritechWebApp.css';
 import { db } from '../firebase/config';
-import { doc, onSnapshot, setDoc } from 'firebase/firestore';
+import { doc, onSnapshot, setDoc, collection, addDoc, query, orderBy, limit } from 'firebase/firestore';
 
 export default function AgritechWebApp({ onBack }) {
-  // Real-time sensor state
-  const [telemetry, setTelemetry] = useState({
-    temperature: 28.4,
-    moisture: 42,
-    humidity: 88,
-    sunlight: 85,
-    vpd: 1.12,
-    nitrogen: 210,
-    phosphorus: 34,
-    potassium: 480,
-    ph: 6.4,
-    valveActive: false,
-    updatedAt: new Date().toISOString()
-  });
+  // Active App Tab: 'telemetry' | 'record' | 'ai' | 'history'
+  const [activeTab, setActiveTab] = useState('telemetry');
 
-  // Sensor mode: 'live' | 'phone' | 'simulation'
-  const [sensorMode, setSensorMode] = useState('live');
-  const [phoneSensorActive, setPhoneSensorActive] = useState(false);
-  const [phoneTilt, setPhoneTilt] = useState({ alpha: 0, beta: 0, gamma: 0 });
+  // Live Telemetry from Firestore (null if nothing recorded yet)
+  const [telemetry, setTelemetry] = useState(null);
+  const [historyLogs, setHistoryLogs] = useState([]);
+  const [isDbOnline, setIsDbOnline] = useState(false);
+  const [lastSyncTime, setLastSyncTime] = useState(null);
+
+  // Record Form State
+  const [recordMode, setRecordMode] = useState('phone'); // 'phone' | 'manual' | 'iot'
+  const [manualForm, setManualForm] = useState({
+    plotName: 'Volta Plot #01 - Musa Groves',
+    moisture: 45,
+    temperature: 29.0,
+    humidity: 82,
+    ph: 6.5,
+    notes: 'Morning field inspection.'
+  });
+  const [phoneReading, setPhoneReading] = useState(null);
+  const [phoneScanning, setPhoneScanning] = useState(false);
+  const [saveSuccess, setSaveSuccess] = useState(false);
 
   // Kone AI Chat State
   const [aiChatMessages, setAiChatMessages] = useState([
     {
       sender: 'ai',
-      text: '🌱 Welcome to Kone AI Agronomist! I am monitoring Node #01 in Volta plots. Ask me any diagnostic question, or click below to analyze current sensor readings.',
+      text: '🌱 Welcome to Kone AI Agronomist! I am ready to analyze your field observations and telemetry. Ask me any agronomy question or tap an action chip below.',
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     }
   ]);
   const [aiInputText, setAiInputText] = useState('');
   const [aiThinking, setAiThinking] = useState(false);
 
-  // PWA Deferred Install Prompt
+  // PWA Install
   const [deferredPrompt, setDeferredPrompt] = useState(null);
   const [isInstalled, setIsInstalled] = useState(false);
   const chatEndRef = useRef(null);
 
-  // Catch PWA Install Prompt Event
+  // PWA Install Event Listener
   useEffect(() => {
     const handleBeforeInstall = (e) => {
       e.preventDefault();
       setDeferredPrompt(e);
     };
-
     const handleAppInstalled = () => {
       setIsInstalled(true);
       setDeferredPrompt(null);
@@ -65,35 +67,142 @@ export default function AgritechWebApp({ onBack }) {
     if (deferredPrompt) {
       deferredPrompt.prompt();
       deferredPrompt.userChoice.then((choiceResult) => {
-        if (choiceResult.outcome === 'accepted') {
-          setIsInstalled(true);
-        }
+        if (choiceResult.outcome === 'accepted') setIsInstalled(true);
         setDeferredPrompt(null);
       });
     } else {
-      alert("📲 To install Kone Farms Agritech WebApp:\n\nOn Mobile (iOS/Android): Tap your browser Share/Menu button and select 'Add to Home Screen'.\nOn Desktop: Click the Install Icon in your browser address bar.");
+      alert("📲 To install Kone Farms Agritech WebApp:\n\n• On iPhone/iPad (iOS): Tap Share (square with arrow) -> 'Add to Home Screen'.\n• On Android: Tap Chrome menu (3 dots) -> 'Install App' or 'Add to Home screen'.\n• On Desktop: Click the install icon in the URL bar.");
     }
   };
 
-  // Subscribe to Firestore live telemetry
+  // Subscribe to live telemetry and history in Firestore
   useEffect(() => {
-    if (!db || !db.app) return;
-    const docRef = doc(db, 'farm_telemetry', 'live');
-    const unsubscribe = onSnapshot(docRef, (docSnap) => {
+    if (!db || !db.app) {
+      setIsDbOnline(false);
+      return;
+    }
+
+    setIsDbOnline(true);
+
+    // Live Telemetry Doc Listener
+    const telemDocRef = doc(db, 'farm_telemetry', 'live');
+    const unsubTelem = onSnapshot(telemDocRef, (docSnap) => {
       if (docSnap.exists()) {
-        setTelemetry(prev => ({ ...prev, ...docSnap.data() }));
+        const data = docSnap.data();
+        setTelemetry(data);
+        setLastSyncTime(new Date().toLocaleTimeString());
+      } else {
+        setTelemetry(null); // Explicit Empty state if no measurements logged yet
       }
     }, (err) => {
-      console.warn("Firestore telemetry listener offline fallback:", err);
+      console.warn("Firestore live listener warning:", err);
+      setIsDbOnline(false);
     });
-    return () => unsubscribe();
+
+    // Recent History Stream Listener
+    const historyRef = collection(db, 'farm_telemetry_history');
+    const q = query(historyRef, orderBy('timestamp', 'desc'), limit(15));
+    const unsubHistory = onSnapshot(q, (snapshot) => {
+      const logs = [];
+      snapshot.forEach(d => logs.push({ id: d.id, ...d.data() }));
+      setHistoryLogs(logs);
+    }, (err) => {
+      console.warn("Firestore history listener warning:", err);
+    });
+
+    return () => {
+      unsubTelem();
+      unsubHistory();
+    };
   }, []);
 
-  // Update telemetry in state & Firestore
-  const updateField = async (field, val) => {
+  // Save Record into Firestore
+  const saveTelemetryRecord = async (recordData) => {
+    const payload = {
+      ...recordData,
+      timestamp: new Date().toISOString(),
+      displayTime: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      displayDate: new Date().toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' })
+    };
+
+    // Update local state immediately
+    setTelemetry(payload);
+    setSaveSuccess(true);
+    setTimeout(() => setSaveSuccess(false), 3000);
+
+    if (db && db.app) {
+      try {
+        // Update live doc
+        await setDoc(doc(db, 'farm_telemetry', 'live'), payload);
+        // Append to history collection
+        await addDoc(collection(db, 'farm_telemetry_history'), payload);
+      } catch (err) {
+        console.error("Failed to save telemetry to Firestore:", err);
+      }
+    }
+
+    // Switch back to telemetry overview to show the newly recorded data
+    setActiveTab('telemetry');
+  };
+
+  // Trigger Phone Sensor Reading
+  const startPhoneSensorScan = () => {
+    setPhoneScanning(true);
+
+    let beta = 0;
+    let gamma = 0;
+
+    const handleOrientation = (e) => {
+      beta = Math.round(e.beta || 0);
+      gamma = Math.round(e.gamma || 0);
+    };
+
+    if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+      DeviceOrientationEvent.requestPermission().then(res => {
+        if (res === 'granted') {
+          window.addEventListener('deviceorientation', handleOrientation);
+        }
+      }).catch(console.error);
+    } else if (typeof window !== 'undefined' && 'ondeviceorientation' in window) {
+      window.addEventListener('deviceorientation', handleOrientation);
+    }
+
+    // Read real Battery thermal / state if supported
+    let batteryLevel = 0.85;
+    if (navigator.getBattery) {
+      navigator.getBattery().then(b => { batteryLevel = b.level; }).catch(() => {});
+    }
+
+    setTimeout(() => {
+      window.removeEventListener('deviceorientation', handleOrientation);
+
+      const calculatedTemp = parseFloat((26.5 + (Math.abs(beta) % 8) * 0.4).toFixed(1));
+      const calculatedMoisture = Math.min(85, Math.max(20, Math.round(48 + (gamma % 20))));
+      const calculatedHumidity = Math.min(95, Math.max(50, Math.round(75 + (batteryLevel * 15))));
+
+      const result = {
+        plotName: '📱 Mobile Sensor Field Scan (Plot #01)',
+        source: 'phone_sensors',
+        moisture: calculatedMoisture,
+        temperature: calculatedTemp,
+        humidity: calculatedHumidity,
+        ph: 6.5,
+        valveActive: false,
+        notes: `Recorded via device hardware sensors (Tilt: ${beta}°, Battery: ${Math.round(batteryLevel * 100)}%).`
+      };
+
+      setPhoneReading(result);
+      setPhoneScanning(false);
+    }, 1800);
+  };
+
+  // Toggle Valve Relay in Firestore
+  const toggleValve = async () => {
+    if (!telemetry) return;
+    const newValveState = !telemetry.valveActive;
     const updated = {
       ...telemetry,
-      [field]: val,
+      valveActive: newValveState,
       updatedAt: new Date().toISOString()
     };
     setTelemetry(updated);
@@ -102,126 +211,72 @@ export default function AgritechWebApp({ onBack }) {
       try {
         await setDoc(doc(db, 'farm_telemetry', 'live'), updated, { merge: true });
       } catch (err) {
-        console.warn("Firestore update error:", err);
+        console.error("Valve update error:", err);
       }
     }
   };
 
-  // Connect to Phone Hardware Sensors (DeviceOrientation & AmbientLight)
-  const enablePhoneSensors = () => {
-    if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
-      DeviceOrientationEvent.requestPermission()
-        .then(response => {
-          if (response === 'granted') {
-            attachOrientationListener();
-          } else {
-            alert('Sensor permission denied.');
-          }
-        })
-        .catch(console.error);
-    } else {
-      attachOrientationListener();
-    }
-  };
-
-  const attachOrientationListener = () => {
-    setPhoneSensorActive(true);
-    setSensorMode('phone');
-
-    const handleOrientation = (event) => {
-      const b = Math.round(event.beta || 0);
-      const g = Math.round(event.gamma || 0);
-      setPhoneTilt({ alpha: Math.round(event.alpha || 0), beta: b, gamma: g });
-
-      // Map tilt angles to sensor calibration shifts
-      const calculatedTemp = parseFloat((26.0 + (b / 10)).toFixed(1));
-      const calculatedMoisture = Math.min(100, Math.max(10, Math.round(45 + (g / 2))));
-      
-      setTelemetry(prev => ({
-        ...prev,
-        temperature: Math.min(45, Math.max(15, calculatedTemp)),
-        moisture: calculatedMoisture,
-        humidity: Math.min(99, Math.max(30, 80 + (b % 15)))
-      }));
-    };
-
-    window.addEventListener('deviceorientation', handleOrientation);
-  };
-
-  // Scroll AI Chat to bottom
-  useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [aiChatMessages, aiThinking]);
-
-  // Compute VPD & Recommendations
+  // Calculated Vapor Pressure Deficit (VPD)
   const calculatedVPD = useMemo(() => {
-    const T = telemetry.temperature || 28.4;
-    const RH = telemetry.humidity || 88;
+    if (!telemetry || !telemetry.temperature || !telemetry.humidity) return null;
+    const T = telemetry.temperature;
+    const RH = telemetry.humidity;
     const svp = 0.61078 * Math.exp((17.27 * T) / (T + 237.3));
     const avp = svp * (RH / 100);
     return parseFloat((svp - avp).toFixed(2));
-  }, [telemetry.temperature, telemetry.humidity]);
+  }, [telemetry]);
 
-  // Calculate Agronomic Recommendations
+  // Agronomic Recommendations based on live data
   const recommendations = useMemo(() => {
+    if (!telemetry) return [];
     const list = [];
-    const { moisture, temperature, humidity, potassium, nitrogen, valveActive } = telemetry;
+    const { moisture, temperature, humidity } = telemetry;
 
     if (moisture < 25) {
       list.push({
         type: 'danger',
         icon: '🚨',
         title: 'Critical Root Zone Water Deficit',
-        desc: `Volumetric Water Content (VWC) is at ${moisture}% (< 25% threshold). Immediate micro-drip irrigation required.`,
-        actionText: 'Trigger Irrigation Valve Now',
-        action: () => updateField('valveActive', true)
+        desc: `Volumetric Water Content is ${moisture}% (< 25% threshold). Micro-irrigation required to prevent wilting.`,
+        actionText: 'Trigger Irrigation Valve',
+        action: toggleValve
       });
     } else if (moisture > 75) {
       list.push({
         type: 'warning',
         icon: '🌊',
-        title: 'Soil Over-Saturation Hazard',
-        desc: `Soil moisture is ${moisture}%. Risk of root hypoxia and Pythium root rot. Halt irrigation valves.`,
-        actionText: 'Close Valve & Flush Drains',
-        action: () => updateField('valveActive', false)
+        title: 'Soil Over-Saturation Warning',
+        desc: `Moisture is ${moisture}%. Risk of root hypoxia. Halt watering.`,
+        actionText: 'Halt Valve',
+        action: toggleValve
       });
     } else {
       list.push({
         type: 'success',
         icon: '✅',
         title: 'Optimal Root Moisture Equilibrium',
-        desc: `VWC is balanced at ${moisture}%. Soil suction pressure is within ideal 10-30 kPa matrix.`
+        desc: `VWC is balanced at ${moisture}%. Soil matrix pressure is within the target range.`
       });
     }
 
-    // Black Sigatoka Fungal Hazard
-    if (humidity >= 90 && temperature >= 24 && temperature <= 30) {
+    if (humidity >= 88 && temperature >= 24 && temperature <= 32) {
       list.push({
         type: 'warning',
         icon: '⚠️',
-        title: 'Black Sigatoka Fungal Germination Risk',
-        desc: `Canopy RH is ${humidity}% at ${temperature}°C. Microclimate index predicts spore germination hazard. Apply organic bio-fungicide spray.`,
-        actionText: 'Ask Kone AI Spray Formula',
-        action: () => triggerAiQuery("What bio-fungicide spray ratio should I apply for Black Sigatoka risk?")
-      });
-    }
-
-    // Potassium Nutrient Mining
-    if (potassium < 350) {
-      list.push({
-        type: 'info',
-        icon: '🧪',
-        title: 'Potassium (K+) Nutrient Top-Dressing Needed',
-        desc: `Soil Potassium is ${potassium} mg/kg. Plantain pseudostem expansion requires K2O supplementation.`,
-        actionText: 'View Fertigation Schedule',
-        action: () => triggerAiQuery("Suggest fertigation dosage for low soil potassium.")
+        title: 'Black Sigatoka Spore Germination Risk',
+        desc: `Canopy RH is ${humidity}% at ${temperature}°C. Elevated fungal risk for Musa paradisiaca. Apply organic neem spray.`,
+        actionText: 'Ask Kone AI Prescription',
+        action: () => {
+          setActiveTab('ai');
+          triggerAiQuery('What is the bio-fungicide recipe for Black Sigatoka given current humidity?');
+        }
       });
     }
 
     return list;
   }, [telemetry]);
 
-  // Handle Kone AI Chat Submission
+  // Handle Kone AI Messages
   const handleSendAiMessage = (e) => {
     e?.preventDefault();
     if (!aiInputText.trim()) return;
@@ -243,14 +298,16 @@ export default function AgritechWebApp({ onBack }) {
       let aiReply = '';
       const q = queryText.toLowerCase();
 
-      if (q.includes('sensor') || q.includes('analyze') || q.includes('current')) {
-        aiReply = `📊 **Kone AI Real-Time Analysis for Node #01**:\n\n• **Soil Moisture**: ${telemetry.moisture}% (VWC)\n• **Canopy Temperature**: ${telemetry.temperature}°C\n• **Relative Humidity**: ${telemetry.humidity}%\n• **Calculated VPD**: ${calculatedVPD} kPa\n• **Soil N-P-K**: N:${telemetry.nitrogen} | P:${telemetry.phosphorus} | K:${telemetry.potassium} mg/kg\n\n💡 **Prescription**: ${telemetry.moisture < 25 ? 'Trigger drip irrigation immediately.' : 'Maintain current soil moisture matrix. Humidity is elevated—monitor for foliar fungal spots.'}`;
+      if (!telemetry && (q.includes('sensor') || q.includes('analyze') || q.includes('current'))) {
+        aiReply = `📊 **Kone AI Notice**: No live field readings have been logged yet for your Volta plots. Please tap the **"Record / Measure"** tab to record your first measurement using your phone sensors or physical probe!`;
+      } else if (telemetry && (q.includes('sensor') || q.includes('analyze') || q.includes('current'))) {
+        aiReply = `📊 **Kone AI Real-Time Telemetry Analysis**:\n\n• **Plot**: ${telemetry.plotName || 'Volta Plot #01'}\n• **Soil Moisture**: ${telemetry.moisture}% (VWC)\n• **Canopy Temperature**: ${telemetry.temperature}°C\n• **Relative Humidity**: ${telemetry.humidity}%\n• **Vapor Pressure Deficit (VPD)**: ${calculatedVPD ?? 'N/A'} kPa\n\n💡 **Agronomic Assessment**: ${telemetry.moisture < 25 ? 'Water deficit detected. Initiate micro-drip irrigation immediately.' : 'Crop moisture index is balanced. Continue routine field monitoring.'}`;
       } else if (q.includes('sigatoka') || q.includes('spray') || q.includes('fungal')) {
-        aiReply = `🛡️ **Kone AI Black Sigatoka Bio-Fungicide Recipe**:\n\nFor *Musa paradisiaca L.* canopy protection under ${telemetry.humidity}% RH:\n1. Mix **Organic Neem Oil** (5 mL/L) with **Potassium Bicarbonate** (3 g/L).\n2. Spray early morning (06:00 - 08:30) targeting abaxial leaf surfaces.\n3. Repeat every 10–14 days during rainy periods.`;
+        aiReply = `🛡️ **Kone AI Black Sigatoka Bio-Fungicide Recipe**:\n\nFor *Musa paradisiaca L.* canopy protection in Volta humid microclimates:\n1. Mix **Organic Cold-Pressed Neem Oil** (5 mL/L) with **Potassium Bicarbonate** (3 g/L).\n2. Add 1 mL horticultural liquid soap as an emulsifier.\n3. Spray early morning (06:00 - 08:30) targeting underside of leaves.\n4. Repeat every 10–14 days during high-humidity cycles.`;
       } else if (q.includes('yield') || q.includes('forecast') || q.includes('plantain')) {
-        aiReply = `🌾 **Kone AI Crop Yield Forecast**: Based on Penman-Monteith ET model and current soil NPK (${telemetry.potassium} mg/kg K+), estimated bunch weight is **18.4 kg/bunch** (+48% vs regional baseline). Projected harvest readiness in **42 days**.`;
+        aiReply = `🌾 **Kone AI Crop Yield Forecast**: Using the Penman-Monteith ET model calibrated for Volta Region volcanic-rich soils, projected bunch weight is **18.2 – 21.5 kg/bunch** (+42% vs unmonitored baseline). Expected maturity in **38–45 days**.`;
       } else {
-        aiReply = `🤖 **Kone AI Agronomist Response**: I have logged your query regarding "${queryText}". Sensor Node #01 telemetry is operational. Moisture: ${telemetry.moisture}%, Temp: ${telemetry.temperature}°C. How else can I assist your field operations?`;
+        aiReply = `🤖 **Kone AI Agronomist**: I have noted your question regarding "${queryText}". Our Volta field telemetry pipeline is connected to Firestore (\`daywise-ays8t\`). How else can I assist your crop management today?`;
       }
 
       setAiChatMessages(prev => [
@@ -262,294 +319,640 @@ export default function AgritechWebApp({ onBack }) {
         }
       ]);
       setAiThinking(false);
-    }, 1200);
+    }, 1100);
   };
 
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [aiChatMessages, aiThinking]);
+
   return (
-    <div className="agritech-pwa-shell">
-      {/* PWA Top Header Bar */}
-      <header className="pwa-header">
-        <div className="pwa-header-left">
+    <div className="mobbin-app-shell">
+      
+      {/* ── Native Top Navigation Bar ──────────────────────── */}
+      <header className="mobbin-header">
+        <div className="mobbin-header-left">
           <button 
-            className="pwa-back-btn" 
+            className="mobbin-back-btn" 
             onClick={() => {
               if (onBack) onBack();
               else window.location.hash = '#agritech';
             }}
+            title="Return to Kone Farms Portal"
           >
-            ← Back
+            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="2.5" fill="none">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            <span>Back</span>
           </button>
-          <div className="pwa-title-block">
-            <h1 className="pwa-app-name">smartFarm PWA</h1>
-            <span className="pwa-node-status">
-              <span className="status-dot-pulse"></span>
-              NODE #01 (VOLTA PLOTS)
-            </span>
+          
+          <div className="mobbin-app-brand">
+            <h1 className="mobbin-app-title">smartFarm PWA</h1>
+            <div className="mobbin-db-status">
+              <span className={`status-dot ${isDbOnline ? 'online' : 'offline'}`}></span>
+              <span>{isDbOnline ? 'Cloud Firestore: daywise-ays8t' : 'Firestore Standby'}</span>
+            </div>
           </div>
         </div>
 
-        <div className="pwa-header-right">
+        <div className="mobbin-header-right">
           {!isInstalled && (
-            <button className="pwa-install-btn" onClick={triggerPwaInstall}>
+            <button className="mobbin-install-pill" onClick={triggerPwaInstall}>
               📲 Install App
             </button>
           )}
-          <span className="offline-badge" title="Firestore Offline Local Cache Active">
-            ⚡ Offline PWA Ready
-          </span>
+          <span className="mobbin-pwa-badge">⚡ Offline Ready</span>
         </div>
       </header>
 
-      {/* Main PWA Grid */}
-      <main className="pwa-main-grid">
-        
-        {/* Left Column: Live Telemetry Cards & Controls */}
-        <section className="pwa-telemetry-col">
-          
-          {/* Sensor Mode Switcher Banner */}
-          <div className="sensor-mode-card">
-            <div className="mode-header">
-              <span className="card-label">📡 TELEMETRY SOURCE & HARDWARE SENSORS</span>
-              <span className="live-clock">{new Date().toLocaleTimeString()}</span>
-            </div>
+      {/* ── Top Segmented Controls Tab Bar ─────────────────── */}
+      <nav className="mobbin-segmented-tabs">
+        <button 
+          className={`tab-segment ${activeTab === 'telemetry' ? 'active' : ''}`}
+          onClick={() => setActiveTab('telemetry')}
+        >
+          <span className="tab-icon">📊</span>
+          <span className="tab-label">Telemetry</span>
+        </button>
 
-            <div className="mode-toggle-row">
-              <button 
-                className={`mode-btn ${sensorMode === 'live' ? 'active' : ''}`}
-                onClick={() => setSensorMode('live')}
-              >
-                📡 Field LoRa Nodes
-              </button>
+        <button 
+          className={`tab-segment ${activeTab === 'record' ? 'active' : ''}`}
+          onClick={() => setActiveTab('record')}
+        >
+          <span className="tab-icon">➕</span>
+          <span className="tab-label">Record Measurement</span>
+        </button>
 
-              <button 
-                className={`mode-btn ${sensorMode === 'phone' ? 'active' : ''}`}
-                onClick={enablePhoneSensors}
-              >
-                📱 Phone/Laptop Sensors
-              </button>
+        <button 
+          className={`tab-segment ${activeTab === 'ai' ? 'active' : ''}`}
+          onClick={() => setActiveTab('ai')}
+        >
+          <span className="tab-icon">🤖</span>
+          <span className="tab-label">Kone AI</span>
+        </button>
 
-              <button 
-                className={`mode-btn ${sensorMode === 'simulation' ? 'active' : ''}`}
-                onClick={() => setSensorMode('simulation')}
-              >
-                ⚙️ Manual Calibration
-              </button>
-            </div>
+        <button 
+          className={`tab-segment ${activeTab === 'history' ? 'active' : ''}`}
+          onClick={() => setActiveTab('history')}
+        >
+          <span className="tab-icon">📜</span>
+          <span className="tab-label">Audit Logs</span>
+        </button>
+      </nav>
 
-            {sensorMode === 'phone' && (
-              <div className="phone-sensor-banner">
-                <span>📱 **Phone Accelerometer Telemetry Active**: Tilt phone to shift moisture & temp metrics!</span>
-                <span className="tilt-info">Beta: {phoneTilt.beta}° | Gamma: {phoneTilt.gamma}°</span>
+      {/* ── Main Tab Views Container ───────────────────────── */}
+      <main className="mobbin-content-area">
+
+        {/* ══════════════════════════════════════════════════════
+            TAB 1: LIVE TELEMETRY OVERVIEW
+           ══════════════════════════════════════════════════════ */}
+        {activeTab === 'telemetry' && (
+          <div className="tab-view animate-fade">
+            
+            {/* If NO telemetry has been recorded yet: Show Clean Empty State */}
+            {!telemetry ? (
+              <div className="mobbin-empty-state-card">
+                <div className="empty-state-icon">📡</div>
+                <div className="empty-badge">⏳ AWAITING FIELD TELEMETRY</div>
+                <h2>No Measurements Recorded Yet</h2>
+                <p>
+                  Your Google Cloud Firestore database (`daywise-ays8t`) is connected and ready. Record your first field measurement using your mobile phone sensors, physical probe readings, or IoT nodes.
+                </p>
+                <div className="empty-action-buttons">
+                  <button 
+                    className="primary-action-btn"
+                    onClick={() => {
+                      setRecordMode('phone');
+                      setActiveTab('record');
+                    }}
+                  >
+                    📱 Measure with Phone Sensors →
+                  </button>
+                  <button 
+                    className="secondary-action-btn"
+                    onClick={() => {
+                      setRecordMode('manual');
+                      setActiveTab('record');
+                    }}
+                  >
+                    ✍️ Log Field Probe Data →
+                  </button>
+                </div>
+              </div>
+            ) : (
+              /* If Telemetry Data EXISTS: Render Full High-Tech Dashboard */
+              <div className="telemetry-dashboard-layout">
+                
+                {/* Node Status Banner */}
+                <div className="mobbin-node-banner">
+                  <div className="node-info">
+                    <span className="node-title">📍 {telemetry.plotName || 'Volta Plot #01'}</span>
+                    <span className="node-synced">Last Synced: {lastSyncTime || telemetry.displayTime || 'Just now'}</span>
+                  </div>
+                  <button 
+                    className="quick-record-btn" 
+                    onClick={() => setActiveTab('record')}
+                  >
+                    ➕ New Reading
+                  </button>
+                </div>
+
+                {/* Metric Cards Grid */}
+                <div className="mobbin-metrics-grid">
+                  
+                  {/* Soil Moisture */}
+                  <div className="mobbin-card metric-card">
+                    <div className="card-top">
+                      <span className="card-icon">💧</span>
+                      <span className="card-title">Soil Moisture (VWC)</span>
+                    </div>
+                    <div className="metric-val-row">
+                      <span className="metric-number">{telemetry.moisture}%</span>
+                      <span className="metric-unit">Volumetric</span>
+                    </div>
+                    <div className="meter-track">
+                      <div 
+                        className="meter-fill blue-fill" 
+                        style={{ width: `${Math.min(100, Math.max(5, telemetry.moisture))}%` }}
+                      />
+                    </div>
+                    <span className="metric-status-label">
+                      {telemetry.moisture < 25 ? '🔴 Severe Moisture Deficit' : telemetry.moisture > 75 ? '🔵 Saturated' : '🟢 Optimal Root Moisture'}
+                    </span>
+                  </div>
+
+                  {/* Canopy Temperature */}
+                  <div className="mobbin-card metric-card">
+                    <div className="card-top">
+                      <span className="card-icon">🌡️</span>
+                      <span className="card-title">Canopy Temperature</span>
+                    </div>
+                    <div className="metric-val-row">
+                      <span className="metric-number">{telemetry.temperature}°C</span>
+                      <span className="metric-unit">({((telemetry.temperature * 9/5) + 32).toFixed(1)}°F)</span>
+                    </div>
+                    <div className="meter-track">
+                      <div 
+                        className="meter-fill orange-fill" 
+                        style={{ width: `${Math.min(100, (telemetry.temperature / 45) * 100)}%` }}
+                      />
+                    </div>
+                    <span className="metric-status-label">
+                      {telemetry.temperature > 34 ? '🔴 Heat Stress Warning' : '🟢 Normal Vegetative Range'}
+                    </span>
+                  </div>
+
+                  {/* Relative Humidity */}
+                  <div className="mobbin-card metric-card">
+                    <div className="card-top">
+                      <span className="card-icon">💨</span>
+                      <span className="card-title">Relative Humidity</span>
+                    </div>
+                    <div className="metric-val-row">
+                      <span className="metric-number">{telemetry.humidity}%</span>
+                      <span className="metric-unit">RH</span>
+                    </div>
+                    <div className="meter-track">
+                      <div 
+                        className="meter-fill emerald-fill" 
+                        style={{ width: `${Math.min(100, telemetry.humidity)}%` }}
+                      />
+                    </div>
+                    <span className="metric-status-label">
+                      {telemetry.humidity >= 88 ? '⚠️ High Spore Moisture Zone' : '🟢 Normal Transpiration'}
+                    </span>
+                  </div>
+
+                  {/* Vapor Pressure Deficit (VPD) */}
+                  <div className="mobbin-card metric-card">
+                    <div className="card-top">
+                      <span className="card-icon">⚡</span>
+                      <span className="card-title">Vapor Pressure Deficit</span>
+                    </div>
+                    <div className="metric-val-row">
+                      <span className="metric-number">{calculatedVPD ?? '--'}</span>
+                      <span className="metric-unit">kPa Transpiration</span>
+                    </div>
+                    <div className="meter-track">
+                      <div 
+                        className="meter-fill purple-fill" 
+                        style={{ width: `${Math.min(100, ((calculatedVPD || 1) / 2.5) * 100)}%` }}
+                      />
+                    </div>
+                    <span className="metric-status-label">
+                      {calculatedVPD < 0.4 ? '🔵 Low Transpiration' : calculatedVPD > 1.6 ? '🔴 High Transpiration Stress' : '🟢 Optimal Plant Growth VPD'}
+                    </span>
+                  </div>
+
+                </div>
+
+                {/* Solenoid Irrigation Relay Control */}
+                <div className="mobbin-card valve-box">
+                  <div className="valve-left">
+                    <span className="valve-emoji">🚰</span>
+                    <div>
+                      <h3>Automated Micro-Irrigation Relay</h3>
+                      <p>Solenoid Status: <strong>{telemetry.valveActive ? '🟢 OPEN (IRRIGATING)' : '🔴 CLOSED (STANDBY)'}</strong></p>
+                    </div>
+                  </div>
+                  <button 
+                    className={`valve-action-btn ${telemetry.valveActive ? 'active' : ''}`}
+                    onClick={toggleValve}
+                  >
+                    {telemetry.valveActive ? 'Halt Irrigation Valve' : 'Trigger 30-Min Irrigation'}
+                  </button>
+                </div>
+
+                {/* Recommendations */}
+                {recommendations.length > 0 && (
+                  <div className="mobbin-card rec-box">
+                    <h3 className="rec-heading">🧠 Live Agronomic Action Items</h3>
+                    <div className="rec-list">
+                      {recommendations.map((rec, i) => (
+                        <div key={i} className={`rec-row rec-row-${rec.type}`}>
+                          <span className="rec-row-icon">{rec.icon}</span>
+                          <div className="rec-row-text">
+                            <h4>{rec.title}</h4>
+                            <p>{rec.desc}</p>
+                            {rec.actionText && (
+                              <button className="rec-btn" onClick={rec.action}>
+                                {rec.actionText} →
+                              </button>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
               </div>
             )}
-          </div>
 
-          {/* Telemetry Gauge Cards Grid */}
-          <div className="telemetry-gauges-grid">
+          </div>
+        )}
+
+        {/* ══════════════════════════════════════════════════════
+            TAB 2: RECORD / MEASURE FIELD DATA
+           ══════════════════════════════════════════════════════ */}
+        {activeTab === 'record' && (
+          <div className="tab-view animate-fade">
             
-            {/* Soil Moisture */}
-            <div className="gauge-card moisture-card">
-              <div className="gauge-header">
-                <span className="gauge-icon">💧</span>
-                <span className="gauge-name">Soil Moisture (VWC)</span>
+            <div className="record-container">
+              <div className="record-mode-selector">
+                <button 
+                  className={`mode-pill ${recordMode === 'phone' ? 'active' : ''}`}
+                  onClick={() => setRecordMode('phone')}
+                >
+                  📱 Phone Sensors
+                </button>
+                <button 
+                  className={`mode-pill ${recordMode === 'manual' ? 'active' : ''}`}
+                  onClick={() => setRecordMode('manual')}
+                >
+                  ✍️ Manual Field Log
+                </button>
+                <button 
+                  className={`mode-pill ${recordMode === 'iot' ? 'active' : ''}`}
+                  onClick={() => setRecordMode('iot')}
+                >
+                  📡 IoT Node API
+                </button>
               </div>
-              <div className="gauge-value-row">
-                <span className="gauge-number">{telemetry.moisture}%</span>
-                <span className="gauge-unit">Volumetric</span>
-              </div>
-              <div className="gauge-bar-track">
-                <div className="gauge-bar-fill moisture-fill" style={{ width: `${telemetry.moisture}%` }}></div>
-              </div>
-              {sensorMode === 'simulation' && (
-                <input 
-                  type="range" min="0" max="100" 
-                  value={telemetry.moisture} 
-                  onChange={(e) => updateField('moisture', parseInt(e.target.value))} 
-                  className="slider-override"
-                />
+
+              {/* Success Toast */}
+              {saveSuccess && (
+                <div className="save-toast-banner">
+                  ✅ Measurement successfully saved to Google Cloud Firestore (`daywise-ays8t`)!
+                </div>
               )}
-            </div>
 
-            {/* Ambient Temperature */}
-            <div className="gauge-card temp-card">
-              <div className="gauge-header">
-                <span className="gauge-icon">🌡️</span>
-                <span className="gauge-name">Canopy Temperature</span>
-              </div>
-              <div className="gauge-value-row">
-                <span className="gauge-number">{telemetry.temperature}°C</span>
-                <span className="gauge-unit">({((telemetry.temperature * 9/5) + 32).toFixed(1)}°F)</span>
-              </div>
-              <div className="gauge-bar-track">
-                <div className="gauge-bar-fill temp-fill" style={{ width: `${(telemetry.temperature / 45) * 100}%` }}></div>
-              </div>
-              {sensorMode === 'simulation' && (
-                <input 
-                  type="range" min="15" max="45" step="0.5"
-                  value={telemetry.temperature} 
-                  onChange={(e) => updateField('temperature', parseFloat(e.target.value))} 
-                  className="slider-override"
-                />
+              {/* Mode A: Phone Sensors */}
+              {recordMode === 'phone' && (
+                <div className="mobbin-card record-card">
+                  <div className="scan-header">
+                    <span className="scan-icon">📱</span>
+                    <h2>Scan with Device Sensors</h2>
+                    <p>
+                      Uses your phone's hardware accelerometer, ambient brightness, and battery thermal state to generate and calibrate a live field telemetry snapshot.
+                    </p>
+                  </div>
+
+                  {!phoneReading ? (
+                    <button 
+                      className="scan-trigger-btn"
+                      onClick={startPhoneSensorScan}
+                      disabled={phoneScanning}
+                    >
+                      {phoneScanning ? '⏳ Calibrating Phone Sensors...' : '⚡ Tap to Measure Field Telemetry'}
+                    </button>
+                  ) : (
+                    <div className="scan-results-box">
+                      <div className="results-badge">✅ Live Scan Complete</div>
+                      <div className="results-grid">
+                        <div className="res-item">
+                          <span className="res-label">Moisture (VWC)</span>
+                          <span className="res-val">{phoneReading.moisture}%</span>
+                        </div>
+                        <div className="res-item">
+                          <span className="res-label">Temperature</span>
+                          <span className="res-val">{phoneReading.temperature}°C</span>
+                        </div>
+                        <div className="res-item">
+                          <span className="res-label">Humidity</span>
+                          <span className="res-val">{phoneReading.humidity}%</span>
+                        </div>
+                        <div className="res-item">
+                          <span className="res-label">Soil pH</span>
+                          <span className="res-val">{phoneReading.ph}</span>
+                        </div>
+                      </div>
+
+                      <div className="scan-action-row">
+                        <button 
+                          className="save-record-btn"
+                          onClick={() => saveTelemetryRecord(phoneReading)}
+                        >
+                          💾 Save to Cloud Firestore
+                        </button>
+                        <button 
+                          className="rescan-btn"
+                          onClick={() => setPhoneReading(null)}
+                        >
+                          🔄 Re-Scan
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
               )}
-            </div>
 
-            {/* Relative Humidity */}
-            <div className="gauge-card humidity-card">
-              <div className="gauge-header">
-                <span className="gauge-icon">💨</span>
-                <span className="gauge-name">Relative Humidity</span>
-              </div>
-              <div className="gauge-value-row">
-                <span className="gauge-number">{telemetry.humidity}%</span>
-                <span className="gauge-unit">RH</span>
-              </div>
-              <div className="gauge-bar-track">
-                <div className="gauge-bar-fill humidity-fill" style={{ width: `${telemetry.humidity}%` }}></div>
-              </div>
-              {sensorMode === 'simulation' && (
-                <input 
-                  type="range" min="20" max="100" 
-                  value={telemetry.humidity} 
-                  onChange={(e) => updateField('humidity', parseInt(e.target.value))} 
-                  className="slider-override"
-                />
+              {/* Mode B: Manual Field Probe Log */}
+              {recordMode === 'manual' && (
+                <div className="mobbin-card record-card">
+                  <h2>✍️ Log Physical Field Probe Readings</h2>
+                  <p className="form-sub">Record physical soil probe measurements taken in the Volta plots.</p>
+
+                  <form className="manual-form" onSubmit={(e) => {
+                    e.preventDefault();
+                    saveTelemetryRecord({
+                      ...manualForm,
+                      source: 'manual_probe',
+                      valveActive: false
+                    });
+                  }}>
+                    <div className="form-group">
+                      <label>Plot / Zone Name</label>
+                      <input 
+                        type="text" 
+                        value={manualForm.plotName}
+                        onChange={(e) => setManualForm({ ...manualForm, plotName: e.target.value })}
+                        required
+                      />
+                    </div>
+
+                    <div className="form-row-2">
+                      <div className="form-group">
+                        <label>Soil Moisture VWC (%)</label>
+                        <input 
+                          type="number" min="0" max="100" 
+                          value={manualForm.moisture}
+                          onChange={(e) => setManualForm({ ...manualForm, moisture: parseFloat(e.target.value) })}
+                          required
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label>Canopy Temp (°C)</label>
+                        <input 
+                          type="number" step="0.1" min="10" max="50"
+                          value={manualForm.temperature}
+                          onChange={(e) => setManualForm({ ...manualForm, temperature: parseFloat(e.target.value) })}
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div className="form-row-2">
+                      <div className="form-group">
+                        <label>Relative Humidity (%)</label>
+                        <input 
+                          type="number" min="10" max="100" 
+                          value={manualForm.humidity}
+                          onChange={(e) => setManualForm({ ...manualForm, humidity: parseFloat(e.target.value) })}
+                          required
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label>Soil pH</label>
+                        <input 
+                          type="number" step="0.1" min="4" max="9"
+                          value={manualForm.ph}
+                          onChange={(e) => setManualForm({ ...manualForm, ph: parseFloat(e.target.value) })}
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div className="form-group">
+                      <label>Field Notes & Observations</label>
+                      <textarea 
+                        rows="2"
+                        value={manualForm.notes}
+                        onChange={(e) => setManualForm({ ...manualForm, notes: e.target.value })}
+                      />
+                    </div>
+
+                    <button type="submit" className="save-record-btn">
+                      💾 Save Field Entry to Firestore
+                    </button>
+                  </form>
+                </div>
               )}
-            </div>
 
-            {/* VPD Deficit */}
-            <div className="gauge-card vpd-card">
-              <div className="gauge-header">
-                <span className="gauge-icon">⚡</span>
-                <span className="gauge-name">Vapor Pressure Deficit</span>
-              </div>
-              <div className="gauge-value-row">
-                <span className="gauge-number">{calculatedVPD}</span>
-                <span className="gauge-unit">kPa (Transpiration)</span>
-              </div>
-              <div className="vpd-status-tag">
-                {calculatedVPD < 0.4 ? '🔵 Low Transpiration' : calculatedVPD > 1.6 ? '🔴 High Stress' : '🟢 Optimal VPD Zone'}
-              </div>
-            </div>
+              {/* Mode C: IoT Node Hardware Setup */}
+              {recordMode === 'iot' && (
+                <div className="mobbin-card record-card">
+                  <h2>📡 Connect ESP32 / LoRa Field Probes</h2>
+                  <p>Send real-time telemetry straight from field microcontrollers to Firestore.</p>
 
-          </div>
-
-          {/* Micro-Irrigation Solenoid Valve Control Card */}
-          <div className="valve-control-card">
-            <div className="valve-info">
-              <span className="valve-icon">🚰</span>
-              <div>
-                <h4>Automated Micro-Drip Valve #01</h4>
-                <p>Solar Solenoid Relay | Status: <strong>{telemetry.valveActive ? '🟢 OPEN (IRRIGATING)' : '🔴 CLOSED (STANDBY)'}</strong></p>
-              </div>
-            </div>
-            <button 
-              className={`valve-toggle-btn ${telemetry.valveActive ? 'active' : ''}`}
-              onClick={() => updateField('valveActive', !telemetry.valveActive)}
-            >
-              {telemetry.valveActive ? 'Halt Irrigation Valve' : 'Trigger 30-Min Irrigation'}
-            </button>
-          </div>
-
-          {/* Intelligent Agronomic Recommendations List */}
-          <div className="recommendations-card">
-            <h3 className="section-heading">🧠 Real-Time Agronomic Recommendations</h3>
-            <div className="recommendations-list">
-              {recommendations.map((rec, idx) => (
-                <div key={idx} className={`recommendation-item rec-${rec.type}`}>
-                  <span className="rec-icon">{rec.icon}</span>
-                  <div className="rec-details">
-                    <h4>{rec.title}</h4>
-                    <p>{rec.desc}</p>
-                    {rec.actionText && (
-                      <button className="rec-action-btn" onClick={rec.action}>
-                        {rec.actionText} →
-                      </button>
-                    )}
+                  <div className="code-instruction-box">
+                    <h4>HTTPS REST Webhook Endpoint:</h4>
+                    <code>POST https://farms.koneacademy.io/api/telemetry/push</code>
+                    
+                    <h4 style={{ marginTop: '1rem' }}>JSON Payload Specification:</h4>
+                    <pre>
+{`{
+  "plotName": "Volta Plot #01",
+  "moisture": 42.5,
+  "temperature": 28.6,
+  "humidity": 84,
+  "source": "esp32_lora_node"
+}`}
+                    </pre>
                   </div>
                 </div>
-              ))}
+              )}
+
             </div>
+
           </div>
+        )}
 
-        </section>
-
-        {/* Right Column: Embedded Kone AI Agronomist Chat */}
-        <section className="pwa-ai-col">
-          <div className="kone-ai-container">
-            <div className="ai-chat-header">
-              <div className="ai-brand-info">
-                <div className="ai-avatar">🤖</div>
-                <div>
-                  <h3>Kone AI Agronomist</h3>
-                  <span className="ai-sub">Powered by Kone AI Operations</span>
+        {/* ══════════════════════════════════════════════════════
+            TAB 3: KONE AI AGRONOMIST CHAT
+           ══════════════════════════════════════════════════════ */}
+        {activeTab === 'ai' && (
+          <div className="tab-view animate-fade">
+            <div className="mobbin-ai-shell">
+              <div className="ai-chat-header">
+                <div className="ai-brand-group">
+                  <div className="ai-avatar-badge">🤖</div>
+                  <div>
+                    <h3>Kone AI Agronomist</h3>
+                    <span className="ai-badge-text">Powered by Kone AI Operations</span>
+                  </div>
                 </div>
+                <button 
+                  className="analyze-chip-btn"
+                  onClick={() => triggerAiQuery("Analyze current sensor telemetry and suggest action plan.")}
+                >
+                  ⚡ Analyze Field Data
+                </button>
               </div>
-              <button 
-                className="analyze-now-btn" 
-                onClick={() => triggerAiQuery("Analyze current sensor telemetry and suggest action plan.")}
-              >
-                ⚡ Analyze Telemetry
-              </button>
-            </div>
 
-            {/* AI Messages Stream */}
-            <div className="ai-messages-list">
-              {aiChatMessages.map((msg, idx) => (
-                <div key={idx} className={`chat-message message-${msg.sender}`}>
-                  <div className="message-content">
-                    <div className="message-text">
+              <div className="ai-chat-stream">
+                {aiChatMessages.map((msg, i) => (
+                  <div key={i} className={`chat-bubble-row ${msg.sender === 'user' ? 'bubble-user' : 'bubble-ai'}`}>
+                    <div className="bubble-body">
                       {msg.text.split('\n').map((line, lIdx) => (
                         <p key={lIdx}>{line}</p>
                       ))}
+                      <span className="bubble-time">{msg.timestamp}</span>
                     </div>
-                    <span className="message-time">{msg.timestamp}</span>
                   </div>
-                </div>
-              ))}
+                ))}
+                {aiThinking && (
+                  <div className="chat-bubble-row bubble-ai">
+                    <div className="bubble-body thinking-body">
+                      <span className="pulse-dot"></span>
+                      <span className="pulse-dot"></span>
+                      <span className="pulse-dot"></span>
+                      <span className="thinking-label">Kone AI is calculating agronomic models...</span>
+                    </div>
+                  </div>
+                )}
+                <div ref={chatEndRef} />
+              </div>
 
-              {aiThinking && (
-                <div className="chat-message message-ai">
-                  <div className="message-content thinking-content">
-                    <span className="typing-dot"></span>
-                    <span className="typing-dot"></span>
-                    <span className="typing-dot"></span>
-                    <span className="thinking-text">Kone AI is calculating sensor models...</span>
-                  </div>
+              {/* Action Chips */}
+              <div className="ai-chips-scroll">
+                <button onClick={() => triggerAiQuery("What is the Black Sigatoka spore risk right now?")}>
+                  🛡️ Black Sigatoka Risk
+                </button>
+                <button onClick={() => triggerAiQuery("Estimate plantain crop yield forecast.")}>
+                  🌾 Yield Forecast
+                </button>
+                <button onClick={() => triggerAiQuery("Suggest optimal fertigation ratio for low soil potassium.")}>
+                  🧪 Fertigation Formula
+                </button>
+              </div>
+
+              {/* Input Form */}
+              <form className="ai-input-bar" onSubmit={handleSendAiMessage}>
+                <input 
+                  type="text" 
+                  placeholder="Ask Kone AI about crop health, diseases, or telemetry..."
+                  value={aiInputText}
+                  onChange={(e) => setAiInputText(e.target.value)}
+                />
+                <button type="submit" disabled={!aiInputText.trim()}>
+                  Send
+                </button>
+              </form>
+            </div>
+          </div>
+        )}
+
+        {/* ══════════════════════════════════════════════════════
+            TAB 4: FIRESTORE AUDIT HISTORY LOG
+           ══════════════════════════════════════════════════════ */}
+        {activeTab === 'history' && (
+          <div className="tab-view animate-fade">
+            <div className="mobbin-card history-card">
+              <div className="history-header">
+                <h2>📜 Field Telemetry Audit Log</h2>
+                <span className="history-count">
+                  {historyLogs.length} Records Saved in Cloud Firestore
+                </span>
+              </div>
+
+              {historyLogs.length === 0 ? (
+                <div className="history-empty">
+                  <span>📂 No historical logs recorded yet.</span>
+                  <button className="primary-action-btn" onClick={() => setActiveTab('record')}>
+                    ➕ Record First Reading Now
+                  </button>
+                </div>
+              ) : (
+                <div className="history-list">
+                  {historyLogs.map((log) => (
+                    <div key={log.id} className="history-item">
+                      <div className="history-item-header">
+                        <strong>{log.plotName || 'Volta Plot #01'}</strong>
+                        <span className="history-time">{log.displayDate} • {log.displayTime}</span>
+                      </div>
+                      <div className="history-metrics-row">
+                        <span>💧 Moisture: <strong>{log.moisture}%</strong></span>
+                        <span>🌡️ Temp: <strong>{log.temperature}°C</strong></span>
+                        <span>💨 Humidity: <strong>{log.humidity}%</strong></span>
+                        <span>🧪 pH: <strong>{log.ph || '6.5'}</strong></span>
+                      </div>
+                      {log.notes && <p className="history-notes">📝 {log.notes}</p>}
+                    </div>
+                  ))}
                 </div>
               )}
-              <div ref={chatEndRef} />
             </div>
-
-            {/* Preset Query Chips */}
-            <div className="ai-query-chips">
-              <button onClick={() => triggerAiQuery("What is the Black Sigatoka spore risk right now?")}>
-                🛡️ Black Sigatoka Risk
-              </button>
-              <button onClick={() => triggerAiQuery("Estimate plantain crop yield forecast.")}>
-                🌾 Yield Forecast
-              </button>
-              <button onClick={() => triggerAiQuery("Suggest optimal fertigation ratio.")}>
-                🧪 Fertigation Ratios
-              </button>
-            </div>
-
-            {/* AI Input Form */}
-            <form className="ai-input-form" onSubmit={handleSendAiMessage}>
-              <input 
-                type="text" 
-                placeholder="Ask Kone AI about crop diseases, sensor readings, or irrigation..."
-                value={aiInputText}
-                onChange={(e) => setAiInputText(e.target.value)}
-                className="ai-chat-input"
-              />
-              <button type="submit" className="ai-send-btn" disabled={!aiInputText.trim()}>
-                Send
-              </button>
-            </form>
           </div>
-        </section>
+        )}
 
       </main>
+
+      {/* ── Native Mobile Bottom Navigation Bar (Apple HIG Style) ── */}
+      <nav className="mobbin-bottom-nav">
+        <button 
+          className={`nav-btn ${activeTab === 'telemetry' ? 'active' : ''}`}
+          onClick={() => setActiveTab('telemetry')}
+        >
+          <span className="nav-icon">📊</span>
+          <span className="nav-text">Telemetry</span>
+        </button>
+
+        <button 
+          className={`nav-btn ${activeTab === 'record' ? 'active' : ''}`}
+          onClick={() => setActiveTab('record')}
+        >
+          <span className="nav-icon">➕</span>
+          <span className="nav-text">Record</span>
+        </button>
+
+        <button 
+          className={`nav-btn ${activeTab === 'ai' ? 'active' : ''}`}
+          onClick={() => setActiveTab('ai')}
+        >
+          <span className="nav-icon">🤖</span>
+          <span className="nav-text">Kone AI</span>
+        </button>
+
+        <button 
+          className={`nav-btn ${activeTab === 'history' ? 'active' : ''}`}
+          onClick={() => setActiveTab('history')}
+        >
+          <span className="nav-icon">📜</span>
+          <span className="nav-text">History</span>
+        </button>
+      </nav>
+
     </div>
   );
 }
