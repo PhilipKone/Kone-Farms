@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Inter:wght@400;500;600;700;800&display=swap');
 
 /* Global base stylesheet for Kone Farms */
 html {
@@ -10,7 +10,7 @@ body {
   padding: 0;
   background: linear-gradient(135deg, #04140f 0%, #082218 100%);
   color: #e2e8f0;
-  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -94,10 +94,9 @@ body {
 }
 
 .farms-headline {
-  font-family: 'Outfit', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Baloo 2', cursive, sans-serif;
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 800;
-  letter-spacing: -0.03em;
   color: #ffffff;
   line-height: 1.15;
   margin: 0 0 1.5rem;
@@ -133,10 +132,9 @@ body {
 }
 
 .smartfarm-title {
-  font-family: 'Outfit', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Baloo 2', cursive, sans-serif;
   font-size: 1.65rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-weight: 800;
   color: #fff;
   margin: 0;
   display: flex;
