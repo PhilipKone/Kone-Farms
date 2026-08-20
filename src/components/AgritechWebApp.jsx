@@ -327,19 +327,20 @@ export default function AgritechWebApp({ onBack }) {
               if (onBack) onBack();
               else window.location.hash = '#agritech';
             }}
-            title="Return to Kone Farms Portal"
+            title="Return to Kone Farms"
+            aria-label="Back to Kone Farms"
           >
-            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2.5" fill="none">
+            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="2.5" fill="none">
               <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
-            <span>Back</span>
+            <span className="back-text">Farms</span>
           </button>
           
           <div className="mobbin-app-brand">
-            <h1 className="mobbin-app-title">smartFarm PWA</h1>
+            <h1 className="mobbin-app-title">smartFarm</h1>
             <div className="mobbin-db-status">
               <span className={`status-dot ${isDbOnline ? 'online' : 'offline'}`}></span>
-              <span>{isDbOnline ? 'Firestore Connected' : 'Offline Mode'}</span>
+              <span>{isDbOnline ? 'Live Sync' : 'Offline'}</span>
             </div>
           </div>
         </div>
@@ -352,15 +353,9 @@ export default function AgritechWebApp({ onBack }) {
                 <polyline points="7 10 12 15 17 10"></polyline>
                 <line x1="12" y1="15" x2="12" y2="3"></line>
               </svg>
-              <span>Install</span>
+              <span>Install App</span>
             </button>
           )}
-          <span className="mobbin-pwa-badge" title="PWA Enabled">
-            <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
-              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-            </svg>
-            <span>PWA</span>
-          </span>
         </div>
       </header>
 
