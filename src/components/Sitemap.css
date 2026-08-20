@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   color: #e2e8f0;
-  font-family: 'Nunito', 'Outfit', 'Inter', sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   background-image: 
     radial-gradient(circle at 10% 20%, rgba(57, 255, 20, 0.05), transparent 50%),
     radial-gradient(circle at 90% 80%, rgba(57, 255, 20, 0.02), transparent 50%);
@@ -39,7 +39,7 @@
 }
 
 .farms-sitemap-brand {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Baloo 2', cursive, sans-serif;
   font-weight: 600;
   font-size: 0.85rem;
   text-transform: uppercase;
@@ -67,7 +67,7 @@
 }
 
 .farms-sitemap-title {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Baloo 2', cursive, sans-serif;
   font-size: 2.5rem;
   font-weight: 800;
   margin-bottom: 12px;
@@ -121,7 +121,7 @@
 }
 
 .farms-sitemap-col-header h2 {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Baloo 2', cursive, sans-serif;
   font-size: 1.2rem;
   font-weight: 700;
   color: #fff;

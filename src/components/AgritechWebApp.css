@@ -3,7 +3,7 @@
   min-height: 100vh;
   background: #040906;
   color: #f1f5f9;
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   display: flex;
   flex-direction: column;
   padding-bottom: 5.5rem;
@@ -63,12 +63,12 @@
 }
 
 .mobbin-app-title {
-  font-size: 1.15rem;
+  font-family: 'Baloo 2', cursive, sans-serif;
+  font-size: 1.25rem;
   font-weight: 800;
   color: #ffffff;
   margin: 0;
   line-height: 1.1;
-  letter-spacing: -0.02em;
 }
 
 .mobbin-db-status {
@@ -227,13 +227,12 @@
 }
 
 .mobbin-empty-state-card h2 {
-  font-family: 'Outfit', 'Plus Jakarta Sans', -apple-system, sans-serif;
-  font-size: 1.45rem;
+  font-family: 'Baloo 2', cursive, sans-serif;
+  font-size: 1.6rem;
   font-weight: 800;
-  letter-spacing: -0.02em;
   color: #ffffff;
   margin: 0 0 0.6rem;
-  line-height: 1.25;
+  line-height: 1.2;
 }
 
 .mobbin-empty-state-card p {

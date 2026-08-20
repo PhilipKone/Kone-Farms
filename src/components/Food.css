@@ -397,10 +397,12 @@
 }
 
 .product-main-heading {
+  font-family: 'Baloo 2', cursive, sans-serif;
   font-size: 2.2rem;
   color: #ffffff;
   margin: 0.25rem 0 0.75rem;
-  font-weight: 900;
+  font-weight: 800;
+  line-height: 1.15;
 }
 
 .product-lead-desc {
