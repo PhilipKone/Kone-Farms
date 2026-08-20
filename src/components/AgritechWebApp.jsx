@@ -339,27 +339,27 @@ export default function AgritechWebApp({ onBack }) {
             <h1 className="mobbin-app-title">smartFarm PWA</h1>
             <div className="mobbin-db-status">
               <span className={`status-dot ${isDbOnline ? 'online' : 'offline'}`}></span>
-              <span>{isDbOnline ? 'Cloud Firestore: daywise-ays8t' : 'Firestore Standby'}</span>
+              <span>{isDbOnline ? 'Firestore Connected' : 'Offline Mode'}</span>
             </div>
           </div>
         </div>
 
         <div className="mobbin-header-right">
           {!isInstalled && (
-            <button className="mobbin-install-pill" onClick={triggerPwaInstall}>
-              <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2.5" fill="none" style={{ marginRight: '4px' }}>
+            <button className="mobbin-install-pill" onClick={triggerPwaInstall} title="Install as Mobile App">
+              <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2.5" fill="none">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                 <polyline points="7 10 12 15 17 10"></polyline>
                 <line x1="12" y1="15" x2="12" y2="3"></line>
               </svg>
-              Install App
+              <span>Install</span>
             </button>
           )}
-          <span className="mobbin-pwa-badge">
-            <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" style={{ marginRight: '4px' }}>
+          <span className="mobbin-pwa-badge" title="PWA Enabled">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
               <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
             </svg>
-            Offline Ready
+            <span>PWA</span>
           </span>
         </div>
       </header>
