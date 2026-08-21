@@ -26,7 +26,7 @@ export default function Agritech() {
   // Subscribe to live telemetry configurations in Firestore
   useEffect(() => {
     if (!db || !db.app) {
-      console.warn("Firebase/Firestore is not initialized. Starting mock telemetry standby.");
+      console.warn("Firebase/Firestore is not initialized.");
       return;
     }
     const telemDocRef = doc(db, 'farm_telemetry', 'live');
@@ -34,18 +34,10 @@ export default function Agritech() {
       if (docSnap.exists()) {
         setTelemetry(docSnap.data());
       } else {
-        const defaults = {
-          moisture: 48,
-          temperature: 29.5,
-          sunlight: 82,
-          valveActive: false,
-          updatedAt: new Date().toISOString()
-        };
-        setDoc(telemDocRef, defaults).catch(err => console.error("Firestore telem init error:", err));
-        setTelemetry(defaults);
+        setTelemetry(null);
       }
     }, (err) => {
-      console.warn("Firestore listener failed: switching to offline telemetry mock", err);
+      console.warn("Firestore listener in Agritech:", err);
     });
 
     return () => unsubscribe();
@@ -54,7 +46,7 @@ export default function Agritech() {
   // Update telemetry fields in Firestore & local state
   const updateTelemetry = async (field, value) => {
     const nextTelemetry = {
-      ...telemetry,
+      ...(telemetry || {}),
       [field]: value,
       updatedAt: new Date().toISOString()
     };
@@ -71,13 +63,14 @@ export default function Agritech() {
     }
   };
 
-  const moistureVal = telemetry.moisture ?? 48;
-  const tempVal = telemetry.temperature ?? 29.5;
-  const sunlightVal = telemetry.sunlight ?? 82;
-  const valveActive = telemetry.valveActive ?? false;
+  const hasData = !!telemetry;
+  const moistureVal = telemetry?.moisture;
+  const tempVal = telemetry?.temperature;
+  const sunlightVal = telemetry?.sunlight;
+  const valveActive = telemetry?.valveActive ?? false;
 
-  const moistureShift = (moistureVal - 48) * 0.4;
-  const tempShift = (tempVal - 29.5) * 1.2;
+  const moistureShift = moistureVal !== undefined ? (moistureVal - 48) * 0.4 : 0;
+  const tempShift = tempVal !== undefined ? (tempVal - 29.5) * 1.2 : 0;
 
   const moisturePathD = `M 0 ${80 - moistureShift} Q 50 ${95 - moistureShift}, 100 ${65 - moistureShift} T 200 ${45 - moistureShift} T 300 ${90 - moistureShift} T 400 ${55 - moistureShift}`;
   const tempPathD = `M 0 ${50 - tempShift} Q 60 ${30 - tempShift}, 120 ${60 - tempShift} T 240 ${40 - tempShift} T 360 ${70 - tempShift} T 400 ${55 - tempShift}`;
@@ -137,27 +130,27 @@ export default function Agritech() {
             {/* Live Metrics */}
             <div className="telemetry-grid">
               <div className="telemetry-item">
-                <div className="telemetry-val">{moistureVal}%</div>
+                <div className="telemetry-val">{hasData && moistureVal !== undefined ? `${moistureVal}%` : '-- %'}</div>
                 <div className="telemetry-label" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                  Soil Moisture
+                  Soil Moisture {hasData ? '' : '(Standby)'}
                   <svg viewBox="0 0 24 24" width="13" height="13" stroke="#60a5fa" strokeWidth="2" fill="none">
                     <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
                   </svg>
                 </div>
               </div>
               <div className="telemetry-item">
-                <div className="telemetry-val">{tempVal}°C</div>
+                <div className="telemetry-val">{hasData && tempVal !== undefined ? `${tempVal}°C` : '-- °C'}</div>
                 <div className="telemetry-label" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                  Temperature
+                  Temperature {hasData ? '' : '(Standby)'}
                   <svg viewBox="0 0 24 24" width="13" height="13" stroke="#f59e0b" strokeWidth="2" fill="none">
                     <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/>
                   </svg>
                 </div>
               </div>
               <div className="telemetry-item">
-                <div className="telemetry-val">{sunlightVal}%</div>
+                <div className="telemetry-val">{hasData && sunlightVal !== undefined ? `${sunlightVal}%` : '-- %'}</div>
                 <div className="telemetry-label" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                  Sunlight
+                  Sunlight {hasData ? '' : '(Standby)'}
                   <svg viewBox="0 0 24 24" width="13" height="13" stroke="#fbbf24" strokeWidth="2" fill="none">
                     <circle cx="12" cy="12" r="5"></circle>
                     <line x1="12" y1="1" x2="12" y2="3"></line>

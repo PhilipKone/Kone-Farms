@@ -192,6 +192,45 @@
   margin-top: 2px;
 }
 
+.telemetry-standby-cta-bar {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.telemetry-standby-cta-bar p {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #94a3b8;
+}
+
+.telemetry-standby-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #34d399;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.45rem 0.9rem;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.telemetry-standby-link:hover {
+  background: #10b981;
+  color: #04140f;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
 /* Crop Portfolio Section */
 .crop-portfolio-section {
   margin-bottom: 3.5rem;

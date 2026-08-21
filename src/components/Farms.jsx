@@ -2,12 +2,17 @@ import React, { useState, useEffect } from 'react';
 import './Farms.css';
 import L from 'leaflet';
 import { db } from '../firebase/config';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, doc, onSnapshot } from 'firebase/firestore';
 
 export default function Farms() {
   const [activeRegion, setActiveRegion] = useState('eastern');
   const [selectedCropFilter, setSelectedCropFilter] = useState('all');
   
+  // Live Telemetry state (null when no live measurements recorded yet)
+  const [telemetry, setTelemetry] = useState(null);
+  const [isDbOnline, setIsDbOnline] = useState(false);
+  const [lastSyncTime, setLastSyncTime] = useState(null);
+
   // Outgrower registration state
   const [farmerName, setFarmerName] = useState('');
   const [farmerContact, setFarmerContact] = useState('');
@@ -15,6 +20,29 @@ export default function Farms() {
   const [farmAcreage, setFarmAcreage] = useState('5-10');
   const [cropType, setCropType] = useState('plantain');
   const [outgrowerSubmitted, setOutgrowerSubmitted] = useState(false);
+
+  // Subscribe to live field telemetry
+  useEffect(() => {
+    if (!db || !db.app) {
+      setIsDbOnline(false);
+      return;
+    }
+    setIsDbOnline(true);
+    const telemDocRef = doc(db, 'farm_telemetry', 'live');
+    const unsubscribe = onSnapshot(telemDocRef, (docSnap) => {
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        setTelemetry(data);
+        setLastSyncTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+      } else {
+        setTelemetry(null);
+      }
+    }, (err) => {
+      console.warn("Firestore telemetry listener in Farms:", err);
+      setIsDbOnline(false);
+    });
+    return () => unsubscribe();
+  }, []);
 
   // Initialize Leaflet Map
   useEffect(() => {
@@ -188,38 +216,40 @@ export default function Farms() {
         {/* Live IoT Agro-Telemetry Stream Bar */}
         <div className="telemetry-bar-card">
           <div className="telemetry-bar-header">
-            <div className="live-indicator">
-              <span className="live-dot pulse"></span>
-              <strong>LIVE FIELD AGRO-TELEMETRY</strong>
+            <div className="telemetry-live-indicator">
+              <span className={telemetry ? "pulse-dot-green" : "status-dot offline"}></span>
+              <strong>{telemetry ? 'LIVE FIELD AGRO-TELEMETRY' : 'STATUS: STANDBY • AWAITING FIELD TELEMETRY'}</strong>
             </div>
-            <span className="telemetry-timestamp">Station #AG-FIELD-04 • Last Synced: 2 mins ago</span>
+            <span className="telemetry-station-id">
+              {telemetry ? `Station #AG-FIELD-01 • Last Synced: ${lastSyncTime || 'Just now'}` : 'Cloud DB Online (daywise-ays8t) • No Live Measurements Logged Yet'}
+            </span>
           </div>
 
-          <div className="telemetry-grid">
-            <div className="telemetry-metric-item">
+          <div className="telemetry-sensors-row">
+            <div className="t-sensor-item">
               <span className="t-icon">
                 <svg viewBox="0 0 24 24" width="20" height="20" stroke="#60a5fa" strokeWidth="2" fill="none">
                   <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
                 </svg>
               </span>
-              <div>
-                <span className="t-val">28.4%</span>
-                <span className="t-lbl">Soil Moisture (Optimal)</span>
+              <div className="t-data">
+                <span className="t-val">{telemetry?.moisture !== undefined ? `${telemetry.moisture}%` : '-- %'}</span>
+                <span className="t-label">{telemetry ? 'Soil Moisture' : 'Moisture (Awaiting Probe)'}</span>
               </div>
             </div>
-            <div className="telemetry-metric-item">
+            <div className="t-sensor-item">
               <span className="t-icon">
                 <svg viewBox="0 0 24 24" width="20" height="20" stroke="#34d399" strokeWidth="2" fill="none">
                   <path d="M10 2v7.31L4.41 18.9A2 2 0 0 0 6.13 22h11.74a2 2 0 0 0 1.72-3.1L14 9.31V2"/>
                   <line x1="8.5" y1="2" x2="15.5" y2="2"/>
                 </svg>
               </span>
-              <div>
-                <span className="t-val">6.4 pH</span>
-                <span className="t-lbl">Soil Loam pH</span>
+              <div className="t-data">
+                <span className="t-val">{telemetry?.ph !== undefined ? `${telemetry.ph} pH` : '-- pH'}</span>
+                <span className="t-label">{telemetry ? 'Soil Loam pH' : 'Soil pH (Awaiting Sample)'}</span>
               </div>
             </div>
-            <div className="telemetry-metric-item">
+            <div className="t-sensor-item">
               <span className="t-icon">
                 <svg viewBox="0 0 24 24" width="20" height="20" stroke="#fbbf24" strokeWidth="2" fill="none">
                   <circle cx="12" cy="12" r="5"></circle>
@@ -231,34 +261,43 @@ export default function Farms() {
                   <line x1="21" y1="12" x2="23" y2="12"></line>
                 </svg>
               </span>
-              <div>
-                <span className="t-val">865 W/m²</span>
-                <span className="t-lbl">Solar Irradiance</span>
+              <div className="t-data">
+                <span className="t-val">{telemetry?.sunlight !== undefined ? `${telemetry.sunlight} W/m²` : '-- W/m²'}</span>
+                <span className="t-label">{telemetry ? 'Solar Irradiance' : 'Solar (Awaiting Sensor)'}</span>
               </div>
             </div>
-            <div className="telemetry-metric-item">
+            <div className="t-sensor-item">
               <span className="t-icon">
                 <svg viewBox="0 0 24 24" width="20" height="20" stroke="#f59e0b" strokeWidth="2" fill="none">
                   <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/>
                 </svg>
               </span>
-              <div>
-                <span className="t-val">29.5°C</span>
-                <span className="t-lbl">Ambient Field Temp</span>
+              <div className="t-data">
+                <span className="t-val">{telemetry?.temperature !== undefined ? `${telemetry.temperature}°C` : '-- °C'}</span>
+                <span className="t-label">{telemetry ? 'Ambient Field Temp' : 'Temp (Awaiting Sensor)'}</span>
               </div>
             </div>
-            <div className="telemetry-metric-item">
+            <div className="t-sensor-item">
               <span className="t-icon">
                 <svg viewBox="0 0 24 24" width="20" height="20" stroke="#10b981" strokeWidth="2" fill="none">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                 </svg>
               </span>
-              <div>
-                <span className="t-val">0.92 NDVI</span>
-                <span className="t-lbl">Canopy Health Index</span>
+              <div className="t-data">
+                <span className="t-val">{telemetry?.ndvi !== undefined ? `${telemetry.ndvi} NDVI` : '-- NDVI'}</span>
+                <span className="t-label">{telemetry ? 'Canopy Health' : 'Canopy (Awaiting Data)'}</span>
               </div>
             </div>
           </div>
+
+          {!telemetry && (
+            <div className="telemetry-standby-cta-bar">
+              <p>📡 Ready for field node telemetry input or manual soil probe sampling.</p>
+              <a href="#agritech/webapp" className="telemetry-standby-link">
+                Launch smartFarm WebApp to Record First Field Reading →
+              </a>
+            </div>
+          )}
         </div>
 
         {/* Organic Farmlands & Crops Section */}
