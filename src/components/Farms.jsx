@@ -304,176 +304,163 @@ export default function Farms() {
         <div className="farms-card crops-section">
           <div className="section-head-flex">
             <div>
-              <h2 className="smartfarm-title" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <svg viewBox="0 0 24 24" width="20" height="20" stroke="#34d399" strokeWidth="2" fill="none">
+              <div className="farms-title-badge" style={{ background: 'rgba(16, 185, 129, 0.12)', borderColor: 'rgba(16, 185, 129, 0.25)', color: '#34d399', display: 'inline-flex', alignItems: 'center', gap: '6px', marginBottom: '0.5rem' }}>
+                <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2.5" fill="none">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                 </svg>
+                Regenerative Botanical Portfolio
+              </div>
+              <h2 className="smartfarm-title" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 Farmland Crops & Sourcing Groves
               </h2>
-              <p style={{ color: '#94a3b8', fontSize: '0.9rem', margin: '0.25rem 0 1.5rem', textAlign: 'left' }}>
-                Explore the biological varieties cultivated across our Ghanaian partner farm clusters.
+              <p style={{ color: '#94a3b8', fontSize: '0.92rem', margin: '0.25rem 0 1.5rem', textAlign: 'left', maxWidth: '720px' }}>
+                Explore the biological varieties cultivated across our Ghanaian partner farm clusters with full botanical specifications, soil profiles, and end-use traceability.
               </p>
             </div>
+
             <div className="crop-filter-chips">
-              {['all', 'chips', 'shito', 'agroforestry'].map((filter) => (
+              {[
+                { id: 'all', label: 'All Farmlands', count: 6 },
+                { id: 'chips', label: 'Chips Crops', count: 3 },
+                { id: 'shito', label: 'Shito Spices', count: 2 },
+                { id: 'agroforestry', label: 'Agro-Forestry', count: 1 }
+              ].map((filter) => (
                 <button
-                  key={filter}
-                  className={`filter-chip-btn ${selectedCropFilter === filter ? 'active' : ''}`}
-                  onClick={() => setSelectedCropFilter(filter)}
+                  key={filter.id}
+                  className={`filter-chip-btn ${selectedCropFilter === filter.id ? 'active' : ''}`}
+                  onClick={() => setSelectedCropFilter(filter.id)}
                 >
-                  {filter === 'all' && 'All Farmlands'}
-                  {filter === 'chips' && 'Chips Crops'}
-                  {filter === 'shito' && 'Shito Spices'}
-                  {filter === 'agroforestry' && 'Agro-Forestry'}
+                  {filter.label} <span className="chip-count-pill">{filter.count}</span>
                 </button>
               ))}
             </div>
           </div>
           
-          <div className="farms-crops-grid">
-            {(selectedCropFilter === 'all' || selectedCropFilter === 'chips') && (
-              <>
-                <div className="farm-crop-box">
-                  <div className="crop-box-top">
-                    <div className="crop-avatar-svg" style={{ color: '#eab308' }}>
-                      <svg viewBox="0 0 24 24" width="26" height="26" stroke="currentColor" strokeWidth="2" fill="none">
+          <div className="crop-grid">
+            {[
+              {
+                id: 'plantain',
+                category: 'chips',
+                categoryLabel: 'Chips Harvest',
+                name: 'Golden Plantain',
+                scientific: 'Musa paradisiaca L.',
+                color: '#eab308',
+                gradient: 'rgba(234, 179, 8, 0.15)',
+                desc: 'Grown under multi-tier agroforestry canopy. Naturally high in potassium and slow-release complex carbohydrates, harvested at peak starch-to-sugar equilibrium for artisanal kettle frying.',
+                region: 'Eastern & Ashanti Groves',
+                irrigation: 'Drip Micro-Irrigation',
+                targetProduct: 'Kone Plantain Chips',
+                tags: ['Partner Groves', 'Drip Irrigated', '100% Non-GMO', 'Peak Starch']
+              },
+              {
+                id: 'yam',
+                category: 'chips',
+                categoryLabel: 'Root Tuber Harvest',
+                name: 'Ghanaian White Yam',
+                scientific: 'Dioscorea alata',
+                color: '#f97316',
+                gradient: 'rgba(249, 115, 22, 0.15)',
+                desc: 'Cultivated in deeply aerated alluvial mounds. Produces crisp, fiber-rich root tubers with dense texture and clean nutty roasted flavor for traditional and salted yam chips.',
+                region: 'Eastern Alluvial Farmlands',
+                irrigation: 'Seasonal Monitored Rain',
+                targetProduct: 'Kone White Yam Chips',
+                tags: ['Mound Grown', 'High Inulin Fiber', 'Aerated Soil', 'Non-GMO']
+              },
+              {
+                id: 'potato',
+                category: 'chips',
+                categoryLabel: 'Highland Tuber',
+                name: 'Highland Russet Potato',
+                scientific: 'Solanum tuberosum',
+                color: '#38bdf8',
+                gradient: 'rgba(56, 189, 248, 0.15)',
+                desc: 'Farm-fresh potatoes slow-grown in cooler highland soils for maximum dry matter density, lower moisture absorption, and golden crispy frying performance.',
+                region: 'Highland Partner Co-ops',
+                irrigation: 'Precision Sprinklers',
+                targetProduct: 'Kone Crisps & Gourmet Fries',
+                tags: ['Highland Canopy', 'Skin-On Processing', 'Dense Starch', 'Pesticide-Free']
+              },
+              {
+                id: 'scotch-bonnet',
+                category: 'shito',
+                categoryLabel: 'Artisanal Spice',
+                name: 'Scotch Bonnet Pepper',
+                scientific: 'Capsicum chinense',
+                color: '#ef4444',
+                gradient: 'rgba(239, 68, 68, 0.15)',
+                desc: 'Fiery organic Scotch Bonnet peppers harvested at 85,000–120,000 Scoville Heat Units (SHU). Sun-ripened on organic compost beds and lab-audited for zero pesticide residues.',
+                region: 'Volta & Central Farmlands',
+                irrigation: 'Drip Telemetry',
+                targetProduct: 'Kone Shito Hot Sauce',
+                tags: ['85,000+ SHU', 'Sun-Ripened', 'Zero Pesticides', 'Lab Audited']
+              },
+              {
+                id: 'shallots',
+                category: 'shito',
+                categoryLabel: 'Alluvial Aromatics',
+                name: 'Sweet Pink Shallots',
+                scientific: 'Allium cepa var. aggregatum',
+                color: '#c084fc',
+                gradient: 'rgba(192, 132, 252, 0.15)',
+                desc: 'Cultivated in coastal sandy loam soils. Delivers concentrated natural sweetness, rich sulfur allicin compounds, and deep umami depth to our slow-simmered Kone Shito base.',
+                region: 'Coastal Sandy Loam Hubs',
+                irrigation: 'Micro-Spray Drip',
+                targetProduct: 'Kone Shito Umami Base',
+                tags: ['Coastal Farmlands', 'Natural Sweetness', 'Hand Harvested', 'Allicin-Rich']
+              },
+              {
+                id: 'garlic-herbs',
+                category: 'agroforestry',
+                categoryLabel: 'Agro-Forestry Companion',
+                name: 'Organic Garlic & Wild Herbs',
+                scientific: 'Allium sativum & Ocimum',
+                color: '#10b981',
+                gradient: 'rgba(16, 185, 129, 0.15)',
+                desc: 'Inter-cropped as botanical companion plants beneath plantain canopies to naturally deter insect pests while providing wild African herbal seasonings for our marinades and chips.',
+                region: 'Kumasi Rainforest Belt',
+                irrigation: 'Rainforest Canopy Moisture',
+                targetProduct: 'Herbal Seasoning & Oil Infusions',
+                tags: ['Companion Cropped', 'Natural Pest Deterrent', 'Wild Herbal', 'Regenerative']
+              }
+            ]
+              .filter(crop => selectedCropFilter === 'all' || crop.category === selectedCropFilter)
+              .map((crop) => (
+                <article key={crop.id} className="crop-card" style={{ '--crop-accent': crop.color }}>
+                  <div className="crop-card-top">
+                    <div className="crop-avatar-svg" style={{ color: crop.color, background: crop.gradient, borderColor: `${crop.color}40` }}>
+                      <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2.2" fill="none">
                         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                       </svg>
                     </div>
-                    <div>
-                      <h4 className="crop-name">Golden Plantain</h4>
-                      <span className="crop-scientific">Musa paradisiaca L.</span>
+                    <div className="crop-heading-group">
+                      <span className="crop-cat-pill" style={{ color: crop.color, background: `${crop.color}18`, borderColor: `${crop.color}35` }}>
+                        {crop.categoryLabel}
+                      </span>
+                      <h3 className="crop-name">{crop.name}</h3>
+                      <span className="crop-scientific">{crop.scientific}</span>
                     </div>
                   </div>
-                  <p className="crop-desc">
-                    Grown under multi-tier canopy cover. Naturally high in potassium and slow-release carbohydrates, harvested at peak starch-to-sugar balance for Kone Chips.
-                  </p>
-                  <div className="crop-meta-tags">
-                    <span>Partner Groves</span>
-                    <span>Drip Irrigated</span>
-                    <span>100% Non-GMO</span>
-                  </div>
-                </div>
 
-                <div className="farm-crop-box">
-                  <div className="crop-box-top">
-                    <div className="crop-avatar-svg" style={{ color: '#f97316' }}>
-                      <svg viewBox="0 0 24 24" width="26" height="26" stroke="currentColor" strokeWidth="2" fill="none">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <path d="M12 8v8M8 12h8"></path>
-                      </svg>
-                    </div>
-                    <div>
-                      <h4 className="crop-name">Ghanaian White Yam</h4>
-                      <span className="crop-scientific">Dioscorea alata</span>
-                    </div>
-                  </div>
-                  <p className="crop-desc">
-                    Cultivated in aerated alluvial mounds. Produces crisp, fiber-rich root tubers with dense texture and clean roasted flavor.
-                  </p>
-                  <div className="crop-meta-tags">
-                    <span>Partner Farmlands</span>
-                    <span>Mound Grown</span>
-                    <span>High Fiber</span>
-                  </div>
-                </div>
+                  <p className="crop-desc">{crop.desc}</p>
 
-                <div className="farm-crop-box">
-                  <div className="crop-box-top">
-                    <div className="crop-avatar-svg" style={{ color: '#38bdf8' }}>
-                      <svg viewBox="0 0 24 24" width="26" height="26" stroke="currentColor" strokeWidth="2" fill="none">
-                        <circle cx="12" cy="12" r="9"></circle>
-                        <path d="M12 3v18"></path>
-                      </svg>
+                  <div className="crop-specs-strip">
+                    <div className="crop-spec-item">
+                      <span className="spec-label">Zone</span>
+                      <strong className="spec-val">{crop.region}</strong>
                     </div>
-                    <div>
-                      <h4 className="crop-name">Highland Russet Potato</h4>
-                      <span className="crop-scientific">Solanum tuberosum</span>
+                    <div className="crop-spec-item">
+                      <span className="spec-label">Product</span>
+                      <strong className="spec-val" style={{ color: crop.color }}>{crop.targetProduct}</strong>
                     </div>
                   </div>
-                  <p className="crop-desc">
-                    Farm-fresh potatoes slow-grown in cooler highland soils for maximum starch density and golden frying performance.
-                  </p>
-                  <div className="crop-meta-tags">
-                    <span>Highland Co-ops</span>
-                    <span>Skin-On Processing</span>
-                    <span>Rich Potassium</span>
-                  </div>
-                </div>
-              </>
-            )}
 
-            {(selectedCropFilter === 'all' || selectedCropFilter === 'shito') && (
-              <>
-                <div className="farm-crop-box">
-                  <div className="crop-box-top">
-                    <div className="crop-avatar-svg" style={{ color: '#ef4444' }}>
-                      <svg viewBox="0 0 24 24" width="26" height="26" stroke="currentColor" strokeWidth="2" fill="none">
-                        <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
-                      </svg>
-                    </div>
-                    <div>
-                      <h4 className="crop-name">Scotch Bonnet Pepper</h4>
-                      <span className="crop-scientific">Capsicum chinense</span>
-                    </div>
-                  </div>
-                  <p className="crop-desc">
-                    Fiery organic Scotch Bonnet peppers harvested at 85,000 Scoville Heat units. Sun-ripened on organic soil beds and cold-audited for pesticide purity.
-                  </p>
                   <div className="crop-meta-tags">
-                    <span>Partner Fields</span>
-                    <span>85,000 SHU</span>
-                    <span>Zero Pesticides</span>
+                    {crop.tags.map((tag, tIdx) => (
+                      <span key={tIdx} className="crop-tag-item">#{tag}</span>
+                    ))}
                   </div>
-                </div>
-
-                <div className="farm-crop-box">
-                  <div className="crop-box-top">
-                    <div className="crop-avatar-svg" style={{ color: '#a855f7' }}>
-                      <svg viewBox="0 0 24 24" width="26" height="26" stroke="currentColor" strokeWidth="2" fill="none">
-                        <path d="M12 2a5 5 0 0 1 5 5c0 3.5-5 9-5 9s-5-5.5-5-9a5 5 0 0 1 5-5z"></path>
-                      </svg>
-                    </div>
-                    <div>
-                      <h4 className="crop-name">Sweet Pink Shallots</h4>
-                      <span className="crop-scientific">Allium cepa var. aggregatum</span>
-                    </div>
-                  </div>
-                  <p className="crop-desc">
-                    Grown in coastal sandy loam. Imparts deep aromatic sweetness and umami foundation to our slow-cooked Kone Shito sauce.
-                  </p>
-                  <div className="crop-meta-tags">
-                    <span>Coastal Farmlands</span>
-                    <span>Natural Sweetness</span>
-                    <span>Hand Harvested</span>
-                  </div>
-                </div>
-              </>
-            )}
-
-            {(selectedCropFilter === 'all' || selectedCropFilter === 'agroforestry') && (
-              <div className="farm-crop-box">
-                <div className="crop-box-top">
-                  <div className="crop-avatar-svg" style={{ color: '#10b981' }}>
-                    <svg viewBox="0 0 24 24" width="26" height="26" stroke="currentColor" strokeWidth="2" fill="none">
-                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                    </svg>
-                  </div>
-                  <div>
-                    <h4 className="crop-name">Organic Garlic & Herbs</h4>
-                    <span className="crop-scientific">Allium sativum & Ocimum</span>
-                  </div>
-                </div>
-                <p className="crop-desc">
-                  Inter-cropped alongside plantains to deter pests naturally while providing wild herbal seasonings for our artisanal chips and sauces.
-                </p>
-                <div className="crop-meta-tags">
-                  <span>Kumasi & Partner Hubs</span>
-                  <span>Companion Cropped</span>
-                  <span>Wild Seasoning</span>
-                </div>
-              </div>
-            )}
+                </article>
+              ))}
           </div>
         </div>
 
