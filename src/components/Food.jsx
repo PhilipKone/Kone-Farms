@@ -16,10 +16,10 @@ const demoBatches = {
     farmerMeta: 'Smallholder Plantain Groves & Central Yam Co-op',
     farmerQuote: '"Our plantains and yams are sun-ripened on organic soil and harvested within 24 hours of kettle frying for unmatched crunch."',
     trail: [
-      { date: 'June 02, 2026', text: 'Organic grove harvest & sugar-brix indexing', status: 'active' },
-      { date: 'June 03, 2026', text: 'Precision kettle-frying in cold-pressed oil', status: 'active' },
-      { date: 'June 04, 2026', text: 'Nitrogen-flushed vacuum sealed foil pouches', status: 'active' },
-      { date: 'June 05, 2026', text: 'Quality checked (99.8% crispness index) & dispatched', status: 'current' }
+      { date: 'June 02, 2026', text: 'Organic grove harvest & natural ripeness check', status: 'active' },
+      { date: 'June 03, 2026', text: 'Precision kettle-cooking in cold-pressed oil', status: 'active' },
+      { date: 'June 04, 2026', text: 'Sealed in airtight fresh-lock foil pouches', status: 'active' },
+      { date: 'June 05, 2026', text: 'Quality & crispness verified, packaged & dispatched', status: 'current' }
     ]
   },
   'KS-SHITO-BATCH-2026': {
@@ -33,8 +33,8 @@ const demoBatches = {
     farmerMeta: 'Field operations manager (Organic Crop Cluster)',
     farmerQuote: '"We feed our Scotch Bonnet pepper crop pure organic compost. No chemical fertilizer is ever allowed."',
     trail: [
-      { date: 'May 24, 2026', text: 'Harvested & telemetry checks passed', status: 'active' },
-      { date: 'May 25, 2026', text: 'Dehydration & moisture auditing', status: 'active' },
+      { date: 'May 24, 2026', text: 'Harvested from partner plots & quality checked', status: 'active' },
+      { date: 'May 25, 2026', text: 'Slow sun-drying & moisture calibration', status: 'active' },
       { date: 'May 27, 2026', text: 'Dispatched to Accra packaging kitchen', status: 'active' },
       { date: 'May 29, 2026', text: 'Bottled, vacuum-sealed & shipped', status: 'current' }
     ]
@@ -351,7 +351,7 @@ export default function Food() {
           </div>
           <h1 className="farms-headline">Kone Gourmet Snacks & Fine Foods</h1>
           <p className="farms-subheadline">
-            Farm-to-pantry excellence from Ghanaian smallholder partner farms. Handcrafted <strong>Kone Chips</strong> kettle-cooked to golden crispness and our authentic <strong>Kone Shito</strong> black pepper sauce. Audited by digital batch telemetry.
+            Farm-to-pantry excellence from Ghanaian smallholder partner farms. Handcrafted <strong>Kone Chips</strong> kettle-cooked to golden crispness and our authentic <strong>Kone Shito</strong> black pepper sauce. Crafted in small batches, 100% Non-GMO, and traceable from field to pantry.
           </p>
 
           {/* Product Category Segmented Control */}

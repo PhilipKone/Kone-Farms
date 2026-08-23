@@ -32,7 +32,7 @@ export default function Home() {
             </div>
             <h2 className="div-h3">Farms & Sourcing</h2>
             <p className="div-desc">
-              Discover our local farming partnerships and regional clusters. Browse our organic crops (Scotch Bonnet, Shallots) and read our strict 100% Non-GMO standard policy.
+              Explore our Ghanaian farming partnerships, organic crop varieties (Golden Plantain, White Yam, Scotch Bonnet), and our 100% Non-GMO cultivation standard.
             </p>
             <div className="div-btn">
               Explore Sourcing
@@ -54,7 +54,7 @@ export default function Home() {
             </div>
             <h2 className="div-h3">Kone Food & Snacks</h2>
             <p className="div-desc">
-              Artisanal organic snacks & cuisine catalog. Explore our new <strong>Kone Chips</strong> (Plantain, Yam & Potato) and signature <strong>Kone Shito</strong>, check audited batch logs, or calculate distributor wholesale pricing.
+              Handcrafted Ghanaian snacks & gourmet sauces. Discover crispy <strong>Kone Chips</strong> (Plantain, Yam & Potato) and savory <strong>Kone Shito</strong>, with verified batch traceability and wholesale ordering.
             </p>
             <div className="div-btn">
               Explore Food & Snacks
@@ -74,7 +74,7 @@ export default function Home() {
             </div>
             <h2 className="div-h3">smartFarm Telemetry</h2>
             <p className="div-desc">
-              Monitor live IoT field sensors tracking soil moisture, temperature, and sunlight. Test the real-time two-way sync console by overriding telemetry values directly to Firestore.
+              Explore live field telemetry tracking soil moisture, temperature, and solar irradiance. Experience automated smart micro-irrigation designed to conserve water and protect crop yields.
             </p>
             <div className="div-btn">
               Open Telemetry

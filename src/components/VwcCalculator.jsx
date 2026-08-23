@@ -101,10 +101,10 @@ export default function VwcCalculator() {
             </svg>
             INTERACTIVE AGRITECH TOOL
           </span>
-          <h2 className="calc-headline">Precision Soil Telemetry & VWC Calculator</h2>
+          <h2 className="calc-headline">Soil Hydration & Solar Node Calculator</h2>
         </div>
         <p className="calc-subtitle">
-          Calibrate raw 12-bit ESP32 ADC readings into Volumetric Water Content (VWC %) and simulate battery power budgets for field nodes.
+          Interactive tool to calculate soil hydration percentage and estimate solar sensor battery life across different farmland soil types.
         </p>
       </div>
 
@@ -114,7 +114,7 @@ export default function VwcCalculator() {
           
           {/* Substrate Selector */}
           <div className="input-group">
-            <label className="input-label">Select Farmland Substrate:</label>
+            <label className="input-label">Farmland Soil Type:</label>
             <select 
               value={substrate} 
               onChange={(e) => setSubstrate(e.target.value)}
@@ -131,8 +131,8 @@ export default function VwcCalculator() {
           {/* Raw ADC Input Slider */}
           <div className="input-group">
             <div className="slider-label-row">
-              <label className="input-label">Raw ESP32 ADC Reading (0 - 4095):</label>
-              <span className="adc-value-pill">{rawAdc} ADC</span>
+              <label className="input-label">Soil Sensor Signal (Digital Probe):</label>
+              <span className="adc-value-pill">{rawAdc} Signal</span>
             </div>
             <input 
               type="range" 
@@ -143,15 +143,15 @@ export default function VwcCalculator() {
               className="calc-slider"
             />
             <div className="slider-range-labels">
-              <span>Saturated Water (1350)</span>
-              <span>Dry Open Air (3200)</span>
+              <span>Wet / Saturated (1350)</span>
+              <span>Dry Soil (3200)</span>
             </div>
           </div>
 
           {/* Baseline Calibrations */}
           <div className="baselines-row">
             <div className="input-group">
-              <label className="input-label-sm">Dry Baseline (V_air):</label>
+              <label className="input-label-sm">Dry Soil Baseline:</label>
               <input 
                 type="number" 
                 value={airBaseline}
@@ -160,7 +160,7 @@ export default function VwcCalculator() {
               />
             </div>
             <div className="input-group">
-              <label className="input-label-sm">Water Baseline (V_water):</label>
+              <label className="input-label-sm">Wet Soil Baseline:</label>
               <input 
                 type="number" 
                 value={waterBaseline}
@@ -173,7 +173,7 @@ export default function VwcCalculator() {
           {/* Telemetry Sleep Duty Cycle */}
           <div className="input-group">
             <div className="slider-label-row">
-              <label className="input-label">Telemetry Deep Sleep Interval:</label>
+              <label className="input-label">Sensor Sync Frequency:</label>
               <span className="adc-value-pill" style={{ background: 'rgba(56, 189, 248, 0.15)', color: '#38bdf8' }}>
                 Every {sleepInterval} Mins
               </span>

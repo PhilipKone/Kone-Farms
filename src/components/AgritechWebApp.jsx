@@ -181,7 +181,7 @@ export default function AgritechWebApp({ onBack }) {
         humidity: calculatedHumidity,
         ph: 6.5,
         valveActive: false,
-        notes: `Calibrated via device hardware sensors (Tilt: ${beta}°, Battery: ${Math.round(batteryLevel * 100)}%).`
+        notes: 'Field reading captured successfully from device mobile sensors.'
       };
 
       setPhoneReading(result);
@@ -245,15 +245,15 @@ export default function AgritechWebApp({ onBack }) {
       list.push({
         type: 'success',
         title: 'Optimal Root Moisture Equilibrium',
-        desc: `VWC is balanced at ${moisture}%. Soil matrix suction pressure is within ideal vegetative range.`
+        desc: `Soil moisture is at optimal levels (${moisture}%) for healthy vegetative crop growth.`
       });
     }
 
     if (humidity >= 88 && temperature >= 24 && temperature <= 32) {
       list.push({
         type: 'warning',
-        title: 'Black Sigatoka Spore Germination Risk',
-        desc: `Canopy RH is ${humidity}% at ${temperature}°C. Elevated fungal germination index for Musa paradisiaca L. Apply organic bio-fungicide spray.`,
+        title: 'High Humidity Fungal Risk',
+        desc: `Canopy humidity is elevated (${humidity}% at ${temperature}°C). Consider applying organic bio-fungicide spray to protect leaves.`,
         actionText: 'View AI Prescription',
         action: () => {
           setActiveTab('ai');
@@ -292,11 +292,11 @@ export default function AgritechWebApp({ onBack }) {
       } else if (telemetry && (q.includes('sensor') || q.includes('analyze') || q.includes('current'))) {
         aiReply = `**Kone AI Real-Time Telemetry Analysis**:\n\n• **Plot**: ${telemetry.plotName || 'Field Plot #01'}\n• **Soil Moisture**: ${telemetry.moisture}% (VWC)\n• **Canopy Temperature**: ${telemetry.temperature}°C\n• **Relative Humidity**: ${telemetry.humidity}%\n• **Vapor Pressure Deficit (VPD)**: ${calculatedVPD ?? 'N/A'} kPa\n\n**Agronomic Assessment**: ${telemetry.moisture < 25 ? 'Water deficit detected. Initiate micro-drip irrigation immediately.' : 'Crop moisture index is balanced. Continue routine field monitoring.'}`;
       } else if (q.includes('sigatoka') || q.includes('spray') || q.includes('fungal')) {
-        aiReply = `**Kone AI Black Sigatoka Bio-Fungicide Recipe**:\n\nFor *Musa paradisiaca L.* canopy protection in tropical humid microclimates:\n1. Mix **Organic Cold-Pressed Neem Oil** (5 mL/L) with **Potassium Bicarbonate** (3 g/L).\n2. Add 1 mL horticultural liquid soap as an emulsifier.\n3. Spray early morning (06:00 - 08:30) targeting underside of leaves.\n4. Repeat every 10–14 days during high-humidity cycles.`;
+        aiReply = `**Kone AI Bio-Fungicide Recipe**:\n\nFor organic plantain canopy protection in humid weather:\n1. Mix **Organic Cold-Pressed Neem Oil** (5 mL/L) with **Potassium Bicarbonate** (3 g/L).\n2. Add 1 mL mild horticultural liquid soap as an emulsifier.\n3. Spray in the early morning (06:00 - 08:30) targeting the underside of leaves.\n4. Repeat every 10–14 days during rainy or high-humidity periods.`;
       } else if (q.includes('yield') || q.includes('forecast') || q.includes('plantain')) {
-        aiReply = `**Kone AI Crop Yield Forecast**: Using the Penman-Monteith ET model calibrated for nutrient-rich loam soils, projected bunch weight is **18.2 – 21.5 kg/bunch** (+42% vs unmonitored baseline). Expected harvest readiness in **38–45 days**.`;
+        aiReply = `**Kone AI Crop Yield Forecast**: Based on optimal soil hydration and climate modeling, projected bunch weight is **18.2 – 21.5 kg/bunch** (+42% vs unmonitored baseline). Expected harvest readiness in **38–45 days**.`;
       } else {
-        aiReply = `**Kone AI Agronomist**: I have logged your query regarding "${queryText}". Our field telemetry pipeline is connected to Firestore (\`daywise-ays8t\`). How else can I assist your crop management today?`;
+        aiReply = `**Kone AI Agronomist**: I have received your question regarding "${queryText}". Our smartFarm cloud telemetry network is connected and active. How else can I assist your crop management today?`;
       }
 
       setAiChatMessages(prev => [

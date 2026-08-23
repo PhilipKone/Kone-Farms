@@ -263,14 +263,14 @@ export default function Agritech() {
                 <svg viewBox="0 0 24 24" width="18" height="18" stroke="#60a5fa" strokeWidth="2" fill="none">
                   <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
                 </svg>
-                Telemetry Control Console (Sandbox)
+                Interactive Field Sensor Simulator
               </h3>
               <span className={`db-status-badge ${isDbOnline ? 'online' : ''}`}>
-                Firestore {isDbOnline ? 'Connected' : 'Offline Mode'}
+                {isDbOnline ? 'Live Sync Connected' : 'Local Mode'}
               </span>
             </div>
             <p style={{ color: '#94a3b8', fontSize: '0.9rem', textAlign: 'left', margin: '0.5rem 0 2rem', lineHeight: 1.5 }}>
-              Adjust these sliders to simulate real-time sensor updates in field plots. If Firestore is active, your changes will sync two-way instantly and update the trend chart above.
+              Adjust the sliders below to test how our smart automated irrigation and field sensors react to changing soil moisture and temperature in real time.
             </p>
 
             <div className="controls-grid">

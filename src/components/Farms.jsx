@@ -221,7 +221,7 @@ export default function Farms() {
               <strong>{telemetry ? 'LIVE FIELD AGRO-TELEMETRY' : 'STATUS: STANDBY • AWAITING FIELD TELEMETRY'}</strong>
             </div>
             <span className="telemetry-station-id">
-              {telemetry ? `Station #AG-FIELD-01 • Last Synced: ${lastSyncTime || 'Just now'}` : 'Cloud DB Online (daywise-ays8t) • No Live Measurements Logged Yet'}
+              {telemetry ? `Field Node #01 • Synced: ${lastSyncTime || 'Just now'}` : 'Cloud Telemetry Active • Awaiting Field Probe Readings'}
             </span>
           </div>
 
