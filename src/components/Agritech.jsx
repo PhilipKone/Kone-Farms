@@ -50,7 +50,7 @@ export default function Agritech() {
       [field]: value,
       updatedAt: new Date().toISOString()
     };
-    
+
     setTelemetry(nextTelemetry);
 
     if (db && db.app) {
@@ -85,7 +85,7 @@ export default function Agritech() {
         <div className="agritech-header-section">
           <div className="farms-title-badge" style={{ background: 'rgba(59, 130, 246, 0.12)', borderColor: 'rgba(59, 130, 246, 0.25)', color: '#60a5fa', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
             <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2.5" fill="none">
-              <path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/>
+              <path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01" />
             </svg>
             smartFarm Agritech
           </div>
@@ -96,14 +96,14 @@ export default function Agritech() {
 
           <div className="agritech-pwa-launch-banner">
             <div className="pwa-banner-text">
-              <h3>Standalone Native Agritech Web App (PWA)</h3>
+              <h3>Agritech App</h3>
               <p>Live soil temp, VWC %, humidity, phone sensor reads, automated recommendations & Kone AI integration.</p>
             </div>
             <a href="#agritech/webapp" className="pwa-launch-btn">
               <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2.5" fill="none" style={{ marginRight: '6px' }}>
-                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/>
+                <rect x="5" y="2" width="14" height="20" rx="2" ry="2" /><line x1="12" y1="18" x2="12.01" y2="18" />
               </svg>
-              Launch Native PWA App →
+              Launch App →
             </a>
           </div>
         </div>
@@ -134,7 +134,7 @@ export default function Agritech() {
                 <div className="telemetry-label" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
                   Soil Moisture {hasData ? '' : '(Standby)'}
                   <svg viewBox="0 0 24 24" width="13" height="13" stroke="#60a5fa" strokeWidth="2" fill="none">
-                    <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                    <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
                   </svg>
                 </div>
               </div>
@@ -143,7 +143,7 @@ export default function Agritech() {
                 <div className="telemetry-label" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
                   Temperature {hasData ? '' : '(Standby)'}
                   <svg viewBox="0 0 24 24" width="13" height="13" stroke="#f59e0b" strokeWidth="2" fill="none">
-                    <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/>
+                    <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
                   </svg>
                 </div>
               </div>
@@ -371,7 +371,7 @@ export default function Agritech() {
             <div className="tool-card">
               <div className="tool-icon">
                 <svg viewBox="0 0 24 24" width="28" height="28" stroke="#34d399" strokeWidth="2" fill="none">
-                  <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                  <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
                 </svg>
               </div>
               <h4 className="tool-title">IoT Water Valve</h4>
@@ -380,7 +380,7 @@ export default function Agritech() {
             <div className="tool-card">
               <div className="tool-icon">
                 <svg viewBox="0 0 24 24" width="28" height="28" stroke="#60a5fa" strokeWidth="2" fill="none">
-                  <path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/>
+                  <path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01" />
                 </svg>
               </div>
               <h4 className="tool-title">Telemetry Hub</h4>

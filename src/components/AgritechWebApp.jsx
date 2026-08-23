@@ -163,7 +163,7 @@ export default function AgritechWebApp({ onBack }) {
 
     let batteryLevel = 0.85;
     if (navigator.getBattery) {
-      navigator.getBattery().then(b => { batteryLevel = b.level; }).catch(() => {});
+      navigator.getBattery().then(b => { batteryLevel = b.level; }).catch(() => { });
     }
 
     setTimeout(() => {
@@ -317,12 +317,12 @@ export default function AgritechWebApp({ onBack }) {
 
   return (
     <div className="mobbin-app-shell">
-      
+
       {/* ── Native Top Navigation Bar ──────────────────────── */}
       <header className="mobbin-header">
         <div className="mobbin-header-left">
-          <button 
-            className="mobbin-back-btn" 
+          <button
+            className="mobbin-back-btn"
             onClick={() => {
               if (onBack) onBack();
               else window.location.hash = '#agritech';
@@ -335,7 +335,7 @@ export default function AgritechWebApp({ onBack }) {
             </svg>
             <span className="back-text">Farms</span>
           </button>
-          
+
           <div className="mobbin-app-brand">
             <h1 className="mobbin-app-title">smartFarm</h1>
             <div className="mobbin-db-status">
@@ -361,42 +361,42 @@ export default function AgritechWebApp({ onBack }) {
 
       {/* ── Top Segmented Controls Tab Bar ─────────────────── */}
       <nav className="mobbin-segmented-tabs">
-        <button 
+        <button
           className={`tab-segment ${activeTab === 'telemetry' ? 'active' : ''}`}
           onClick={() => setActiveTab('telemetry')}
         >
           <svg className="tab-svg" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none">
-            <path d="M12 20v-6M6 20V10M18 20V4"/>
+            <path d="M12 20v-6M6 20V10M18 20V4" />
           </svg>
           <span className="tab-label">Telemetry</span>
         </button>
 
-        <button 
+        <button
           className={`tab-segment ${activeTab === 'record' ? 'active' : ''}`}
           onClick={() => setActiveTab('record')}
         >
           <svg className="tab-svg" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none">
-            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>
+            <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="16" /><line x1="8" y1="12" x2="16" y2="12" />
           </svg>
           <span className="tab-label">Record Reading</span>
         </button>
 
-        <button 
+        <button
           className={`tab-segment ${activeTab === 'ai' ? 'active' : ''}`}
           onClick={() => setActiveTab('ai')}
         >
           <svg className="tab-svg" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none">
-            <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3z"/>
+            <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3z" />
           </svg>
           <span className="tab-label">Kone AI</span>
         </button>
 
-        <button 
+        <button
           className={`tab-segment ${activeTab === 'history' ? 'active' : ''}`}
           onClick={() => setActiveTab('history')}
         >
           <svg className="tab-svg" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" />
           </svg>
           <span className="tab-label">Audit Logs</span>
         </button>
@@ -410,22 +410,22 @@ export default function AgritechWebApp({ onBack }) {
            ══════════════════════════════════════════════════════ */}
         {activeTab === 'telemetry' && (
           <div className="tab-view animate-fade">
-            
+
             {/* If NO telemetry has been recorded yet: Show Clean Empty State */}
             {!telemetry ? (
               <div className="mobbin-empty-state-card">
                 <div className="empty-state-icon-wrapper">
                   <svg viewBox="0 0 24 24" width="48" height="48" stroke="#10b981" strokeWidth="1.8" fill="none">
-                    <path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/>
+                    <path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01" />
                   </svg>
                 </div>
                 <div className="empty-badge">AWAITING FIELD TELEMETRY</div>
                 <h2>No Measurements Recorded Yet</h2>
                 <p>
-                  Your Google Cloud Firestore database (<code className="code-inline">daywise-ays8t</code>) is online and ready. Record your first field measurement using your mobile phone sensors, physical probe readings, or IoT nodes.
+                  Your Google Cloud Firestore database (<code className="code-inline">project-daywise</code>) is online and ready. Record your first field measurement using your mobile phone sensors, physical probe readings, or IoT nodes.
                 </p>
                 <div className="empty-action-buttons">
-                  <button 
+                  <button
                     className="primary-action-btn"
                     onClick={() => {
                       setRecordMode('phone');
@@ -433,11 +433,11 @@ export default function AgritechWebApp({ onBack }) {
                     }}
                   >
                     <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2.5" fill="none" style={{ marginRight: '6px' }}>
-                      <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/>
+                      <rect x="5" y="2" width="14" height="20" rx="2" ry="2" /><line x1="12" y1="18" x2="12.01" y2="18" />
                     </svg>
                     Measure with Phone Sensors →
                   </button>
-                  <button 
+                  <button
                     className="secondary-action-btn"
                     onClick={() => {
                       setRecordMode('manual');
@@ -445,7 +445,7 @@ export default function AgritechWebApp({ onBack }) {
                     }}
                   >
                     <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2.5" fill="none" style={{ marginRight: '6px' }}>
-                      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
                     </svg>
                     Log Field Probe Data →
                   </button>
@@ -454,7 +454,7 @@ export default function AgritechWebApp({ onBack }) {
             ) : (
               /* If Telemetry Data EXISTS: Render Full High-Tech Dashboard */
               <div className="telemetry-dashboard-layout">
-                
+
                 {/* Node Status Banner */}
                 <div className="mobbin-node-banner">
                   <div className="node-info">
@@ -467,8 +467,8 @@ export default function AgritechWebApp({ onBack }) {
                     </span>
                     <span className="node-synced">Last Synced: {lastSyncTime || telemetry.displayTime || 'Just now'}</span>
                   </div>
-                  <button 
-                    className="quick-record-btn" 
+                  <button
+                    className="quick-record-btn"
                     onClick={() => setActiveTab('record')}
                   >
                     <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2.5" fill="none" style={{ marginRight: '4px' }}>
@@ -481,13 +481,13 @@ export default function AgritechWebApp({ onBack }) {
 
                 {/* Metric Cards Grid */}
                 <div className="mobbin-metrics-grid">
-                  
+
                   {/* Soil Moisture */}
                   <div className="mobbin-card metric-card">
                     <div className="card-top">
                       <div className="card-icon-wrapper blue-icon">
                         <svg viewBox="0 0 24 24" width="18" height="18" stroke="#60a5fa" strokeWidth="2" fill="none">
-                          <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                          <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
                         </svg>
                       </div>
                       <span className="card-title">Soil Moisture (VWC)</span>
@@ -497,8 +497,8 @@ export default function AgritechWebApp({ onBack }) {
                       <span className="metric-unit">Volumetric</span>
                     </div>
                     <div className="meter-track">
-                      <div 
-                        className="meter-fill blue-fill" 
+                      <div
+                        className="meter-fill blue-fill"
                         style={{ width: `${Math.min(100, Math.max(5, telemetry.moisture))}%` }}
                       />
                     </div>
@@ -512,18 +512,18 @@ export default function AgritechWebApp({ onBack }) {
                     <div className="card-top">
                       <div className="card-icon-wrapper orange-icon">
                         <svg viewBox="0 0 24 24" width="18" height="18" stroke="#f59e0b" strokeWidth="2" fill="none">
-                          <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/>
+                          <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
                         </svg>
                       </div>
                       <span className="card-title">Canopy Temperature</span>
                     </div>
                     <div className="metric-val-row">
                       <span className="metric-number">{telemetry.temperature}°C</span>
-                      <span className="metric-unit">({((telemetry.temperature * 9/5) + 32).toFixed(1)}°F)</span>
+                      <span className="metric-unit">({((telemetry.temperature * 9 / 5) + 32).toFixed(1)}°F)</span>
                     </div>
                     <div className="meter-track">
-                      <div 
-                        className="meter-fill orange-fill" 
+                      <div
+                        className="meter-fill orange-fill"
                         style={{ width: `${Math.min(100, (telemetry.temperature / 45) * 100)}%` }}
                       />
                     </div>
@@ -537,7 +537,7 @@ export default function AgritechWebApp({ onBack }) {
                     <div className="card-top">
                       <div className="card-icon-wrapper emerald-icon">
                         <svg viewBox="0 0 24 24" width="18" height="18" stroke="#34d399" strokeWidth="2" fill="none">
-                          <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9z"/>
+                          <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9z" />
                         </svg>
                       </div>
                       <span className="card-title">Relative Humidity</span>
@@ -547,8 +547,8 @@ export default function AgritechWebApp({ onBack }) {
                       <span className="metric-unit">RH</span>
                     </div>
                     <div className="meter-track">
-                      <div 
-                        className="meter-fill emerald-fill" 
+                      <div
+                        className="meter-fill emerald-fill"
                         style={{ width: `${Math.min(100, telemetry.humidity)}%` }}
                       />
                     </div>
@@ -562,7 +562,7 @@ export default function AgritechWebApp({ onBack }) {
                     <div className="card-top">
                       <div className="card-icon-wrapper purple-icon">
                         <svg viewBox="0 0 24 24" width="18" height="18" stroke="#c084fc" strokeWidth="2" fill="none">
-                          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
                         </svg>
                       </div>
                       <span className="card-title">Vapor Pressure Deficit</span>
@@ -572,8 +572,8 @@ export default function AgritechWebApp({ onBack }) {
                       <span className="metric-unit">kPa Transpiration</span>
                     </div>
                     <div className="meter-track">
-                      <div 
-                        className="meter-fill purple-fill" 
+                      <div
+                        className="meter-fill purple-fill"
                         style={{ width: `${Math.min(100, ((calculatedVPD || 1) / 2.5) * 100)}%` }}
                       />
                     </div>
@@ -589,7 +589,7 @@ export default function AgritechWebApp({ onBack }) {
                   <div className="valve-left">
                     <div className="valve-svg-wrapper">
                       <svg viewBox="0 0 24 24" width="22" height="22" stroke="#34d399" strokeWidth="2" fill="none">
-                        <path d="M12 2v4M8 4h8M4 10h16v4H4zM6 14v6M18 14v6"/>
+                        <path d="M12 2v4M8 4h8M4 10h16v4H4zM6 14v6M18 14v6" />
                       </svg>
                     </div>
                     <div>
@@ -597,7 +597,7 @@ export default function AgritechWebApp({ onBack }) {
                       <p>Solenoid Status: <strong>{telemetry.valveActive ? 'OPEN (IRRIGATING)' : 'CLOSED (STANDBY)'}</strong></p>
                     </div>
                   </div>
-                  <button 
+                  <button
                     className={`valve-action-btn ${telemetry.valveActive ? 'active' : ''}`}
                     onClick={toggleValve}
                   >
@@ -644,33 +644,33 @@ export default function AgritechWebApp({ onBack }) {
            ══════════════════════════════════════════════════════ */}
         {activeTab === 'record' && (
           <div className="tab-view animate-fade">
-            
+
             <div className="record-container">
               <div className="record-mode-selector">
-                <button 
+                <button
                   className={`mode-pill ${recordMode === 'phone' ? 'active' : ''}`}
                   onClick={() => setRecordMode('phone')}
                 >
                   <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" strokeWidth="2" fill="none" style={{ marginRight: '5px' }}>
-                    <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/>
+                    <rect x="5" y="2" width="14" height="20" rx="2" ry="2" /><line x1="12" y1="18" x2="12.01" y2="18" />
                   </svg>
                   Phone Sensors
                 </button>
-                <button 
+                <button
                   className={`mode-pill ${recordMode === 'manual' ? 'active' : ''}`}
                   onClick={() => setRecordMode('manual')}
                 >
                   <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" strokeWidth="2" fill="none" style={{ marginRight: '5px' }}>
-                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
                   </svg>
                   Manual Field Log
                 </button>
-                <button 
+                <button
                   className={`mode-pill ${recordMode === 'iot' ? 'active' : ''}`}
                   onClick={() => setRecordMode('iot')}
                 >
                   <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" strokeWidth="2" fill="none" style={{ marginRight: '5px' }}>
-                    <path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/>
+                    <path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01" />
                   </svg>
                   IoT Node API
                 </button>
@@ -682,7 +682,7 @@ export default function AgritechWebApp({ onBack }) {
                   <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2.5" fill="none" style={{ marginRight: '6px', verticalAlign: 'middle' }}>
                     <polyline points="20 6 9 17 4 12"></polyline>
                   </svg>
-                  Measurement saved to Google Cloud Firestore (<code className="code-inline">daywise-ays8t</code>).
+                  Measurement saved to Google Cloud Firestore (<code className="code-inline">project-daywise</code>).
                 </div>
               )}
 
@@ -692,7 +692,7 @@ export default function AgritechWebApp({ onBack }) {
                   <div className="scan-header">
                     <div className="scan-icon-circle">
                       <svg viewBox="0 0 24 24" width="32" height="32" stroke="#34d399" strokeWidth="2" fill="none">
-                        <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/>
+                        <rect x="5" y="2" width="14" height="20" rx="2" ry="2" /><line x1="12" y1="18" x2="12.01" y2="18" />
                       </svg>
                     </div>
                     <h2>Scan with Device Sensors</h2>
@@ -702,7 +702,7 @@ export default function AgritechWebApp({ onBack }) {
                   </div>
 
                   {!phoneReading ? (
-                    <button 
+                    <button
                       className="scan-trigger-btn"
                       onClick={startPhoneSensorScan}
                       disabled={phoneScanning}
@@ -737,13 +737,13 @@ export default function AgritechWebApp({ onBack }) {
                       </div>
 
                       <div className="scan-action-row">
-                        <button 
+                        <button
                           className="save-record-btn"
                           onClick={() => saveTelemetryRecord(phoneReading)}
                         >
                           Save to Cloud Firestore
                         </button>
-                        <button 
+                        <button
                           className="rescan-btn"
                           onClick={() => setPhoneReading(null)}
                         >
@@ -771,8 +771,8 @@ export default function AgritechWebApp({ onBack }) {
                   }}>
                     <div className="form-group">
                       <label>Plot / Zone Name</label>
-                      <input 
-                        type="text" 
+                      <input
+                        type="text"
                         value={manualForm.plotName}
                         onChange={(e) => setManualForm({ ...manualForm, plotName: e.target.value })}
                         required
@@ -782,8 +782,8 @@ export default function AgritechWebApp({ onBack }) {
                     <div className="form-row-2">
                       <div className="form-group">
                         <label>Soil Moisture VWC (%)</label>
-                        <input 
-                          type="number" min="0" max="100" 
+                        <input
+                          type="number" min="0" max="100"
                           value={manualForm.moisture}
                           onChange={(e) => setManualForm({ ...manualForm, moisture: parseFloat(e.target.value) })}
                           required
@@ -791,7 +791,7 @@ export default function AgritechWebApp({ onBack }) {
                       </div>
                       <div className="form-group">
                         <label>Canopy Temp (°C)</label>
-                        <input 
+                        <input
                           type="number" step="0.1" min="10" max="50"
                           value={manualForm.temperature}
                           onChange={(e) => setManualForm({ ...manualForm, temperature: parseFloat(e.target.value) })}
@@ -803,8 +803,8 @@ export default function AgritechWebApp({ onBack }) {
                     <div className="form-row-2">
                       <div className="form-group">
                         <label>Relative Humidity (%)</label>
-                        <input 
-                          type="number" min="10" max="100" 
+                        <input
+                          type="number" min="10" max="100"
                           value={manualForm.humidity}
                           onChange={(e) => setManualForm({ ...manualForm, humidity: parseFloat(e.target.value) })}
                           required
@@ -812,7 +812,7 @@ export default function AgritechWebApp({ onBack }) {
                       </div>
                       <div className="form-group">
                         <label>Soil pH</label>
-                        <input 
+                        <input
                           type="number" step="0.1" min="4" max="9"
                           value={manualForm.ph}
                           onChange={(e) => setManualForm({ ...manualForm, ph: parseFloat(e.target.value) })}
@@ -823,7 +823,7 @@ export default function AgritechWebApp({ onBack }) {
 
                     <div className="form-group">
                       <label>Field Notes & Observations</label>
-                      <textarea 
+                      <textarea
                         rows="2"
                         value={manualForm.notes}
                         onChange={(e) => setManualForm({ ...manualForm, notes: e.target.value })}
@@ -846,10 +846,10 @@ export default function AgritechWebApp({ onBack }) {
                   <div className="code-instruction-box">
                     <h4>HTTPS REST Webhook Endpoint:</h4>
                     <code>POST https://farms.koneacademy.io/api/telemetry/push</code>
-                    
+
                     <h4 style={{ marginTop: '1rem' }}>JSON Payload Specification:</h4>
                     <pre>
-{`{
+                      {`{
   "plotName": "Field Plot #01",
   "moisture": 42.5,
   "temperature": 28.6,
@@ -876,7 +876,7 @@ export default function AgritechWebApp({ onBack }) {
                 <div className="ai-brand-group">
                   <div className="ai-avatar-badge">
                     <svg viewBox="0 0 24 24" width="20" height="20" stroke="#34d399" strokeWidth="2" fill="none">
-                      <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3z"/>
+                      <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3z" />
                     </svg>
                   </div>
                   <div>
@@ -884,7 +884,7 @@ export default function AgritechWebApp({ onBack }) {
                     <span className="ai-badge-text">Powered by Kone AI Operations</span>
                   </div>
                 </div>
-                <button 
+                <button
                   className="analyze-chip-btn"
                   onClick={() => triggerAiQuery("Analyze current sensor telemetry and suggest action plan.")}
                 >
@@ -934,8 +934,8 @@ export default function AgritechWebApp({ onBack }) {
 
               {/* Input Form */}
               <form className="ai-input-bar" onSubmit={handleSendAiMessage}>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   placeholder="Ask Kone AI about crop health, diseases, or telemetry..."
                   value={aiInputText}
                   onChange={(e) => setAiInputText(e.target.value)}
@@ -999,42 +999,42 @@ export default function AgritechWebApp({ onBack }) {
 
       {/* ── Native Mobile Bottom Navigation Bar (Apple HIG Style) ── */}
       <nav className="mobbin-bottom-nav">
-        <button 
+        <button
           className={`nav-btn ${activeTab === 'telemetry' ? 'active' : ''}`}
           onClick={() => setActiveTab('telemetry')}
         >
           <svg className="nav-svg" viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" strokeWidth="2" fill="none">
-            <path d="M12 20v-6M6 20V10M18 20V4"/>
+            <path d="M12 20v-6M6 20V10M18 20V4" />
           </svg>
           <span className="nav-text">Telemetry</span>
         </button>
 
-        <button 
+        <button
           className={`nav-btn ${activeTab === 'record' ? 'active' : ''}`}
           onClick={() => setActiveTab('record')}
         >
           <svg className="nav-svg" viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" strokeWidth="2" fill="none">
-            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>
+            <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="16" /><line x1="8" y1="12" x2="16" y2="12" />
           </svg>
           <span className="nav-text">Record</span>
         </button>
 
-        <button 
+        <button
           className={`nav-btn ${activeTab === 'ai' ? 'active' : ''}`}
           onClick={() => setActiveTab('ai')}
         >
           <svg className="nav-svg" viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" strokeWidth="2" fill="none">
-            <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3z"/>
+            <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3z" />
           </svg>
           <span className="nav-text">Kone AI</span>
         </button>
 
-        <button 
+        <button
           className={`nav-btn ${activeTab === 'history' ? 'active' : ''}`}
           onClick={() => setActiveTab('history')}
         >
           <svg className="nav-svg" viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" strokeWidth="2" fill="none">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" />
           </svg>
           <span className="nav-text">History</span>
         </button>

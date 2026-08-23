@@ -379,38 +379,47 @@
 }
 
 .crop-specs-strip {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  padding: 0.65rem 0.85rem;
-  margin-bottom: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 0.75rem 0.95rem;
+  margin-bottom: 1.15rem;
   text-align: left;
 }
 
 .crop-spec-item {
   display: flex;
-  flex-direction: column;
-  gap: 2px;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+  padding-bottom: 0.35rem;
+}
+
+.crop-spec-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
 .spec-label {
-  font-size: 0.65rem;
+  font-size: 0.68rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: #94a3b8;
   font-weight: 700;
+  flex-shrink: 0;
 }
 
 .spec-val {
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   font-weight: 700;
   color: #e2e8f0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  text-align: right;
+  word-break: break-word;
+  white-space: normal;
 }
 
 .crop-meta-tags {
