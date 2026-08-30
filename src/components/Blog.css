@@ -607,6 +607,11 @@
     margin-bottom: 1.8rem;
   }
 
+  .farms-blog-container {
+    padding-top: 80px;
+    padding-bottom: 120px;
+  }
+
   .farms-blog-badge {
     font-size: 0.68rem;
     padding: 0.35rem 0.85rem;

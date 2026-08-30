@@ -72,14 +72,15 @@ export default function Blog({ onSelectArticle }) {
     <div className="farms-blog-container">
       {/* Blog Hero Banner */}
       <div className="farms-blog-hero">
-        <div className="farms-blog-badge">
-          <span className="badge-pulse"></span>
-          KONE FARMS AGRITECH RESEARCH & ENGINEERING HUB
+        <div className="farms-title-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+          <span className="badge-pulse-dot" />
+          Agritech Research & Field Engineering
         </div>
-        <h1 className="farms-blog-title">
-          Smart Agriculture & <span className="text-emerald-glow">Precision Telemetry</span>
+        <h1 className="farms-headline">
+          Smart Agriculture & <br className="desktop-break" />
+          <span className="emerald-luminance">Precision Telemetry.</span>
         </h1>
-        <p className="farms-blog-subtitle">
+        <p className="farms-subheadline" style={{ margin: '0 auto 2.5rem' }}>
           Publication-grade agricultural research, edge AI disease prediction models, hardware circuit schematics, 
           and field-tested IoT telemetry deployments across Ghana and West Africa.
         </p>
