@@ -341,17 +341,16 @@ export default function Food() {
         
         {/* Market & Gourmet Storefront Header */}
         <div className="food-header-section">
-          <div className="farms-title-badge" style={{ background: 'rgba(239, 68, 68, 0.12)', borderColor: 'rgba(239, 68, 68, 0.25)', color: '#f87171', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-            <svg viewBox="0 0 24 24" width="14" height="14" stroke="#f87171" strokeWidth="2.5" fill="none">
-              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-              <line x1="3" y1="6" x2="21" y2="6"></line>
-              <path d="M16 10a4 4 0 0 1-8 0"></path>
-            </svg>
-            Artisanal Food Market & Pantry Store
+          <div className="farms-title-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+            <span className="badge-pulse-dot" />
+            100% Non-GMO Artisanal Pantry & Snacks
           </div>
-          <h1 className="farms-headline">Kone Gourmet Snacks & Fine Foods</h1>
+          <h1 className="farms-headline">
+            Ghanaian Flavor & <br className="desktop-break" />
+            <span className="emerald-luminance">Precision Agro-Processing.</span>
+          </h1>
           <p className="farms-subheadline">
-            Farm-to-pantry excellence from Ghanaian smallholder partner farms. Handcrafted <strong>Kone Chips</strong> kettle-cooked to golden crispness and our authentic <strong>Kone Shito</strong> black pepper sauce. Crafted in small batches, 100% Non-GMO, and traceable from field to pantry.
+            Farm-to-pantry excellence from Ghanaian smallholder partner farms. Handcrafted <strong>Kone Chips</strong> kettle-cooked to golden crispness and our authentic <strong>Kone Shito</strong> slow-cooked with organic Scotch Bonnet peppers.
           </p>
 
           {/* Product Category Segmented Control */}

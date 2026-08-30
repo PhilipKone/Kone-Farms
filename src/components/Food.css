@@ -1200,3 +1200,10 @@
   margin: 0.15rem 0 0;
   line-height: 1.35;
 }
+
+@media (max-width: 768px) {
+  .food-div-page {
+    padding-bottom: 120px;
+    padding-top: 80px;
+  }
+}
