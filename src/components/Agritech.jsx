@@ -83,27 +83,28 @@ export default function Agritech() {
 
         {/* Header */}
         <div className="agritech-header-section">
-          <div className="farms-title-badge" style={{ background: 'rgba(59, 130, 246, 0.12)', borderColor: 'rgba(59, 130, 246, 0.25)', color: '#60a5fa', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2.5" fill="none">
-              <path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01" />
-            </svg>
-            smartFarm Agritech
+          <div className="farms-title-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+            <span className="badge-pulse-dot" />
+            Solar-Powered IoT Sensors & Micro-Irrigation
           </div>
-          <h1 className="farms-headline">Precision Agriculture & Field Telemetry</h1>
-          <p className="farms-subheadline" style={{ margin: '0 auto 1.5rem' }}>
-            We deploy software engineering, solar-driven field units, and wireless telemetry sensors directly into field plots. Real-time atmospheric statistics drive automated micro-irrigation valves to conserve water.
+          <h1 className="farms-headline">
+            Autonomous Field Telemetry & <br className="desktop-break" />
+            <span className="emerald-luminance">Precision Soil Science.</span>
+          </h1>
+          <p className="farms-subheadline" style={{ margin: '0 auto 1.75rem' }}>
+            Deploying solar-driven ESP32 telemetry hardware and wireless sensor mesh nodes directly across Ghanaian partner farmlands. Real-time soil hydrology drives automated micro-irrigation valves to maximize crop yield and conserve water.
           </p>
 
           <div className="agritech-pwa-launch-banner">
             <div className="pwa-banner-text">
-              <h3>Agritech App</h3>
-              <p>Live soil temp, VWC %, humidity, phone sensor reads, automated recommendations & Kone AI integration.</p>
+              <h3>smartFarm Telemetry WebApp</h3>
+              <p>Live soil temp, VWC %, humidity, phone sensor diagnostics, automated irrigation thresholds & Kone AI agronomy.</p>
             </div>
             <a href="#agritech/webapp" className="pwa-launch-btn">
               <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2.5" fill="none" style={{ marginRight: '6px' }}>
                 <rect x="5" y="2" width="14" height="20" rx="2" ry="2" /><line x1="12" y1="18" x2="12.01" y2="18" />
               </svg>
-              Launch App →
+              Launch Live App →
             </a>
           </div>
         </div>

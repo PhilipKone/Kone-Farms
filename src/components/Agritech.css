@@ -381,11 +381,12 @@
 }
 
 .tool-title {
-  font-family: 'Baloo 2', cursive, sans-serif;
-  font-size: 1.35rem;
-  font-weight: 800;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 850;
   color: #fff;
   margin: 0;
+  letter-spacing: -0.02em;
 }
 
 .tool-desc {
@@ -444,4 +445,11 @@
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(16, 185, 129, 0.5);
   background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+}
+
+@media (max-width: 768px) {
+  .agritech-div-page {
+    padding-bottom: 120px;
+    padding-top: 80px;
+  }
 }
