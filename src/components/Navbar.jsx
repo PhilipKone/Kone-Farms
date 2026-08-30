@@ -24,15 +24,9 @@ export default function Navbar({ currentRoute }) {
       {/* Desktop Menu */}
       <nav className="nav-menu-desktop">
         <a href="#home" className={`nav-link ${currentRoute === '#home' ? 'active' : ''}`}>Overview</a>
-        <a href="#farms" className={`nav-link ${currentRoute === '#farms' ? 'active' : ''}`}>Farms</a>
-        <a href="#food" className={`nav-link ${currentRoute === '#food' ? 'active' : ''}`}>Food</a>
-        <a href="#agritech" className={`nav-link ${isAgritechActive ? 'active' : ''}`}>Agritech</a>
-        <a href="#agritech/webapp" className={`nav-link ${currentRoute === '#agritech/webapp' ? 'active' : ''}`} style={{ color: '#34d399', fontWeight: 800, display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
-          <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2.5" fill="none">
-            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/>
-          </svg>
-          PWA WebApp
-        </a>
+        <a href="#farms" className={`nav-link ${currentRoute === '#farms' ? 'active' : ''}`}>Farms & Sourcing</a>
+        <a href="#food" className={`nav-link ${currentRoute === '#food' ? 'active' : ''}`}>Food & Snacks</a>
+        <a href="#agritech" className={`nav-link ${isAgritechActive ? 'active' : ''}`}>smartFarm Telemetry</a>
         <a href="#blog" className={`nav-link ${currentRoute.startsWith('#blog') ? 'active' : ''}`}>Blog</a>
         <a href="https://koneacademy.io" className="back-btn-nav">
           <svg className="back-arrow-svg" viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '4px' }}>
@@ -68,16 +62,10 @@ export default function Navbar({ currentRoute }) {
       {/* Mobile Menu Overlay */}
       <nav className={`nav-menu-mobile ${mobileMenuOpen ? 'open' : ''}`}>
         <a href="#home" className={`nav-link ${currentRoute === '#home' ? 'active' : ''}`} onClick={closeMobileMenu}>Overview</a>
-        <a href="#farms" className={`nav-link ${currentRoute === '#farms' ? 'active' : ''}`} onClick={closeMobileMenu}>Farms</a>
-        <a href="#food" className={`nav-link ${currentRoute === '#food' ? 'active' : ''}`} onClick={closeMobileMenu}>Food</a>
-        <a href="#agritech" className={`nav-link ${currentRoute === '#agritech' ? 'active' : ''}`} onClick={closeMobileMenu}>Agritech Dashboard</a>
-        <a href="#agritech/webapp" className={`nav-link ${currentRoute === '#agritech/webapp' ? 'active' : ''}`} onClick={closeMobileMenu} style={{ color: '#34d399', fontWeight: 800, display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2.5" fill="none">
-            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/>
-          </svg>
-          Standalone PWA WebApp
-        </a>
-        <a href="#blog" className={`nav-link ${currentRoute.startsWith('#blog') ? 'active' : ''}`} onClick={closeMobileMenu}>Blog</a>
+        <a href="#farms" className={`nav-link ${currentRoute === '#farms' ? 'active' : ''}`} onClick={closeMobileMenu}>Farms & Sourcing</a>
+        <a href="#food" className={`nav-link ${currentRoute === '#food' ? 'active' : ''}`} onClick={closeMobileMenu}>Food & Snacks</a>
+        <a href="#agritech" className={`nav-link ${currentRoute === '#agritech' ? 'active' : ''}`} onClick={closeMobileMenu}>smartFarm Telemetry</a>
+        <a href="#blog" className={`nav-link ${currentRoute.startsWith('#blog') ? 'active' : ''}`} onClick={closeMobileMenu}>Research Blog</a>
         <a href="https://koneacademy.io" className="back-btn-nav" style={{ marginTop: '1rem', justifyContent: 'center' }}>
           <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2.5" fill="none" style={{ marginRight: '6px' }}>
             <line x1="19" y1="12" x2="5" y2="12"></line>
