@@ -30,11 +30,11 @@
 }
 
 .farms-brand-name {
-  font-family: 'Baloo 2', cursive, sans-serif;
-  font-size: 1.5rem;
-  font-weight: 800;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 1.35rem;
+  font-weight: 850;
   color: #ffffff;
-  letter-spacing: 0.05em;
+  letter-spacing: -0.03em;
   text-shadow: 0 2px 4px rgba(0,0,0,0.3), 0 0 10px rgba(52, 211, 153, 0.3);
 }
 

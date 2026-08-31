@@ -39,8 +39,8 @@
 }
 
 .farms-sitemap-brand {
-  font-family: 'Baloo 2', cursive, sans-serif;
-  font-weight: 600;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-weight: 700;
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -67,9 +67,10 @@
 }
 
 .farms-sitemap-title {
-  font-family: 'Baloo 2', cursive, sans-serif;
-  font-size: 2.5rem;
-  font-weight: 800;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 2.35rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
   margin-bottom: 12px;
   background: linear-gradient(135deg, #ffffff 0%, #39ff14 100%);
   -webkit-background-clip: text;
@@ -121,9 +122,10 @@
 }
 
 .farms-sitemap-col-header h2 {
-  font-family: 'Baloo 2', cursive, sans-serif;
-  font-size: 1.2rem;
-  font-weight: 700;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 850;
+  letter-spacing: -0.02em;
   color: #fff;
   margin: 0;
 }
