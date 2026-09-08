@@ -44,13 +44,8 @@ const demoBatches = {
 export default function Food() {
   const [productTab, setProductTab] = useState('chips');
 
-  // Shito states
-  const [spiceLevel, setSpiceLevel] = useState('Hot');
-
-  // Chips states
+  // Chips variety state
   const [chipVariety, setChipVariety] = useState('plantain');
-  const [chipFlavor, setChipFlavor] = useState('Savory Chili & Garlic');
-  const [chipCut, setChipCut] = useState('Kettle Thin');
 
   // Wholesaler / Distributor states
   const [selectedProductLine, setSelectedProductLine] = useState('chips');
@@ -498,41 +493,26 @@ export default function Food() {
                     <strong>Tasting Notes:</strong> {currentChip.tastingNotes}
                   </div>
 
-                  {/* Flavor / Seasoning Selection Bar */}
+                  {/* Verified Quality & Processing Standards */}
                   <div className="flavor-selection-panel">
-                    <span className="dist-label">Choose Artisanal Seasoning:</span>
+                    <span className="dist-label">Artisanal Quality & Processing Standards:</span>
                     <div className="flavor-options-grid">
-                      {[
-                        { label: 'Savory Chili & Garlic', desc: 'Infused with organic Scotch Bonnet' },
-                        { label: 'Roasted Sea Salt', desc: 'Pure Ada coastal mineral salt crunch' },
-                        { label: 'Sweet Cinnamon & Cane', desc: 'Caramelized natural raw cane sugar' },
-                        { label: 'Smoked Onion & Herb', desc: 'Aromatic Ghanaian wild forest herbs' }
-                      ].map((item) => (
-                        <button
-                          key={item.label}
-                          onClick={() => setChipFlavor(item.label)}
-                          className={`flavor-choice-card ${chipFlavor === item.label ? 'active' : ''}`}
-                        >
-                          <strong>{item.label}</strong>
-                          <small>{item.desc}</small>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Cut / Style Selector */}
-                  <div className="cut-selector-row">
-                    <span className="dist-label">Slice Cut:</span>
-                    <div className="cut-pill-group">
-                      {['Kettle Thin', 'Crinkle Cut', 'Wavy Ridge'].map((cut) => (
-                        <button
-                          key={cut}
-                          onClick={() => setChipCut(cut)}
-                          className={`cut-pill-btn ${chipCut === cut ? 'active' : ''}`}
-                        >
-                          {cut}
-                        </button>
-                      ))}
+                      <div className="flavor-choice-card">
+                        <strong>✓ Kettle-Cooked Thin Cut</strong>
+                        <small>Small-batch fried for optimal natural crunch</small>
+                      </div>
+                      <div className="flavor-choice-card">
+                        <strong>✓ Cold-Pressed Vegetable Oil</strong>
+                        <small>Zero trans fat and zero artificial frying agents</small>
+                      </div>
+                      <div className="flavor-choice-card">
+                        <strong>✓ Natural Mineral Sea Salt</strong>
+                        <small>Unrefined Ada coastal crystals and natural spices</small>
+                      </div>
+                      <div className="flavor-choice-card">
+                        <strong>✓ Nitrogen Fresh Foil Seal</strong>
+                        <small>Airtight multi-layer barrier locking in 9-month crispness</small>
+                      </div>
                     </div>
                   </div>
 
@@ -626,20 +606,22 @@ export default function Food() {
                     </div>
                   </div>
 
-                  {/* Heat selector */}
+                  {/* Authentic Formulation Profile */}
                   <div className="spice-meter">
-                    <span className="dist-label">Select Heat Intensity:</span>
-                    <div className="spice-slider">
-                      {['Mild', 'Hot', 'Extra Hot'].map((level) => (
-                        <button
-                          key={level}
-                          onClick={() => setSpiceLevel(level)}
-                          aria-label={`Select heat level ${level}`}
-                          className={`spice-btn ${spiceLevel === level ? 'active' : ''}`}
-                        >
-                          {level}
-                        </button>
-                      ))}
+                    <span className="dist-label">Authentic Culinary Profile:</span>
+                    <div className="spice-slider" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem' }}>
+                      <div className="flavor-choice-card" style={{ textAlign: 'center', padding: '0.65rem 0.4rem' }}>
+                        <strong style={{ color: '#ef4444' }}>85,000 SHU</strong>
+                        <small>Scotch Bonnet Heat</small>
+                      </div>
+                      <div className="flavor-choice-card" style={{ textAlign: 'center', padding: '0.65rem 0.4rem' }}>
+                        <strong style={{ color: '#fbbf24' }}>Smoked Fish</strong>
+                        <small>Herring & Shrimp</small>
+                      </div>
+                      <div className="flavor-choice-card" style={{ textAlign: 'center', padding: '0.65rem 0.4rem' }}>
+                        <strong style={{ color: '#34d399' }}>Zero Additives</strong>
+                        <small>100% Non-GMO</small>
+                      </div>
                     </div>
                   </div>
                 </div>

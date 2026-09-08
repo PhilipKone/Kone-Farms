@@ -159,7 +159,7 @@ export default function Home() {
 
             <div className="card-deliverables">
               <span className="card-deliv-item">✓ Live ESP32 Sensor Grid</span>
-              <span className="card-deliv-item">✓ Soil Moisture VWC Calculator</span>
+              <span className="card-deliv-item">✓ Automated Solenoid Drip</span>
               <span className="card-deliv-item">✓ Precision Water Conservation</span>
             </div>
 

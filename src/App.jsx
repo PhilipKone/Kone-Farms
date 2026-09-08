@@ -5,7 +5,6 @@ import Home from './components/Home';
 import Farms from './components/Farms';
 import Food from './components/Food';
 import Agritech from './components/Agritech';
-import AgritechWebApp from './components/AgritechWebApp';
 import Sitemap from './components/Sitemap';
 import Blog from './components/Blog';
 import BlogPost from './components/BlogPost';
@@ -21,7 +20,9 @@ export default function App() {
       } else if (currentHash.startsWith('#blog/')) {
         setRoute(currentHash);
       } else if (currentHash === '#agritech/webapp') {
-        setRoute('#agritech/webapp');
+        // Canonical redirect to unified agritech dashboard
+        window.location.hash = '#agritech';
+        setRoute('#agritech');
       } else if (['#home', '#farms', '#food', '#agritech', '#blog', '#sitemap'].includes(currentHash)) {
         setRoute(currentHash);
       } else {
@@ -38,8 +39,6 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [route]);
 
-  const isWebAppRoute = route === '#agritech/webapp';
-
   const renderContent = () => {
     if (route.startsWith('#blog/')) {
       const slug = route.replace('#blog/', '');
@@ -51,8 +50,6 @@ export default function App() {
         return <Farms />;
       case '#food':
         return <Food />;
-      case '#agritech/webapp':
-        return <AgritechWebApp onBack={() => { window.location.hash = '#agritech'; }} />;
       case '#agritech':
         return <Agritech />;
       case '#blog':
@@ -67,11 +64,12 @@ export default function App() {
 
   return (
     <div className="farms-page-wrapper">
-      {!isWebAppRoute && <Navbar currentRoute={route} />}
+      <Navbar currentRoute={route} />
       <main className="farms-main-viewport">
         {renderContent()}
       </main>
-      {!isWebAppRoute && <Footer />}
+      <Footer />
     </div>
   );
 }
+

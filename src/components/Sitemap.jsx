@@ -86,15 +86,9 @@ const Sitemap = ({ onBack }) => {
                 </div>
                 <div className="farms-sitemap-item">
                   <a href="#agritech" className="farms-sitemap-link">
-                    Agritech Systems
+                    smartFarm Telemetry & Irrigation
                   </a>
-                  <p className="farms-sitemap-desc">Hardware specs for microcontroller soil nodes, sensor arrays, and solar telemetry modules.</p>
-                </div>
-                <div className="farms-sitemap-item">
-                  <a href="#agritech/webapp" className="farms-sitemap-link">
-                    Agritech Native WebApp
-                  </a>
-                  <p className="farms-sitemap-desc">Standalone PWA dashboard with real-time LoRa telemetry, hardware sensor status, and Kone AI crop intelligence.</p>
+                  <p className="farms-sitemap-desc">Autonomous field telemetry, capacitive root hydrology, crop irrigation simulator, and field inspection logger.</p>
                 </div>
                 <div className="farms-sitemap-item">
                   <a href="#blog" className="farms-sitemap-link">
