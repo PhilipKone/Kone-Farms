@@ -179,6 +179,9 @@
 }
 
 @media (max-width: 768px) {
+  .farms-footer {
+    padding-bottom: 125px;
+  }
   .footer-container {
     grid-template-columns: 1fr;
     gap: 2rem;

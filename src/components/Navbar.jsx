@@ -66,7 +66,8 @@ export default function Navbar({ currentRoute }) {
         <a href="#food" className={`nav-link ${currentRoute === '#food' ? 'active' : ''}`} onClick={closeMobileMenu}>Food & Snacks</a>
         <a href="#agritech" className={`nav-link ${currentRoute === '#agritech' ? 'active' : ''}`} onClick={closeMobileMenu}>smartFarm Telemetry</a>
         <a href="#blog" className={`nav-link ${currentRoute.startsWith('#blog') ? 'active' : ''}`} onClick={closeMobileMenu}>Research Blog</a>
-        <a href="https://koneacademy.io" className="back-btn-nav" style={{ marginTop: '1rem', justifyContent: 'center' }}>
+        <a href="#sitemap" className={`nav-link ${currentRoute === '#sitemap' ? 'active' : ''}`} onClick={closeMobileMenu}>Subdomain Sitemap</a>
+        <a href="https://koneacademy.io" className="back-btn-nav" style={{ marginTop: '0.75rem', justifyContent: 'center' }}>
           <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2.5" fill="none" style={{ marginRight: '6px' }}>
             <line x1="19" y1="12" x2="5" y2="12"></line>
             <polyline points="12 19 5 12 12 5"></polyline>

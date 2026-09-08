@@ -10,7 +10,8 @@ export default function Home() {
         <div className="home-badge-container">
           <span className="home-badge">
             <span className="badge-pulse-dot" />
-            SUSTAINABLE AGRI-TECH & SMALLHOLDER SOURCING
+            <span className="badge-text-desktop">SUSTAINABLE AGRI-TECH & SMALLHOLDER SOURCING</span>
+            <span className="badge-text-mobile">AGRI-TECH & SMALLHOLDER SOURCING</span>
           </span>
         </div>
 
@@ -35,7 +36,10 @@ export default function Home() {
           </a>
 
           <a href="#agritech" className="btn-secondary-farms">
-            <span>Launch smartFarm Telemetry 📡</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#34d399" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/>
+            </svg>
+            <span>smartFarm Telemetry</span>
           </a>
         </div>
 
