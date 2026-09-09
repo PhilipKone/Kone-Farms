@@ -56,9 +56,9 @@ export default function Farms() {
       scrollWheelZoom: false,
     });
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; OpenStreetMap &copy; CartoDB',
-      minZoom: 6,
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; OpenStreetMap &copy; CARTO',
+      minZoom: 5,
       maxZoom: 11,
     }).addTo(map);
 
@@ -343,6 +343,7 @@ export default function Farms() {
                 categoryLabel: 'Chips Harvest',
                 name: 'Golden Plantain',
                 scientific: 'Musa paradisiaca L.',
+                image: '/assets/crops/plantain.jpg',
                 color: '#eab308',
                 gradient: 'rgba(234, 179, 8, 0.15)',
                 desc: 'Grown under multi-tier agroforestry canopy. Naturally high in potassium and slow-release complex carbohydrates, harvested at peak starch-to-sugar equilibrium for artisanal kettle frying.',
@@ -357,6 +358,7 @@ export default function Farms() {
                 categoryLabel: 'Root Tuber Harvest',
                 name: 'Ghanaian White Yam',
                 scientific: 'Dioscorea alata',
+                image: '/assets/crops/yam.jpg',
                 color: '#f97316',
                 gradient: 'rgba(249, 115, 22, 0.15)',
                 desc: 'Cultivated in deeply aerated alluvial mounds. Produces crisp, fiber-rich root tubers with dense texture and clean nutty roasted flavor for traditional and salted yam chips.',
@@ -371,6 +373,7 @@ export default function Farms() {
                 categoryLabel: 'Highland Tuber',
                 name: 'Highland Russet Potato',
                 scientific: 'Solanum tuberosum',
+                image: '/assets/crops/potato.jpg',
                 color: '#38bdf8',
                 gradient: 'rgba(56, 189, 248, 0.15)',
                 desc: 'Farm-fresh potatoes slow-grown in cooler highland soils for maximum dry matter density, lower moisture absorption, and golden crispy frying performance.',
@@ -385,6 +388,7 @@ export default function Farms() {
                 categoryLabel: 'Artisanal Spice',
                 name: 'Scotch Bonnet Pepper',
                 scientific: 'Capsicum chinense',
+                image: '/assets/crops/pepper.jpg',
                 color: '#ef4444',
                 gradient: 'rgba(239, 68, 68, 0.15)',
                 desc: 'Fiery organic Scotch Bonnet peppers harvested at 85,000–120,000 Scoville Heat Units (SHU). Sun-ripened on organic compost beds and lab-audited for zero pesticide residues.',
@@ -399,6 +403,7 @@ export default function Farms() {
                 categoryLabel: 'Alluvial Aromatics',
                 name: 'Sweet Pink Shallots',
                 scientific: 'Allium cepa var. aggregatum',
+                image: '/assets/crops/shallots.jpg',
                 color: '#c084fc',
                 gradient: 'rgba(192, 132, 252, 0.15)',
                 desc: 'Cultivated in coastal sandy loam soils. Delivers concentrated natural sweetness, rich sulfur allicin compounds, and deep umami depth to our slow-simmered Kone Shito base.',
@@ -413,6 +418,7 @@ export default function Farms() {
                 categoryLabel: 'Agro-Forestry Companion',
                 name: 'Organic Garlic & Wild Herbs',
                 scientific: 'Allium sativum & Ocimum',
+                image: '/assets/crops/garlic-herbs.jpg',
                 color: '#10b981',
                 gradient: 'rgba(16, 185, 129, 0.15)',
                 desc: 'Inter-cropped as botanical companion plants beneath plantain canopies to naturally deter insect pests while providing wild African herbal seasonings for our marinades and chips.',
@@ -425,38 +431,47 @@ export default function Farms() {
               .filter(crop => selectedCropFilter === 'all' || crop.category === selectedCropFilter)
               .map((crop) => (
                 <article key={crop.id} className="crop-card" style={{ '--crop-accent': crop.color }}>
-                  <div className="crop-card-top">
-                    <div className="crop-avatar-svg" style={{ color: crop.color, background: crop.gradient, borderColor: `${crop.color}40` }}>
-                      <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2.2" fill="none">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                      </svg>
-                    </div>
+                  {/* Visual Photo Header */}
+                  <div className="crop-card-media">
+                    <img 
+                      src={crop.image} 
+                      alt={crop.name} 
+                      className="crop-card-img" 
+                      loading="lazy" 
+                    />
+                    <div className="crop-card-img-overlay"></div>
+                    <span 
+                      className="crop-cat-pill-floating" 
+                      style={{ color: crop.color, borderColor: `${crop.color}60` }}
+                    >
+                      {crop.categoryLabel}
+                    </span>
+                  </div>
+
+                  <div className="crop-card-body">
                     <div className="crop-heading-group">
-                      <span className="crop-cat-pill" style={{ color: crop.color, background: `${crop.color}18`, borderColor: `${crop.color}35` }}>
-                        {crop.categoryLabel}
-                      </span>
                       <h3 className="crop-name">{crop.name}</h3>
                       <span className="crop-scientific">{crop.scientific}</span>
                     </div>
-                  </div>
 
-                  <p className="crop-desc">{crop.desc}</p>
+                    <p className="crop-desc">{crop.desc}</p>
 
-                  <div className="crop-specs-strip">
-                    <div className="crop-spec-item">
-                      <span className="spec-label">Zone</span>
-                      <strong className="spec-val">{crop.region}</strong>
+                    <div className="crop-specs-strip">
+                      <div className="crop-spec-item">
+                        <span className="spec-label">Zone</span>
+                        <strong className="spec-val">{crop.region}</strong>
+                      </div>
+                      <div className="crop-spec-item">
+                        <span className="spec-label">Product</span>
+                        <strong className="spec-val" style={{ color: crop.color }}>{crop.targetProduct}</strong>
+                      </div>
                     </div>
-                    <div className="crop-spec-item">
-                      <span className="spec-label">Product</span>
-                      <strong className="spec-val" style={{ color: crop.color }}>{crop.targetProduct}</strong>
-                    </div>
-                  </div>
 
-                  <div className="crop-meta-tags">
-                    {crop.tags.map((tag, tIdx) => (
-                      <span key={tIdx} className="crop-tag-item">#{tag}</span>
-                    ))}
+                    <div className="crop-meta-tags">
+                      {crop.tags.map((tag, tIdx) => (
+                        <span key={tIdx} className="crop-tag-item">#{tag}</span>
+                      ))}
+                    </div>
                   </div>
                 </article>
               ))}

@@ -316,12 +316,12 @@
   background: linear-gradient(150deg, rgba(12, 38, 28, 0.85) 0%, rgba(6, 20, 15, 0.95) 100%);
   border: 1px solid rgba(16, 185, 129, 0.18);
   border-radius: 22px;
-  padding: 1.6rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
 }
@@ -329,26 +329,58 @@
 .crop-card:hover {
   transform: translateY(-6px);
   border-color: var(--crop-accent, #10b981);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 25px rgba(16, 185, 129, 0.15);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 25px rgba(16, 185, 129, 0.2);
 }
 
-.crop-card-top {
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
-  margin-bottom: 1rem;
+.crop-card-media {
+  position: relative;
+  width: calc(100% + 3rem);
+  height: 180px;
+  margin: -1.5rem -1.5rem 1.25rem -1.5rem;
+  overflow: hidden;
+  background: #020b08;
 }
 
-.crop-avatar-svg {
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
+.crop-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.crop-card:hover .crop-card-img {
+  transform: scale(1.06);
+}
+
+.crop-card-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(6, 20, 15, 0.75) 100%);
+  pointer-events: none;
+}
+
+.crop-cat-pill-floating {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 0.66rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.25rem 0.6rem;
+  border-radius: 8px;
+  border: 1px solid;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.crop-card-body {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1.5px solid;
-  flex-shrink: 0;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
 }
 
 .crop-heading-group {
@@ -356,27 +388,14 @@
   flex-direction: column;
   gap: 2px;
   text-align: left;
-}
-
-.crop-cat-pill {
-  display: inline-block;
-  font-size: 0.66rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  padding: 0.2rem 0.55rem;
-  border-radius: 6px;
-  border: 1px solid;
-  width: fit-content;
-  margin-bottom: 3px;
+  margin-bottom: 0.6rem;
 }
 
 .crop-name {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Baloo 2', cursive, sans-serif;
   color: #ffffff;
-  font-size: 1.25rem;
-  font-weight: 850;
-  letter-spacing: -0.02em;
+  font-size: 1.35rem;
+  font-weight: 800;
   margin: 0;
   line-height: 1.15;
 }
