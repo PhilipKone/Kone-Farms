@@ -247,10 +247,10 @@
 
 /* Vertical Irrigation Pipeline Stepper */
 .pipeline-title {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  font-size: 1.15rem;
-  font-weight: 850;
-  letter-spacing: -0.02em;
+  font-family: 'Baloo 2', cursive, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
   color: #fff;
   margin-bottom: 1.75rem;
   text-align: left;
@@ -383,12 +383,12 @@
 }
 
 .tool-title {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  font-size: 1.25rem;
-  font-weight: 850;
+  font-family: 'Baloo 2', cursive, sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
   color: #fff;
   margin: 0;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 .tool-desc {

@@ -71,14 +71,14 @@
 
 /* Hero Typography */
 .home-headline {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Baloo 2', cursive, sans-serif;
   font-size: clamp(2.4rem, 5.5vw, 4rem);
-  font-weight: 900;
+  font-weight: 800;
   color: #FFFFFF;
   line-height: 1.12;
   margin: 0 auto 1.4rem;
   max-width: 960px;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.01em;
 }
 
 .emerald-luminance {
@@ -311,12 +311,12 @@
 }
 
 .div-h3 {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Baloo 2', cursive, sans-serif;
   font-size: 1.45rem;
-  font-weight: 850;
+  font-weight: 800;
   color: #FFFFFF;
   margin: 0 0 0.8rem;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 .div-desc {
