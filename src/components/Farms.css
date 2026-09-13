@@ -392,11 +392,10 @@
 }
 
 .crop-name {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Baloo 2', cursive, sans-serif;
   color: #ffffff;
-  font-size: 1.25rem;
-  font-weight: 850;
-  letter-spacing: -0.02em;
+  font-size: 1.35rem;
+  font-weight: 800;
   margin: 0;
   line-height: 1.15;
 }
