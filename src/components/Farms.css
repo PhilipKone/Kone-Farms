@@ -501,6 +501,65 @@
   border-radius: 24px;
   overflow: hidden;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+/* Leaflet Custom Glowing Pins */
+.leaflet-custom-marker-wrapper {
+  background: transparent !important;
+  border: none !important;
+}
+
+.custom-marker-glowing {
+  position: relative;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.custom-marker-glowing .pin-core {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--pin-color, #10b981);
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 12px var(--pin-color, #10b981), 0 2px 6px rgba(0, 0, 0, 0.6);
+  z-index: 2;
+  transition: transform 0.2s ease;
+}
+
+.custom-marker-glowing:hover .pin-core {
+  transform: scale(1.25);
+}
+
+.custom-marker-glowing .pin-ring {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--pin-color, #10b981);
+  animation: pinPulseRing 2.2s infinite ease-out;
+  opacity: 0.8;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes pinPulseRing {
+  0% {
+    transform: scale(0.4);
+    opacity: 1;
+  }
+  75% {
+    transform: scale(1.6);
+    opacity: 0.15;
+  }
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
 }
 
 .map-details-card {

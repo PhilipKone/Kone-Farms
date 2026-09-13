@@ -56,10 +56,10 @@ export default function Farms() {
       scrollWheelZoom: false,
     });
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; OpenStreetMap &copy; CARTO',
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       minZoom: 5,
-      maxZoom: 11,
+      maxZoom: 18,
     }).addTo(map);
 
     const createGlowingPin = (color) => `
@@ -113,7 +113,13 @@ export default function Farms() {
     L.polyline([kumasiCoords, accraCoords], routeOptions('#10b981')).addTo(map);
     L.polyline([tamaleCoords, accraCoords], routeOptions('#f97316')).addTo(map);
 
+    const resizeTimer = setTimeout(() => {
+      map.invalidateSize();
+      map.fitBounds(group.getBounds().pad(0.18));
+    }, 250);
+
     return () => {
+      clearTimeout(resizeTimer);
       map.remove();
     };
   }, []);
