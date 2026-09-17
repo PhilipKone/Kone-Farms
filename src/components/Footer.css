@@ -36,11 +36,11 @@
 }
 
 .footer-brand-name {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  font-size: 1.2rem;
-  font-weight: 850;
+  font-family: 'Baloo 2', cursive, sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
   color: #fff;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.01em;
 }
 
 .footer-tagline {

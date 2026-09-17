@@ -126,14 +126,13 @@ export default function Footer() {
 
       <div className="footer-bottom">
         <div>
-          © {new Date().getFullYear()} Kone Farms. All rights reserved.
+          © {new Date().getFullYear()} Kone Farms • A Kone Academy Initiative. All rights reserved.
         </div>
         <div className="footer-bottom-links">
-          <a href="https://www.linkedin.com/showcase/konefarms/about/?viewAsMember=true" target="_blank" rel="noopener noreferrer" className="footer-link">LinkedIn</a>
-          <a href="https://www.facebook.com/profile.php?id=61593017477470" target="_blank" rel="noopener noreferrer" className="footer-link">Facebook</a>
-          <a href="https://www.instagram.com/konefarms/" target="_blank" rel="noopener noreferrer" className="footer-link">Instagram</a>
-          <a href="https://whatsapp.com/channel/0029Vb89rkTE50Ugks0LIG0L" target="_blank" rel="noopener noreferrer" className="footer-link">WhatsApp</a>
-          <a href="https://koneacademy.io" className="footer-link">Kone Academy</a>
+          <a href="#sitemap" className="footer-link">Subdomain Sitemap</a>
+          <a href="#agritech" className="footer-link">smartFarm Telemetry</a>
+          <a href="#blog" className="footer-link">Research Blog</a>
+          <a href="https://koneacademy.io" target="_blank" rel="noopener noreferrer" className="footer-link">Kone Academy ↗</a>
         </div>
       </div>
     </footer>

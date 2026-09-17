@@ -36,6 +36,7 @@
   color: #ffffff;
   letter-spacing: -0.01em;
   text-shadow: 0 2px 4px rgba(0,0,0,0.3), 0 0 10px rgba(52, 211, 153, 0.3);
+  white-space: nowrap;
 }
 
 /* Desktop Navigation Menu */
@@ -56,6 +57,7 @@
   border-radius: 8px;
   transition: all 0.25s ease;
   position: relative;
+  white-space: nowrap;
 }
 
 .nav-link:hover {
@@ -91,6 +93,7 @@
   font-size: 0.85rem;
   font-weight: 700;
   transition: all 0.2s;
+  white-space: nowrap;
 }
 
 .back-btn-nav:hover {
@@ -148,12 +151,30 @@
   bottom: auto;
 }
 
-/* Desktop default: hide mobile bottom nav */
-.farms-mobile-bottom-nav {
-  display: none;
+/* Intermediate Tablet/Laptop Screen (961px - 1220px) */
+@media (max-width: 1220px) and (min-width: 961px) {
+  .farms-nav-header {
+    padding: 0 2%;
+  }
+
+  .nav-menu-desktop {
+    gap: 0.65rem;
+  }
+
+  .nav-link {
+    font-size: 0.8rem;
+    padding: 0.35rem 0.55rem;
+    letter-spacing: 0.02em;
+  }
+
+  .back-btn-nav {
+    font-size: 0.78rem;
+    padding: 0.35rem 0.75rem;
+    gap: 0.3rem;
+  }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 960px) {
   .nav-menu-desktop {
     display: none !important;
   }
