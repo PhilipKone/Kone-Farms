@@ -158,77 +158,21 @@
   color: #fff;
 }
 
-/* 4-Pillar Impact Metrics Capsule Bar */
-.impact-metrics-bar {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-  max-width: 1100px;
-  margin: 0 auto 4rem;
-}
-
-.impact-metric-pill {
-  background: rgba(6, 24, 18, 0.8);
-  border: 1px solid rgba(52, 211, 153, 0.18);
-  border-radius: 18px;
-  padding: 1rem 1.2rem;
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  text-align: left;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-  transition: all 0.25s ease;
-}
-
-.impact-metric-pill:hover {
-  border-color: rgba(52, 211, 153, 0.35);
-  transform: translateY(-3px);
-  box-shadow: 0 12px 30px rgba(52, 211, 153, 0.1);
-}
-
-.metric-icon-wrap {
-  font-size: 1.5rem;
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
-  background: rgba(52, 211, 153, 0.08);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.metric-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.metric-label {
-  font-size: 0.88rem;
-  font-weight: 800;
-  color: #FFFFFF;
-  letter-spacing: -0.01em;
-}
-
-.metric-sub {
-  font-size: 0.74rem;
-  color: #94a3b8;
-  margin-top: 0.15rem;
-}
-
 /* Division Cards Grid */
 .divisions-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
-  margin-bottom: 3.5rem;
+  margin-bottom: 3rem;
 }
 
 .div-card {
-  background: rgba(7, 26, 20, 0.9);
-  border: 1.5px solid rgba(52, 211, 153, 0.15);
+  background: rgba(6, 24, 18, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
   border-radius: 24px;
-  padding: 1.8rem;
+  padding: 1.6rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -237,15 +181,15 @@
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
   box-sizing: border-box;
 }
 
 .div-card-media {
   position: relative;
-  width: calc(100% + 3.6rem);
-  height: 195px;
-  margin: -1.8rem -1.8rem 1.4rem -1.8rem;
+  width: calc(100% + 3.2rem);
+  height: 200px;
+  margin: -1.6rem -1.6rem 1.4rem -1.6rem;
   overflow: hidden;
   background: #020b08;
 }
@@ -254,34 +198,35 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .div-card:hover .div-card-img {
-  transform: scale(1.06);
+  transform: scale(1.05);
 }
 
 .div-card-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(7, 26, 20, 0.85) 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(6, 24, 18, 0.8) 100%);
   pointer-events: none;
 }
 
-.div-card-floating-badge {
+.card-tag {
   position: absolute;
   top: 14px;
   left: 14px;
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  padding: 0.28rem 0.75rem;
+  padding: 0.3rem 0.8rem;
   border-radius: 20px;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid;
   z-index: 2;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .tag-farms {
@@ -302,28 +247,6 @@
   border-color: rgba(59, 130, 246, 0.4);
 }
 
-.div-card-floating-icon {
-  position: absolute;
-  bottom: 12px;
-  right: 14px;
-  width: 44px;
-  height: 44px;
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(4, 20, 15, 0.85);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  z-index: 2;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-  transition: transform 0.3s ease;
-}
-
-.div-card:hover .div-card-floating-icon {
-  transform: scale(1.1);
-}
-
 .div-card-body {
   display: flex;
   flex-direction: column;
@@ -332,21 +255,21 @@
 }
 
 .card-farms:hover {
-  border-color: rgba(52, 211, 153, 0.45);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 30px rgba(52, 211, 153, 0.15);
-  transform: translateY(-6px);
+  border-color: rgba(52, 211, 153, 0.4);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5), 0 0 25px rgba(52, 211, 153, 0.12);
+  transform: translateY(-5px);
 }
 
 .card-food:hover {
-  border-color: rgba(245, 158, 11, 0.45);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 30px rgba(245, 158, 11, 0.15);
-  transform: translateY(-6px);
+  border-color: rgba(245, 158, 11, 0.4);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5), 0 0 25px rgba(245, 158, 11, 0.12);
+  transform: translateY(-5px);
 }
 
 .card-agritech:hover {
-  border-color: rgba(59, 130, 246, 0.45);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 30px rgba(59, 130, 246, 0.15);
-  transform: translateY(-6px);
+  border-color: rgba(96, 165, 250, 0.4);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5), 0 0 25px rgba(96, 165, 250, 0.12);
+  transform: translateY(-5px);
 }
 
 .div-h3 {
@@ -354,7 +277,7 @@
   font-size: 1.45rem;
   font-weight: 800;
   color: #FFFFFF;
-  margin: 0 0 0.8rem;
+  margin: 0 0 0.6rem;
   letter-spacing: -0.01em;
 }
 
@@ -362,23 +285,7 @@
   font-size: 0.9rem;
   color: #94a3b8;
   line-height: 1.6;
-  margin-bottom: 1.5rem;
-}
-
-.card-deliverables {
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
-  margin-bottom: 1.8rem;
-  width: 100%;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.card-deliv-item {
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: #cbd5e1;
+  margin-bottom: 1.6rem;
 }
 
 .div-btn {
@@ -404,44 +311,37 @@
 
 /* Wholesale Banner Card */
 .wholesale-banner-card {
-  background: radial-gradient(circle at top right, rgba(52, 211, 153, 0.15), rgba(7, 26, 20, 0.95));
-  border: 1.5px solid rgba(52, 211, 153, 0.25);
+  background: rgba(6, 24, 18, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(52, 211, 153, 0.2);
   border-radius: 24px;
-  padding: 2.5rem 3rem;
+  padding: 2.2rem 2.8rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 2rem;
   text-align: left;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-  margin-top: 2rem;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  margin-top: 1.5rem;
   box-sizing: border-box;
 }
 
-.wholesale-badge {
-  font-size: 0.74rem;
-  font-weight: 800;
-  color: #34d399;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-bottom: 0.5rem;
-  display: inline-block;
-}
-
 .wholesale-headline {
-  font-size: 1.5rem;
-  font-weight: 850;
+  font-family: 'Baloo 2', cursive, sans-serif;
+  font-size: 1.45rem;
+  font-weight: 800;
   color: #FFFFFF;
-  margin: 0 0 0.6rem;
-  letter-spacing: -0.02em;
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.01em;
 }
 
 .wholesale-text {
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   color: #94a3b8;
   margin: 0;
   max-width: 620px;
-  line-height: 1.6;
+  line-height: 1.55;
 }
 
 .wholesale-banner-actions {
