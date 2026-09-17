@@ -228,7 +228,7 @@
   background: rgba(7, 26, 20, 0.9);
   border: 1.5px solid rgba(52, 211, 153, 0.15);
   border-radius: 24px;
-  padding: 2.2rem 1.8rem;
+  padding: 1.8rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -241,55 +241,94 @@
   box-sizing: border-box;
 }
 
-.card-top-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 1.4rem;
+.div-card-media {
+  position: relative;
+  width: calc(100% + 3.6rem);
+  height: 195px;
+  margin: -1.8rem -1.8rem 1.4rem -1.8rem;
+  overflow: hidden;
+  background: #020b08;
 }
 
-.card-tag {
-  font-size: 0.72rem;
+.div-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.div-card:hover .div-card-img {
+  transform: scale(1.06);
+}
+
+.div-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(7, 26, 20, 0.85) 100%);
+  pointer-events: none;
+}
+
+.div-card-floating-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  font-size: 0.68rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  padding: 0.3rem 0.8rem;
+  padding: 0.28rem 0.75rem;
   border-radius: 20px;
+  backdrop-filter: blur(8px);
+  border: 1px solid;
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
 .tag-farms {
-  background: rgba(52, 211, 153, 0.12);
+  background: rgba(4, 20, 15, 0.85);
   color: #34d399;
-  border: 1px solid rgba(52, 211, 153, 0.25);
+  border-color: rgba(52, 211, 153, 0.4);
 }
 
 .tag-food {
-  background: rgba(245, 158, 11, 0.12);
+  background: rgba(4, 20, 15, 0.85);
   color: #fbbf24;
-  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-color: rgba(245, 158, 11, 0.4);
 }
 
 .tag-agritech {
-  background: rgba(59, 130, 246, 0.12);
+  background: rgba(4, 20, 15, 0.85);
   color: #60a5fa;
-  border: 1px solid rgba(59, 130, 246, 0.25);
+  border-color: rgba(59, 130, 246, 0.4);
 }
 
-.div-icon-wrapper {
-  width: 54px;
-  height: 54px;
-  border-radius: 16px;
+.div-card-floating-icon {
+  position: absolute;
+  bottom: 12px;
+  right: 14px;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: all 0.3s;
+  background: rgba(4, 20, 15, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  z-index: 2;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
 }
 
-.div-card:hover .div-icon-wrapper {
-  transform: scale(1.08);
+.div-card:hover .div-card-floating-icon {
+  transform: scale(1.1);
+}
+
+.div-card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
 }
 
 .card-farms:hover {
@@ -530,18 +569,29 @@
   }
 
   .div-card {
-    padding: 1.4rem 1.2rem;
+    padding: 1.2rem;
     border-radius: 20px;
   }
 
-  .card-top-meta {
-    margin-bottom: 0.9rem;
+  .div-card-media {
+    width: calc(100% + 2.4rem);
+    height: 165px;
+    margin: -1.2rem -1.2rem 1.1rem -1.2rem;
   }
 
-  .div-icon-wrapper {
-    width: 44px;
-    height: 44px;
-    border-radius: 14px;
+  .div-card-floating-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+    bottom: 10px;
+    right: 10px;
+  }
+
+  .div-card-floating-badge {
+    top: 10px;
+    left: 10px;
+    font-size: 0.64rem;
+    padding: 0.22rem 0.6rem;
   }
 
   .div-h3 {
