@@ -682,6 +682,28 @@ export default function Agritech() {
           </div>
         </div>
 
+        {/* ========================================================================= */}
+        {/* KONE MARKET AGRITECH HARDWARE PROCUREMENT BANNER */}
+        {/* ========================================================================= */}
+        <div className="market-bridge-card" style={{ marginTop: '3.5rem' }}>
+          <div className="market-bridge-inner">
+            <div className="market-badge-pill" style={{ borderColor: 'rgba(6, 182, 212, 0.4)', color: '#22d3ee' }}>
+              ⚡ smartFarm Field Hardware
+            </div>
+            <h3 className="market-bridge-title">
+              Ready to Deploy Telemetry Nodes & Sensors on Your Farm?
+            </h3>
+            <p className="market-bridge-desc">
+              Procure pre-calibrated LoRaWAN telemetry base stations, stainless steel soil moisture probes, and automated solar solenoid valve kits in The Kone Market.
+            </p>
+            <div className="market-bridge-actions">
+              <a href="#market" className="farms-submit-btn" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'linear-gradient(135deg, #06b6d4 0%, #0891b2 100%)', color: '#032733' }}>
+                Procure Hardware in Market ➔
+              </a>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   );

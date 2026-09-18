@@ -41,6 +41,56 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 800;
 }
 
+/* Primary and Secondary CTA buttons */
+.farms-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #032e16 !important;
+  font-family: 'Baloo 2', cursive, sans-serif !important;
+  font-weight: 800;
+  font-size: 0.95rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.farms-submit-btn:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+  box-shadow: 0 8px 22px rgba(16, 185, 129, 0.45);
+  color: #032e16 !important;
+}
+
+.market-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #f1f5f9 !important;
+  font-family: 'Baloo 2', cursive, sans-serif !important;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: 12px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.market-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.32);
+  color: #ffffff !important;
+  transform: translateY(-2px);
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

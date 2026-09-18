@@ -739,6 +739,28 @@ export default function Farms() {
           </div>
         </div>
 
+        {/* ========================================================================= */}
+        {/* KONE MARKET BULK HARVEST SOURCING BANNER */}
+        {/* ========================================================================= */}
+        <div className="market-bridge-card" style={{ marginTop: '3.5rem' }}>
+          <div className="market-bridge-inner">
+            <div className="market-badge-pill" style={{ borderColor: 'rgba(16, 185, 129, 0.4)', color: '#34d399' }}>
+              🌾 Commercial Raw Crop Supply
+            </div>
+            <h3 className="market-bridge-title">
+              Sourcing Bulk Raw Plantains, Yams, or Peppers for Food Processing?
+            </h3>
+            <p className="market-bridge-desc">
+              Request metric ton harvest quotas, contract terms, and direct farm-gate delivery schedules through our official commercial procurement desk in The Kone Market.
+            </p>
+            <div className="market-bridge-actions">
+              <a href="#market" className="farms-submit-btn" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                Browse Bulk Harvest in Market ➔
+              </a>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-﻿import fs from 'fs';
+import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -33,6 +33,12 @@ const routes = [
     title: 'smartFarm IoT Telemetry & Precision Agriculture | Kone Farms',
     desc: 'Intelligent agricultural IoT telemetry. Real-time soil moisture sensors, weather stations, and automated solar drip irrigation calculators.',
     canonical: 'https://farms.koneacademy.io/agritech'
+  },
+  {
+    path: 'market',
+    title: 'The Kone Market | Artisanal Foods, Bulk Harvest & smartFarm Hardware',
+    desc: 'Official Kone storefront. Purchase wholesale cartons of Kone Chips & Shito, source organic bulk plantains & yams, or procure smartFarm IoT hardware.',
+    canonical: 'https://farms.koneacademy.io/market'
   },
   {
     path: 'blog',

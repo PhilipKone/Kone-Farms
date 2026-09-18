@@ -1,0 +1,499 @@
+/* ========================================================================= */
+/* KONE MARKET STOREFRONT & COMMERCE HUB                                    */
+/* Brand Font: Baloo 2 everywhere                                           */
+/* ========================================================================= */
+
+.kone-market-page {
+  padding-top: 100px;
+  padding-bottom: 90px;
+  min-height: calc(100vh - 80px);
+  position: relative;
+  z-index: 2;
+  font-family: 'Baloo 2', cursive, sans-serif !important;
+}
+
+.market-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 1.5rem 5% 4rem;
+  box-sizing: border-box;
+}
+
+/* ── HEADER & HERO ──────────────────────────────────────────────────────── */
+.market-header-section {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.market-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #34d399;
+  padding: 0.4rem 1.1rem;
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.market-trust-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.market-trust-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.88rem;
+  color: #cbd5e1;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+}
+
+/* ── PRODUCT GRID & CARDS ───────────────────────────────────────────────── */
+.market-catalog-section {
+  margin-bottom: 4.5rem;
+}
+
+.market-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.market-card {
+  background: linear-gradient(145deg, rgba(20, 26, 22, 0.94) 0%, rgba(10, 14, 12, 0.98) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+}
+
+.market-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(16, 185, 129, 0.4);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.6), 0 0 25px rgba(16, 185, 129, 0.15);
+}
+
+.market-card-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: #0d120f;
+  overflow: hidden;
+}
+
+.market-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.market-card:hover .market-card-img {
+  transform: scale(1.06);
+}
+
+.market-card-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(10, 14, 12, 0.85) 100%);
+  pointer-events: none;
+}
+
+.market-card-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  border: 1px solid;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.market-card-body {
+  padding: 1.5rem 1.6rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  text-align: left;
+}
+
+.market-item-origin {
+  font-size: 0.78rem;
+  color: #10b981;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.35rem;
+}
+
+.market-item-title {
+  font-size: 1.28rem;
+  color: #f8fafc;
+  margin: 0 0 0.5rem 0;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.market-item-desc {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin: 0 0 1rem 0;
+  flex-grow: 1;
+}
+
+.market-item-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.25rem;
+}
+
+.market-spec-chip {
+  font-size: 0.72rem;
+  color: #cbd5e1;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.market-item-pricing-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.price-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.price-label {
+  font-size: 0.7rem;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+  margin-bottom: 0.15rem;
+}
+
+.price-val {
+  font-size: 1.15rem;
+  color: #34d399;
+  font-weight: 800;
+}
+
+.price-carton {
+  font-size: 0.88rem;
+  color: #facc15;
+  font-weight: 700;
+}
+
+.market-order-action-btn {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #032e16;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.92rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: inherit;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+}
+
+.market-order-action-btn:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+  box-shadow: 0 8px 22px rgba(16, 185, 129, 0.45);
+}
+
+.market-order-action-btn.harvest-action-btn {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #3b1d03;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3);
+}
+
+.market-order-action-btn.harvest-action-btn:hover {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  box-shadow: 0 8px 22px rgba(245, 158, 11, 0.45);
+}
+
+.market-order-action-btn.hardware-action-btn {
+  background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+  color: #032733;
+  box-shadow: 0 4px 14px rgba(6, 182, 212, 0.3);
+}
+
+.market-order-action-btn.hardware-action-btn:hover {
+  background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
+  box-shadow: 0 8px 22px rgba(6, 182, 212, 0.45);
+}
+
+/* ── B2B WHOLESALE CARTON CALCULATOR & DIRECT PORTAL ─────────────────────── */
+.market-wholesale-portal-wrapper {
+  scroll-margin-top: 90px;
+  background: linear-gradient(145deg, rgba(20, 26, 22, 0.95) 0%, rgba(10, 14, 12, 0.98) 100%);
+  border: 1px solid rgba(234, 179, 8, 0.25);
+  border-radius: 28px;
+  padding: 3rem 2.5rem;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+  position: relative;
+  overflow: hidden;
+}
+
+.market-portal-header {
+  text-align: center;
+  max-width: 750px;
+  margin: 0 auto 2.5rem;
+}
+
+.market-section-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: white;
+  margin: 0.75rem 0 0.5rem;
+  line-height: 1.2;
+}
+
+.market-section-subtitle {
+  font-size: 1rem;
+  color: #94a3b8;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.market-btn-secondary {
+  padding: 0.65rem 1.25rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #f1f5f9;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.market-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ── INQUIRY MODAL (Harvest & Hardware) ─────────────────────────────────── */
+.market-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(12px);
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.25rem;
+  animation: modalFadeIn 0.2s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.market-modal-card {
+  width: 100%;
+  max-width: 520px;
+  background: #111814;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  border-radius: 24px;
+  padding: 2.25rem 2rem;
+  position: relative;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8);
+  box-sizing: border-box;
+  animation: modalSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+@keyframes modalSlideUp {
+  from { transform: translateY(20px) scale(0.97); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.market-modal-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #cbd5e1;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.market-modal-close:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  border-color: #ef4444;
+}
+
+/* ========================================================================= */
+/* MOBILE & RESPONSIVE REFINEMENTS                                          */
+/* ========================================================================= */
+
+@media (max-width: 900px) {
+  .kone-market-page {
+    padding-top: 85px;
+    padding-bottom: 95px; /* Room for bottom mobile dock */
+  }
+
+  .market-container {
+    padding: 1rem 4% 3rem;
+  }
+
+  .market-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .market-wholesale-portal-wrapper {
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+  }
+
+  .market-section-title {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .market-header-section {
+    margin-bottom: 2rem;
+  }
+
+  .farms-headline {
+    font-size: 2.2rem !important;
+  }
+
+  .market-trust-row {
+    flex-direction: column;
+    gap: 0.6rem;
+    align-items: stretch;
+  }
+
+  .market-trust-tag {
+    justify-content: center;
+    font-size: 0.82rem;
+  }
+
+  /* Segmented control smooth touch scroll */
+  .segmented-control-wrapper {
+    margin-top: 1.25rem;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .segmented-control {
+    width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 4px;
+    justify-content: flex-start;
+  }
+
+  .segmented-control::-webkit-scrollbar {
+    display: none;
+  }
+
+  .segment-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.82rem;
+    flex-shrink: 0;
+  }
+
+  .market-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .market-card {
+    border-radius: 18px;
+  }
+
+  .market-card-body {
+    padding: 1.25rem;
+  }
+
+  .market-item-title {
+    font-size: 1.18rem;
+  }
+
+  .market-item-desc {
+    font-size: 0.86rem;
+  }
+
+  .market-wholesale-portal-wrapper {
+    padding: 1.5rem 1rem;
+  }
+
+  .market-section-title {
+    font-size: 1.5rem;
+  }
+
+  .market-modal-card {
+    padding: 1.5rem 1.25rem;
+    border-radius: 20px;
+    margin: 0.5rem;
+  }
+}
+
+/* Touch targets optimization */
+button, select, input, textarea {
+  font-family: 'Baloo 2', cursive, sans-serif !important;
+}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Food.css';
 import { db } from '../firebase/config';
-import { collection, addDoc, doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 
 // Fallback verified demo batches for instant interactive tracing
 const demoBatches = {
@@ -46,14 +46,6 @@ export default function Food() {
 
   // Chips variety state
   const [chipVariety, setChipVariety] = useState('plantain');
-
-  // Wholesaler / Distributor states
-  const [selectedProductLine, setSelectedProductLine] = useState('chips');
-  const [orderQuantity, setOrderQuantity] = useState(2);
-  const [distributorName, setDistributorName] = useState('');
-  const [distributorEmail, setDistributorEmail] = useState('');
-  const [distributorPhone, setDistributorPhone] = useState('');
-  const [orderSubmitted, setOrderSubmitted] = useState(false);
 
   // Batch Search States
   const [showTraceModal, setShowTraceModal] = useState(false);
@@ -128,160 +120,6 @@ export default function Food() {
 
   const currentChip = chipVarieties[chipVariety];
 
-  const storeCatalog = [
-    {
-      id: 'plantain',
-      name: 'Kone Golden Plantain Chips',
-      category: 'chips',
-      image: '/assets/products/plantain-chips.jpg',
-      size: '150g Foil Pouch',
-      unitPrice: 8.0,
-      badge: 'Bestseller',
-      badgeColor: '#eab308',
-      rating: 4.9,
-      reviewsCount: 128,
-      ingredients: 'Sun-ripened Organic Plantains, Cold-Pressed Vegetable Oil, Sea Salt, Natural Spices',
-      tags: ['100% Vegan', 'Gluten-Free', 'Non-GMO']
-    },
-    {
-      id: 'yam',
-      name: 'Kone Crispy Yam Chips',
-      category: 'chips',
-      image: '/assets/products/yam-chips.jpg',
-      size: '150g Foil Pouch',
-      unitPrice: 8.0,
-      badge: 'Savory Hit',
-      badgeColor: '#f97316',
-      rating: 4.8,
-      reviewsCount: 94,
-      ingredients: 'Ghanaian White Yam, Cold-Pressed Vegetable Oil, Cracked Black Pepper, Rosemary, Sea Salt',
-      tags: ['100% Vegan', 'Gluten-Free', 'High Fiber']
-    },
-    {
-      id: 'potato',
-      name: 'Kone Rustic Potato Crisps',
-      category: 'chips',
-      image: '/assets/products/potato-chips.jpg',
-      size: '150g Foil Pouch',
-      unitPrice: 8.0,
-      badge: 'Zesty Crunch',
-      badgeColor: '#38bdf8',
-      rating: 4.9,
-      reviewsCount: 86,
-      ingredients: 'Highland Potatoes (Skin-on), Cold-Pressed Oil, Ghanaian Chili Paprika, Sea Salt',
-      tags: ['Gluten-Free', 'Slow Kettle Fried', 'Zero Trans Fat']
-    },
-    {
-      id: 'trio',
-      name: 'Kone Trio Variety Box',
-      category: 'bundles',
-      image: '/assets/products/trio-box.jpg',
-      size: '3 x 150g Gift Box',
-      unitPrice: 24.0,
-      badge: 'Party Pack',
-      badgeColor: '#ec4899',
-      rating: 5.0,
-      reviewsCount: 62,
-      ingredients: 'Complete selection: Golden Plantain, Crispy Yam, and Rustic Potato packs',
-      tags: ['Gift Box', '3 Flavour Blend', 'Party Ready']
-    },
-    {
-      id: 'shito',
-      name: 'Kone Authentic Shito Sauce',
-      category: 'shito',
-      image: '/assets/products/shito-jar.jpg',
-      size: '350g Glass Jar',
-      unitPrice: 20.0,
-      badge: 'Signature Umami',
-      badgeColor: '#ef4444',
-      rating: 4.95,
-      reviewsCount: 215,
-      ingredients: 'Organic Scotch Bonnet, Artisanal Pink Shallots, Wild Smoked Herring, Dried Shrimp, Ginger, Vegetable Oil',
-      tags: ['85K SHU Heat', 'Smoked Seafood', 'Vacuum Sealed']
-    }
-  ];
-
-  const productPricingConfig = {
-    chips: {
-      unitName: 'Carton of 24 Pouches (150g)',
-      basePrice: 140,
-      itemLabel: 'Cartons (24 packs each)',
-      suggestedRetailPerUnit: 8.0,
-      unitsPerBox: 24,
-      shippingFlat: 20
-    },
-    shito: {
-      unitName: 'Box of 12 Jars (350g)',
-      basePrice: 180,
-      itemLabel: 'Boxes (12 jars each)',
-      suggestedRetailPerUnit: 20.0,
-      unitsPerBox: 12,
-      shippingFlat: 25
-    },
-    combo: {
-      unitName: 'Merchant Pallet (12 Jars Shito + 12 Chip Pouches)',
-      basePrice: 160,
-      itemLabel: 'Combo Bundles',
-      suggestedRetailPerUnit: 18.0,
-      unitsPerBox: 24,
-      shippingFlat: 25
-    }
-  };
-
-  const activePricing = productPricingConfig[selectedProductLine];
-
-  const getPricingTier = (qty, config) => {
-    if (qty >= 10) {
-      const discount = 0.1;
-      const price = Math.round(config.basePrice * (1 - discount));
-      return { price, discountPercent: 10, label: 'Tier 3 Wholesale (10% Off + Free Shipping)', shipping: 0 };
-    } else if (qty >= 5) {
-      const discount = 0.05;
-      const price = Math.round(config.basePrice * (1 - discount));
-      return { price, discountPercent: 5, label: 'Tier 2 Bulk (5% Off)', shipping: config.shippingFlat };
-    } else {
-      return { price: config.basePrice, discountPercent: 0, label: 'Standard Wholesale Rate', shipping: config.shippingFlat };
-    }
-  };
-
-  const currentTier = getPricingTier(orderQuantity, activePricing);
-  const subtotal = orderQuantity * currentTier.price;
-  const totalCost = subtotal + currentTier.shipping;
-  const totalUnits = orderQuantity * activePricing.unitsPerBox;
-  const estimatedRetailRevenue = totalUnits * activePricing.suggestedRetailPerUnit;
-  const estimatedDistributorProfit = estimatedRetailRevenue - totalCost;
-
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
-    if (!distributorName || !distributorEmail) return;
-    setOrderSubmitted(true);
-
-    if (db && db.app) {
-      try {
-        await addDoc(collection(db, 'farm_distributors'), {
-          name: distributorName.trim(),
-          email: distributorEmail.trim(),
-          phone: distributorPhone.trim(),
-          productLine: selectedProductLine,
-          quantity: Number(orderQuantity),
-          totalCost: totalCost,
-          status: 'Pending',
-          createdAt: new Date().toISOString()
-        });
-      } catch (err) {
-        console.error("Firestore B2B submission error:", err);
-      }
-    }
-
-    setTimeout(() => {
-      setOrderSubmitted(false);
-      setDistributorName('');
-      setDistributorEmail('');
-      setDistributorPhone('');
-      setOrderQuantity(2);
-    }, 4000);
-  };
-
   const executeTraceLookup = async (batchCode) => {
     const queryId = (batchCode || searchBatchId).trim().toUpperCase();
     if (!queryId) return;
@@ -322,14 +160,6 @@ export default function Food() {
     executeTraceLookup(searchBatchId);
   };
 
-  const scrollToDistributor = (lineKey) => {
-    if (lineKey) setSelectedProductLine(lineKey);
-    const element = document.getElementById('distributor-hub-section');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <div className="food-div-page animate-fade-in">
       <div className="food-container">
@@ -364,16 +194,10 @@ export default function Food() {
                 Kone Shito
               </button>
               <button 
-                className={`segment-btn ${productTab === 'store' ? 'active' : ''}`}
-                onClick={() => setProductTab('store')}
-              >
-                Pantry Store Catalog
-              </button>
-              <button 
                 className={`segment-btn ${productTab === 'all' ? 'active' : ''}`}
                 onClick={() => setProductTab('all')}
               >
-                View Everything
+                View Both
               </button>
             </div>
           </div>
@@ -429,12 +253,13 @@ export default function Food() {
                     </div>
 
                     <div className="photo-quick-actions">
-                      <button 
+                      <a 
+                        href="#market"
                         className="photo-order-btn"
-                        onClick={() => scrollToDistributor('chips')}
+                        style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                       >
-                        Order Wholesale Carton (24 Packs)
-                      </button>
+                        Order Wholesale Carton in Market ➔
+                      </a>
                     </div>
                   </div>
 
@@ -596,13 +421,13 @@ export default function Food() {
                     </div>
 
                     <div className="photo-quick-actions">
-                      <button 
+                      <a 
+                        href="#market"
                         className="photo-order-btn" 
-                        style={{ background: 'linear-gradient(135deg, #dc2626 0%, #991b1b 100%)', borderColor: '#ef4444' }}
-                        onClick={() => scrollToDistributor('shito')}
+                        style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #dc2626 0%, #991b1b 100%)', borderColor: '#ef4444' }}
                       >
-                        Order Wholesale Box (12 Jars)
-                      </button>
+                        Order Wholesale Box in Market ➔
+                      </a>
                     </div>
                   </div>
 
@@ -680,81 +505,6 @@ export default function Food() {
         )}
 
         {/* ========================================================================= */}
-        {/* PANTRY STORE & MARKETPLACE SHELF GRID */}
-        {/* ========================================================================= */}
-        {(productTab === 'store' || productTab === 'all') && (
-          <div className="storefront-section animate-fade-in">
-            <div className="farms-header-section" style={{ marginBottom: '2rem', textAlign: 'left' }}>
-              <div className="farms-title-badge" style={{ background: 'rgba(16, 185, 129, 0.12)', borderColor: 'rgba(16, 185, 129, 0.25)', color: '#34d399', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                <svg viewBox="0 0 24 24" width="14" height="14" stroke="#34d399" strokeWidth="2.5" fill="none">
-                  <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                  <line x1="3" y1="6" x2="21" y2="6"></line>
-                  <path d="M16 10a4 4 0 0 1-8 0"></path>
-                </svg>
-                Gourmet Store & Retail Catalog
-              </div>
-              <h2 className="farms-headline" style={{ fontSize: '2rem' }}>Browse the Complete Shelf</h2>
-              <p className="farms-subheadline" style={{ margin: 0, fontSize: '0.95rem' }}>
-                Order direct retail packs, sample variety boxes, or volume wholesale cartons for your supermarket or hotel pantry.
-              </p>
-            </div>
-
-            <div className="store-products-grid">
-              {storeCatalog.map((item) => (
-                <div key={item.id} className="store-product-card">
-                  <div className="store-img-wrapper">
-                    <img src={item.image} alt={item.name} className="store-card-img" />
-                    <span className="store-card-badge" style={{ background: item.badgeColor }}>
-                      {item.badge}
-                    </span>
-                    <span className="store-size-tag">{item.size}</span>
-                  </div>
-
-                  <div className="store-card-body">
-                    <div className="store-rating-row">
-                      <span className="rating-stars">★★★★★</span>
-                      <span className="rating-num">{item.rating} ({item.reviewsCount} reviews)</span>
-                    </div>
-
-                    <h3 className="store-product-name">{item.name}</h3>
-
-                    <div className="store-ingredients-preview">
-                      <strong>Ingredients:</strong> {item.ingredients}
-                    </div>
-
-                    <div className="store-tags-flex">
-                      {item.tags.map((t, idx) => (
-                        <span key={idx} className="store-tag-pill">{t}</span>
-                      ))}
-                    </div>
-
-                    <div className="store-card-footer">
-                      <div className="store-price-block">
-                        <span className="unit-label">Retail Price</span>
-                        <strong className="unit-val">GHS {item.unitPrice.toFixed(2)}</strong>
-                      </div>
-
-                      <button 
-                        className="store-action-btn"
-                        onClick={() => {
-                          if (item.id === 'shito') {
-                            scrollToDistributor('shito');
-                          } else {
-                            scrollToDistributor('chips');
-                          }
-                        }}
-                      >
-                        Order / Stock ➔
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* ========================================================================= */}
         {/* UNIFIED BATCH TRACEABILITY CONSOLE */}
         {/* ========================================================================= */}
         <div className="farms-card trace-console-card animate-fade-in">
@@ -827,198 +577,34 @@ export default function Food() {
         </div>
 
         {/* ========================================================================= */}
-        {/* WHOLESALER & DISTRIBUTOR HUB */}
+        {/* KONE MARKET STOREFRONT BRIDGE BANNER */}
         {/* ========================================================================= */}
-        <div id="distributor-hub-section" className="b2b-distributors-grid">
-          
-          {/* Left panel: Registration form */}
-          <div className="farms-card">
-            <h3 className="smartfarm-title" style={{ marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <svg viewBox="0 0 24 24" width="20" height="20" stroke="#34d399" strokeWidth="2" fill="none">
-                <line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line>
-                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                <line x1="12" y1="22.08" x2="12" y2="12"></line>
-              </svg>
-              Retailer & Distributor Registration
-            </h3>
-            <p style={{ color: '#94a3b8', fontSize: '0.9rem', marginBottom: '1.5rem', textAlign: 'left', lineHeight: 1.5 }}>
-              Stock <strong>Kone Chips</strong> and <strong>Kone Shito</strong> in your supermarket, grocery store, school snack lounge, hotel, or retail chain. Direct wholesale margins, shelf display materials, and scheduled delivery.
-            </p>
-
-            {orderSubmitted ? (
-              <div className="submit-success-banner">
-                <div style={{ margin: '0 auto 1rem', width: '48px', height: '48px', borderRadius: '50%', background: 'rgba(16, 185, 129, 0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <svg viewBox="0 0 24 24" width="28" height="28" stroke="#34d399" strokeWidth="2" fill="none">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                </div>
-                <strong style={{ display: 'block', fontSize: '1.2rem', marginBottom: '0.5rem' }}>Application Submitted!</strong>
-                <p style={{ fontSize: '0.85rem', margin: 0 }}>Thank you for joining our distribution network. Our logistics team will email your account credentials and merchant delivery schedule.</p>
-              </div>
-            ) : (
-              <form onSubmit={handleFormSubmit}>
-                <div className="dist-form-group">
-                  <label htmlFor="dist-partner-name" className="dist-label">Store / Business Name</label>
-                  <input
-                    id="dist-partner-name"
-                    type="text"
-                    required
-                    aria-label="Store or partner name"
-                    value={distributorName}
-                    onChange={(e) => setDistributorName(e.target.value)}
-                    placeholder="e.g. Prime Fresh Mart & Supermarket"
-                    className="dist-input"
-                  />
-                </div>
-                <div className="dist-form-group">
-                  <label htmlFor="dist-email" className="dist-label">Business Email Address</label>
-                  <input
-                    id="dist-email"
-                    type="email"
-                    required
-                    aria-label="Email address"
-                    value={distributorEmail}
-                    onChange={(e) => setDistributorEmail(e.target.value)}
-                    placeholder="manager@yourstore.com"
-                    className="dist-input"
-                  />
-                </div>
-                <div className="dist-form-group">
-                  <label htmlFor="dist-phone" className="dist-label">Contact Phone / WhatsApp</label>
-                  <input
-                    id="dist-phone"
-                    type="tel"
-                    aria-label="Phone number"
-                    value={distributorPhone}
-                    onChange={(e) => setDistributorPhone(e.target.value)}
-                    placeholder="+233 24 000 0000"
-                    className="dist-input"
-                  />
-                </div>
-
-                {/* Product line selection */}
-                <div className="dist-form-group">
-                  <label htmlFor="dist-product-line" className="dist-label">Select Primary Inventory Line</label>
-                  <select
-                    id="dist-product-line"
-                    aria-label="Select product inventory line"
-                    value={selectedProductLine}
-                    onChange={(e) => setSelectedProductLine(e.target.value)}
-                    className="dist-input select-farms-option"
-                  >
-                    <option value="chips">Kone Chips (Cartons of 24 Pouches - 150g)</option>
-                    <option value="shito">Kone Shito (Boxes of 12 Jars - 350g)</option>
-                    <option value="combo">Merchant Starter Pallet (12 Jars Shito + 12 Chip Pouches)</option>
-                  </select>
-                </div>
-
-                <div className="dist-form-group">
-                  <label htmlFor="dist-quantity-select" className="dist-label">
-                    Select Volume ({activePricing.itemLabel})
-                  </label>
-                  <select
-                    id="dist-quantity-select"
-                    aria-label="Select volume"
-                    value={orderQuantity}
-                    onChange={(e) => setOrderQuantity(Number(e.target.value))}
-                    className="dist-input select-farms-option"
-                  >
-                    {[1, 2, 5, 10, 20, 50, 100].map((num) => (
-                      <option key={num} value={num}>
-                        {num} {activePricing.itemLabel} {num >= 10 ? '(10% Off + Free Shipping)' : num >= 5 ? '(5% Bulk Discount)' : ''}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <button type="submit" className="farms-submit-btn" style={{ width: '100%', marginTop: '1rem' }}>
-                  Submit Wholesaler Application ➔
-                </button>
-              </form>
-            )}
-          </div>
-
-          {/* Right panel: Live B2B margin calculator */}
-          <div className="farms-card">
-            <h3 className="smartfarm-title" style={{ marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <svg viewBox="0 0 24 24" width="20" height="20" stroke="#34d399" strokeWidth="2" fill="none">
-                <line x1="18" y1="20" x2="18" y2="10"></line>
-                <line x1="12" y1="20" x2="12" y2="4"></line>
-                <line x1="6" y1="20" x2="6" y2="14"></line>
-              </svg>
-              Merchant Margin & Invoice Calculator
-            </h3>
-            <p style={{ color: '#94a3b8', fontSize: '0.9rem', marginBottom: '1.5rem', textAlign: 'left', lineHeight: 1.5 }}>
-              Real-time wholesale breakdown for your retail store shelf or food service establishment.
-            </p>
-
-            <div className="pricing-calculator-box">
-              <div className="calc-row">
-                <span>Selected Line:</span>
-                <strong>{activePricing.unitName}</strong>
-              </div>
-              <div className="calc-row">
-                <span>Volume Tier:</span>
-                <span className="calc-tier-badge">{currentTier.label}</span>
-              </div>
-              <div className="calc-row">
-                <span>Price per Carton/Box:</span>
-                <strong>
-                  {currentTier.discountPercent > 0 && (
-                    <s style={{ color: '#ef4444', marginRight: '0.5rem' }}>GHS {activePricing.basePrice}</s>
-                  )}
-                  GHS {currentTier.price}.00
-                </strong>
-              </div>
-              <div className="calc-row">
-                <span>Total Units on Order:</span>
-                <strong style={{ color: '#facc15' }}>{totalUnits} Units</strong>
-              </div>
-              <div className="calc-row">
-                <span>Logistics & Freight:</span>
-                <span>{currentTier.shipping === 0 ? <strong style={{ color: '#10b981' }}>FREE</strong> : `GHS ${currentTier.shipping}.00`}</span>
-              </div>
-
-              <div className="calc-total-row">
-                <span>Total Wholesale Invoice:</span>
-                <span className="calc-total-amount">GHS {totalCost}.00</span>
-              </div>
-
-              {/* Retail Margin Projection */}
-              <div className="profit-projection-card">
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.35rem' }}>
-                  <span style={{ fontSize: '0.85rem', color: '#94a3b8' }}>Est. Consumer Retail Revenue:</span>
-                  <strong style={{ color: '#38bdf8' }}>GHS {estimatedRetailRevenue}.00</strong>
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ fontSize: '0.85rem', color: '#94a3b8' }}>Est. Merchant Profit Margin:</span>
-                  <strong style={{ color: '#10b981' }}>+GHS {estimatedDistributorProfit}.00 ({Math.round((estimatedDistributorProfit / totalCost) * 100)}% ROI)</strong>
-                </div>
-              </div>
-
-              <div style={{ textAlign: 'left', fontSize: '0.85rem', color: '#94a3b8', lineHeight: 1.5, marginTop: '1rem' }}>
-                <strong style={{ display: 'block', color: 'white', marginBottom: '0.25rem' }}>Volume Incentive Tiers:</strong>
-                <ul>
-                  <li>Order <strong>5 - 9 cartons/boxes</strong>: Save <strong>5%</strong> on whole invoice.</li>
-                  <li>Order <strong>10+ cartons/boxes</strong>: Save <strong>10%</strong> + <strong>100% Free Nationwide Freight</strong>!</li>
-                </ul>
-              </div>
+        <div id="distributor-hub-section" className="market-bridge-card">
+          <div className="market-bridge-inner">
+            <div className="market-badge-pill" style={{ borderColor: 'rgba(234, 179, 8, 0.4)', color: '#fef08a' }}>
+              ✦ Official Kone Storefront & Wholesale Hub
             </div>
-
-            <div style={{ borderTop: '1px solid rgba(16, 185, 129, 0.15)', paddingTop: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.75rem', textAlign: 'left', marginTop: '1rem' }}>
-              <svg viewBox="0 0 24 24" width="20" height="20" stroke="#34d399" strokeWidth="2" fill="none" style={{ flexShrink: 0 }}>
-                <rect x="1" y="3" width="15" height="13"></rect>
-                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
-                <circle cx="5.5" cy="18.5" r="2.5"></circle>
-                <circle cx="18.5" cy="18.5" r="2.5"></circle>
-              </svg>
-              <span style={{ fontSize: '0.8rem', color: '#94a3b8', lineHeight: 1.4 }}>
-                Products are packaged in moisture-barrier nitrogen foil and dispatched directly from our packaging facility to stockists within 24-48 hours.
-              </span>
+            <h3 className="market-bridge-title">
+              Looking to Order Wholesale Cartons or Stock Kone Foods?
+            </h3>
+            <p className="market-bridge-desc">
+              All commercial ordering, volume carton calculators, retail margin projections, and direct WhatsApp invoice dispatches are now centralized in <strong>The Kone Market</strong>.
+            </p>
+            <div className="market-bridge-actions">
+              <a href="#market" className="farms-submit-btn" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                Open The Kone Market ➔
+              </a>
+              <a 
+                href="https://wa.me/233240000000?text=Hello%20Kone%20Farms%20Logistics%2C%20I%20would%20like%20to%20inquire%20about%20ordering%20wholesale%20cartons." 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="market-btn-secondary" 
+                style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px' }}
+              >
+                Inquire on WhatsApp
+              </a>
             </div>
           </div>
-
         </div>
 
       </div>

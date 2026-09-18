@@ -27,6 +27,14 @@ export default function Navbar({ currentRoute }) {
         <a href="#farms" className={`nav-link ${currentRoute === '#farms' ? 'active' : ''}`}>Farms & Sourcing</a>
         <a href="#food" className={`nav-link ${currentRoute === '#food' ? 'active' : ''}`}>Food & Snacks</a>
         <a href="#agritech" className={`nav-link ${isAgritechActive ? 'active' : ''}`}>smartFarm Telemetry</a>
+        <a href="#market" className={`nav-link nav-market-link ${currentRoute === '#market' ? 'active' : ''}`}>
+          <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '5px', verticalAlign: '-2px' }}>
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          Market
+        </a>
         <a href="#blog" className={`nav-link ${currentRoute.startsWith('#blog') ? 'active' : ''}`}>Blog</a>
         <a href="https://koneacademy.io" className="back-btn-nav">
           <svg className="back-arrow-svg" viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '4px' }}>
@@ -65,6 +73,7 @@ export default function Navbar({ currentRoute }) {
         <a href="#farms" className={`nav-link ${currentRoute === '#farms' ? 'active' : ''}`} onClick={closeMobileMenu}>Farms & Sourcing</a>
         <a href="#food" className={`nav-link ${currentRoute === '#food' ? 'active' : ''}`} onClick={closeMobileMenu}>Food & Snacks</a>
         <a href="#agritech" className={`nav-link ${currentRoute === '#agritech' ? 'active' : ''}`} onClick={closeMobileMenu}>smartFarm Telemetry</a>
+        <a href="#market" className={`nav-link nav-market-link ${currentRoute === '#market' ? 'active' : ''}`} onClick={closeMobileMenu}>The Kone Market</a>
         <a href="#blog" className={`nav-link ${currentRoute.startsWith('#blog') ? 'active' : ''}`} onClick={closeMobileMenu}>Blog</a>
         <a href="#sitemap" className={`nav-link ${currentRoute === '#sitemap' ? 'active' : ''}`} onClick={closeMobileMenu}>Sitemap</a>
         <a href="https://koneacademy.io" className="back-btn-nav" style={{ marginTop: '0.75rem', justifyContent: 'center' }}>
@@ -80,7 +89,7 @@ export default function Navbar({ currentRoute }) {
       <nav className="farms-mobile-bottom-nav">
         <a href="#home" className={`mobile-nav-item ${currentRoute === '#home' ? 'active' : ''}`} title="Overview">
           <div className="mobile-icon-pill">
-            <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round">
               <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
               <polyline points="9 22 9 12 15 12 15 22"></polyline>
             </svg>
@@ -88,7 +97,7 @@ export default function Navbar({ currentRoute }) {
         </a>
         <a href="#farms" className={`mobile-nav-item ${currentRoute === '#farms' ? 'active' : ''}`} title="Farms & Sourcing">
           <div className="mobile-icon-pill">
-            <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round">
               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
               <circle cx="12" cy="10" r="3"></circle>
             </svg>
@@ -96,16 +105,18 @@ export default function Navbar({ currentRoute }) {
         </a>
         <a href="#food" className={`mobile-nav-item ${currentRoute === '#food' ? 'active' : ''}`} title="Food & Snacks">
           <div className="mobile-icon-pill">
-            <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-              <line x1="3" y1="6" x2="21" y2="6"></line>
-              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+              <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+              <line x1="6" y1="1" x2="6" y2="4"></line>
+              <line x1="10" y1="1" x2="10" y2="4"></line>
+              <line x1="14" y1="1" x2="14" y2="4"></line>
             </svg>
           </div>
         </a>
         <a href="#agritech" className={`mobile-nav-item ${isAgritechActive ? 'active' : ''}`} title="smartFarm Telemetry">
           <div className="mobile-icon-pill">
-            <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round">
               <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
               <rect x="9" y="9" width="6" height="6"></rect>
               <line x1="9" y1="2" x2="9" y2="4"></line>
@@ -116,6 +127,15 @@ export default function Navbar({ currentRoute }) {
               <line x1="20" y1="15" x2="22" y2="15"></line>
               <line x1="2" y1="9" x2="4" y2="9"></line>
               <line x1="2" y1="15" x2="4" y2="15"></line>
+            </svg>
+          </div>
+        </a>
+        <a href="#market" className={`mobile-nav-item ${currentRoute === '#market' ? 'active' : ''}`} title="The Kone Market">
+          <div className="mobile-icon-pill">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
             </svg>
           </div>
         </a>

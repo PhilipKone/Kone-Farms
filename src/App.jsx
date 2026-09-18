@@ -8,12 +8,18 @@ import Agritech from './components/Agritech';
 import Sitemap from './components/Sitemap';
 import Blog from './components/Blog';
 import BlogPost from './components/BlogPost';
+import Market from './components/Market';
 
 const routeMetadata = {
   '#home': {
     title: 'Kone Farms & Agritech | Sustainable Agriculture & Artisanal Foods',
     desc: 'Pioneering Sustainable Agriculture & Artisanal Foods Through Modern Agritech. Handcrafted Kone Chips and authentic Kone Shito, sourced directly from organic Ghanaian farmlands.',
     canonical: 'https://farms.koneacademy.io/'
+  },
+  '#market': {
+    title: 'The Kone Market | Artisanal Foods, Bulk Harvest & smartFarm Hardware',
+    desc: 'Official Kone storefront. Purchase wholesale cartons of Kone Chips & Shito, source organic bulk plantains & yams, or procure smartFarm IoT hardware.',
+    canonical: 'https://farms.koneacademy.io/market'
   },
   '#farms': {
     title: 'Organic Farmlands & Fair-Trade Sourcing | Kone Farms',
@@ -55,12 +61,13 @@ function resolveCurrentRoute() {
   if (pathname === '/farms') return '#farms';
   if (pathname === '/food') return '#food';
   if (pathname === '/agritech') return '#agritech';
+  if (pathname === '/market') return '#market';
   if (pathname === '/sitemap') return '#sitemap';
 
   // Fall back to hash routing
   if (hash.startsWith('#blog/')) return hash;
   if (hash === '#agritech/webapp') return '#agritech';
-  if (['#farms', '#food', '#agritech', '#blog', '#sitemap'].includes(hash)) return hash;
+  if (['#farms', '#food', '#agritech', '#market', '#blog', '#sitemap'].includes(hash)) return hash;
 
   return '#home';
 }
@@ -114,6 +121,8 @@ export default function App() {
         return <Food />;
       case '#agritech':
         return <Agritech />;
+      case '#market':
+        return <Market />;
       case '#blog':
         return <Blog onSelectArticle={(slug) => { window.location.hash = `#blog/${slug}`; }} />;
       case '#sitemap':
