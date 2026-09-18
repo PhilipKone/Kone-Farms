@@ -71,14 +71,14 @@
 
 /* Hero Typography */
 .home-headline {
-  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
-  font-size: clamp(2.3rem, 5vw, 3.8rem);
-  font-weight: 700;
+  font-family: 'Baloo 2', cursive, sans-serif;
+  font-size: clamp(2.3rem, 5.2vw, 3.9rem);
+  font-weight: 800;
   color: #FFFFFF;
   line-height: 1.15;
   margin: 0 auto 1.4rem;
   max-width: 960px;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.01em;
 }
 
 .emerald-luminance {
@@ -276,12 +276,12 @@
 }
 
 .div-h3 {
-  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
-  font-size: 1.35rem;
-  font-weight: 700;
+  font-family: 'Baloo 2', cursive, sans-serif;
+  font-size: 1.45rem;
+  font-weight: 800;
   color: #FFFFFF;
   margin: 0 0 0.6rem;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 .div-desc {

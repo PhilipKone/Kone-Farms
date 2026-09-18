@@ -1,6 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap');
 
-/* Global base stylesheet for Kone Farms */
+/* Global base stylesheet for Kone Farms - Brand Standard */
+:root {
+  --font-brand: 'Baloo 2', cursive, sans-serif;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -15,13 +19,24 @@ body {
     linear-gradient(180deg, #04140f 0%, #020b08 100%);
   background-attachment: fixed;
   color: #e2e8f0;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Baloo 2', cursive, sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
 }
 
+*,
+button,
+input,
+textarea,
+select,
+a,
+p,
+span,
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Baloo 2', cursive, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.01em;
   font-weight: 800;
 }
@@ -105,10 +120,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .farms-headline {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Baloo 2', cursive, sans-serif;
   font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 900;
-  letter-spacing: -0.035em;
+  font-weight: 800;
+  letter-spacing: -0.01em;
   color: #ffffff;
   line-height: 1.15;
   margin: 0 0 1.5rem;
@@ -144,10 +159,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .smartfarm-title {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Baloo 2', cursive, sans-serif;
   font-size: 1.5rem;
-  font-weight: 850;
-  letter-spacing: -0.025em;
+  font-weight: 800;
+  letter-spacing: -0.01em;
   color: #fff;
   margin: 0;
   display: flex;
