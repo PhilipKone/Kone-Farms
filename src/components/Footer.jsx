@@ -23,10 +23,10 @@ export default function Footer() {
           <div className="footer-links">
             <a href="#home" className="footer-link">Overview</a>
             <a href="#farms" className="footer-link">Farms & Sourcing</a>
-            <a href="#food" className="footer-link">Kone Shito Sauce</a>
+            <a href="#food" className="footer-link">Food & Snacks</a>
             <a href="#agritech" className="footer-link">smartFarm Telemetry</a>
-            <a href="#blog" className="footer-link">Agritech Research Blog</a>
-            <a href="#sitemap" className="footer-link">Subdomain Sitemap</a>
+            <a href="#blog" className="footer-link">Blog</a>
+            <a href="#sitemap" className="footer-link">Sitemap</a>
           </div>
         </div>
 
