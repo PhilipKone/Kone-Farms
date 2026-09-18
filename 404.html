@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kone Farms & Agritech</title>
+  <script type="text/javascript">
+    // Single Page Apps for GitHub Pages
+    // MIT License - https://github.com/rafgraph/spa-github-pages
+    var pathSegmentsToKeep = 0;
+    var l = window.location;
+    var safeOrigin = l.origin || (l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : ''));
+    var safePath = encodeURI(l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/')).replace(/&/g, '~and~');
+    var safeSearch = l.search ? '&' + encodeURIComponent(l.search.slice(1)).replace(/&/g, '~and~') : '';
+    var safeHash = l.hash ? '#' + encodeURIComponent(l.hash.slice(1)) : '';
+    var redirectTarget = safeOrigin + '/?/' + safePath + safeSearch + safeHash;
+    
+    if (redirectTarget.indexOf(safeOrigin) === 0) {
+      l.replace(redirectTarget);
+    }
+  </script>
+</head>
+<body>
+</body>
+</html>
