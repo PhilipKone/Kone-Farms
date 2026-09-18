@@ -68,8 +68,8 @@ export default function Food() {
       nutrition: { crunchScore: '99.8%', oilAbsorption: 'Zero Trans Fat', shelfLife: '9 Months', calories: '140 kcal / serving' },
       colorAccent: '#eab308',
       badge: 'Golden Plantain',
-      retailPrice: 'GHS 8.00',
-      cartonPrice: 'GHS 140 (24 packs)'
+      format: '150g Foil Pouch',
+      packSpec: 'Kettle Cooked • Fresh-Lock Nitrogen'
     },
     yam: {
       id: 'yam',
@@ -83,8 +83,8 @@ export default function Food() {
       nutrition: { crunchScore: '98.5%', oilAbsorption: 'Zero Cholesterol', shelfLife: '9 Months', calories: '135 kcal / serving' },
       colorAccent: '#f97316',
       badge: 'Ghanaian Yam',
-      retailPrice: 'GHS 8.00',
-      cartonPrice: 'GHS 140 (24 packs)'
+      format: '150g Foil Pouch',
+      packSpec: 'Slow Kettle Fried • Sea Salt & Herbs'
     },
     potato: {
       id: 'potato',
@@ -98,8 +98,8 @@ export default function Food() {
       nutrition: { crunchScore: '99.2%', oilAbsorption: 'Cold-Pressed Oil Only', shelfLife: '9 Months', calories: '145 kcal / serving' },
       colorAccent: '#38bdf8',
       badge: 'Highland Potato',
-      retailPrice: 'GHS 8.00',
-      cartonPrice: 'GHS 140 (24 packs)'
+      format: '150g Foil Pouch',
+      packSpec: 'Skin-On Crisp • Ghanaian Chili Paprika'
     },
     trio: {
       id: 'trio',
@@ -113,8 +113,8 @@ export default function Food() {
       nutrition: { crunchScore: '100%', oilAbsorption: '100% Non-GMO', shelfLife: '9 Months', calories: '3 x 150g Packs' },
       colorAccent: '#ec4899',
       badge: '3-in-1 Combo',
-      retailPrice: 'GHS 24.00',
-      cartonPrice: 'GHS 210 (10 boxes)'
+      format: '3 x 150g Gift Box',
+      packSpec: 'Gift Edition • Triple Harvest Sampler'
     }
   };
 
@@ -246,20 +246,10 @@ export default function Food() {
                         {currentChip.badge}
                       </div>
 
-                      <div className="photo-price-tag">
-                        <span className="single-price">{currentChip.retailPrice}</span>
-                        <span className="carton-sub">{currentChip.cartonPrice}</span>
+                      <div className="photo-spec-tag">
+                        <span className="spec-format">{currentChip.format}</span>
+                        <span className="spec-sub">{currentChip.packSpec}</span>
                       </div>
-                    </div>
-
-                    <div className="photo-quick-actions">
-                      <a 
-                        href="#market"
-                        className="photo-order-btn"
-                        style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                      >
-                        Order Wholesale Carton in Market ➔
-                      </a>
                     </div>
                   </div>
 
@@ -414,20 +404,12 @@ export default function Food() {
                         Authentic Shito
                       </div>
 
-                      <div className="photo-price-tag">
-                        <span className="single-price">GHS 20.00</span>
-                        <span className="carton-sub">Box of 12: GHS 180</span>
+                      <div className="photo-spec-tag">
+                        <span className="spec-format">350g Glass Jar</span>
+                        <span className="spec-sub" style={{ background: 'rgba(153, 27, 27, 0.65)', borderColor: 'rgba(239, 68, 68, 0.4)', color: '#fca5a5' }}>
+                          Slow-Simmered Umami
+                        </span>
                       </div>
-                    </div>
-
-                    <div className="photo-quick-actions">
-                      <a 
-                        href="#market"
-                        className="photo-order-btn" 
-                        style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #dc2626 0%, #991b1b 100%)', borderColor: '#ef4444' }}
-                      >
-                        Order Wholesale Box in Market ➔
-                      </a>
                     </div>
                   </div>
 
