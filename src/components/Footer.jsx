@@ -24,9 +24,9 @@ export default function Footer() {
             <a href="#home" className="footer-link">Overview</a>
             <a href="#farms" className="footer-link">Farms & Sourcing</a>
             <a href="#food" className="footer-link">Kone Shito Sauce</a>
-            <a href="#agritech" className="footer-link">Smart Telemetry</a>
+            <a href="#agritech" className="footer-link">smartFarm Telemetry</a>
             <a href="#blog" className="footer-link">Agritech Research Blog</a>
-            <a href="#sitemap" className="footer-link" style={{ fontWeight: 'bold', color: '#34d399' }}>Subdomain Sitemap</a>
+            <a href="#sitemap" className="footer-link">Subdomain Sitemap</a>
           </div>
         </div>
 
@@ -42,6 +42,7 @@ export default function Footer() {
             <a href="https://kids.koneacademy.io" className="footer-link">Kone Kids</a>
             <a href="https://shop.koneacademy.io" className="footer-link">Kone Shop</a>
             <a href="https://warp.koneacademy.io" className="footer-link">Kone Warp</a>
+            <a href="https://tech.koneacademy.io" className="footer-link">Kone Tech</a>
             <a href="https://digital.koneacademy.io" className="footer-link">Kone Digital</a>
           </div>
         </div>
@@ -117,8 +118,8 @@ export default function Footer() {
               <polyline points="2 17 12 22 22 17"></polyline>
               <polyline points="2 12 12 17 22 12"></polyline>
             </svg>
-            <strong>Farming Partner Districts:</strong><br />
-            Partner Organic Agricultural Districts, Ghana
+            <strong>Partner Districts:</strong><br />
+            Organic Agricultural Belts, Ghana
           </div>
         </div>
 
@@ -129,9 +130,9 @@ export default function Footer() {
           © {new Date().getFullYear()} Kone Farms • A Kone Academy Initiative. All rights reserved.
         </div>
         <div className="footer-bottom-links">
-          <a href="#sitemap" className="footer-link">Subdomain Sitemap</a>
-          <a href="#agritech" className="footer-link">smartFarm Telemetry</a>
-          <a href="#blog" className="footer-link">Research Blog</a>
+          <a href="https://koneacademy.io/privacy" target="_blank" rel="noopener noreferrer" className="footer-link">Privacy Policy</a>
+          <a href="https://koneacademy.io/terms" target="_blank" rel="noopener noreferrer" className="footer-link">Terms of Service</a>
+          <a href="#sitemap" className="footer-link">Sitemap</a>
           <a href="https://koneacademy.io" target="_blank" rel="noopener noreferrer" className="footer-link">Kone Academy ↗</a>
         </div>
       </div>

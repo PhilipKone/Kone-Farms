@@ -45,7 +45,8 @@
 
 .footer-tagline {
   font-size: 0.85rem;
-  line-height: 1.5;
+  line-height: 1.55;
+  color: rgba(226, 232, 240, 0.75);
   max-width: 300px;
 }
 
@@ -56,11 +57,12 @@
 }
 
 .footer-h4 {
-  font-size: 0.9rem;
-  font-weight: 800;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
   text-transform: uppercase;
   color: #fff;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   margin: 0 0 0.5rem;
 }
 
@@ -71,10 +73,10 @@
 }
 
 .footer-link {
-  color: #64748b;
+  color: #94a3b8;
   text-decoration: none;
   font-size: 0.85rem;
-  font-weight: 700;
+  font-weight: 500;
   transition: color 0.2s;
 }
 
@@ -82,7 +84,7 @@
   color: #34d399;
 }
 
-/* ── Social Media Button List ───────────────────────────── */
+/* ── Refined Dark-Mode Social Buttons ───────────────────────────── */
 .footer-social-list {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -92,67 +94,45 @@
 
 .social-pill {
   padding: 0.45rem 0.75rem;
-  border-radius: 12px;
+  border-radius: 10px;
   font-size: 0.8rem;
-  font-weight: 750;
+  font-weight: 600;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  transition: all 0.25s ease;
+  gap: 0.45rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   box-sizing: border-box;
 }
 
-.whatsapp-pill {
-  background: rgba(37, 211, 102, 0.1);
-  border: 1px solid rgba(37, 211, 102, 0.3);
-  color: #25D366;
+.social-pill:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .whatsapp-pill:hover {
-  background: #25D366;
-  color: #060d08;
-  border-color: #25D366;
-  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-}
-
-.linkedin-pill {
-  background: rgba(10, 102, 194, 0.1);
-  border: 1px solid rgba(10, 102, 194, 0.3);
-  color: #38bdf8;
+  color: #34d399;
+  border-color: rgba(52, 211, 153, 0.4);
 }
 
 .linkedin-pill:hover {
-  background: #0A66C2;
-  color: #ffffff;
-  border-color: #0A66C2;
-  box-shadow: 0 4px 15px rgba(10, 102, 194, 0.3);
-}
-
-.facebook-pill {
-  background: rgba(24, 119, 242, 0.1);
-  border: 1px solid rgba(24, 119, 242, 0.3);
-  color: #60a5fa;
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.4);
 }
 
 .facebook-pill:hover {
-  background: #1877F2;
-  color: #ffffff;
-  border-color: #1877F2;
-  box-shadow: 0 4px 15px rgba(24, 119, 242, 0.3);
-}
-
-.instagram-pill {
-  background: rgba(225, 48, 108, 0.1);
-  border: 1px solid rgba(225, 48, 108, 0.3);
-  color: #f472b6;
+  color: #60a5fa;
+  border-color: rgba(96, 165, 250, 0.4);
 }
 
 .instagram-pill:hover {
-  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-  color: #ffffff;
-  border-color: transparent;
-  box-shadow: 0 4px 15px rgba(225, 48, 108, 0.3);
+  color: #f472b6;
+  border-color: rgba(244, 114, 182, 0.4);
 }
 
 .footer-info-item {

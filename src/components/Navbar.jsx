@@ -26,7 +26,7 @@ export default function Navbar({ currentRoute }) {
         <a href="#home" className={`nav-link ${currentRoute === '#home' ? 'active' : ''}`}>Overview</a>
         <a href="#farms" className={`nav-link ${currentRoute === '#farms' ? 'active' : ''}`}>Farms & Sourcing</a>
         <a href="#food" className={`nav-link ${currentRoute === '#food' ? 'active' : ''}`}>Food & Snacks</a>
-        <a href="#agritech" className={`nav-link ${isAgritechActive ? 'active' : ''}`}>smartFarm Telemetry</a>
+        <a href="#agritech" className={`nav-link ${isAgritechActive ? 'active' : ''}`}>SmartFarm Telemetry</a>
         <a href="#blog" className={`nav-link ${currentRoute.startsWith('#blog') ? 'active' : ''}`}>Blog</a>
         <a href="https://koneacademy.io" className="back-btn-nav">
           <svg className="back-arrow-svg" viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '4px' }}>
@@ -64,7 +64,7 @@ export default function Navbar({ currentRoute }) {
         <a href="#home" className={`nav-link ${currentRoute === '#home' ? 'active' : ''}`} onClick={closeMobileMenu}>Overview</a>
         <a href="#farms" className={`nav-link ${currentRoute === '#farms' ? 'active' : ''}`} onClick={closeMobileMenu}>Farms & Sourcing</a>
         <a href="#food" className={`nav-link ${currentRoute === '#food' ? 'active' : ''}`} onClick={closeMobileMenu}>Food & Snacks</a>
-        <a href="#agritech" className={`nav-link ${currentRoute === '#agritech' ? 'active' : ''}`} onClick={closeMobileMenu}>smartFarm Telemetry</a>
+        <a href="#agritech" className={`nav-link ${currentRoute === '#agritech' ? 'active' : ''}`} onClick={closeMobileMenu}>SmartFarm Telemetry</a>
         <a href="#blog" className={`nav-link ${currentRoute.startsWith('#blog') ? 'active' : ''}`} onClick={closeMobileMenu}>Research Blog</a>
         <a href="#sitemap" className={`nav-link ${currentRoute === '#sitemap' ? 'active' : ''}`} onClick={closeMobileMenu}>Subdomain Sitemap</a>
         <a href="https://koneacademy.io" className="back-btn-nav" style={{ marginTop: '0.75rem', justifyContent: 'center' }}>
@@ -103,7 +103,7 @@ export default function Navbar({ currentRoute }) {
             </svg>
           </div>
         </a>
-        <a href="#agritech" className={`mobile-nav-item ${isAgritechActive ? 'active' : ''}`} title="smartFarm Telemetry">
+        <a href="#agritech" className={`mobile-nav-item ${isAgritechActive ? 'active' : ''}`} title="SmartFarm Telemetry">
           <div className="mobile-icon-pill">
             <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round">
               <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>

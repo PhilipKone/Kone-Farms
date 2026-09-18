@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 /* Global base stylesheet for Kone Farms */
 html {
@@ -8,7 +8,12 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background: linear-gradient(135deg, #04140f 0%, #082218 100%);
+  background-color: #03120d;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.15) 0%, transparent 55%),
+    radial-gradient(circle at 90% 25%, rgba(5, 150, 105, 0.08) 0%, transparent 40%),
+    linear-gradient(180deg, #04140f 0%, #020b08 100%);
+  background-attachment: fixed;
   color: #e2e8f0;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   min-height: 100vh;

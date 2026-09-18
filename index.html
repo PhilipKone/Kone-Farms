@@ -11,6 +11,20 @@
     <link rel="llms-txt" href="/llms.txt" />
     <link rel="canonical" href="https://farms.koneacademy.io/" />
 
+    <!-- Single Page Apps for GitHub Pages URL Handler -->
+    <script type="text/javascript">
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) { 
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location));
+    </script>
+
     <!-- WebMCP Declarations for Autonomous Agentic Browsing -->
     <script type="application/webmcp+json">
     {
@@ -85,33 +99,43 @@
         "@context": "https://schema.org",
         "@type": "WebSite",
         "name": "Kone Farms",
-        "alternateName": ["Kone Farms Agritech", "Kone Farms Ghana"],
+        "alternateName": ["Kone Farms & Agritech", "Kone Farms Ghana", "Kone Chips", "Kone Shito"],
         "url": "https://farms.koneacademy.io/",
         "potentialAction": {
           "@type": "SearchAction",
-          "target": "https://farms.koneacademy.io/#blog?q={search_term_string}",
+          "target": "https://farms.koneacademy.io/blog?q={search_term_string}",
           "query-input": "required name=search_term_string"
         },
         "hasPart": [
           {
             "@type": "WebPage",
-            "name": "Agritech & Field Telemetry",
-            "url": "https://farms.koneacademy.io/#agritech"
+            "name": "Farms & Sourcing",
+            "url": "https://farms.koneacademy.io/farms",
+            "description": "Organic smallholder farmlands across Ghana cultivating plantain, yam, and Scotch Bonnet peppers under fair-trade standards."
+          },
+          {
+            "@type": "WebPage",
+            "name": "Kone Food & Snacks",
+            "url": "https://farms.koneacademy.io/food",
+            "description": "Handcrafted packaged foods: kettle-cooked plantain, yam, and potato chips with signature savory Kone Shito black pepper sauce."
+          },
+          {
+            "@type": "WebPage",
+            "name": "smartFarm Telemetry",
+            "url": "https://farms.koneacademy.io/agritech",
+            "description": "Live IoT environmental telemetry, soil moisture calculators, and automated solar micro-irrigation valves."
           },
           {
             "@type": "WebPage",
             "name": "Agritech Research Blog",
-            "url": "https://farms.koneacademy.io/#blog"
+            "url": "https://farms.koneacademy.io/blog",
+            "description": "Peer-reviewed research whitepapers on Musa paradisiaca L., NPK sensor calibration, and LoRa mesh networks."
           },
           {
             "@type": "WebPage",
-            "name": "Organic Farmlands & Sourcing",
-            "url": "https://farms.koneacademy.io/#farms"
-          },
-          {
-            "@type": "WebPage",
-            "name": "Kone Chips & Artisanal Food Products",
-            "url": "https://farms.koneacademy.io/#food"
+            "name": "Subdomain Sitemap",
+            "url": "https://farms.koneacademy.io/sitemap",
+            "description": "Complete architectural directory and resource index of all Kone Farms division sections and research studies."
           }
         ],
         "parentOrganization": {
@@ -126,28 +150,46 @@
         "@context": "https://schema.org",
         "@graph": [
           {
-            "@type": "SiteNavigationElement",
-            "name": "Agritech Telemetry",
-            "description": "Smart IoT telemetry, soil moisture calculators, and micro-irrigation valves.",
-            "url": "https://farms.koneacademy.io/#agritech"
-          },
-          {
-            "@type": "SiteNavigationElement",
-            "name": "Agritech Research Blog",
-            "description": "Peer-reviewed research articles on Musa paradisiaca L., NPK sensors, and poultry environmental control.",
-            "url": "https://farms.koneacademy.io/#blog"
-          },
-          {
-            "@type": "SiteNavigationElement",
-            "name": "Organic Farmlands",
-            "description": "Partner smallholder plantain, yam, pepper, and organic crop farmlands.",
-            "url": "https://farms.koneacademy.io/#farms"
-          },
-          {
-            "@type": "SiteNavigationElement",
-            "name": "Kone Chips & Gourmet Foods",
-            "description": "Handcrafted organic plantain, yam & potato chips, plus signature Kone Shito black pepper sauce.",
-            "url": "https://farms.koneacademy.io/#food"
+            "@type": "ItemList",
+            "name": "Kone Farms Sitelinks Navigation",
+            "description": "Primary sitelinks navigation hierarchy for Kone Farms & Agritech.",
+            "itemListElement": [
+              {
+                "@type": "SiteNavigationElement",
+                "position": 1,
+                "name": "Farms & Sourcing",
+                "description": "Organic smallholder farmlands across Ghana cultivating plantain, yam, and Scotch Bonnet peppers under fair-trade standards.",
+                "url": "https://farms.koneacademy.io/farms"
+              },
+              {
+                "@type": "SiteNavigationElement",
+                "position": 2,
+                "name": "Kone Food & Snacks",
+                "description": "Handcrafted packaged foods: kettle-cooked plantain, yam, and potato chips with signature savory Kone Shito black pepper sauce.",
+                "url": "https://farms.koneacademy.io/food"
+              },
+              {
+                "@type": "SiteNavigationElement",
+                "position": 3,
+                "name": "smartFarm Telemetry",
+                "description": "Live IoT environmental telemetry, soil moisture calculators, and automated solar micro-irrigation valves.",
+                "url": "https://farms.koneacademy.io/agritech"
+              },
+              {
+                "@type": "SiteNavigationElement",
+                "position": 4,
+                "name": "Agritech Research Blog",
+                "description": "Peer-reviewed research whitepapers on Musa paradisiaca L., NPK sensor calibration, and LoRa mesh networks.",
+                "url": "https://farms.koneacademy.io/blog"
+              },
+              {
+                "@type": "SiteNavigationElement",
+                "position": 5,
+                "name": "Subdomain Sitemap",
+                "description": "Complete architectural directory and resource index of all Kone Farms division sections and research studies.",
+                "url": "https://farms.koneacademy.io/sitemap"
+              }
+            ]
           }
         ]
       }
@@ -171,17 +213,16 @@
           "https://consult.koneacademy.io/",
           "https://code.koneacademy.io/",
           "https://lab.koneacademy.io/",
+          "https://tech.koneacademy.io/",
           "https://digital.koneacademy.io/",
           "https://shop.koneacademy.io/",
           "https://farms.koneacademy.io/",
           "https://warp.koneacademy.io/",
           "https://ai.koneacademy.io/",
-          "https://www.linkedin.com/company/konecodeacdemy/",
-          "https://www.facebook.com/profile.php?id=61584327765846",
-          "https://www.instagram.com/koneacademy",
-          "https://x.com/koneacademy",
-          "https://www.tiktok.com/@koneacademy",
-          "https://youtube.com/@koneacademy"
+          "https://www.linkedin.com/showcase/konefarms/",
+          "https://www.facebook.com/profile.php?id=61593017477470",
+          "https://www.instagram.com/konefarms/",
+          "https://whatsapp.com/channel/0029Vb89rkTE50Ugks0LIG0L"
         ]
       }
     </script>
