@@ -68,31 +68,31 @@ const Sitemap = ({ onBack }) => {
               <div className="farms-sitemap-list">
                 <div className="farms-sitemap-item">
                   <a href="#home" className="farms-sitemap-link">
-                    Agriculture Homepage
+                    Overview
                   </a>
                   <p className="farms-sitemap-desc">Kone Farms overview detailing agricultural automation, telemetry, and smallholder small networks.</p>
                 </div>
                 <div className="farms-sitemap-item">
                   <a href="#farms" className="farms-sitemap-link">
-                    Smart Farms Dashboard
+                    Farms & Sourcing
                   </a>
                   <p className="farms-sitemap-desc">IoT telemetry console displaying live soil data, electric fence voltages, and automated crop yields.</p>
                 </div>
                 <div className="farms-sitemap-item">
                   <a href="#food" className="farms-sitemap-link">
-                    Kone Food (Supply Network)
+                    Food & Snacks
                   </a>
                   <p className="farms-sitemap-desc">Sourcing premium organic ingredients directly to consumers and shops.</p>
                 </div>
                 <div className="farms-sitemap-item">
                   <a href="#agritech" className="farms-sitemap-link">
-                    smartFarm Telemetry & Irrigation
+                    smartFarm Telemetry
                   </a>
                   <p className="farms-sitemap-desc">Autonomous field telemetry, capacitive root hydrology, crop irrigation simulator, and field inspection logger.</p>
                 </div>
                 <div className="farms-sitemap-item">
                   <a href="#blog" className="farms-sitemap-link">
-                    Agritech Research Blog
+                    Blog
                   </a>
                   <p className="farms-sitemap-desc">Deep-dive engineering research, solar telemetry node circuit schematics, and sensor calibration guides.</p>
                 </div>
