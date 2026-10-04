@@ -4,7 +4,7 @@
 /* ========================================================================= */
 
 .kone-market-page {
-  padding-top: 100px;
+  padding-top: 110px;
   padding-bottom: 90px;
   min-height: calc(100vh - 80px);
   position: relative;
@@ -13,9 +13,10 @@
 }
 
 .market-container {
-  max-width: 1240px;
+  max-width: 1200px;
+  width: 92%;
   margin: 0 auto;
-  padding: 1.5rem 5% 4rem;
+  padding: 1.5rem 0 4rem;
   box-sizing: border-box;
 }
 
@@ -25,20 +26,6 @@
   margin-bottom: 3.5rem;
 }
 
-.market-badge-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(16, 185, 129, 0.12);
-  border: 1px solid rgba(16, 185, 129, 0.35);
-  color: #34d399;
-  padding: 0.4rem 1.1rem;
-  border-radius: 9999px;
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
 
 .market-trust-row {
   display: flex;
@@ -60,6 +47,111 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 0.35rem 0.85rem;
   border-radius: 9999px;
+}
+
+/* ── SPECIALTY AISLE SPOTLIGHT BANNER ───────────────────────────────────── */
+.market-shito-spotlight {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.12) 0%, rgba(20, 26, 22, 0.95) 60%, rgba(16, 185, 129, 0.08) 100%);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  border-radius: 20px;
+  padding: 1.5rem 2rem;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35), 0 0 20px rgba(239, 68, 68, 0.12);
+  transition: all 0.3s ease;
+}
+
+.market-shito-spotlight:hover {
+  border-color: rgba(239, 68, 68, 0.6);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 28px rgba(239, 68, 68, 0.2);
+}
+
+.shito-spotlight-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.shito-spotlight-tag {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fca5a5;
+  background: rgba(239, 68, 68, 0.18);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+}
+
+.shito-spotlight-title {
+  font-family: 'Baloo 2', cursive, sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.shito-spotlight-desc {
+  font-size: 0.92rem;
+  color: #cbd5e1;
+  margin: 0;
+  line-height: 1.45;
+  max-width: 680px;
+}
+
+.shito-spotlight-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1.4rem;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: #ffffff;
+  font-family: 'Baloo 2', cursive, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-radius: 9999px;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(239, 68, 68, 0.4);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+}
+
+.shito-spotlight-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
+  box-shadow: 0 8px 24px rgba(239, 68, 68, 0.55);
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .market-shito-spotlight {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.25rem 1.25rem;
+    gap: 1.25rem;
+  }
+  
+  .shito-spotlight-title {
+    font-size: 1.15rem;
+  }
+
+  .shito-spotlight-desc {
+    font-size: 0.85rem;
+  }
+
+  .shito-spotlight-btn {
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+  }
 }
 
 /* ── PRODUCT GRID & CARDS ───────────────────────────────────────────────── */
@@ -411,6 +503,81 @@
   }
 }
 
+/* ── Agritech Hardware R&D Callout Banner ── */
+.market-hardware-notice {
+  margin-top: 3.5rem;
+  padding: 1.8rem 2rem;
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, rgba(16, 185, 129, 0.08) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  text-align: left;
+}
+
+.hardware-notice-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.hardware-notice-text {
+  flex-grow: 1;
+}
+
+.hardware-notice-text h4 {
+  font-family: 'Baloo 2', cursive, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 0.35rem;
+}
+
+.hardware-notice-text p {
+  font-size: 0.88rem;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.hardware-notice-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.25rem;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  border-radius: 12px;
+  color: #34d399;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.hardware-notice-btn:hover {
+  background: rgba(16, 185, 129, 0.25);
+  border-color: #34d399;
+  transform: translateY(-2px);
+  color: #a7f3d0;
+}
+
+@media (max-width: 768px) {
+  .kone-market-page {
+    padding-top: 90px;
+    padding-bottom: 120px;
+  }
+}
+
 @media (max-width: 640px) {
   .market-header-section {
     margin-bottom: 2rem;
@@ -420,15 +587,27 @@
     font-size: 2.2rem !important;
   }
 
+  /* Horizontal swipeable trust row */
   .market-trust-row {
-    flex-direction: column;
-    gap: 0.6rem;
-    align-items: stretch;
+    flex-direction: row;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    padding: 0.25rem 0.25rem 0.6rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    justify-content: flex-start;
+  }
+
+  .market-trust-row::-webkit-scrollbar {
+    display: none;
   }
 
   .market-trust-tag {
-    justify-content: center;
-    font-size: 0.82rem;
+    flex-shrink: 0;
+    white-space: nowrap;
+    font-size: 0.76rem;
+    padding: 0.35rem 0.7rem;
   }
 
   /* Segmented control smooth touch scroll */
@@ -441,9 +620,14 @@
   .segmented-control {
     width: 100%;
     overflow-x: auto;
+    white-space: nowrap;
+    flex-wrap: nowrap;
+    display: flex;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    padding: 4px;
+    -webkit-overflow-scrolling: touch;
+    padding: 6px;
+    gap: 6px;
     justify-content: flex-start;
   }
 
@@ -455,6 +639,7 @@
     padding: 0.5rem 1rem;
     font-size: 0.82rem;
     flex-shrink: 0;
+    white-space: nowrap;
   }
 
   .market-grid {
@@ -476,6 +661,19 @@
 
   .market-item-desc {
     font-size: 0.86rem;
+  }
+
+  .market-hardware-notice {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.35rem;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .hardware-notice-btn {
+    width: 100%;
+    justify-content: center;
   }
 
   .market-wholesale-portal-wrapper {

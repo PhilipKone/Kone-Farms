@@ -90,7 +90,7 @@ export default function Market() {
       id: 'food-plantain-chips',
       category: 'food',
       name: 'Kone Golden Plantain Chips',
-      division: 'Food & Snacks',
+      division: 'Food',
       origin: 'Partner Smallholder Groves, Ghana',
       image: '/assets/products/plantain-chips.jpg',
       badge: 'Bestseller',
@@ -105,7 +105,7 @@ export default function Market() {
       id: 'food-yam-chips',
       category: 'food',
       name: 'Kone Crispy White Yam Chips',
-      division: 'Food & Snacks',
+      division: 'Food',
       origin: 'Central Belt Farmlands, Ghana',
       image: '/assets/products/yam-chips.jpg',
       badge: 'Savory Crisp',
@@ -120,7 +120,7 @@ export default function Market() {
       id: 'food-potato-chips',
       category: 'food',
       name: 'Kone Rustic Potato Crisps',
-      division: 'Food & Snacks',
+      division: 'Food',
       origin: 'Highland Farms Cooperative',
       image: '/assets/products/potato-chips.jpg',
       badge: 'Zesty Crunch',
@@ -135,7 +135,7 @@ export default function Market() {
       id: 'food-trio-box',
       category: 'food',
       name: 'Kone Trio Variety Gift Box',
-      division: 'Food & Snacks',
+      division: 'Food',
       origin: 'Multi-Hub Collective, Ghana',
       image: '/assets/products/trio-box.jpg',
       badge: 'Master Sampler',
@@ -150,7 +150,7 @@ export default function Market() {
       id: 'food-shito-jar',
       category: 'food',
       name: 'Kone Authentic Shito Sauce',
-      division: 'Food & Snacks',
+      division: 'Food',
       origin: 'Artisanal Kitchens, Accra',
       image: '/assets/products/shito-jar.jpg',
       badge: 'Signature Umami',
@@ -222,38 +222,6 @@ export default function Market() {
       lineKey: null,
       desc: 'Sun-cured pink alliums with intense aromatic sweetness. Sourced directly from traditional coastal delta beds.',
       specs: ['Sun-Cured Bulbs', 'Long Ambient Storage', 'Intense Umami Notes']
-    },
-
-    // ── smartFarm Agritech Hardware ──────────────────────────────────────
-    {
-      id: 'hardware-telemetry-station',
-      category: 'hardware',
-      name: 'smartFarm Telemetry Base Station',
-      division: 'smartFarm Agritech',
-      origin: 'Kone Engineering Lab, Accra',
-      image: '/assets/agritech/telemetry-station.jpg',
-      badge: 'Autonomous IoT',
-      badgeColor: '#06b6d4',
-      singlePrice: 'GHS 1,450.00',
-      cartonPrice: 'Complete Field Kit + Solar Mount',
-      lineKey: null,
-      desc: 'Off-grid solar-powered weather and soil gateway. Real-time LoRaWAN mesh transmitter with 15km field coverage.',
-      specs: ['Solar MPPT + 18650 Li-ion', 'LoRaWAN 868/915MHz', 'IP67 Weatherproof']
-    },
-    {
-      id: 'hardware-sensor-node',
-      category: 'hardware',
-      name: 'Soil Moisture & Temperature Node',
-      division: 'smartFarm Agritech',
-      origin: 'Kone Engineering Lab, Accra',
-      image: '/assets/home/division-agritech.jpg',
-      badge: 'Precision SDI-12',
-      badgeColor: '#10b981',
-      singlePrice: 'GHS 680.00',
-      cartonPrice: 'Dual Probe + LoRa Node',
-      lineKey: null,
-      desc: 'Stainless steel dielectric soil moisture (VWC%) and root temperature probe with battery-powered wireless telemetry node.',
-      specs: ['±2% VWC Accuracy', '5-Year Battery Life', 'Pre-calibrated Profiles']
     }
   ];
 
@@ -360,16 +328,7 @@ export default function Market() {
         
         {/* ── MARKET HERO SECTION ────────────────────────────────────────── */}
         <header className="market-header-section">
-          <div className="market-badge-pill">
-            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2.5" fill="none">
-              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-              <line x1="3" y1="6" x2="21" y2="6"></line>
-              <path d="M16 10a4 4 0 0 1-8 0"></path>
-            </svg>
-            Kone Official Storefront & Wholesale Hub
-          </div>
-
-          <h1 className="farms-headline" style={{ marginTop: '0.75rem' }}>
+          <h1 className="farms-headline">
             The Kone Market
           </h1>
 
@@ -409,7 +368,7 @@ export default function Market() {
                 className={`segment-btn ${activeCategory === 'all' ? 'active' : ''}`}
                 onClick={() => setActiveCategory('all')}
               >
-                All Offerings ({catalog.length})
+                All Products ({catalog.length})
               </button>
               <button
                 className={`segment-btn ${activeCategory === 'food' ? 'active' : ''}`}
@@ -423,15 +382,27 @@ export default function Market() {
               >
                 Organic Bulk Harvest (4)
               </button>
-              <button
-                className={`segment-btn ${activeCategory === 'hardware' ? 'active' : ''}`}
-                onClick={() => setActiveCategory('hardware')}
-              >
-                smartFarm Hardware (2)
-              </button>
             </div>
           </div>
         </header>
+
+        {/* ── SPECIALTY AISLE: SHITO SUPERMARKET SPOTLIGHT ───────────────── */}
+        <div className="market-shito-spotlight">
+          <div className="shito-spotlight-left">
+            <span className="shito-spotlight-tag">🌶️ SPECIALTY AISLE</span>
+            <h2 className="shito-spotlight-title">The Kone Shito Supermarket</h2>
+            <p className="shito-spotlight-desc">
+              Looking for our signature Ghanaian hot pepper sauce? Explore 3D interactive jars, chef pairing guides, Scoville heat metrics, and wholesale cartons.
+            </p>
+          </div>
+          <a href="#shito" className="shito-spotlight-btn">
+            <span>Enter Shito Supermarket</span>
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
 
         {/* ── PRODUCT CATALOG GRID ────────────────────────────────────────── */}
         <section className="market-catalog-section">
@@ -487,7 +458,7 @@ export default function Market() {
                       </svg>
                       Order Wholesale Cartons ➔
                     </button>
-                  ) : item.category === 'harvest' ? (
+                  ) : (
                     <button 
                       className="market-order-action-btn harvest-action-btn"
                       onClick={() => handleOpenInquiry(item, 'harvest')}
@@ -498,21 +469,37 @@ export default function Market() {
                       </svg>
                       Request Bulk Harvest Quote ➔
                     </button>
-                  ) : (
-                    <button 
-                      className="market-order-action-btn hardware-action-btn"
-                      onClick={() => handleOpenInquiry(item, 'hardware')}
-                    >
-                      <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none" style={{ marginRight: '6px' }}>
-                        <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
-                        <rect x="9" y="9" width="6" height="6"></rect>
-                      </svg>
-                      Procure Field Hardware ➔
-                    </button>
                   )}
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* smartFarm Hardware R&D Callout Notice */}
+          <div className="market-hardware-notice">
+            <div className="hardware-notice-icon">
+              <svg viewBox="0 0 24 24" width="24" height="24" stroke="#34d399" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                <rect x="9" y="9" width="6" height="6"></rect>
+                <line x1="9" y1="2" x2="9" y2="4"></line>
+                <line x1="15" y1="2" x2="15" y2="4"></line>
+                <line x1="9" y1="20" x2="9" y2="22"></line>
+                <line x1="15" y1="20" x2="15" y2="22"></line>
+                <line x1="20" y1="9" x2="22" y2="9"></line>
+                <line x1="20" y1="15" x2="22" y2="15"></line>
+              </svg>
+            </div>
+            <div className="hardware-notice-text">
+              <h4>Looking for smartFarm Telemetry & Sensor Hardware?</h4>
+              <p>Our off-grid LoRa mesh gateways, automated irrigation valves, and NPK probes are currently in active field R&D and pilot deployment across our farmlands. Read the technical whitepapers, schematics, and field results on our research blog.</p>
+            </div>
+            <a href="#blog" className="hardware-notice-btn">
+              Explore Research Papers
+              <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
           </div>
         </section>
 

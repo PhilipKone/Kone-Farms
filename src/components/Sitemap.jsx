@@ -74,21 +74,33 @@ const Sitemap = ({ onBack }) => {
                 </div>
                 <div className="farms-sitemap-item">
                   <a href="#farms" className="farms-sitemap-link">
-                    Farms & Sourcing
+                    Farms
                   </a>
-                  <p className="farms-sitemap-desc">IoT telemetry console displaying live soil data, electric fence voltages, and automated crop yields.</p>
+                  <p className="farms-sitemap-desc">Direct agricultural hubs, regenerative soil management, and Ghanaian farmer partnerships.</p>
                 </div>
                 <div className="farms-sitemap-item">
                   <a href="#food" className="farms-sitemap-link">
-                    Food & Snacks
+                    Food
                   </a>
-                  <p className="farms-sitemap-desc">Sourcing premium organic ingredients directly to consumers and shops.</p>
+                  <p className="farms-sitemap-desc">Artisanal kettle-cooked plantain, yam, and potato chips crafted with clean Ghanaian ingredients.</p>
                 </div>
                 <div className="farms-sitemap-item">
                   <a href="#agritech" className="farms-sitemap-link">
-                    smartFarm Telemetry
+                    Agritech
                   </a>
                   <p className="farms-sitemap-desc">Autonomous field telemetry, capacitive root hydrology, crop irrigation simulator, and field inspection logger.</p>
+                </div>
+                <div className="farms-sitemap-item">
+                  <a href="#market" className="farms-sitemap-link">
+                    Kone Market
+                  </a>
+                  <p className="farms-sitemap-desc">Commercial storefront for bulk organic harvest lots, wholesale cartons, and retail pantry orders.</p>
+                </div>
+                <div className="farms-sitemap-item">
+                  <a href="#shito" className="farms-sitemap-link">
+                    Shito Supermarket
+                  </a>
+                  <p className="farms-sitemap-desc">Dedicated spicy sauce aisle featuring 3D jars, culinary pairings, and export carton wholesale ordering.</p>
                 </div>
                 <div className="farms-sitemap-item">
                   <a href="#blog" className="farms-sitemap-link">

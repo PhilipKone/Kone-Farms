@@ -1,7 +1,7 @@
 /* ── Top Fixed Reading Progress Bar ─────────────────────── */
 .reading-progress-bar {
   position: fixed;
-  top: 0;
+  top: 80px;
   left: 0;
   height: 3.5px;
   background: linear-gradient(90deg, #10b981 0%, #34d399 50%, #60a5fa 100%);
@@ -12,8 +12,9 @@
 
 .farms-post-container {
   max-width: 1200px;
+  width: 92%;
   margin: 0 auto;
-  padding: 7rem 1.5rem 6rem;
+  padding: 7.5rem 0 6rem;
   color: #e2e8f0;
 }
 
@@ -774,8 +775,8 @@
 /* ── Floating Back to Top Button ─────────────────────────── */
 .back-to-top-btn {
   position: fixed;
-  bottom: 95px;
-  right: 25px;
+  bottom: 35px;
+  right: 30px;
   width: 44px;
   height: 44px;
   border-radius: 50%;
@@ -797,6 +798,10 @@
 
 /* ── Mobile Viewports (max-width: 900px) ─────────────────── */
 @media (max-width: 900px) {
+  .reading-progress-bar {
+    top: 64px;
+  }
+
   .article-layout-grid {
     grid-template-columns: 1fr;
   }
@@ -810,7 +815,7 @@
   }
 
   .farms-post-container {
-    padding: 5.5rem 1rem 7.5rem;
+    padding: 6rem 0 7.5rem;
   }
 
   .post-header-banner {
@@ -842,10 +847,10 @@
   }
 
   .back-to-top-btn {
-    bottom: 95px;
-    right: 15px;
-    width: 40px;
-    height: 40px;
-    font-size: 1.1rem;
+    bottom: 86px;
+    right: 18px;
+    width: 42px;
+    height: 42px;
+    font-size: 1.15rem;
   }
 }

@@ -1,6 +1,6 @@
 /* Food Division & Gourmet Market Styles */
 .food-div-page {
-  padding-top: 90px;
+  padding-top: 110px;
   padding-bottom: 80px;
   min-height: calc(100vh - 80px);
   position: relative;
@@ -9,8 +9,9 @@
 
 .food-container {
   max-width: 1200px;
+  width: 92%;
   margin: 0 auto;
-  padding: 1.5rem 5% 4rem;
+  padding: 1.5rem 0 4rem;
 }
 
 .food-header-section {
@@ -242,7 +243,51 @@
   height: 340px;
   border-radius: 18px;
   overflow: hidden;
-  background: #020617;
+  background: linear-gradient(145deg, #091310 0%, #030806 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photo-fallback-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  z-index: 1;
+  background: radial-gradient(circle at center, rgba(16, 185, 129, 0.08) 0%, rgba(4, 16, 12, 0.95) 100%);
+}
+
+.fallback-art-icon {
+  width: 76px;
+  height: 76px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.fallback-product-title {
+  font-family: 'Baloo 2', cursive, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.2;
+  margin-bottom: 0.35rem;
+}
+
+.fallback-product-subtitle {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  max-width: 220px;
 }
 
 .photo-product-img {
@@ -250,6 +295,8 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  position: relative;
+  z-index: 2;
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -1012,6 +1059,13 @@
     width: 100%;
     box-sizing: border-box;
     justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .food-div-page {
+    padding-top: 90px;
+    padding-bottom: 120px;
   }
 }
 

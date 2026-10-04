@@ -189,16 +189,12 @@ export default function Agritech() {
 
         {/* Header */}
         <div className="agritech-header-section">
-          <div className="farms-title-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-            <span className="badge-pulse-dot" />
-            Solar-Powered IoT Sensors & Micro-Irrigation
-          </div>
           <h1 className="farms-headline">
-            Autonomous Field Telemetry & <br className="desktop-break" />
-            <span className="emerald-luminance">Precision Soil Science.</span>
+            smartFarm IoT Architecture & <br className="desktop-break" />
+            <span className="emerald-luminance">Precision Soil Science Blueprints.</span>
           </h1>
           <p className="farms-subheadline" style={{ margin: '0 auto' }}>
-            Deploying solar-powered ESP32 wireless sensor mesh nodes across Ghanaian partner farmlands. Continuous volumetric root hydrology triggers automated micro-drip valves, maximizing yield and conserving water.
+            Open-source hardware and firmware architecture under active R&D. We model solar-powered ESP32 sensor telemetry and closed-loop pulse-latching drip irrigation to empower smallholder Ghanaian agriculture with water-saving automation.
           </p>
         </div>
 
@@ -284,10 +280,10 @@ export default function Agritech() {
                   <line x1="8" y1="21" x2="16" y2="21"></line>
                   <line x1="12" y1="17" x2="12" y2="21"></line>
                 </svg>
-                Live Field Telemetry
+                Telemetry Architecture Simulator
               </h2>
-              <span className={`live-badge-glow ${valveActive ? '' : 'mild'}`} style={{ background: isDbOnline ? '#059669' : '#475569' }}>
-                {isDbOnline ? (lastSyncTime ? `SYNCED ${lastSyncTime}` : 'LIVE SYNC') : 'CALIBRATED BASELINE'}
+              <span className="live-badge-glow mild" style={{ background: '#0284c7' }}>
+                R&D SIMULATOR TESTBED
               </span>
             </div>
 
@@ -683,22 +679,22 @@ export default function Agritech() {
         </div>
 
         {/* ========================================================================= */}
-        {/* KONE MARKET AGRITECH HARDWARE PROCUREMENT BANNER */}
+        {/* AGRITECH RESEARCH PAPERS & BLUEPRINTS BANNER */}
         {/* ========================================================================= */}
         <div className="market-bridge-card" style={{ marginTop: '3.5rem' }}>
           <div className="market-bridge-inner">
-            <div className="market-badge-pill" style={{ borderColor: 'rgba(6, 182, 212, 0.4)', color: '#22d3ee' }}>
-              ⚡ smartFarm Field Hardware
+            <div className="market-badge-pill" style={{ borderColor: 'rgba(16, 185, 129, 0.4)', color: '#34d399' }}>
+              🔬 Open-Source Agritech Research Series
             </div>
             <h3 className="market-bridge-title">
-              Ready to Deploy Telemetry Nodes & Sensors on Your Farm?
+              Explore Our 6 Technical Whitepapers & Engineering Blueprints
             </h3>
             <p className="market-bridge-desc">
-              Procure pre-calibrated LoRaWAN telemetry base stations, stainless steel soil moisture probes, and automated solar solenoid valve kits in The Kone Market.
+              From ESP32 solar telemetry and automated pulse-latching irrigation valves to LoRa mesh networks and Sigatoka disease prediction algorithms—read the full research papers on our blog.
             </p>
             <div className="market-bridge-actions">
-              <a href="#market" className="farms-submit-btn" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'linear-gradient(135deg, #06b6d4 0%, #0891b2 100%)', color: '#032733' }}>
-                Procure Hardware in Market ➔
+              <a href="#blog" className="farms-submit-btn" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', color: '#ffffff' }}>
+                Read Research Whitepapers ➔
               </a>
             </div>
           </div>

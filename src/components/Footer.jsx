@@ -22,9 +22,11 @@ export default function Footer() {
           <h3 className="footer-h4">Explore</h3>
           <div className="footer-links">
             <a href="#home" className="footer-link">Overview</a>
-            <a href="#farms" className="footer-link">Farms & Sourcing</a>
-            <a href="#food" className="footer-link">Food & Snacks</a>
-            <a href="#agritech" className="footer-link">smartFarm Telemetry</a>
+            <a href="#farms" className="footer-link">Farms</a>
+            <a href="#food" className="footer-link">Food</a>
+            <a href="#agritech" className="footer-link">Agritech</a>
+            <a href="#market" className="footer-link">Market</a>
+            <a href="#shito" className="footer-link">Shito Supermarket</a>
             <a href="#blog" className="footer-link">Blog</a>
             <a href="#sitemap" className="footer-link">Sitemap</a>
           </div>

@@ -166,10 +166,6 @@ export default function Food() {
         
         {/* Market & Gourmet Storefront Header */}
         <div className="food-header-section">
-          <div className="farms-title-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-            <span className="badge-pulse-dot" />
-            100% Non-GMO Artisanal Pantry & Snacks
-          </div>
           <h1 className="farms-headline">
             Ghanaian Flavor & <br className="desktop-break" />
             <span className="emerald-luminance">Precision Agro-Processing.</span>
@@ -234,11 +230,23 @@ export default function Food() {
                   {/* Photo Display Card */}
                   <div className="photo-product-chassis">
                     <div className="photo-frame-wrapper">
+                      <div className="photo-fallback-placeholder">
+                        <div className="fallback-art-icon" style={{ color: currentChip.colorAccent }}>
+                          <svg viewBox="0 0 24 24" width="40" height="40" stroke="currentColor" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <path d="M16 10a4 4 0 0 1-8 0"></path>
+                          </svg>
+                        </div>
+                        <span className="fallback-product-title">{currentChip.name}</span>
+                        <span className="fallback-product-subtitle">{currentChip.packSpec}</span>
+                      </div>
                       <img 
                         src={currentChip.image} 
                         alt={currentChip.name} 
                         className="photo-product-img"
                         loading="eager"
+                        onError={(e) => { e.currentTarget.style.display = 'none'; }}
                       />
                       <div className="photo-overlay-gradient"></div>
                       
@@ -392,11 +400,23 @@ export default function Food() {
                 <div className="shito-visual-column">
                   <div className="photo-product-chassis">
                     <div className="photo-frame-wrapper">
+                      <div className="photo-fallback-placeholder">
+                        <div className="fallback-art-icon" style={{ color: '#ef4444' }}>
+                          <svg viewBox="0 0 24 24" width="40" height="40" stroke="currentColor" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                            <rect x="5" y="6" width="14" height="15" rx="3"></rect>
+                            <line x1="8" y1="2" x2="16" y2="2"></line>
+                            <line x1="8" y1="6" x2="16" y2="6"></line>
+                          </svg>
+                        </div>
+                        <span className="fallback-product-title">Kone Shito Premium Sauce</span>
+                        <span className="fallback-product-subtitle">Slow-Simmered Black Pepper • 350g Glass Jar</span>
+                      </div>
                       <img 
                         src="/assets/products/shito-jar.jpg" 
                         alt="Kone Shito Premium Black Pepper Sauce" 
                         className="photo-product-img"
                         loading="eager"
+                        onError={(e) => { e.currentTarget.style.display = 'none'; }}
                       />
                       <div className="photo-overlay-gradient"></div>
                       
@@ -467,11 +487,54 @@ export default function Food() {
                     </span>
                   </div>
 
+                  {/* 3D Simulation CTA Banner */}
+                  <a 
+                    href="#shito" 
+                    className="shito-3d-launch-banner"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.18), rgba(185, 28, 28, 0.08))',
+                      border: '1px solid rgba(239, 68, 68, 0.45)',
+                      borderRadius: '14px',
+                      padding: '1rem 1.25rem',
+                      marginTop: '1.25rem',
+                      textDecoration: 'none',
+                      color: '#ffffff',
+                      boxShadow: '0 8px 24px rgba(239, 68, 68, 0.15)',
+                      transition: 'all 0.3s ease'
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                      <span style={{ fontSize: '1.75rem' }}>🌶️</span>
+                      <div>
+                        <div style={{ fontWeight: '700', fontSize: '0.98rem', color: '#fca5a5' }}>
+                          Step Into The Kone Shito Supermarket
+                        </div>
+                        <div style={{ fontSize: '0.8rem', color: '#cbd5e1' }}>
+                          Browse All Aisles • Real Jars & Wooden Shelves • 3D Lab • WhatsApp Checkout
+                        </div>
+                      </div>
+                    </div>
+                    <span style={{ 
+                      fontSize: '0.85rem', 
+                      fontWeight: '700', 
+                      background: '#ef4444', 
+                      color: '#fff', 
+                      padding: '0.4rem 0.85rem', 
+                      borderRadius: '8px', 
+                      whiteSpace: 'nowrap' 
+                    }}>
+                      Shop Supermarket ➔
+                    </span>
+                  </a>
+
                   {/* Shito Batch Trace Hint */}
                   <div 
                     className="chips-trace-hint"
                     onClick={() => executeTraceLookup('KS-SHITO-BATCH-2026')}
-                    style={{ cursor: 'pointer', borderColor: '#f87171', background: 'rgba(239, 68, 68, 0.08)', marginTop: '1.5rem' }}
+                    style={{ cursor: 'pointer', borderColor: '#f87171', background: 'rgba(239, 68, 68, 0.08)', marginTop: '1rem' }}
                   >
                     <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none" style={{ marginRight: '6px' }}>
                       <circle cx="11" cy="11" r="8"></circle>
@@ -492,13 +555,6 @@ export default function Food() {
         <div className="farms-card trace-console-card animate-fade-in">
           <div className="trace-console-grid">
             <div style={{ textAlign: 'left' }}>
-              <div className="farms-title-badge" style={{ background: 'rgba(245, 158, 11, 0.12)', borderColor: 'rgba(245, 158, 11, 0.25)', color: '#fbbf24', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                <svg viewBox="0 0 24 24" width="14" height="14" stroke="#fbbf24" strokeWidth="2.5" fill="none">
-                  <circle cx="11" cy="11" r="8"></circle>
-                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                </svg>
-                Quality & Agritech Assurance
-              </div>
               <h2 style={{ color: 'white', fontSize: '1.8rem', margin: '0.5rem 0' }}>
                 Trace Your Food Batch
               </h2>

@@ -1,7 +1,8 @@
 .farms-blog-container {
   max-width: 1200px;
+  width: 92%;
   margin: 0 auto;
-  padding: 7.25rem 1.5rem 6rem;
+  padding: 7.25rem 0 6rem;
   color: #e2e8f0;
 }
 
@@ -608,7 +609,7 @@
   }
 
   .farms-blog-container {
-    padding-top: 80px;
+    padding-top: 90px;
     padding-bottom: 120px;
   }
 
@@ -629,11 +630,40 @@
   }
 
   .featured-card-cover {
-    padding: 1.8rem 1.4rem;
+    padding: 1.25rem 1.2rem;
+    min-height: auto;
+  }
+
+  .featured-cover-visual {
+    margin: 0.65rem 0;
+  }
+
+  .telemetry-node-graphic {
+    gap: 0.85rem;
+  }
+
+  .node-center-core {
+    width: 48px;
+    height: 48px;
+  }
+
+  .node-spec-tags {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .spec-tag-item {
+    font-size: 0.68rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .featured-cover-graphic {
+    display: none;
   }
 
   .featured-card-content {
-    padding: 1.6rem 1.4rem;
+    padding: 1.4rem 1.2rem;
   }
 
   .featured-card-title {

@@ -49,11 +49,15 @@ export default function Farms() {
     const mapContainer = document.getElementById('farms-leaflet-map');
     if (!mapContainer) return;
 
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     const map = L.map('farms-leaflet-map', {
       center: [6.8, -0.9],
       zoom: 7,
       zoomControl: true,
       scrollWheelZoom: false,
+      dragging: !isTouchDevice,
+      tap: !isTouchDevice,
+      touchZoom: false,
     });
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -205,10 +209,6 @@ export default function Farms() {
             <div className="farm-hero-gradient-overlay"></div>
             
             <div className="farm-hero-content">
-              <div className="farms-title-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                <span className="badge-pulse-dot" />
-                Sustainable Agri-Tech & Ethical Sourcing
-              </div>
               <h1 className="farms-headline">
                 Cultivating the Future, <br className="desktop-break" />
                 <span className="emerald-luminance">Respecting African Soil.</span>
@@ -225,10 +225,10 @@ export default function Farms() {
           <div className="telemetry-bar-header">
             <div className="telemetry-live-indicator">
               <span className={telemetry ? "pulse-dot-green" : "status-dot calibrated"}></span>
-              <strong>{telemetry ? 'LIVE FIELD AGRO-TELEMETRY' : 'CALIBRATED AGRO-BASELINE • NODE #01 (STANDBY)'}</strong>
+              <strong>{telemetry ? 'AGRITECH R&D BASELINE & SENSOR TELEMETRY' : 'R&D BASELINE & SENSOR BLUEPRINTS'}</strong>
             </div>
             <span className="telemetry-station-id">
-              {telemetry ? `Field Node #01 • Synced: ${lastSyncTime || 'Just now'}` : 'Cloud Telemetry Active • ESP32 Field Grid'}
+              {telemetry ? `Field Node #01 • Calibrated: ${lastSyncTime || 'Just now'}` : 'Field-Calibrated Sensor Benchmarks • Eastern Region & Coastal Delta'}
             </span>
           </div>
 
@@ -298,7 +298,7 @@ export default function Farms() {
           </div>
 
           <div className="telemetry-standby-cta-bar">
-            <p>📡 Connected to smartFarm ESP32 agro-mesh network. Real-time calibration & automated micro-irrigation ready.</p>
+            <p>📡 Field-calibrated agronomic parameters & smartFarm IoT architecture. Explore live telemetry models & sensor whitepapers.</p>
             <a href="#agritech" className="telemetry-standby-link">
               Launch smartFarm Telemetry Suite →
             </a>
@@ -309,12 +309,6 @@ export default function Farms() {
         <div className="farms-card crops-section">
           <div className="section-head-flex">
             <div>
-              <div className="farms-title-badge" style={{ background: 'rgba(16, 185, 129, 0.12)', borderColor: 'rgba(16, 185, 129, 0.25)', color: '#34d399', display: 'inline-flex', alignItems: 'center', gap: '6px', marginBottom: '0.5rem' }}>
-                <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2.5" fill="none">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                </svg>
-                Regenerative Botanical Portfolio
-              </div>
               <h2 className="smartfarm-title" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 Farmland Crops & Sourcing Groves
               </h2>
@@ -487,13 +481,6 @@ export default function Farms() {
         {/* Interactive Map Section */}
         <div className="map-section">
           <div className="farms-header-section" style={{ marginBottom: '2.5rem' }}>
-            <div className="farms-title-badge" style={{ background: 'rgba(59, 130, 246, 0.12)', borderColor: 'rgba(59, 130, 246, 0.25)', color: '#60a5fa', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-              <svg viewBox="0 0 24 24" width="14" height="14" stroke="#60a5fa" strokeWidth="2.5" fill="none">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                <circle cx="12" cy="10" r="3"></circle>
-              </svg>
-              Geographic Trail
-            </div>
             <h2 className="farms-headline" style={{ fontSize: '2rem' }}>Trace the Ghanaian Harvest Path</h2>
             <p className="farms-subheadline" style={{ fontSize: '0.95rem', margin: '0 auto', maxWidth: '600px' }}>
               Hover or tap the glowing region pins on our interactive map of Ghana to explore where our ingredients are cultivated and prepared.
@@ -556,14 +543,6 @@ export default function Farms() {
         {/* Sustainable Ecological Farming Principles */}
         <div className="farms-card ecological-principles-card">
           <div className="farms-header-section" style={{ marginBottom: '2rem', textAlign: 'left' }}>
-            <div className="farms-title-badge" style={{ background: 'rgba(16, 185, 129, 0.12)', borderColor: 'rgba(16, 185, 129, 0.25)', color: '#34d399', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-              <svg viewBox="0 0 24 24" width="14" height="14" stroke="#34d399" strokeWidth="2.5" fill="none">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="2" y1="12" x2="22" y2="12"></line>
-                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-              </svg>
-              Agro-Ecology Standards
-            </div>
             <h2 className="farms-headline" style={{ fontSize: '2rem' }}>How We Protect the Soil & Farmers</h2>
           </div>
 
@@ -613,15 +592,6 @@ export default function Farms() {
         <div className="farms-card outgrower-section animate-fade-in">
           <div className="outgrower-grid">
             <div style={{ textAlign: 'left' }}>
-              <div className="farms-title-badge" style={{ background: 'rgba(234, 179, 8, 0.12)', borderColor: 'rgba(234, 179, 8, 0.25)', color: '#facc15', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                <svg viewBox="0 0 24 24" width="14" height="14" stroke="#facc15" strokeWidth="2.5" fill="none">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="9" cy="7" r="4"></circle>
-                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                </svg>
-                Ghanaian Farmer Partnership
-              </div>
               <h2 style={{ color: 'white', fontSize: '1.8rem', margin: '0.5rem 0' }}>
                 Join the Kone Outgrower Network
               </h2>

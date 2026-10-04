@@ -1,6 +1,6 @@
 /* Agritech Division Styles */
 .agritech-div-page {
-  padding-top: 100px;
+  padding-top: 110px;
   min-height: calc(100vh - 80px);
   position: relative;
   z-index: 2;
@@ -8,8 +8,9 @@
 
 .agritech-container {
   max-width: 1200px;
+  width: 92%;
   margin: 0 auto;
-  padding: 2rem 5% 4rem;
+  padding: 2rem 0 4rem;
 }
 
 .agritech-header-section {
@@ -706,7 +707,7 @@
 @media (max-width: 768px) {
   .agritech-div-page {
     padding-bottom: 120px;
-    padding-top: 80px;
+    padding-top: 96px;
   }
 }
 

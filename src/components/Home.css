@@ -1,6 +1,6 @@
 /* Home Portal Styles - Commercial Mobbin Agri-Tech Standard */
 .home-page {
-  padding-top: 100px;
+  padding-top: 110px;
   padding-bottom: 60px;
   min-height: calc(100vh - 80px);
   display: flex;
@@ -15,7 +15,7 @@
 }
 
 .home-container {
-  max-width: 1240px;
+  max-width: 1200px;
   width: 92%;
   margin: 1.5rem auto 3.5rem;
   text-align: center;
@@ -24,50 +24,6 @@
   box-sizing: border-box;
 }
 
-/* Badge Container & Pulse Dot */
-.home-badge-container {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1.6rem;
-}
-
-.home-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  background: rgba(16, 185, 129, 0.1);
-  border: 1px solid rgba(52, 211, 153, 0.3);
-  color: #34d399;
-  padding: 0.45rem 1.25rem;
-  border-radius: 30px;
-  font-size: 0.76rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  box-shadow: 0 0 15px rgba(52, 211, 153, 0.12);
-}
-
-.badge-text-desktop {
-  display: inline;
-}
-
-.badge-text-mobile {
-  display: none;
-}
-
-.badge-pulse-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #34d399;
-  box-shadow: 0 0 8px #34d399;
-  animation: pulseGreen 1.5s infinite alternate;
-}
-
-@keyframes pulseGreen {
-  from { opacity: 0.6; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1.2); }
-}
 
 /* Hero Typography */
 .home-headline {
@@ -412,31 +368,23 @@
   }
 }
 
+@media (max-width: 768px) {
+  .home-page {
+    padding-top: 90px;
+    padding-bottom: 120px;
+  }
+}
+
 @media (max-width: 640px) {
   .desktop-break {
     display: none;
   }
 
   .home-container {
-    width: 90%;
+    width: 92%;
     margin: 1rem auto 2.5rem;
   }
 
-  /* Badge mobile optimization */
-  .badge-text-desktop {
-    display: none;
-  }
-
-  .badge-text-mobile {
-    display: inline;
-  }
-
-  .home-badge {
-    font-size: 0.68rem;
-    padding: 0.35rem 0.95rem;
-    letter-spacing: 0.05em;
-    max-width: 92vw;
-  }
 
   /* Headline & text balance */
   .home-headline {

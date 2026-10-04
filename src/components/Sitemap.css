@@ -1,6 +1,7 @@
 .farms-sitemap-page {
   background-color: #060913;
   min-height: 100vh;
+  padding-top: 80px;
   display: flex;
   flex-direction: column;
   color: #e2e8f0;
@@ -92,6 +93,10 @@
 }
 
 @media (max-width: 768px) {
+  .farms-sitemap-page {
+    padding-top: 64px;
+    padding-bottom: 120px;
+  }
   .farms-sitemap-grid {
     grid-template-columns: 1fr;
   }

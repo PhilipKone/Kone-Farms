@@ -6,13 +6,6 @@ export default function Home() {
     <div className="home-page animate-fade-in">
       <div className="home-container">
         
-        {/* Sleek Minimalist Eyebrow */}
-        <div className="home-badge-container">
-          <span className="home-badge">
-            <span className="badge-pulse-dot" />
-            <span>SUSTAINABLE AGRI-TECH & SOURCING</span>
-          </span>
-        </div>
 
         {/* Hero Headline & Subtitle */}
         <h1 className="home-headline">
@@ -21,7 +14,7 @@ export default function Home() {
         </h1>
         
         <p className="home-subheadline">
-          Empowering Ghanaian smallholder farms, artisanal food production, and automated solar telemetry.
+          Empowering Ghanaian smallholder farms, artisanal food production, and open-source agritech research.
         </p>
 
         {/* Focused Hero Actions */}
@@ -34,18 +27,18 @@ export default function Home() {
             </svg>
           </a>
 
-          <a href="#agritech" className="btn-secondary-farms">
+          <a href="#blog" className="btn-secondary-farms">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#34d399" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/>
             </svg>
-            <span>smartFarm Telemetry</span>
+            <span>Agritech Research & Blueprints</span>
           </a>
         </div>
 
         {/* Division Showcase Grid */}
         <div className="divisions-grid" id="divisions">
           
-          {/* Card 1: Farms & Sourcing */}
+          {/* Card 1: Farms */}
           <a href="#farms" className="div-card card-farms">
             <div className="div-card-media">
               <img 
@@ -59,7 +52,7 @@ export default function Home() {
             </div>
 
             <div className="div-card-body">
-              <h2 className="div-h3">Farms & Sourcing</h2>
+              <h2 className="div-h3">Farms</h2>
               <p className="div-desc">
                 Direct farming partnerships across Ghana. Cultivating Golden Plantain, White Yam, and Scotch Bonnet peppers under 100% fair-trade standards.
               </p>
@@ -74,7 +67,7 @@ export default function Home() {
             </div>
           </a>
 
-          {/* Card 2: Kone Food & Snacks */}
+          {/* Card 2: Food */}
           <a href="#food" className="div-card card-food">
             <div className="div-card-media">
               <img 
@@ -88,7 +81,7 @@ export default function Home() {
             </div>
 
             <div className="div-card-body">
-              <h2 className="div-h3">Kone Food & Snacks</h2>
+              <h2 className="div-h3">Food</h2>
               <p className="div-desc">
                 Premium packaged foods. Featuring crisp kettle-cooked plantain, yam, and potato chips paired with authentic savory Kone Shito sauce.
               </p>
@@ -103,27 +96,27 @@ export default function Home() {
             </div>
           </a>
 
-          {/* Card 3: smartFarm Telemetry */}
-          <a href="#agritech" className="div-card card-agritech">
+          {/* Card 3: Agritech Research & IoT Blueprints */}
+          <a href="#blog" className="div-card card-agritech">
             <div className="div-card-media">
               <img 
                 src="/assets/home/division-agritech.jpg" 
-                alt="Solar-Powered smartFarm Telemetry" 
+                alt="Solar-Powered smartFarm Telemetry Blueprint" 
                 className="div-card-img" 
                 loading="lazy" 
               />
               <div className="div-card-overlay"></div>
-              <span className="card-tag tag-agritech">Live Telemetry</span>
+              <span className="card-tag tag-agritech">Research & Blueprints</span>
             </div>
 
             <div className="div-card-body">
-              <h2 className="div-h3">smartFarm Telemetry</h2>
+              <h2 className="div-h3">Agritech Research & Blueprints</h2>
               <p className="div-desc">
-                Intelligent agricultural IoT. Real-time soil moisture and environmental sensing to drive automated solar drip irrigation.
+                Open-source engineering and IoT blueprints for tropical agriculture. Researching solar telemetry, precision soil moisture sensing, and low-waste irrigation.
               </p>
 
               <div className="div-btn">
-                <span>Open Telemetry Station</span>
+                <span>Read Research Papers</span>
                 <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2.5" fill="none">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                   <polyline points="12 5 19 12 12 19"></polyline>

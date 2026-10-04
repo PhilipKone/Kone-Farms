@@ -158,10 +158,13 @@
   flex-wrap: wrap;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 960px) {
   .farms-footer {
     padding-bottom: 125px;
   }
+}
+
+@media (max-width: 768px) {
   .footer-container {
     grid-template-columns: 1fr;
     gap: 2rem;

@@ -1,6 +1,6 @@
 /* Farms Division Specific Styles */
 .farms-div-page {
-  padding-top: 100px;
+  padding-top: 110px;
   min-height: calc(100vh - 80px);
   position: relative;
   z-index: 2;
@@ -8,8 +8,9 @@
 
 .farms-container {
   max-width: 1200px;
+  width: 92%;
   margin: 0 auto;
-  padding: 1.5rem 5% 4rem;
+  padding: 1.5rem 0 4rem;
 }
 
 .farms-header-section {
@@ -788,6 +789,39 @@
 @media (max-width: 768px) {
   .farms-div-page {
     padding-bottom: 120px;
-    padding-top: 80px;
+    padding-top: 96px;
+  }
+
+  .telemetry-sensors-row {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.65rem !important;
+  }
+
+  .t-sensor-item {
+    padding: 0.65rem 0.75rem !important;
+    gap: 0.6rem !important;
+  }
+
+  .t-icon {
+    width: 32px !important;
+    height: 32px !important;
+    flex-shrink: 0;
+  }
+
+  .t-icon svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  .t-val {
+    font-size: 1.05rem !important;
+  }
+
+  .t-label {
+    font-size: 0.62rem !important;
+  }
+
+  .telemetry-sensors-row > :last-child:nth-child(odd) {
+    grid-column: span 2;
   }
 }

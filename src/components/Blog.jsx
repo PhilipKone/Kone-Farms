@@ -72,10 +72,6 @@ export default function Blog({ onSelectArticle }) {
     <div className="farms-blog-container">
       {/* Blog Hero Banner */}
       <div className="farms-blog-hero">
-        <div className="farms-title-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-          <span className="badge-pulse-dot" />
-          Agritech Research & Field Engineering
-        </div>
         <h1 className="farms-headline">
           Smart Agriculture & <br className="desktop-break" />
           <span className="emerald-luminance">Precision Telemetry.</span>
@@ -94,7 +90,7 @@ export default function Blog({ onSelectArticle }) {
             </svg>
             <input 
               type="text" 
-              placeholder="Search articles by crop, sensor, LoRa mesh, or disease model..." 
+              placeholder="Search articles by crop, sensor, or topic..." 
               value={searchQuery}
               onChange={handleSearchChange}
               className="blog-search-input"
