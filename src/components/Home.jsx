@@ -17,24 +17,6 @@ export default function Home() {
           Empowering Ghanaian smallholder farms, artisanal food production, and open-source agritech research.
         </p>
 
-        {/* Focused Hero Actions */}
-        <div className="home-cta-group">
-          <a href="#farms" className="btn-primary-farms">
-            <span>Explore Sourcing Network</span>
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-          </a>
-
-          <a href="#blog" className="btn-secondary-farms">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#34d399" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/>
-            </svg>
-            <span>Agritech Research & Blueprints</span>
-          </a>
-        </div>
-
         {/* Division Showcase Grid */}
         <div className="divisions-grid" id="divisions">
           
