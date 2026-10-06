@@ -42,13 +42,21 @@ export default function Navbar({ currentRoute }) {
             </svg>
           </a>
           <div className="nav-market-dropdown-menu">
-            <a href="#market" className={`dropdown-item ${currentRoute === '#market' ? 'active' : ''}`}>
-              <span className="dropdown-item-title">Kone Market</span>
-              <span className="dropdown-item-desc">Bulk crops, cartons & wholesale produce</span>
+            <a href="#market?category=agritech" className="dropdown-item">
+              <span className="dropdown-item-title">Agritech Products</span>
+              <span className="dropdown-item-desc">Solar IoT telemetry, soil NPK probes & automated valves</span>
+            </a>
+            <a href="#market?category=produce" className="dropdown-item">
+              <span className="dropdown-item-title">Farm Produce</span>
+              <span className="dropdown-item-desc">Organic Musa plantains, white yam tubers & peppers</span>
+            </a>
+            <a href="#market?category=food" className="dropdown-item">
+              <span className="dropdown-item-title">Food Products</span>
+              <span className="dropdown-item-desc">Kone Chips snack cartons & wholesale bundles</span>
             </a>
             <a href="#shito" className={`dropdown-item dropdown-shito-item ${currentRoute === '#shito' ? 'active' : ''}`}>
-              <span className="dropdown-item-title">Shito Supermarket</span>
-              <span className="dropdown-item-desc">Artisanal Ghanaian hot pepper sauce & pantry</span>
+              <span className="dropdown-item-title">🌶️ Shito Supermarket</span>
+              <span className="dropdown-item-desc">Dedicated aisle: 4 editions, heat ratings & gift sets</span>
             </a>
           </div>
         </div>
@@ -96,8 +104,17 @@ export default function Navbar({ currentRoute }) {
             Kone Market
           </a>
           <div className="mobile-nav-sublinks">
+            <a href="#market?category=agritech" className="nav-sublink" onClick={closeMobileMenu}>
+              Agritech Products
+            </a>
+            <a href="#market?category=produce" className="nav-sublink" onClick={closeMobileMenu}>
+              Farm Produce
+            </a>
+            <a href="#market?category=food" className="nav-sublink" onClick={closeMobileMenu}>
+              Food Products
+            </a>
             <a href="#shito" className={`nav-sublink ${currentRoute === '#shito' ? 'active' : ''}`} onClick={closeMobileMenu}>
-              Shito Supermarket
+              🌶️ Shito Supermarket
             </a>
           </div>
         </div>

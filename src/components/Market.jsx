@@ -1,12 +1,53 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import './Market.css';
 import { db } from '../firebase/config';
 import { collection, addDoc } from 'firebase/firestore';
+
+// Compile-time static image mapping to break taint tracking and ensure safe asset rendering
+const MARKET_IMAGE_MAP = {
+  'food-plantain-chips': '/assets/products/plantain-chips.jpg',
+  'food-yam-chips': '/assets/products/yam-chips.jpg',
+  'food-potato-chips': '/assets/products/potato-chips.jpg',
+  'food-trio-box': '/assets/products/trio-box.jpg',
+  'food-shito-jar': '/assets/products/shito-jar.jpg',
+  'produce-plantain': '/assets/crops/plantain.jpg',
+  'produce-yam': '/assets/crops/yam.jpg',
+  'produce-pepper': '/assets/crops/pepper.jpg',
+  'produce-shallots': '/assets/crops/shallots.jpg',
+  'agritech-telemetry-hub': '/assets/home/division-agritech.jpg',
+  'agritech-npk-sensor': '/assets/products/npk-sensor-array.jpg',
+  'agritech-drip-valve': '/assets/products/drip-valve-hardware.jpg'
+};
+
+const getStaticMarketImage = (id) => {
+  return MARKET_IMAGE_MAP[id] || '/assets/products/plantain-chips.jpg';
+};
 
 export default function Market() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [selectedProductLine, setSelectedProductLine] = useState('chips');
   const [orderQuantity, setOrderQuantity] = useState(5);
+
+  // Sync category from URL query parameter or hash (e.g. ?category=agritech or #market?category=agritech)
+  useEffect(() => {
+    const parseCategory = () => {
+      const searchParams = new URLSearchParams(window.location.search);
+      let cat = searchParams.get('category');
+      if (!cat && window.location.hash.includes('category=')) {
+        const hashQuery = window.location.hash.split('?')[1];
+        if (hashQuery) {
+          cat = new URLSearchParams(hashQuery).get('category');
+        }
+      }
+      if (cat && ['all', 'agritech', 'produce', 'food', 'harvest'].includes(cat)) {
+        setActiveCategory(cat === 'harvest' ? 'produce' : cat);
+      }
+    };
+
+    parseCategory();
+    window.addEventListener('hashchange', parseCategory);
+    return () => window.removeEventListener('hashchange', parseCategory);
+  }, []);
   
   // Wholesaler application / direct order state
   const [distributorName, setDistributorName] = useState('');
@@ -162,12 +203,12 @@ export default function Market() {
       specs: ['350g Glass Jar', '85,000 SHU Heat', '12 Months Vacuum Sealed']
     },
 
-    // ── Organic Bulk Farm Harvest ────────────────────────────────────────
+    // ── Farm Produce (Organic Bulk Harvest) ─────────────────────────────
     {
-      id: 'harvest-plantain',
-      category: 'harvest',
+      id: 'produce-plantain',
+      category: 'produce',
       name: 'Organic Musa Plantain Bunches',
-      division: 'Organic Farmlands',
+      division: 'Farm Produce',
       origin: 'Eastern & Volta Basin Outgrowers',
       image: '/assets/crops/plantain.jpg',
       badge: 'Wholesale Crop',
@@ -179,10 +220,10 @@ export default function Market() {
       specs: ['Direct Farm Gate', 'Export Caliber Fingers', 'Fair-Trade Certified']
     },
     {
-      id: 'harvest-yam',
-      category: 'harvest',
+      id: 'produce-yam',
+      category: 'produce',
       name: 'Ghanaian White Yam Tubers (Pona)',
-      division: 'Organic Farmlands',
+      division: 'Farm Produce',
       origin: 'Central & Northern Belt Hubs',
       image: '/assets/crops/yam.jpg',
       badge: 'Export Grade',
@@ -194,10 +235,10 @@ export default function Market() {
       specs: ['Cured for Longevity', 'High Dry Starch', 'Phytosanitary Certified']
     },
     {
-      id: 'harvest-pepper',
-      category: 'harvest',
+      id: 'produce-pepper',
+      category: 'produce',
       name: 'Fresh Scotch Bonnet Peppers',
-      division: 'Organic Farmlands',
+      division: 'Farm Produce',
       origin: 'Irrigated Precision Outgrowers',
       image: '/assets/crops/pepper.jpg',
       badge: 'High Capsaicin',
@@ -209,10 +250,10 @@ export default function Market() {
       specs: ['85K+ Scoville Heat', 'Sorted & Destemmed', 'Refrigerated Dispatch']
     },
     {
-      id: 'harvest-shallots',
-      category: 'harvest',
+      id: 'produce-shallots',
+      category: 'produce',
       name: 'Artisanal Pink Shallots & Alliums',
-      division: 'Organic Farmlands',
+      division: 'Farm Produce',
       origin: 'Volta Delta Coastal Plains',
       image: '/assets/crops/shallots.jpg',
       badge: 'Gourmet Produce',
@@ -222,11 +263,70 @@ export default function Market() {
       lineKey: null,
       desc: 'Sun-cured pink alliums with intense aromatic sweetness. Sourced directly from traditional coastal delta beds.',
       specs: ['Sun-Cured Bulbs', 'Long Ambient Storage', 'Intense Umami Notes']
+    },
+
+    // ── Agritech Products (Smart Hardware & Sensors) ────────────────────
+    {
+      id: 'agritech-telemetry-hub',
+      category: 'agritech',
+      name: 'smartFarm Solar Telemetry Hub',
+      division: 'Agritech',
+      origin: 'Kone Lab Engineering Hub, Accra',
+      image: '/assets/home/division-agritech.jpg',
+      badge: 'IoT Station',
+      badgeColor: '#38bdf8',
+      singlePrice: 'GHS 650.00',
+      cartonPrice: 'Station + Panel + Battery',
+      lineKey: null,
+      desc: 'Self-contained solar IoT field station. Measures ambient humidity, temperature, and solar irradiance with long-range LoRa transmission.',
+      specs: ['Solar Powered', 'LoRa 868/915MHz', 'Cloud Telemetry Sync']
+    },
+    {
+      id: 'agritech-npk-sensor',
+      category: 'agritech',
+      name: 'Precision Soil Moisture & NPK Sensor',
+      division: 'Agritech',
+      origin: 'Precision Agronomy Division',
+      image: '/assets/products/npk-sensor-array.jpg',
+      badge: 'Precision Sensor',
+      badgeColor: '#10b981',
+      singlePrice: 'GHS 380.00',
+      cartonPrice: 'Industrial 316L Probe',
+      lineKey: null,
+      desc: 'Industrial FDR volumetric water content (VWC) and multi-depth electroconductivity probe for root rhizosphere health.',
+      specs: ['±2% VWC Accuracy', 'Stainless 316L Probes', 'RS485 Modbus / Analog']
+    },
+    {
+      id: 'agritech-drip-valve',
+      category: 'agritech',
+      name: 'Automated Drip Pulse-Latch Valve',
+      division: 'Agritech',
+      origin: 'Kone Irrigation Systems',
+      image: '/assets/products/drip-valve-hardware.jpg',
+      badge: 'Automation',
+      badgeColor: '#f59e0b',
+      singlePrice: 'GHS 290.00',
+      cartonPrice: '12V Latching Solenoid',
+      lineKey: null,
+      desc: 'Ultra-low power pulse-latching water valve that triggers micro-drip irrigation only when root hydration drops below crop thresholds.',
+      specs: ['Zero Standby Power', '12V Pulse Latching', '3/4" BSP Standard Fitting']
     }
   ];
 
+  const categoryCounts = useMemo(() => {
+    return {
+      all: catalog.length,
+      agritech: catalog.filter((i) => i.category === 'agritech').length,
+      produce: catalog.filter((i) => i.category === 'produce' || i.category === 'harvest').length,
+      food: catalog.filter((i) => i.category === 'food').length
+    };
+  }, [catalog]);
+
   const filteredCatalog = useMemo(() => {
     if (activeCategory === 'all') return catalog;
+    if (activeCategory === 'produce') {
+      return catalog.filter((item) => item.category === 'produce' || item.category === 'harvest');
+    }
     return catalog.filter((item) => item.category === activeCategory);
   }, [activeCategory, catalog]);
 
@@ -361,26 +461,32 @@ export default function Market() {
             </div>
           </div>
 
-          {/* Category Filter Segments */}
+          {/* Category Filter Segments: 3 Core Pillars */}
           <div className="segmented-control-wrapper" style={{ marginTop: '2rem' }}>
             <div className="segmented-control" role="tablist">
               <button
                 className={`segment-btn ${activeCategory === 'all' ? 'active' : ''}`}
                 onClick={() => setActiveCategory('all')}
               >
-                All Products ({catalog.length})
+                All Products ({categoryCounts.all})
+              </button>
+              <button
+                className={`segment-btn ${activeCategory === 'agritech' ? 'active' : ''}`}
+                onClick={() => setActiveCategory('agritech')}
+              >
+                Agritech Products ({categoryCounts.agritech})
+              </button>
+              <button
+                className={`segment-btn ${activeCategory === 'produce' ? 'active' : ''}`}
+                onClick={() => setActiveCategory('produce')}
+              >
+                Farm Produce ({categoryCounts.produce})
               </button>
               <button
                 className={`segment-btn ${activeCategory === 'food' ? 'active' : ''}`}
                 onClick={() => setActiveCategory('food')}
               >
-                Packaged Foods & Sauces (5)
-              </button>
-              <button
-                className={`segment-btn ${activeCategory === 'harvest' ? 'active' : ''}`}
-                onClick={() => setActiveCategory('harvest')}
-              >
-                Organic Bulk Harvest (4)
+                Food Products ({categoryCounts.food})
               </button>
             </div>
           </div>
@@ -410,7 +516,7 @@ export default function Market() {
             {filteredCatalog.map((item) => (
               <div key={item.id} className="market-card">
                 <div className="market-card-media">
-                  <img src={item.image} alt={item.name} className="market-card-img" loading="lazy" />
+                  <img src={getStaticMarketImage(item.id)} alt={item.name} className="market-card-img" loading="lazy" />
                   <div className="market-card-gradient"></div>
                   <span 
                     className="market-card-badge" 
@@ -443,20 +549,62 @@ export default function Market() {
                   </div>
 
                   {item.category === 'food' ? (
+                    item.id === 'food-shito-jar' ? (
+                      <div className="market-dual-btn-row">
+                        <button 
+                          className="market-order-action-btn"
+                          onClick={() => {
+                            setSelectedProductLine('shito');
+                            const calcEl = document.getElementById('market-wholesale-portal');
+                            if (calcEl) calcEl.scrollIntoView({ behavior: 'smooth' });
+                          }}
+                        >
+                          <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2" fill="none" style={{ marginRight: '5px' }}>
+                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <path d="M16 10a4 4 0 0 1-8 0"></path>
+                          </svg>
+                          Wholesale Cartons
+                        </button>
+                        <a 
+                          href="#shito"
+                          className="market-order-action-btn shito-aisle-link-btn"
+                          style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
+                        >
+                          🌶️ Shito Supermarket ➔
+                        </a>
+                      </div>
+                    ) : (
+                      <button 
+                        className="market-order-action-btn"
+                        onClick={() => {
+                          setSelectedProductLine(item.lineKey || 'chips');
+                          const calcEl = document.getElementById('market-wholesale-portal');
+                          if (calcEl) calcEl.scrollIntoView({ behavior: 'smooth' });
+                        }}
+                      >
+                        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none" style={{ marginRight: '6px' }}>
+                          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                          <line x1="3" y1="6" x2="21" y2="6"></line>
+                          <path d="M16 10a4 4 0 0 1-8 0"></path>
+                        </svg>
+                        Order Wholesale Cartons ➔
+                      </button>
+                    )
+                  ) : item.category === 'agritech' ? (
                     <button 
-                      className="market-order-action-btn"
-                      onClick={() => {
-                        setSelectedProductLine(item.lineKey || 'chips');
-                        const calcEl = document.getElementById('market-wholesale-portal');
-                        if (calcEl) calcEl.scrollIntoView({ behavior: 'smooth' });
-                      }}
+                      className="market-order-action-btn agritech-action-btn"
+                      onClick={() => handleOpenInquiry(item, 'hardware')}
                     >
                       <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none" style={{ marginRight: '6px' }}>
-                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                        <line x1="3" y1="6" x2="21" y2="6"></line>
-                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                        <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                        <rect x="9" y="9" width="6" height="6"></rect>
+                        <line x1="9" y1="2" x2="9" y2="4"></line>
+                        <line x1="15" y1="2" x2="15" y2="4"></line>
+                        <line x1="9" y1="20" x2="9" y2="22"></line>
+                        <line x1="15" y1="20" x2="15" y2="22"></line>
                       </svg>
-                      Order Wholesale Cartons ➔
+                      Request Hardware Quote ➔
                     </button>
                   ) : (
                     <button 

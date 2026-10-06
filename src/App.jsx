@@ -100,6 +100,10 @@ function resolveCurrentRoute() {
   if (hash.startsWith('#shito/')) return hash;
   if (hash === '#agritech/webapp') return '#agritech';
   if (hash === '#shito' || hash === '#food/shito') return '#shito';
+  if (hash.startsWith('#market')) return '#market';
+  if (hash.startsWith('#farms')) return '#farms';
+  if (hash.startsWith('#food')) return '#food';
+  if (hash.startsWith('#agritech')) return '#agritech';
   if (['#farms', '#food', '#agritech', '#market', '#blog', '#sitemap', '#shito'].includes(hash)) return hash;
 
   return '#home';
