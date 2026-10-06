@@ -111,7 +111,7 @@ export default function Food() {
       desc: 'The ultimate Ghanaian snacking experience. Includes Golden Plantain, Crispy Yam, and Rustic Potato packs in one presentation-grade gift and party box.',
       tastingNotes: 'The complete trifecta of sweet, savory, and rustic crunches in one premium package.',
       nutrition: { crunchScore: '100%', oilAbsorption: '100% Non-GMO', shelfLife: '9 Months', calories: '3 x 150g Packs' },
-      colorAccent: '#ec4899',
+      colorAccent: '#d97706',
       badge: '3-in-1 Combo',
       format: '3 x 150g Gift Box',
       packSpec: 'Gift Edition • Triple Harvest Sampler'
@@ -289,7 +289,7 @@ export default function Food() {
                       <button 
                         className={`variety-btn ${chipVariety === 'trio' ? 'active' : ''}`}
                         onClick={() => setChipVariety('trio')}
-                        style={{ '--active-border': '#ec4899' }}
+                        style={{ '--active-border': '#d97706' }}
                       >
                         Trio Box
                       </button>

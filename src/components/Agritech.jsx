@@ -631,7 +631,7 @@ export default function Agritech() {
           <p style={{ color: '#94a3b8', fontSize: '0.95rem', lineHeight: 1.7, margin: 0 }}>
             Our smartFarm agricultural monitoring system is a product of multidisciplinary collaboration across Kone Technologies.
             The solar telemetry hardware nodes and micro-controllers are engineered and field-tested by researchers at the
-            <a href="https://lab.koneacademy.io" target="_blank" rel="noopener noreferrer" style={{ color: '#a855f7', textDecoration: 'none', fontWeight: 600, margin: '0 4px' }}>Kone Lab</a>
+            <a href="https://lab.koneacademy.io" target="_blank" rel="noopener noreferrer" style={{ color: '#38bdf8', textDecoration: 'none', fontWeight: 600, margin: '0 4px' }}>Kone Lab</a>
             division, while the automated database sync channels and telemetry dashboard logic are maintained in collaboration with the
             <a href="https://code.koneacademy.io" target="_blank" rel="noopener noreferrer" style={{ color: '#22c55e', textDecoration: 'none', fontWeight: 600, margin: '0 4px' }}>Kone Code</a>
             software engineering branch.

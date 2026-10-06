@@ -404,8 +404,8 @@ export default function Farms() {
                 name: 'Sweet Pink Shallots',
                 scientific: 'Allium cepa var. aggregatum',
                 image: '/assets/crops/shallots.jpg',
-                color: '#c084fc',
-                gradient: 'rgba(192, 132, 252, 0.15)',
+                color: '#fb7185',
+                gradient: 'rgba(251, 113, 133, 0.15)',
                 desc: 'Cultivated in coastal sandy loam soils. Delivers concentrated natural sweetness, rich sulfur allicin compounds, and deep umami depth to our slow-simmered Kone Shito base.',
                 region: 'Coastal Sandy Loam Hubs',
                 irrigation: 'Micro-Spray Drip',
@@ -578,7 +578,7 @@ export default function Farms() {
             </div>
             <div className="principle-item">
               <span className="p-icon">
-                <svg viewBox="0 0 24 24" width="24" height="24" stroke="#c084fc" strokeWidth="2" fill="none">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="#10b981" strokeWidth="2" fill="none">
                   <path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/>
                 </svg>
               </span>
