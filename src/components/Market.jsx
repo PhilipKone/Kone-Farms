@@ -517,10 +517,16 @@ export default function Market() {
         {/* ── PRODUCT CATALOG GRID ────────────────────────────────────────── */}
         <section className="market-catalog-section">
           <div className="market-grid">
-            {filteredCatalog.map((item) => (
+            {filteredCatalog.map((item, index) => (
               <div key={item.id} className="market-card">
                 <div className="market-card-media">
-                  <img src={getStaticMarketImage(item.id)} alt={item.name} className="market-card-img" loading="lazy" />
+                  <img 
+                    src={getStaticMarketImage(item.id)} 
+                    alt={item.name} 
+                    className="market-card-img" 
+                    loading={index < 4 ? 'eager' : 'lazy'}
+                    decoding={index < 4 ? 'sync' : 'async'} 
+                  />
                   <div className="market-card-gradient"></div>
                   <span 
                     className="market-card-badge" 
