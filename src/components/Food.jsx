@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Food.css';
+import PepperIcon from './PepperIcon';
 import { db } from '../firebase/config';
 import { doc, getDoc } from 'firebase/firestore';
 
@@ -507,7 +508,7 @@ export default function Food() {
                     }}
                   >
                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                      <span style={{ fontSize: '1.75rem' }}>🌶️</span>
+                      <PepperIcon size={28} />
                       <div>
                         <div style={{ fontWeight: '700', fontSize: '0.98rem', color: '#fca5a5' }}>
                           Step Into The Kone Shito Supermarket

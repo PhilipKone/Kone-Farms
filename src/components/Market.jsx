@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import './Market.css';
+import PepperIcon from './PepperIcon';
 import { db } from '../firebase/config';
 import { collection, addDoc } from 'firebase/firestore';
 
@@ -495,7 +496,10 @@ export default function Market() {
         {/* ── SPECIALTY AISLE: SHITO SUPERMARKET SPOTLIGHT ───────────────── */}
         <div className="market-shito-spotlight">
           <div className="shito-spotlight-left">
-            <span className="shito-spotlight-tag">🌶️ SPECIALTY AISLE</span>
+            <span className="shito-spotlight-tag">
+              <PepperIcon size={14} style={{ marginRight: '5px' }} />
+              SPECIALTY AISLE
+            </span>
             <h2 className="shito-spotlight-title">The Kone Shito Supermarket</h2>
             <p className="shito-spotlight-desc">
               Looking for our signature Ghanaian hot pepper sauce? Explore 3D interactive jars, chef pairing guides, Scoville heat metrics, and wholesale cartons.
@@ -571,7 +575,8 @@ export default function Market() {
                           className="market-order-action-btn shito-aisle-link-btn"
                           style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
                         >
-                          🌶️ Shito Supermarket ➔
+                          <PepperIcon size={14} style={{ marginRight: '6px' }} />
+                          Shito Supermarket ➔
                         </a>
                       </div>
                     ) : (

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Navbar.css';
+import PepperIcon from './PepperIcon';
 
 export default function Navbar({ currentRoute }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -55,7 +56,10 @@ export default function Navbar({ currentRoute }) {
               <span className="dropdown-item-desc">Kone Chips snack cartons & wholesale bundles</span>
             </a>
             <a href="#shito" className={`dropdown-item dropdown-shito-item ${currentRoute === '#shito' ? 'active' : ''}`}>
-              <span className="dropdown-item-title">🌶️ Shito Supermarket</span>
+              <span className="dropdown-item-title">
+                <PepperIcon size={14} style={{ marginRight: '6px' }} />
+                Shito Supermarket
+              </span>
               <span className="dropdown-item-desc">Dedicated aisle: 4 editions, heat ratings & gift sets</span>
             </a>
           </div>
@@ -114,7 +118,8 @@ export default function Navbar({ currentRoute }) {
               Food Products
             </a>
             <a href="#shito" className={`nav-sublink ${currentRoute === '#shito' ? 'active' : ''}`} onClick={closeMobileMenu}>
-              🌶️ Shito Supermarket
+              <PepperIcon size={14} style={{ marginRight: '6px' }} />
+              Shito Supermarket
             </a>
           </div>
         </div>
