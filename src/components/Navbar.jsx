@@ -16,8 +16,9 @@ export default function Navbar({ currentRoute }) {
   const isAgritechActive = currentRoute === '#agritech';
 
   return (
-    <header className="farms-nav-header">
-      <a href="#home" className="farms-brand" onClick={closeMobileMenu}>
+    <>
+      <header className="farms-nav-header">
+        <a href="#home" className="farms-brand" onClick={closeMobileMenu}>
         <img src="/logos/logo.svg" className="farms-logo" alt="Kone Farms Logo" />
         <span className="farms-brand-name">Kone Farms</span>
       </a>
@@ -83,8 +84,9 @@ export default function Navbar({ currentRoute }) {
           </svg>
         )}
       </button>
+    </header>
 
-      {/* Mobile Menu Backdrop Overlay */}
+    {/* Mobile Menu Backdrop Overlay */}
       <div 
         className={`nav-mobile-overlay ${mobileMenuOpen ? 'visible' : ''}`} 
         onClick={closeMobileMenu}
@@ -199,6 +201,6 @@ export default function Navbar({ currentRoute }) {
           <span className="mobile-nav-label">Blog</span>
         </a>
       </nav>
-    </header>
+    </>
   );
 }
