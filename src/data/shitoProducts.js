@@ -171,7 +171,7 @@ export const SUPERMARKET_PRODUCTS = [
     aisle: 'gold',
     price: 100.0,
     originalPrice: null,
-    weight: '250g Glass Jar',
+    weight: '500g Glass Jar',
     heatRating: '65,000 SHU • Connoisseur Hot',
     heatColor: '#f59e0b',
     badge: 'LIMITED RESERVE',
@@ -182,8 +182,7 @@ export const SUPERMARKET_PRODUCTS = [
     galleryImages: [
       '/assets/shito/supermarket/gold-clean-branded.jpg',
       '/assets/shito/supermarket/gold-clean-plain.jpg',
-      '/assets/shito/supermarket/lineup-clean-plain.jpg',
-      '/assets/shito/supermarket/lineup-group-table.jpg'
+      '/assets/shito/supermarket/lineup-clean-plain.jpg'
     ],
     labelTexture: '/assets/shito/shito-label-red.png',
     lidHex: 0xd97706,
@@ -439,8 +438,7 @@ export const PRODUCT_GALLERY_MAP = {
   'ks-gold-250': [
     '/assets/shito/supermarket/gold-clean-branded.jpg',
     '/assets/shito/supermarket/gold-clean-plain.jpg',
-    '/assets/shito/supermarket/lineup-clean-plain.jpg',
-    '/assets/shito/supermarket/lineup-group-table.jpg'
+    '/assets/shito/supermarket/lineup-clean-plain.jpg'
   ],
   'ks-bundle-trio': [
     '/assets/shito/supermarket/lineup-clean-plain.jpg',
