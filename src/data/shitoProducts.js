@@ -276,44 +276,6 @@ export const SUPERMARKET_PRODUCTS = [
     },
     pairings: ['Master Chef Kitchens', 'Home Tasting Flights', 'Executive Corporate Gifts']
   },
-  {
-    id: 'ks-wholesale-crate24',
-    slug: 'crate-24',
-    slugAliases: ['commercial-crate', 'ks-wholesale-crate24', 'crate24'],
-    name: 'Commercial Crate',
-    shortName: 'Crate of 24',
-    subtitle: '24x 250g Jars Food Service',
-    aisle: 'wholesale',
-    price: 840.0,
-    originalPrice: 1080.0,
-    weight: '24 x 250g (6.0kg Net)',
-    heatRating: 'Food Service',
-    heatColor: '#0ea5e9',
-    badge: 'BULK VALUE',
-    badgeColor: '#0284c7',
-    barcode: '079458210421',
-    primaryImage: '/assets/shito/supermarket/lineup-supermarket-stack.jpg',
-    ogImage: 'https://farms.codkon.com/assets/shito/supermarket/lineup-supermarket-stack.jpg',
-    galleryImages: [
-      '/assets/shito/supermarket/lineup-supermarket-stack.jpg',
-      '/assets/shito/supermarket/lineup-carton-display.jpg',
-      '/assets/shito/supermarket/lineup-group-table.jpg'
-    ],
-    labelTexture: '/assets/shito/shito-label-red.png',
-    lidHex: 0xdc2626,
-    description:
-      'Designed specifically for wedding caterers, commercial chop bars, and hotel kitchens requiring consistent, high-grade artisanal shito without chemical adulterants.',
-    ingredients: '24 sealed jars with tamper-evident fresh-lock seals. Custom flavor splits available upon request.',
-    nutrition: {
-      servingSize: '24 Commercial Units',
-      calories: 'Volume Food Service Tier',
-      totalFat: 'Unit Cost: GH₵ 35.00 / jar',
-      sodium: 'Standard Food Safe Specs',
-      protein: '100% Traceable Organic Batches',
-      shelfLife: '12 Months'
-    },
-    pairings: ['Event & Wedding Catering', 'Accra & Kumasi Chop Bars', 'Export Containers']
-  }
 ];
 
 // Compile-time static image mapping
@@ -325,7 +287,6 @@ export const PRODUCT_IMAGE_MAP = {
   'ks-gold-250': '/assets/shito/supermarket/gold-clean-branded.jpg',
   'ks-bundle-trio': '/assets/shito/supermarket/lineup-clean-branded.jpg',
   'ks-bundle-quad': '/assets/shito/supermarket/lineup-all-4-jars.jpg',
-  'ks-wholesale-crate24': '/assets/shito/supermarket/lineup-supermarket-stack.jpg'
 };
 
 export const PRODUCT_GALLERY_MAP = {
@@ -366,11 +327,6 @@ export const PRODUCT_GALLERY_MAP = {
     '/assets/shito/supermarket/lineup-group-table.jpg',
     '/assets/shito/supermarket/lineup-trio-shelf.jpg'
   ],
-  'ks-wholesale-crate24': [
-    '/assets/shito/supermarket/lineup-supermarket-stack.jpg',
-    '/assets/shito/supermarket/lineup-carton-display.jpg',
-    '/assets/shito/supermarket/lineup-group-table.jpg'
-  ]
 };
 
 // Finds a product by its primary slug, ID, or slug alias (case-insensitive)
