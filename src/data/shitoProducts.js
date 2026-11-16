@@ -65,12 +65,8 @@ export const SUPERMARKET_PRODUCTS = [
     primaryImage: '/assets/shito/supermarket/blue-clean-plain.jpg',
     ogImage: 'https://farms.codkon.com/assets/shito/supermarket/blue-clean-branded.jpg',
     galleryImages: [
-      '/assets/shito/supermarket/blue-clean-plain.jpg',
-      '/assets/shito/supermarket/blue-clean-branded.jpg',
-      '/assets/shito/supermarket/blue-jar-closeup.jpg',
-      '/assets/shito/supermarket/blue-jar-table.jpg',
-      '/assets/shito/supermarket/blue-jar-kitchen.jpg',
-      '/assets/shito/supermarket/blue-jar-high.jpg'
+      "/assets/shito/supermarket/blue-clean-plain.jpg",
+      "/assets/shito/supermarket/blue-clean-branded.jpg"
     ],
     labelTexture: '/assets/shito/shito-label-blue.png',
     lidHex: 0x2563eb,
