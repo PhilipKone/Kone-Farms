@@ -67,8 +67,6 @@ export const SUPERMARKET_PRODUCTS = [
     galleryImages: [
       '/assets/shito/supermarket/blue-clean-plain.jpg',
       '/assets/shito/supermarket/blue-clean-branded.jpg',
-      '/assets/shito/supermarket/blue-jar-front.jpg',
-      '/assets/shito/supermarket/blue-jar-angle.jpg',
       '/assets/shito/supermarket/blue-jar-closeup.jpg',
       '/assets/shito/supermarket/blue-jar-table.jpg',
       '/assets/shito/supermarket/blue-jar-kitchen.jpg',
