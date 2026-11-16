@@ -205,30 +205,27 @@ export const SUPERMARKET_PRODUCTS = [
     slugAliases: ['trio-collection', 'ks-bundle-trio', 'trio-box'],
     name: 'The Trio Collection',
     shortName: 'Trio Collection',
-    subtitle: 'Red, Blue & Green (3x 250g)',
+    subtitle: 'Red, Blue, Green & Gold (4x 250g)',
     aisle: 'bundles',
     price: 120.0,
     originalPrice: 135.0,
-    weight: '3 x 250g (750g Net)',
+    weight: '4 x 250g (1000g Net)',
     heatRating: 'Mild to Fiery Spectrum',
     heatColor: '#f59e0b',
     badge: 'SPECIAL',
     badgeColor: '#d97706',
     barcode: '079458210410',
-    primaryImage: '/assets/shito/supermarket/lineup-clean-plain.jpg',
+    primaryImage: '/assets/shito/supermarket/lineup-clean-branded.jpg',
     ogImage: 'https://farms.codkon.com/assets/shito/supermarket/lineup-clean-branded.jpg',
     galleryImages: [
-      '/assets/shito/supermarket/lineup-clean-plain.jpg',
       '/assets/shito/supermarket/lineup-clean-branded.jpg',
-      '/assets/shito/supermarket/lineup-trio-shelf.jpg',
-      '/assets/shito/supermarket/lineup-all-4-jars.jpg',
-      '/assets/shito/supermarket/lineup-group-table.jpg'
+      '/assets/shito/supermarket/lineup-clean-plain.jpg'
     ],
     labelTexture: '/assets/shito/shito-label-red.png',
     lidHex: 0xdc2626,
     description:
-      'The definitive Ghanaian pantry gift box. Contains one jar each of Fiery Red Scotch Bonnet, Seafood Heritage Blue, and Emerald Kpakpo Green, packed in a gold-foil gift carton.',
-    ingredients: 'Contains full jars of Red Edition (250g), Blue Edition (250g), and Green Edition (250g).',
+      'The definitive Ghanaian pantry gift box. Contains one jar each of Fiery Red Scotch Bonnet, Seafood Heritage Blue, Emerald Kpakpo Green, and 12-Hour Copper Kettle Gold, packed in a gold-foil gift carton.',
+    ingredients: 'Contains full jars of Red Edition (250g), Blue Edition (250g), Green Edition (250g), and Gold Edition (250g).',
     nutrition: {
       servingSize: '3 x 250g Sealed Glass Jars',
       calories: 'Variety Pack',
@@ -404,7 +401,7 @@ export const PRODUCT_IMAGE_MAP = {
   'ks-green-250': '/assets/shito/supermarket/green-clean-branded.jpg',
   'ks-green-studio-250': '/assets/shito/supermarket/green-studio-front.jpg',
   'ks-gold-250': '/assets/shito/supermarket/gold-clean-branded.jpg',
-  'ks-bundle-trio': '/assets/shito/supermarket/lineup-clean-plain.jpg',
+  'ks-bundle-trio': '/assets/shito/supermarket/lineup-clean-branded.jpg',
   'ks-bundle-quad': '/assets/shito/supermarket/lineup-all-4-jars.jpg',
   'ks-bundle-chips': '/assets/shito/supermarket/lineup-group-table.jpg',
   'ks-wholesale-carton12': '/assets/shito/supermarket/lineup-carton-display.jpg',
@@ -439,11 +436,8 @@ export const PRODUCT_GALLERY_MAP = {
     '/assets/shito/supermarket/gold-clean-plain.jpg'
   ],
   'ks-bundle-trio': [
-    '/assets/shito/supermarket/lineup-clean-plain.jpg',
     '/assets/shito/supermarket/lineup-clean-branded.jpg',
-    '/assets/shito/supermarket/lineup-trio-shelf.jpg',
-    '/assets/shito/supermarket/lineup-all-4-jars.jpg',
-    '/assets/shito/supermarket/lineup-group-table.jpg'
+    '/assets/shito/supermarket/lineup-clean-plain.jpg'
   ],
   'ks-bundle-quad': [
     '/assets/shito/supermarket/lineup-clean-branded.jpg',
