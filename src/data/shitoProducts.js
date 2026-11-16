@@ -92,7 +92,7 @@ export const SUPERMARKET_PRODUCTS = [
     shortName: 'Green Edition',
     subtitle: 'Emerald Kpakpo Pepper',
     aisle: 'green',
-    price: 45.0,
+    price: 40.0,
     originalPrice: null,
     weight: '250g Glass Jar',
     heatRating: '16,000 SHU • Aromatic Mild',
