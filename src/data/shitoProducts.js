@@ -62,7 +62,7 @@ export const SUPERMARKET_PRODUCTS = [
     badge: 'COASTAL FAVORITE',
     badgeColor: '#2563eb',
     barcode: '079458210402',
-    primaryImage: '/assets/shito/supermarket/blue-clean-plain.jpg',
+    primaryImage: '/assets/shito/supermarket/blue-clean-branded.jpg',
     ogImage: 'https://farms.codkon.com/assets/shito/supermarket/blue-clean-branded.jpg',
     galleryImages: [
       "/assets/shito/supermarket/blue-clean-branded.jpg",
@@ -371,7 +371,7 @@ export const SUPERMARKET_PRODUCTS = [
 // Compile-time static image mapping
 export const PRODUCT_IMAGE_MAP = {
   'ks-red-250': '/assets/shito/supermarket/red-clean-plain.jpg',
-  'ks-blue-250': '/assets/shito/supermarket/blue-clean-plain.jpg',
+  'ks-blue-250': '/assets/shito/supermarket/blue-clean-branded.jpg',
   'ks-green-250': '/assets/shito/supermarket/green-clean-plain.jpg',
   'ks-gold-250': '/assets/shito/supermarket/gold-clean-plain.jpg',
   'ks-bundle-trio': '/assets/shito/supermarket/lineup-clean-plain.jpg',
@@ -393,14 +393,8 @@ export const PRODUCT_GALLERY_MAP = {
     '/assets/shito/supermarket/red-jar-kitchen.jpg'
   ],
   'ks-blue-250': [
-    '/assets/shito/supermarket/blue-clean-plain.jpg',
     '/assets/shito/supermarket/blue-clean-branded.jpg',
-    '/assets/shito/supermarket/blue-jar-front.jpg',
-    '/assets/shito/supermarket/blue-jar-angle.jpg',
-    '/assets/shito/supermarket/blue-jar-table.jpg',
-    '/assets/shito/supermarket/blue-jar-label.jpg',
-    '/assets/shito/supermarket/blue-jar-closeup.jpg',
-    '/assets/shito/supermarket/blue-jar-kitchen.jpg'
+    '/assets/shito/supermarket/blue-clean-plain.jpg'
   ],
   'ks-green-250': [
     '/assets/shito/supermarket/green-clean-plain.jpg',
