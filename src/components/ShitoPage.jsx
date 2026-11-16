@@ -603,32 +603,6 @@ export default function ShitoPage({ onNavigateHome, initialProductSlug }) {
             </div>
           </div>
         )}
-
-
-        {/* ── KITCHEN PHOTOSHOOT WALL ("The Kitchen Archive") ─────────────── */}
-        <section className="supermarket-photoshoot-section">
-          <div className="section-title-wrap">
-            <h2 className="section-heading">The Kitchen Archive</h2>
-          </div>
-
-          <div className="photoshoot-masonry-row">
-            <div className="photo-wall-card">
-              <img src="/assets/shito/supermarket/lineup-all-4-jars.jpg" alt="All 4 Flagship Shito Jars" loading="lazy" />
-            </div>
-            <div className="photo-wall-card">
-              <img src="/assets/shito/supermarket/red-jar-shelf-1.jpg" alt="Red Jar" loading="lazy" />
-            </div>
-            <div className="photo-wall-card">
-              <img src="/assets/shito/supermarket/blue-jar-table.jpg" alt="Blue Jar" loading="lazy" />
-            </div>
-            <div className="photo-wall-card">
-              <img src="/assets/shito/supermarket/green-jar-table.jpg" alt="Green Jar" loading="lazy" />
-            </div>
-            <div className="photo-wall-card">
-              <img src="/assets/shito/supermarket/lineup-supermarket-stack.jpg" alt="Master Stacks" loading="lazy" />
-            </div>
-          </div>
-        </section>
       </main>
 
       {/* ── FLOATING TROLLEY WIDGET ───────────────────────────────────────── */}
