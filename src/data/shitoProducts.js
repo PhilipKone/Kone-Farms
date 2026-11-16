@@ -181,8 +181,7 @@ export const SUPERMARKET_PRODUCTS = [
     ogImage: 'https://farms.codkon.com/assets/shito/supermarket/gold-clean-branded.jpg',
     galleryImages: [
       '/assets/shito/supermarket/gold-clean-branded.jpg',
-      '/assets/shito/supermarket/gold-clean-plain.jpg',
-      '/assets/shito/supermarket/lineup-clean-plain.jpg'
+      '/assets/shito/supermarket/gold-clean-plain.jpg'
     ],
     labelTexture: '/assets/shito/shito-label-red.png',
     lidHex: 0xd97706,
@@ -437,8 +436,7 @@ export const PRODUCT_GALLERY_MAP = {
   ],
   'ks-gold-250': [
     '/assets/shito/supermarket/gold-clean-branded.jpg',
-    '/assets/shito/supermarket/gold-clean-plain.jpg',
-    '/assets/shito/supermarket/lineup-clean-plain.jpg'
+    '/assets/shito/supermarket/gold-clean-plain.jpg'
   ],
   'ks-bundle-trio': [
     '/assets/shito/supermarket/lineup-clean-plain.jpg',
