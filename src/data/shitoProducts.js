@@ -277,44 +277,6 @@ export const SUPERMARKET_PRODUCTS = [
     pairings: ['Master Chef Kitchens', 'Home Tasting Flights', 'Executive Corporate Gifts']
   },
   {
-    id: 'ks-wholesale-carton12',
-    slug: 'carton-12',
-    slugAliases: ['wholesale-carton', 'ks-wholesale-carton12', 'carton12'],
-    name: 'Merchant Carton',
-    shortName: 'Carton of 12',
-    subtitle: '12x 250g Jars Freight Pack',
-    aisle: 'wholesale',
-    price: 450.0,
-    originalPrice: 540.0,
-    weight: '12 x 250g (3.0kg Net)',
-    heatRating: 'Merchant Tier',
-    heatColor: '#10b981',
-    badge: 'WHOLESALE',
-    badgeColor: '#059669',
-    barcode: '079458210420',
-    primaryImage: '/assets/shito/supermarket/lineup-carton-display.jpg',
-    ogImage: 'https://farms.codkon.com/assets/shito/supermarket/lineup-carton-display.jpg',
-    galleryImages: [
-      '/assets/shito/supermarket/lineup-carton-display.jpg',
-      '/assets/shito/supermarket/lineup-supermarket-stack.jpg',
-      '/assets/shito/supermarket/lineup-clean-plain.jpg'
-    ],
-    labelTexture: '/assets/shito/shito-label-red.png',
-    lidHex: 0xdc2626,
-    description:
-      'Wholesale master shipping carton containing 12 vacuum-sealed glass jars separated by shockproof corrugated dividers. Ideal for boutique grocers, African food stores, and diaspora shipping.',
-    ingredients: 'Standard configuration: 6x Red Edition, 4x Blue Edition, 2x Green Edition (or customized upon WhatsApp checkout).',
-    nutrition: {
-      servingSize: '12 Sealed Jars',
-      calories: 'Wholesale Commercial Pack',
-      totalFat: 'Unit Cost: GH₵ 37.50 / jar',
-      sodium: 'Retail Value: GH₵ 45-55 / jar',
-      protein: 'High Resale Margin',
-      shelfLife: '12 Months'
-    },
-    pairings: ['Retail Store Shelves', 'Diaspora Care Barrels', 'Restaurants & Chop Bars']
-  },
-  {
     id: 'ks-wholesale-crate24',
     slug: 'crate-24',
     slugAliases: ['commercial-crate', 'ks-wholesale-crate24', 'crate24'],
@@ -363,7 +325,6 @@ export const PRODUCT_IMAGE_MAP = {
   'ks-gold-250': '/assets/shito/supermarket/gold-clean-branded.jpg',
   'ks-bundle-trio': '/assets/shito/supermarket/lineup-clean-branded.jpg',
   'ks-bundle-quad': '/assets/shito/supermarket/lineup-all-4-jars.jpg',
-  'ks-wholesale-carton12': '/assets/shito/supermarket/lineup-carton-display.jpg',
   'ks-wholesale-crate24': '/assets/shito/supermarket/lineup-supermarket-stack.jpg'
 };
 
@@ -404,11 +365,6 @@ export const PRODUCT_GALLERY_MAP = {
     '/assets/shito/supermarket/lineup-clean-plain.jpg',
     '/assets/shito/supermarket/lineup-group-table.jpg',
     '/assets/shito/supermarket/lineup-trio-shelf.jpg'
-  ],
-  'ks-wholesale-carton12': [
-    '/assets/shito/supermarket/lineup-carton-display.jpg',
-    '/assets/shito/supermarket/lineup-supermarket-stack.jpg',
-    '/assets/shito/supermarket/lineup-clean-plain.jpg'
   ],
   'ks-wholesale-crate24': [
     '/assets/shito/supermarket/lineup-supermarket-stack.jpg',
