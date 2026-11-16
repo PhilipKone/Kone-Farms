@@ -236,46 +236,6 @@ export const SUPERMARKET_PRODUCTS = [
     },
     pairings: ['The Ultimate Gift for Family & Diaspora', 'Party Grazing Tables', 'Pantry Staple Stockup']
   },
-  {
-    id: 'ks-bundle-quad',
-    slug: 'master',
-    slugAliases: ['master-collection', 'ks-bundle-quad', 'quad-box'],
-    name: 'The Master Collection',
-    shortName: 'Master Collection',
-    subtitle: 'All 4 Flagship Varieties (4x 250g)',
-    aisle: 'bundles',
-    price: 165.0,
-    originalPrice: 190.0,
-    weight: '4 x 250g (1000g Net)',
-    heatRating: 'Complete Range (16K - 82K SHU)',
-    heatColor: '#d97706',
-    badge: 'CHEF SELECTION',
-    badgeColor: '#b45309',
-    barcode: '079458210411',
-    primaryImage: '/assets/shito/supermarket/lineup-clean-branded.jpg',
-    ogImage: 'https://farms.codkon.com/assets/shito/supermarket/lineup-clean-branded.jpg',
-    galleryImages: [
-      '/assets/shito/supermarket/lineup-clean-branded.jpg',
-      '/assets/shito/supermarket/lineup-all-4-jars.jpg',
-      '/assets/shito/supermarket/lineup-clean-plain.jpg',
-      '/assets/shito/supermarket/lineup-group-table.jpg',
-      '/assets/shito/supermarket/lineup-trio-shelf.jpg'
-    ],
-    labelTexture: '/assets/shito/shito-label-red.png',
-    lidHex: 0xdc2626,
-    description:
-      'For true Ghanaian culinary enthusiasts. Includes every edition: Fiery Red, Seafood Blue, Emerald Green, and Limited Master Reserve Gold in a handsome wooden provisions caddy.',
-    ingredients: 'Includes 1x Red (250g), 1x Blue (250g), 1x Green (250g), 1x Gold Reserve (250g).',
-    nutrition: {
-      servingSize: '4 x 250g Sealed Glass Jars',
-      calories: 'Complete Master Sampler',
-      totalFat: 'Cold-Pressed Oils Only',
-      sodium: 'Ada Natural Sea Salt',
-      protein: 'Authentic Seafood Sediments',
-      shelfLife: '12-14 Months'
-    },
-    pairings: ['Master Chef Kitchens', 'Home Tasting Flights', 'Executive Corporate Gifts']
-  },
 ];
 
 // Compile-time static image mapping
@@ -286,7 +246,6 @@ export const PRODUCT_IMAGE_MAP = {
   'ks-green-studio-250': '/assets/shito/supermarket/green-studio-front.jpg',
   'ks-gold-250': '/assets/shito/supermarket/gold-clean-branded.jpg',
   'ks-bundle-trio': '/assets/shito/supermarket/lineup-clean-branded.jpg',
-  'ks-bundle-quad': '/assets/shito/supermarket/lineup-all-4-jars.jpg',
 };
 
 export const PRODUCT_GALLERY_MAP = {
@@ -319,13 +278,6 @@ export const PRODUCT_GALLERY_MAP = {
   'ks-bundle-trio': [
     '/assets/shito/supermarket/lineup-clean-branded.jpg',
     '/assets/shito/supermarket/lineup-clean-plain.jpg'
-  ],
-  'ks-bundle-quad': [
-    '/assets/shito/supermarket/lineup-clean-branded.jpg',
-    '/assets/shito/supermarket/lineup-all-4-jars.jpg',
-    '/assets/shito/supermarket/lineup-clean-plain.jpg',
-    '/assets/shito/supermarket/lineup-group-table.jpg',
-    '/assets/shito/supermarket/lineup-trio-shelf.jpg'
   ],
 };
 
