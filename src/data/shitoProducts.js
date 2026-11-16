@@ -18,11 +18,11 @@ export const SUPERMARKET_PRODUCTS = [
     badge: 'HOTTEST SELLER',
     badgeColor: '#dc2626',
     barcode: '079458210401',
-    primaryImage: '/assets/shito/supermarket/red-clean-plain.jpg',
+    primaryImage: '/assets/shito/supermarket/red-clean-branded.jpg',
     ogImage: 'https://farms.codkon.com/assets/shito/supermarket/red-clean-branded.jpg',
     galleryImages: [
-      '/assets/shito/supermarket/red-clean-plain.jpg',
       '/assets/shito/supermarket/red-clean-branded.jpg',
+      '/assets/shito/supermarket/red-clean-plain.jpg',
       '/assets/shito/supermarket/red-studio-front.jpg',
       '/assets/shito/supermarket/red-studio-angle.jpg',
       '/assets/shito/supermarket/red-jar-closeup.jpg',
@@ -370,7 +370,7 @@ export const SUPERMARKET_PRODUCTS = [
 
 // Compile-time static image mapping
 export const PRODUCT_IMAGE_MAP = {
-  'ks-red-250': '/assets/shito/supermarket/red-clean-plain.jpg',
+  'ks-red-250': '/assets/shito/supermarket/red-clean-branded.jpg',
   'ks-blue-250': '/assets/shito/supermarket/blue-clean-branded.jpg',
   'ks-green-250': '/assets/shito/supermarket/green-clean-plain.jpg',
   'ks-gold-250': '/assets/shito/supermarket/gold-clean-plain.jpg',
@@ -383,8 +383,8 @@ export const PRODUCT_IMAGE_MAP = {
 
 export const PRODUCT_GALLERY_MAP = {
   'ks-red-250': [
-    '/assets/shito/supermarket/red-clean-plain.jpg',
     '/assets/shito/supermarket/red-clean-branded.jpg',
+    '/assets/shito/supermarket/red-clean-plain.jpg',
     '/assets/shito/supermarket/red-studio-front.jpg',
     '/assets/shito/supermarket/red-studio-angle.jpg',
     '/assets/shito/supermarket/red-jar-closeup.jpg',
