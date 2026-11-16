@@ -104,13 +104,7 @@ export const SUPERMARKET_PRODUCTS = [
     ogImage: 'https://farms.codkon.com/assets/shito/supermarket/green-clean-branded.jpg',
     galleryImages: [
       '/assets/shito/supermarket/green-clean-branded.jpg',
-      '/assets/shito/supermarket/green-clean-plain.jpg',
-
-      '/assets/shito/supermarket/green-jar-closeup.jpg',
-      '/assets/shito/supermarket/green-jar-shelf-1.jpg',
-      '/assets/shito/supermarket/green-jar-table.jpg',
-      '/assets/shito/supermarket/green-jar-kitchen.jpg',
-      '/assets/shito/supermarket/green-jar-angle2.jpg'
+      '/assets/shito/supermarket/green-clean-plain.jpg'
     ],
     labelTexture: '/assets/shito/shito-label-green.png',
     lidHex: 0x16a34a,
@@ -441,12 +435,7 @@ export const PRODUCT_GALLERY_MAP = {
   ],
   'ks-green-250': [
     '/assets/shito/supermarket/green-clean-branded.jpg',
-    '/assets/shito/supermarket/green-clean-plain.jpg',
-
-    '/assets/shito/supermarket/green-jar-shelf-1.jpg',
-    '/assets/shito/supermarket/green-jar-table.jpg',
-    '/assets/shito/supermarket/green-jar-closeup.jpg',
-    '/assets/shito/supermarket/green-jar-kitchen.jpg'
+    '/assets/shito/supermarket/green-clean-plain.jpg'
   ],
   'ks-gold-250': [
     '/assets/shito/supermarket/gold-clean-plain.jpg',
