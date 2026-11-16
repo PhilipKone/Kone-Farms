@@ -169,7 +169,7 @@ export const SUPERMARKET_PRODUCTS = [
     shortName: 'Gold Edition',
     subtitle: '12-Hour Copper Kettle Reserve',
     aisle: 'gold',
-    price: 55.0,
+    price: 100.0,
     originalPrice: null,
     weight: '250g Glass Jar',
     heatRating: '65,000 SHU • Connoisseur Hot',
@@ -177,12 +177,11 @@ export const SUPERMARKET_PRODUCTS = [
     badge: 'LIMITED RESERVE',
     badgeColor: '#d97706',
     barcode: '079458210404',
-    primaryImage: '/assets/shito/supermarket/gold-clean-plain.jpg',
+    primaryImage: '/assets/shito/supermarket/gold-clean-branded.jpg',
     ogImage: 'https://farms.codkon.com/assets/shito/supermarket/gold-clean-branded.jpg',
     galleryImages: [
-      '/assets/shito/supermarket/gold-clean-plain.jpg',
       '/assets/shito/supermarket/gold-clean-branded.jpg',
-      '/assets/shito/supermarket/gold-jar-front.jpg',
+      '/assets/shito/supermarket/gold-clean-plain.jpg',
       '/assets/shito/supermarket/lineup-clean-plain.jpg',
       '/assets/shito/supermarket/lineup-group-table.jpg'
     ],
@@ -406,7 +405,7 @@ export const PRODUCT_IMAGE_MAP = {
   'ks-blue-250': '/assets/shito/supermarket/blue-clean-branded.jpg',
   'ks-green-250': '/assets/shito/supermarket/green-clean-branded.jpg',
   'ks-green-studio-250': '/assets/shito/supermarket/green-studio-front.jpg',
-  'ks-gold-250': '/assets/shito/supermarket/gold-clean-plain.jpg',
+  'ks-gold-250': '/assets/shito/supermarket/gold-clean-branded.jpg',
   'ks-bundle-trio': '/assets/shito/supermarket/lineup-clean-plain.jpg',
   'ks-bundle-quad': '/assets/shito/supermarket/lineup-all-4-jars.jpg',
   'ks-bundle-chips': '/assets/shito/supermarket/lineup-group-table.jpg',
@@ -438,9 +437,8 @@ export const PRODUCT_GALLERY_MAP = {
     '/assets/shito/supermarket/green-clean-plain.jpg'
   ],
   'ks-gold-250': [
-    '/assets/shito/supermarket/gold-clean-plain.jpg',
     '/assets/shito/supermarket/gold-clean-branded.jpg',
-    '/assets/shito/supermarket/gold-jar-front.jpg',
+    '/assets/shito/supermarket/gold-clean-plain.jpg',
     '/assets/shito/supermarket/lineup-clean-plain.jpg',
     '/assets/shito/supermarket/lineup-group-table.jpg'
   ],
