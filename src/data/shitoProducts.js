@@ -54,7 +54,7 @@ export const SUPERMARKET_PRODUCTS = [
     shortName: 'Blue Edition',
     subtitle: 'Volta Delta River Prawn',
     aisle: 'blue',
-    price: 45.0,
+    price: 40.0,
     originalPrice: null,
     weight: '250g Glass Jar',
     heatRating: '42,000 SHU • Classic Medium',
