@@ -277,46 +277,6 @@ export const SUPERMARKET_PRODUCTS = [
     pairings: ['Master Chef Kitchens', 'Home Tasting Flights', 'Executive Corporate Gifts']
   },
   {
-    id: 'ks-bundle-chips',
-    slug: 'chips',
-    slugAliases: ['shito-and-chips', 'ks-bundle-chips'],
-    name: 'Shito & Chips Kit',
-    shortName: 'Shito & Chips',
-    subtitle: '1x Choice Jar + Plantain & Yam Chips',
-    aisle: 'bundles',
-    price: 85.0,
-    originalPrice: 95.0,
-    weight: '1x 250g Jar + 2x Chips',
-    heatRating: 'Crisp & Fiery Match',
-    heatColor: '#f97316',
-    badge: 'BESTSELLER',
-    badgeColor: '#ea580c',
-    barcode: '079458210412',
-    primaryImage: '/assets/shito/supermarket/lineup-group-table.jpg',
-    ogImage: 'https://farms.codkon.com/assets/shito/supermarket/lineup-group-table.jpg',
-    galleryImages: [
-      '/assets/shito/supermarket/lineup-group-table.jpg',
-      '/assets/shito/supermarket/lineup-clean-plain.jpg',
-      '/assets/shito/supermarket/red-jar-table.jpg',
-      '/assets/shito/supermarket/blue-jar-table.jpg'
-    ],
-    labelTexture: '/assets/shito/shito-label-red.png',
-    lidHex: 0xdc2626,
-    description:
-      'The ultimate Ghanaian street snacking experience. Dip our thin kettle-cooked Golden Plantain Chips and salted Ghanaian White Yam Chips directly into savory Kone Shito.',
-    ingredients:
-      '1x 250g Glass Jar Kone Shito (Red or Blue), 1x 150g Golden Plantain Chips, 1x 150g Crispy Yam Chips with sea salt and rosemary.',
-    nutrition: {
-      servingSize: 'Snack Feast Kit',
-      calories: '100% Non-GMO Organic Farmland Sourced',
-      totalFat: 'Zero Trans Fat',
-      sodium: 'Pure Mineral Salt',
-      protein: 'Nutritious & Energizing',
-      shelfLife: '9-12 Months'
-    },
-    pairings: ['Late-Night Movies', 'Game Nights', 'Office Snacking Stash', 'Picnics']
-  },
-  {
     id: 'ks-wholesale-carton12',
     slug: 'carton-12',
     slugAliases: ['wholesale-carton', 'ks-wholesale-carton12', 'carton12'],
@@ -403,7 +363,6 @@ export const PRODUCT_IMAGE_MAP = {
   'ks-gold-250': '/assets/shito/supermarket/gold-clean-branded.jpg',
   'ks-bundle-trio': '/assets/shito/supermarket/lineup-clean-branded.jpg',
   'ks-bundle-quad': '/assets/shito/supermarket/lineup-all-4-jars.jpg',
-  'ks-bundle-chips': '/assets/shito/supermarket/lineup-group-table.jpg',
   'ks-wholesale-carton12': '/assets/shito/supermarket/lineup-carton-display.jpg',
   'ks-wholesale-crate24': '/assets/shito/supermarket/lineup-supermarket-stack.jpg'
 };
@@ -445,12 +404,6 @@ export const PRODUCT_GALLERY_MAP = {
     '/assets/shito/supermarket/lineup-clean-plain.jpg',
     '/assets/shito/supermarket/lineup-group-table.jpg',
     '/assets/shito/supermarket/lineup-trio-shelf.jpg'
-  ],
-  'ks-bundle-chips': [
-    '/assets/shito/supermarket/lineup-group-table.jpg',
-    '/assets/shito/supermarket/lineup-clean-plain.jpg',
-    '/assets/shito/supermarket/red-jar-table.jpg',
-    '/assets/shito/supermarket/blue-jar-table.jpg'
   ],
   'ks-wholesale-carton12': [
     '/assets/shito/supermarket/lineup-carton-display.jpg',
