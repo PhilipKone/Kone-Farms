@@ -100,11 +100,11 @@ export const SUPERMARKET_PRODUCTS = [
     badge: 'FRESH HARVEST',
     badgeColor: '#16a34a',
     barcode: '079458210403',
-    primaryImage: '/assets/shito/supermarket/green-clean-plain.jpg',
+    primaryImage: '/assets/shito/supermarket/green-clean-branded.jpg',
     ogImage: 'https://farms.codkon.com/assets/shito/supermarket/green-clean-branded.jpg',
     galleryImages: [
-      '/assets/shito/supermarket/green-clean-plain.jpg',
       '/assets/shito/supermarket/green-clean-branded.jpg',
+      '/assets/shito/supermarket/green-clean-plain.jpg',
       '/assets/shito/supermarket/green-studio-front.jpg',
       '/assets/shito/supermarket/green-studio-angle.jpg',
       '/assets/shito/supermarket/green-jar-closeup.jpg',
@@ -372,7 +372,7 @@ export const SUPERMARKET_PRODUCTS = [
 export const PRODUCT_IMAGE_MAP = {
   'ks-red-250': '/assets/shito/supermarket/red-clean-branded.jpg',
   'ks-blue-250': '/assets/shito/supermarket/blue-clean-branded.jpg',
-  'ks-green-250': '/assets/shito/supermarket/green-clean-plain.jpg',
+  'ks-green-250': '/assets/shito/supermarket/green-clean-branded.jpg',
   'ks-gold-250': '/assets/shito/supermarket/gold-clean-plain.jpg',
   'ks-bundle-trio': '/assets/shito/supermarket/lineup-clean-plain.jpg',
   'ks-bundle-quad': '/assets/shito/supermarket/lineup-all-4-jars.jpg',
@@ -397,8 +397,8 @@ export const PRODUCT_GALLERY_MAP = {
     '/assets/shito/supermarket/blue-clean-plain.jpg'
   ],
   'ks-green-250': [
-    '/assets/shito/supermarket/green-clean-plain.jpg',
     '/assets/shito/supermarket/green-clean-branded.jpg',
+    '/assets/shito/supermarket/green-clean-plain.jpg',
     '/assets/shito/supermarket/green-studio-front.jpg',
     '/assets/shito/supermarket/green-studio-angle.jpg',
     '/assets/shito/supermarket/green-jar-shelf-1.jpg',
