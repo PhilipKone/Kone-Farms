@@ -10,7 +10,7 @@ export const SUPERMARKET_PRODUCTS = [
     shortName: 'Red Edition',
     subtitle: 'Scotch Bonnet & Smoked Seafood',
     aisle: 'red',
-    price: 45.0,
+    price: 40.0,
     originalPrice: null,
     weight: '250g Glass Jar',
     heatRating: '82,000 SHU • Extra Hot',
