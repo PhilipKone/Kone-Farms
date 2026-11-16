@@ -14,7 +14,7 @@ export const blogArticles = [
       name: 'Philip Hotor',
       role: 'Founder & Chief Architect, Kone Farms',
       avatar: '/logos/logo.svg',
-      profileUrl: 'https://www.koneacademy.io/author/philip-hotor'
+      profileUrl: 'https://academy.codkon.com/author/philip-hotor'
     },
     tags: ['Plantain Agritech', 'Musa paradisiaca', 'Black Sigatoka', 'IoT Telemetry', 'West Africa Agriculture', 'Penman-Monteith', 'Post-Harvest Kinetics'],
     hardwareBOM: [
@@ -341,7 +341,7 @@ Integrating precision IoT telemetry, Penman-Monteith microclimate modeling, and 
       name: 'Philip Hotor',
       role: 'Founder & Chief Architect, Kone Farms',
       avatar: '/logos/logo.svg',
-      profileUrl: 'https://www.koneacademy.io/author/philip-hotor'
+      profileUrl: 'https://academy.codkon.com/author/philip-hotor'
     },
     tags: ['ESP32', 'LoRaWAN', 'Soil Sensors', 'Ghana Agritech', 'Solar Telemetry'],
     hardwareBOM: [
@@ -467,7 +467,7 @@ Field nodes are powered by a single **18650 LiFePO4 battery (3400mAh)** coupled 
       name: 'Philip Hotor',
       role: 'Founder & Chief Architect, Kone Farms',
       avatar: '/logos/logo.svg',
-      profileUrl: 'https://www.koneacademy.io/author/philip-hotor'
+      profileUrl: 'https://academy.codkon.com/author/philip-hotor'
     },
     tags: ['Modbus RS485', 'Greenhouse', 'VPD', 'NPK Sensors', 'Agritech'],
     hardwareBOM: [
@@ -568,7 +568,7 @@ To automate fertigation (fertilizer injection), **Kone Farms** deploys industria
       name: 'Philip Hotor',
       role: 'Founder & Chief Architect, Kone Farms',
       avatar: '/logos/logo.svg',
-      profileUrl: 'https://www.koneacademy.io/author/philip-hotor'
+      profileUrl: 'https://academy.codkon.com/author/philip-hotor'
     },
     tags: ['Poultry Tech', 'Ammonia Sensors', 'Solar Ventilation', 'Ghana Agriculture'],
     hardwareBOM: [
@@ -668,7 +668,7 @@ Dual **MQ-137 semiconductor gas sensors** [3] and **DHT22 climate sensors** cont
       name: 'Philip Hotor',
       role: 'Founder & Chief Architect, Kone Farms',
       avatar: '/logos/logo.svg',
-      profileUrl: 'https://www.koneacademy.io/author/philip-hotor'
+      profileUrl: 'https://academy.codkon.com/author/philip-hotor'
     },
     tags: ['smartFarm Telemetry', 'IoT Sensors', 'Soil Moisture', 'Solar Irradiance', 'Microclimate', 'ESP32', 'Agritech'],
     hardwareBOM: [
@@ -829,7 +829,7 @@ The station is fully self-sustaining in off-grid environments:
       name: 'Philip Hotor',
       role: 'Founder & Chief Architect, Kone Farms',
       avatar: '/logos/logo.svg',
-      profileUrl: 'https://www.koneacademy.io/author/philip-hotor'
+      profileUrl: 'https://academy.codkon.com/author/philip-hotor'
     },
     tags: ['IoT Water Valves', 'Drip Irrigation', 'Solenoid Actuators', 'Hysteresis Control', 'Water Conservation', 'ESP32'],
     hardwareBOM: [

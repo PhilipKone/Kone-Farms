@@ -16,50 +16,50 @@ const routeMetadata = {
   '#home': {
     title: 'Kone Farms & Agritech | Sustainable Agriculture & Artisanal Foods',
     desc: 'Pioneering Sustainable Agriculture & Artisanal Foods Through Modern Agritech. Handcrafted Kone Chips and authentic Kone Shito, sourced directly from organic Ghanaian farmlands.',
-    canonical: 'https://farms.koneacademy.io/',
-    image: 'https://farms.koneacademy.io/og-image.png?v=4'
+    canonical: 'https://farms.codkon.com/',
+    image: 'https://farms.codkon.com/og-image.png?v=4'
   },
   '#market': {
     title: 'Kone Market | Wholesale Produce, Cartons & Harvest | Kone Farms',
     desc: 'Official Kone Market storefront. Purchase wholesale cartons of Kone Shito & Kone Chips, or source organic bulk farm harvest.',
-    canonical: 'https://farms.koneacademy.io/market',
-    image: 'https://farms.koneacademy.io/assets/shito/supermarket/lineup-clean-branded.jpg'
+    canonical: 'https://farms.codkon.com/market',
+    image: 'https://farms.codkon.com/assets/shito/supermarket/lineup-clean-branded.jpg'
   },
   '#farms': {
     title: 'Organic Farmlands & Fair-Trade Sourcing | Kone Farms',
     desc: 'Direct farming partnerships across Ghana cultivating Golden Plantain, White Yam, and Scotch Bonnet peppers under 100% fair-trade standards.',
-    canonical: 'https://farms.koneacademy.io/farms',
-    image: 'https://farms.koneacademy.io/og-image.png?v=4'
+    canonical: 'https://farms.codkon.com/farms',
+    image: 'https://farms.codkon.com/og-image.png?v=4'
   },
   '#food': {
     title: 'Kone Chips & Artisanal Packaged Foods | Kone Farms',
     desc: 'Premium packaged food products featuring crisp kettle-cooked plantain, yam, and potato chips paired with authentic savory Kone Shito black pepper sauce.',
-    canonical: 'https://farms.koneacademy.io/food',
-    image: 'https://farms.koneacademy.io/assets/shito/supermarket/lineup-clean-branded.jpg'
+    canonical: 'https://farms.codkon.com/food',
+    image: 'https://farms.codkon.com/assets/shito/supermarket/lineup-clean-branded.jpg'
   },
   '#agritech': {
     title: 'smartFarm IoT Architecture & Precision Agritech Blueprints | Kone Farms',
     desc: 'Open-source engineering and IoT blueprints for tropical agriculture. Researching solar telemetry, precision soil moisture sensing, and low-waste irrigation.',
-    canonical: 'https://farms.koneacademy.io/agritech',
-    image: 'https://farms.koneacademy.io/og-image.png?v=4'
+    canonical: 'https://farms.codkon.com/agritech',
+    image: 'https://farms.codkon.com/og-image.png?v=4'
   },
   '#blog': {
     title: 'Agritech Research & Scientific Whitepapers | Kone Farms Blog',
     desc: 'Publication-grade agritech research on Musa paradisiaca L. physiology, NPK sensor calibration, poultry environmental automation, and LoRa mesh networks.',
-    canonical: 'https://farms.koneacademy.io/blog',
-    image: 'https://farms.koneacademy.io/og-image.png?v=4'
+    canonical: 'https://farms.codkon.com/blog',
+    image: 'https://farms.codkon.com/og-image.png?v=4'
   },
   '#sitemap': {
     title: 'Subdomain Architecture & Resource Directory | Kone Farms Sitemap',
     desc: 'Complete architectural directory and resource index of all Kone Farms division sections, research studies, IoT tools, and sister ecosystems.',
-    canonical: 'https://farms.koneacademy.io/sitemap',
-    image: 'https://farms.koneacademy.io/og-image.png?v=4'
+    canonical: 'https://farms.codkon.com/sitemap',
+    image: 'https://farms.codkon.com/og-image.png?v=4'
   },
   '#shito': {
     title: 'Kone Shito | Authentic Ghanaian Black Pepper Sauce | Kone Farms',
     desc: 'Buy authentic artisanal Kone Shito hot pepper sauce online. Handcrafted smallholder Ghanaian sauce: Red Edition Scotch Bonnet, Coastal Blue Delta Prawn, Green Edition Kpakpo, and Collector Trio Boxes.',
-    canonical: 'https://farms.koneacademy.io/food/shito',
-    image: 'https://farms.koneacademy.io/assets/shito/supermarket/lineup-clean-branded.jpg'
+    canonical: 'https://farms.codkon.com/food/shito',
+    image: 'https://farms.codkon.com/assets/shito/supermarket/lineup-clean-branded.jpg'
   }
 };
 
@@ -134,7 +134,7 @@ export default function App() {
       const product = getShitoProductBySlug(slug);
       if (product) {
         const productTitle = `Kone Shito ${product.name} (${product.weight}) | Kone Farms`;
-        const canonical = `https://farms.koneacademy.io/food/shito/${product.slug}`;
+        const canonical = `https://farms.codkon.com/food/shito/${product.slug}`;
         document.title = productTitle;
         const descEl = document.querySelector('meta[name="description"]');
         if (descEl) descEl.setAttribute('content', product.description);

@@ -19,7 +19,7 @@ export const SUPERMARKET_PRODUCTS = [
     badgeColor: '#dc2626',
     barcode: '079458210401',
     primaryImage: '/assets/shito/supermarket/red-clean-plain.jpg',
-    ogImage: 'https://farms.koneacademy.io/assets/shito/supermarket/red-clean-branded.jpg',
+    ogImage: 'https://farms.codkon.com/assets/shito/supermarket/red-clean-branded.jpg',
     galleryImages: [
       '/assets/shito/supermarket/red-clean-plain.jpg',
       '/assets/shito/supermarket/red-clean-branded.jpg',
@@ -63,7 +63,7 @@ export const SUPERMARKET_PRODUCTS = [
     badgeColor: '#2563eb',
     barcode: '079458210402',
     primaryImage: '/assets/shito/supermarket/blue-clean-plain.jpg',
-    ogImage: 'https://farms.koneacademy.io/assets/shito/supermarket/blue-clean-branded.jpg',
+    ogImage: 'https://farms.codkon.com/assets/shito/supermarket/blue-clean-branded.jpg',
     galleryImages: [
       '/assets/shito/supermarket/blue-clean-plain.jpg',
       '/assets/shito/supermarket/blue-clean-branded.jpg',
@@ -107,7 +107,7 @@ export const SUPERMARKET_PRODUCTS = [
     badgeColor: '#16a34a',
     barcode: '079458210403',
     primaryImage: '/assets/shito/supermarket/green-clean-plain.jpg',
-    ogImage: 'https://farms.koneacademy.io/assets/shito/supermarket/green-clean-branded.jpg',
+    ogImage: 'https://farms.codkon.com/assets/shito/supermarket/green-clean-branded.jpg',
     galleryImages: [
       '/assets/shito/supermarket/green-clean-plain.jpg',
       '/assets/shito/supermarket/green-clean-branded.jpg',
@@ -152,7 +152,7 @@ export const SUPERMARKET_PRODUCTS = [
     badgeColor: '#d97706',
     barcode: '079458210404',
     primaryImage: '/assets/shito/supermarket/gold-clean-plain.jpg',
-    ogImage: 'https://farms.koneacademy.io/assets/shito/supermarket/gold-clean-branded.jpg',
+    ogImage: 'https://farms.codkon.com/assets/shito/supermarket/gold-clean-branded.jpg',
     galleryImages: [
       '/assets/shito/supermarket/gold-clean-plain.jpg',
       '/assets/shito/supermarket/gold-clean-branded.jpg',
@@ -193,7 +193,7 @@ export const SUPERMARKET_PRODUCTS = [
     badgeColor: '#d97706',
     barcode: '079458210410',
     primaryImage: '/assets/shito/supermarket/lineup-clean-plain.jpg',
-    ogImage: 'https://farms.koneacademy.io/assets/shito/supermarket/lineup-clean-branded.jpg',
+    ogImage: 'https://farms.codkon.com/assets/shito/supermarket/lineup-clean-branded.jpg',
     galleryImages: [
       '/assets/shito/supermarket/lineup-clean-plain.jpg',
       '/assets/shito/supermarket/lineup-clean-branded.jpg',
@@ -233,7 +233,7 @@ export const SUPERMARKET_PRODUCTS = [
     badgeColor: '#b45309',
     barcode: '079458210411',
     primaryImage: '/assets/shito/supermarket/lineup-clean-branded.jpg',
-    ogImage: 'https://farms.koneacademy.io/assets/shito/supermarket/lineup-clean-branded.jpg',
+    ogImage: 'https://farms.codkon.com/assets/shito/supermarket/lineup-clean-branded.jpg',
     galleryImages: [
       '/assets/shito/supermarket/lineup-clean-branded.jpg',
       '/assets/shito/supermarket/lineup-all-4-jars.jpg',
@@ -273,7 +273,7 @@ export const SUPERMARKET_PRODUCTS = [
     badgeColor: '#ea580c',
     barcode: '079458210412',
     primaryImage: '/assets/shito/supermarket/lineup-group-table.jpg',
-    ogImage: 'https://farms.koneacademy.io/assets/shito/supermarket/lineup-group-table.jpg',
+    ogImage: 'https://farms.codkon.com/assets/shito/supermarket/lineup-group-table.jpg',
     galleryImages: [
       '/assets/shito/supermarket/lineup-group-table.jpg',
       '/assets/shito/supermarket/lineup-clean-plain.jpg',
@@ -313,7 +313,7 @@ export const SUPERMARKET_PRODUCTS = [
     badgeColor: '#059669',
     barcode: '079458210420',
     primaryImage: '/assets/shito/supermarket/lineup-carton-display.jpg',
-    ogImage: 'https://farms.koneacademy.io/assets/shito/supermarket/lineup-carton-display.jpg',
+    ogImage: 'https://farms.codkon.com/assets/shito/supermarket/lineup-carton-display.jpg',
     galleryImages: [
       '/assets/shito/supermarket/lineup-carton-display.jpg',
       '/assets/shito/supermarket/lineup-supermarket-stack.jpg',
@@ -351,7 +351,7 @@ export const SUPERMARKET_PRODUCTS = [
     badgeColor: '#0284c7',
     barcode: '079458210421',
     primaryImage: '/assets/shito/supermarket/lineup-supermarket-stack.jpg',
-    ogImage: 'https://farms.koneacademy.io/assets/shito/supermarket/lineup-supermarket-stack.jpg',
+    ogImage: 'https://farms.codkon.com/assets/shito/supermarket/lineup-supermarket-stack.jpg',
     galleryImages: [
       '/assets/shito/supermarket/lineup-supermarket-stack.jpg',
       '/assets/shito/supermarket/lineup-carton-display.jpg',
@@ -473,8 +473,8 @@ export function getShitoProductBySlug(slugOrId) {
 
 // Canonical share URL for any shito product
 export function getShitoShareUrl(product) {
-  if (!product) return 'https://farms.koneacademy.io/food/shito';
-  return `https://farms.koneacademy.io/food/shito/${product.slug}`;
+  if (!product) return 'https://farms.codkon.com/food/shito';
+  return `https://farms.codkon.com/food/shito/${product.slug}`;
 }
 
 // Formatted share text for social media (WhatsApp, Twitter, iMessage, etc.)

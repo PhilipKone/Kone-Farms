@@ -1,9 +1,9 @@
 {
   "lighthouseVersion": "13.3.0",
-  "requestedUrl": "https://farms.koneacademy.io/",
-  "mainDocumentUrl": "https://farms.koneacademy.io/",
-  "finalDisplayedUrl": "https://farms.koneacademy.io/",
-  "finalUrl": "https://farms.koneacademy.io/",
+  "requestedUrl": "https://farms.codkon.com/",
+  "mainDocumentUrl": "https://farms.codkon.com/",
+  "finalDisplayedUrl": "https://farms.codkon.com/",
+  "finalUrl": "https://farms.codkon.com/",
   "fetchTime": "2026-05-29T19:15:04.740Z",
   "gatherMode": "navigation",
   "runWarnings": [
@@ -388,9 +388,9 @@
   "stackPacks": [],
   "entities": [
     {
-      "name": "koneacademy.io",
+      "name": "codkon.com",
       "origins": [
-        "https://farms.koneacademy.io"
+        "https://farms.codkon.com"
       ],
       "isFirstParty": true,
       "isUnrecognized": true

@@ -36,16 +36,16 @@ export default function Footer() {
         <div className="footer-links-col">
           <h3 className="footer-h4">Ecosystem</h3>
           <div className="footer-links">
-            <a href="https://www.koneacademy.io" className="footer-link">Academy Home</a>
-            <a href="https://code.koneacademy.io" className="footer-link">Kone Code</a>
-            <a href="https://lab.koneacademy.io" className="footer-link">Kone Lab</a>
-            <a href="https://ai.koneacademy.io" className="footer-link">Kone AI</a>
-            <a href="https://consult.koneacademy.io" className="footer-link">Kone Consult</a>
-            <a href="https://kids.koneacademy.io" className="footer-link">Kone Kids</a>
-            <a href="https://shop.koneacademy.io" className="footer-link">Kone Shop</a>
-            <a href="https://warp.koneacademy.io" className="footer-link">Kone Warp</a>
-            <a href="https://tech.koneacademy.io" className="footer-link">Kone Tech</a>
-            <a href="https://digital.koneacademy.io" className="footer-link">Kone Digital</a>
+            <a href="https://academy.codkon.com" className="footer-link">Academy Home</a>
+            <a href="https://code.codkon.com" className="footer-link">Kone Code</a>
+            <a href="https://lab.codkon.com" className="footer-link">Kone Lab</a>
+            <a href="https://ai.codkon.com" className="footer-link">Kone AI</a>
+            <a href="https://consult.codkon.com" className="footer-link">Kone Consult</a>
+            <a href="https://kids.codkon.com" className="footer-link">Kone Kids</a>
+            <a href="https://shop.codkon.com" className="footer-link">Kone Shop</a>
+            <a href="https://warp.codkon.com" className="footer-link">Kone Warp</a>
+            <a href="https://security.codkon.com" className="footer-link">Kone Tech</a>
+            <a href="https://digital.codkon.com" className="footer-link">Kone Digital</a>
           </div>
         </div>
 
@@ -132,10 +132,10 @@ export default function Footer() {
           © {new Date().getFullYear()} Kone Farms • A Kone Academy Initiative. All rights reserved.
         </div>
         <div className="footer-bottom-links">
-          <a href="https://koneacademy.io/privacy" target="_blank" rel="noopener noreferrer" className="footer-link">Privacy Policy</a>
-          <a href="https://koneacademy.io/terms" target="_blank" rel="noopener noreferrer" className="footer-link">Terms of Service</a>
+          <a href="https://academy.codkon.com/privacy" target="_blank" rel="noopener noreferrer" className="footer-link">Privacy Policy</a>
+          <a href="https://academy.codkon.com/terms" target="_blank" rel="noopener noreferrer" className="footer-link">Terms of Service</a>
           <a href="#sitemap" className="footer-link">Sitemap</a>
-          <a href="https://koneacademy.io" target="_blank" rel="noopener noreferrer" className="footer-link">Kone Academy ↗</a>
+          <a href="https://academy.codkon.com" target="_blank" rel="noopener noreferrer" className="footer-link">Kone Academy ↗</a>
         </div>
       </div>
     </footer>

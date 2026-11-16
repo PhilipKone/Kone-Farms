@@ -2,7 +2,7 @@
   "name": "Kone-Farms",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://farms.koneacademy.io",
+  "homepage": "https://farms.codkon.com",
   "type": "module",
   "scripts": {
     "dev": "vite",

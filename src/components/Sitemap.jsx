@@ -18,13 +18,13 @@ const Sitemap = ({ onBack }) => {
           "@type": "ListItem",
           "position": 1,
           "name": "Kone Farms",
-          "item": "https://farms.koneacademy.io/"
+          "item": "https://farms.codkon.com/"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Sitemap",
-          "item": "https://farms.koneacademy.io/#sitemap"
+          "item": "https://farms.codkon.com/#sitemap"
         }
       ]
     });
@@ -123,7 +123,7 @@ const Sitemap = ({ onBack }) => {
               </div>
               <div className="farms-sitemap-list">
                 <div className="farms-sitemap-item">
-                  <a href="https://www.koneacademy.io" className="farms-sitemap-link" target="_blank" rel="noopener noreferrer">
+                  <a href="https://academy.codkon.com" className="farms-sitemap-link" target="_blank" rel="noopener noreferrer">
                     Academy Home
                     <svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '6px', opacity: 0.6 }}>
                       <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
@@ -134,7 +134,7 @@ const Sitemap = ({ onBack }) => {
                   <p className="farms-sitemap-desc">Parent company landing page containing central index protocols and specs.</p>
                 </div>
                 <div className="farms-sitemap-item">
-                  <a href="https://www.koneacademy.io/sitemap" className="farms-sitemap-link" target="_blank" rel="noopener noreferrer">
+                  <a href="https://academy.codkon.com/sitemap" className="farms-sitemap-link" target="_blank" rel="noopener noreferrer">
                     Central Sitemap Hub
                     <svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '6px', opacity: 0.6 }}>
                       <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>

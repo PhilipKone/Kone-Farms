@@ -6,14 +6,14 @@ Kone Farms pioneers sustainable agriculture, food security, and IoT field automa
 
 ## Primary Sections & Capabilities
 
-- [Agritech & IoT Telemetry](https://farms.koneacademy.io/agritech) - Real-time soil moisture calculations, micro-irrigation valve automation, and ESP32 solar telemetry.
-- [Agritech Research Blog](https://farms.koneacademy.io/blog) - Peer-reviewed publications and field whitepapers on Musa paradisiaca L., NPK sensing, and precision irrigation.
-- [Smart Farmlands & Map](https://farms.koneacademy.io/farms) - Interactive map of regional organic farm clusters and harvest schedules.
-- [Kone Food & Artisanal Snacks](https://farms.koneacademy.io/food) - Artisanal food production empowering local agricultural supply chains with Kone Chips (Plantain, Yam & Potato) and Kone Shito.
-- [Subdomain Sitemap](https://farms.koneacademy.io/sitemap) - Full architectural index of pages and resources.
+- [Agritech & IoT Telemetry](https://farms.codkon.com/agritech) - Real-time soil moisture calculations, micro-irrigation valve automation, and ESP32 solar telemetry.
+- [Agritech Research Blog](https://farms.codkon.com/blog) - Peer-reviewed publications and field whitepapers on Musa paradisiaca L., NPK sensing, and precision irrigation.
+- [Smart Farmlands & Map](https://farms.codkon.com/farms) - Interactive map of regional organic farm clusters and harvest schedules.
+- [Kone Food & Artisanal Snacks](https://farms.codkon.com/food) - Artisanal food production empowering local agricultural supply chains with Kone Chips (Plantain, Yam & Potato) and Kone Shito.
+- [Subdomain Sitemap](https://farms.codkon.com/sitemap) - Full architectural index of pages and resources.
 
 ## Parent Collective
 
-- [Kone Academy Main Hub](https://www.koneacademy.io/) - The core innovation collective and educational platform.
-- [Kone Lab](https://lab.koneacademy.io/) - Hardware engineering, CAD, and IoT prototyping studio.
-- [Kone Shop](https://shop.koneacademy.io/) - Official hardware kits and ESP32 telemetry hardware.
+- [Kone Academy Main Hub](https://academy.codkon.com/) - The core innovation collective and educational platform.
+- [Kone Lab](https://lab.codkon.com/) - Hardware engineering, CAD, and IoT prototyping studio.
+- [Kone Shop](https://shop.codkon.com/) - Official hardware kits and ESP32 telemetry hardware.

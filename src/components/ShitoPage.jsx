@@ -113,13 +113,13 @@ export default function ShitoPage({ onNavigateHome, initialProductSlug }) {
       const descEl = document.querySelector('meta[name="description"]');
       if (descEl) descEl.setAttribute('content', quickViewProduct.description);
       const canEl = document.querySelector('link[rel="canonical"]');
-      if (canEl) canEl.setAttribute('href', `https://farms.koneacademy.io${canonicalPath}`);
+      if (canEl) canEl.setAttribute('href', `https://farms.codkon.com${canonicalPath}`);
       const ogTitle = document.querySelector('meta[property="og:title"]');
       if (ogTitle) ogTitle.setAttribute('content', `Kone Shito ${quickViewProduct.name} (${quickViewProduct.weight}) | Kone Farms`);
       const ogDesc = document.querySelector('meta[property="og:description"]');
       if (ogDesc) ogDesc.setAttribute('content', quickViewProduct.description);
       const ogUrl = document.querySelector('meta[property="og:url"]');
-      if (ogUrl) ogUrl.setAttribute('content', `https://farms.koneacademy.io${canonicalPath}`);
+      if (ogUrl) ogUrl.setAttribute('content', `https://farms.codkon.com${canonicalPath}`);
       const ogImg = document.querySelector('meta[property="og:image"]');
       if (ogImg) ogImg.setAttribute('content', quickViewProduct.ogImage);
       const ogImgSecure = document.querySelector('meta[property="og:image:secure_url"]');
@@ -134,17 +134,17 @@ export default function ShitoPage({ onNavigateHome, initialProductSlug }) {
       const descEl = document.querySelector('meta[name="description"]');
       if (descEl) descEl.setAttribute('content', 'Buy authentic artisanal Kone Shito hot pepper sauce online. Handcrafted smallholder Ghanaian sauce.');
       const canEl = document.querySelector('link[rel="canonical"]');
-      if (canEl) canEl.setAttribute('href', 'https://farms.koneacademy.io/food/shito');
+      if (canEl) canEl.setAttribute('href', 'https://farms.codkon.com/food/shito');
       const ogTitle = document.querySelector('meta[property="og:title"]');
       if (ogTitle) ogTitle.setAttribute('content', 'Kone Shito | Authentic Ghanaian Black Pepper Sauce | Kone Farms');
       const ogUrl = document.querySelector('meta[property="og:url"]');
-      if (ogUrl) ogUrl.setAttribute('content', 'https://farms.koneacademy.io/food/shito');
+      if (ogUrl) ogUrl.setAttribute('content', 'https://farms.codkon.com/food/shito');
       const ogImg = document.querySelector('meta[property="og:image"]');
-      if (ogImg) ogImg.setAttribute('content', 'https://farms.koneacademy.io/assets/shito/supermarket/lineup-clean-branded.jpg');
+      if (ogImg) ogImg.setAttribute('content', 'https://farms.codkon.com/assets/shito/supermarket/lineup-clean-branded.jpg');
       const ogImgSecure = document.querySelector('meta[property="og:image:secure_url"]');
-      if (ogImgSecure) ogImgSecure.setAttribute('content', 'https://farms.koneacademy.io/assets/shito/supermarket/lineup-clean-branded.jpg');
+      if (ogImgSecure) ogImgSecure.setAttribute('content', 'https://farms.codkon.com/assets/shito/supermarket/lineup-clean-branded.jpg');
       const twImg = document.querySelector('meta[property="twitter:image"]');
-      if (twImg) twImg.setAttribute('content', 'https://farms.koneacademy.io/assets/shito/supermarket/lineup-clean-branded.jpg');
+      if (twImg) twImg.setAttribute('content', 'https://farms.codkon.com/assets/shito/supermarket/lineup-clean-branded.jpg');
     }
   }, [quickViewProduct]);
 
