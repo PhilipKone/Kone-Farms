@@ -105,8 +105,7 @@ export const SUPERMARKET_PRODUCTS = [
     galleryImages: [
       '/assets/shito/supermarket/green-clean-branded.jpg',
       '/assets/shito/supermarket/green-clean-plain.jpg',
-      '/assets/shito/supermarket/green-studio-front.jpg',
-      '/assets/shito/supermarket/green-studio-angle.jpg',
+
       '/assets/shito/supermarket/green-jar-closeup.jpg',
       '/assets/shito/supermarket/green-jar-shelf-1.jpg',
       '/assets/shito/supermarket/green-jar-table.jpg',
@@ -129,7 +128,46 @@ export const SUPERMARKET_PRODUCTS = [
     },
     pairings: ['Morning Fried Eggs & Avocado Toast', 'Rustic Potato Crisps', 'Grilled Chicken Salad', 'Boiled Yam']
   },
-  {
+    {
+    id: 'ks-green-studio-250',
+    slug: 'green-studio',
+    slugAliases: ['green-studio-edition', 'ks-green-studio-250'],
+    name: 'Green Studio Edition',
+    shortName: 'Green Studio',
+    subtitle: 'Botanical Studio Reserve',
+    aisle: 'green',
+    price: 45.0,
+    originalPrice: null,
+    weight: '250g Glass Jar',
+    heatRating: '16,000 SHU • Aromatic Mild',
+    heatColor: '#10b981',
+    badge: 'STUDIO RESERVE',
+    badgeColor: '#059669',
+    barcode: '079458210430',
+    primaryImage: '/assets/shito/supermarket/green-studio-front.jpg',
+    ogImage: 'https://farms.codkon.com/assets/shito/supermarket/green-studio-front.jpg',
+    galleryImages: [
+      '/assets/shito/supermarket/green-studio-front.jpg',
+      '/assets/shito/supermarket/green-studio-angle.jpg',
+      '/assets/shito/supermarket/green-clean-branded.jpg'
+    ],
+    labelTexture: '/assets/shito/shito-label-green.png',
+    lidHex: 0x16a34a,
+    description:
+      'Botanical studio reserve. Showcasing the vibrant emerald hue and artisanal glass clarity of native green Kpakpo Shito under pristine studio lighting.',
+    ingredients:
+      'Fresh Green Kpakpo Shito Peppers, Roasted Garlic, White Peppercorns, Wild Basil, Smoked Crayfish, Cold-Pressed Vegetable Oil, Ada Sea Salt.',
+    nutrition: {
+      servingSize: '15g (1 Tbsp)',
+      calories: '38 kcal',
+      totalFat: '2.8g (Zero Trans Fat)',
+      sodium: '95mg',
+      protein: '1.4g',
+      shelfLife: '12 Months (Airtight Safety Seal)'
+    },
+    pairings: ['Morning Fried Eggs & Avocado Toast', 'Rustic Potato Crisps', 'Grilled Chicken Salad', 'Boiled Yam']
+  },
+{
     id: 'ks-gold-250',
     slug: 'gold',
     slugAliases: ['gold-edition', 'ks-gold-250'],
@@ -373,6 +411,7 @@ export const PRODUCT_IMAGE_MAP = {
   'ks-red-250': '/assets/shito/supermarket/red-clean-branded.jpg',
   'ks-blue-250': '/assets/shito/supermarket/blue-clean-branded.jpg',
   'ks-green-250': '/assets/shito/supermarket/green-clean-branded.jpg',
+  'ks-green-studio-250': '/assets/shito/supermarket/green-studio-front.jpg',
   'ks-gold-250': '/assets/shito/supermarket/gold-clean-plain.jpg',
   'ks-bundle-trio': '/assets/shito/supermarket/lineup-clean-plain.jpg',
   'ks-bundle-quad': '/assets/shito/supermarket/lineup-all-4-jars.jpg',
@@ -396,11 +435,14 @@ export const PRODUCT_GALLERY_MAP = {
     '/assets/shito/supermarket/blue-clean-branded.jpg',
     '/assets/shito/supermarket/blue-clean-plain.jpg'
   ],
+  'ks-green-studio-250': [
+    '/assets/shito/supermarket/green-studio-front.jpg',
+    '/assets/shito/supermarket/green-studio-angle.jpg'
+  ],
   'ks-green-250': [
     '/assets/shito/supermarket/green-clean-branded.jpg',
     '/assets/shito/supermarket/green-clean-plain.jpg',
-    '/assets/shito/supermarket/green-studio-front.jpg',
-    '/assets/shito/supermarket/green-studio-angle.jpg',
+
     '/assets/shito/supermarket/green-jar-shelf-1.jpg',
     '/assets/shito/supermarket/green-jar-table.jpg',
     '/assets/shito/supermarket/green-jar-closeup.jpg',
