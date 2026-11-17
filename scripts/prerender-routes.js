@@ -37,7 +37,7 @@ const baseRoutes = [
   {
     path: 'shito',
     title: 'Kone Shito | Authentic Ghanaian Black Pepper Sauce | Kone Farms',
-    desc: 'Buy authentic artisanal Kone Shito hot pepper sauce online. Handcrafted smallholder Ghanaian sauce: Red Edition Scotch Bonnet, Coastal Blue Delta Prawn, Green Edition Kpakpo, and Collector Trio Boxes.',
+    desc: 'Buy authentic artisanal Kone Shito hot pepper sauce online. Handcrafted smallholder Ghanaian sauce: Red Edition Scotch Bonnet, Coastal Blue Delta Prawn, Green Edition Kpakpo, 500g Gold Edition Reserve, and The Quartet Collection (4 x 250g).',
     canonical: 'https://farms.codkon.com/shito',
     image: 'https://farms.codkon.com/assets/shito/supermarket/lineup-clean-plain.jpg',
     imageWidth: 1024,
@@ -48,28 +48,28 @@ const baseRoutes = [
         <h1>Kone Shito Supermarket — Authentic Ghanaian Black Pepper Sauce</h1>
         <p>Handcrafted by Kone Farms using organic Ghanaian Scotch Bonnet peppers, wild smoked Volta river prawns, coastal herring, and cold-pressed oil.</p>
         <section>
-          <h2>Kone Shito Red Edition (250g Glass Jar) — GHS 45.00</h2>
+          <h2>Kone Shito Red Edition (250g Glass Jar) — GHS 40.00</h2>
           <p>Scotch Bonnet & Smoked Seafood • 82,000 SHU Extra Hot. Slow-caramelized with pink shallots, sun-dried Volta delta prawns, and smoked herring.</p>
         </section>
         <section>
-          <h2>Kone Shito Blue Edition (250g Glass Jar) — GHS 45.00</h2>
+          <h2>Kone Shito Blue Edition (250g Glass Jar) — GHS 40.00</h2>
           <p>Volta Delta River Prawn • 42,000 SHU Classic Medium. Heavy on coarse-ground dried estuary river prawns and smoked coastal herring.</p>
         </section>
         <section>
-          <h2>Kone Shito Green Edition (250g Glass Jar) — GHS 45.00</h2>
+          <h2>Kone Shito Green Edition (250g Glass Jar) — GHS 40.00</h2>
           <p>Kpakpo Shito & Fresh Green Herbs • 28,000 SHU Mild Tangy Zest. Heirloom green bonnet peppers and fresh shallots.</p>
         </section>
         <section>
-          <h2>Kone Shito Gold Edition (250g Glass Jar) — GHS 55.00</h2>
+          <h2>Kone Shito Green Studio Edition (250g Glass Jar) — GHS 45.00</h2>
+          <p>Small-Batch Emerald Reserve • 32,000 SHU Crisp Herbal Heat. Stone-milled green Kpakpo peppers and aromatic coastal spices.</p>
+        </section>
+        <section>
+          <h2>Kone Shito Gold Edition (500g Glass Jar) — GHS 100.00</h2>
           <p>12-Hour Copper Kettle Reserve • 65,000 SHU Connoisseur Hot. Triple-smoked estuary crayfish and caramelized aged ginger.</p>
         </section>
         <section>
-          <h2>Kone Shito Collector Trio Box (3 x 250g) — GHS 120.00</h2>
-          <p>The Complete Collection: 1x Red, 1x Blue, 1x Green in premium presentation gift packaging.</p>
-        </section>
-        <section>
-          <h2>Wholesale Master Carton (12 Jars) — GHS 450.00</h2>
-          <p>Bulk stockist lot for restaurants, retail shelves, and export grocery.</p>
+          <h2>Kone Shito The Quartet Collection (4 x 250g) — GHS 120.00</h2>
+          <p>The Complete Collection: 1x Red, 1x Blue, 1x Green, and 1x Gold in a gold-foil presentation gift carton.</p>
         </section>
       </main>
     `
@@ -77,7 +77,7 @@ const baseRoutes = [
   {
     path: 'food/shito',
     title: 'Kone Shito | Authentic Ghanaian Black Pepper Sauce | Kone Farms',
-    desc: 'Buy authentic artisanal Kone Shito hot pepper sauce online. Handcrafted smallholder Ghanaian sauce: Red Edition Scotch Bonnet, Coastal Blue Delta Prawn, Green Edition Kpakpo, and Collector Trio Boxes.',
+    desc: 'Buy authentic artisanal Kone Shito hot pepper sauce online. Handcrafted smallholder Ghanaian sauce: Red Edition Scotch Bonnet, Coastal Blue Delta Prawn, Green Edition Kpakpo, 500g Gold Edition Reserve, and The Quartet Collection (4 x 250g).',
     canonical: 'https://farms.codkon.com/food/shito',
     image: 'https://farms.codkon.com/assets/shito/supermarket/lineup-clean-branded.jpg',
     imageWidth: 1024,

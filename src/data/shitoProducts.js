@@ -201,8 +201,8 @@ export const SUPERMARKET_PRODUCTS = [
   },
   {
     id: 'ks-bundle-trio',
-    slug: 'trio',
-    slugAliases: ['trio-collection', 'ks-bundle-trio', 'trio-box'],
+    slug: 'quartet',
+    slugAliases: ['quartet-collection', 'trio', 'trio-collection', 'trio-box'],
     name: 'The Quartet Collection',
     shortName: 'Quartet Collection',
     subtitle: 'Red, Blue, Green & Gold (4x 250g)',

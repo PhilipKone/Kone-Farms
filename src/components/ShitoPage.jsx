@@ -30,13 +30,12 @@ const getStaticGalleryImage = (id, index) => {
 
 // ── SUPERMARKET AISLE DEPARTMENTS ───────────────────────────────────────────
 const AISLE_TABS = [
-  { id: 'all', name: 'All', count: 9 },
-  { id: 'red', name: 'Red', count: 1 },
-  { id: 'blue', name: 'Blue', count: 1 },
-  { id: 'green', name: 'Green', count: 1 },
-  { id: 'gold', name: 'Gold', count: 1 },
-  { id: 'bundles', name: 'Sets', count: 3 },
-  { id: 'wholesale', name: 'Wholesale', count: 2 }
+  { id: 'all', name: 'All', count: SUPERMARKET_PRODUCTS.length },
+  { id: 'red', name: 'Red', count: SUPERMARKET_PRODUCTS.filter((p) => p.aisle === 'red').length },
+  { id: 'blue', name: 'Blue', count: SUPERMARKET_PRODUCTS.filter((p) => p.aisle === 'blue').length },
+  { id: 'green', name: 'Green', count: SUPERMARKET_PRODUCTS.filter((p) => p.aisle === 'green').length },
+  { id: 'gold', name: 'Gold', count: SUPERMARKET_PRODUCTS.filter((p) => p.aisle === 'gold').length },
+  { id: 'bundles', name: 'Sets', count: SUPERMARKET_PRODUCTS.filter((p) => p.aisle === 'bundles').length }
 ];
 
 export default function ShitoPage({ onNavigateHome, initialProductSlug }) {
@@ -46,16 +45,7 @@ export default function ShitoPage({ onNavigateHome, initialProductSlug }) {
   const [viewMode, setViewMode] = useState('grid'); // 'grid' | 'shelf'
 
   // Cart & Trolley State
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 'ks-red-250',
-      name: 'Kone Shito Red (Fiery Black Gold)',
-      price: 45.0,
-      weight: '250g Jar',
-      image: '/assets/shito/supermarket/red-studio-front.jpg',
-      quantity: 1
-    }
-  ]);
+  const [cartItems, setCartItems] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [deliveryZone, setDeliveryZone] = useState('accra_metro');
   const [customerName, setCustomerName] = useState('');
@@ -556,51 +546,6 @@ export default function ShitoPage({ onNavigateHome, initialProductSlug }) {
               </div>
             </div>
 
-            {/* SHELF TIER 3: WHOLESALE MASTER CARTONS */}
-            <div className="supermarket-rack-tier">
-              <div className="rack-tier-header">
-                <span className="tier-tag">03 · Bulk Wholesale</span>
-              </div>
-
-              <div className="shelf-items-row wholesale-row">
-                {SUPERMARKET_PRODUCTS.filter((p) => p.aisle === 'wholesale').map((product) => (
-                  <div key={product.id} className="shelf-product-unit wholesale-unit">
-                    <div className="shelf-jar-wrapper wholesale-wrapper" onClick={() => setQuickViewProduct(product)}>
-                      <img src={getStaticProductImage(product.id)} alt={product.name} className="shelf-wholesale-img" />
-                    </div>
-
-                    <div className="shelf-talker-plate">
-                      <div className="talker-name">{product.shortName}</div>
-                      <div className="talker-weight">{product.weight}</div>
-                      <div className="talker-bottom">
-                        <span className="talker-price">GH₵ {product.price.toFixed(2)}</span>
-                        <div className="talker-action-group">
-                          <button
-                            className="talker-share-btn"
-                            onClick={(e) => handleShareProduct(product, e)}
-                            title={`Share ${product.name}`}
-                            aria-label={`Share ${product.name}`}
-                          >
-                            <svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" strokeWidth="2" fill="none">
-                              <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
-                              <polyline points="16 6 12 2 8 6"></polyline>
-                              <line x1="12" y1="2" x2="12" y2="15"></line>
-                            </svg>
-                          </button>
-                          <button className="talker-add-btn" onClick={() => addToCart(product, 1)}>
-                            + Cart
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="wooden-shelf-plank">
-                <div className="plank-wood-grain"></div>
-                <div className="plank-metal-lip"></div>
-              </div>
-            </div>
           </div>
         )}
       </main>
